@@ -1,18 +1,48 @@
-# Quartz v4
+# Student Notes with Quartz
 
-> “[One] who works with the door open gets all kinds of interruptions, but [they] also occasionally gets clues as to what the world is and what might be important.” — Richard Hamming
+Welcome! This repository contains my personal notes, organized and published using [Quartz](https://quartz.jzhao.xyz/).
 
-Quartz is a set of tools that helps you publish your [digital garden](https://jzhao.xyz/posts/networked-thought) and notes as a website for free.
-Quartz v4 features a from-the-ground rewrite focusing on end-user extensibility and ease-of-use.
+## About
 
-🔗 Read the documentation and get started: https://quartz.jzhao.xyz/
+This project is a digital garden for my studies, leveraging Quartz to create a connected, searchable, and easily navigable knowledge base.
 
-[Join the Discord Community](https://discord.gg/cRFFHYye7t)
+## Features
 
-## Sponsors
+- **Linked Notes:** Easily connect concepts and topics.
+- **Full-Text Search:** Quickly find information.
+- **Customizable:** Personalize themes and layouts.
+- **Markdown Support:** Write notes in simple Markdown.
 
-<p align="center">
-  <a href="https://github.com/sponsors/jackyzha0">
-    <img src="https://cdn.jsdelivr.net/gh/jackyzha0/jackyzha0/sponsorkit/sponsors.svg" />
-  </a>
-</p>
+## Getting Started
+
+1. **Clone this repository:**
+  ```bash
+  git clone https://github.com/yourusername/your-repo.git
+  cd your-repo
+  ```
+
+2. **Install dependencies:**
+  ```bash
+  npm install
+  ```
+
+3. **Start the local server:**
+  ```bash
+  npm run dev
+  ```
+
+4. **Edit notes:**  
+  Add or update Markdown files in the `/content` directory.
+
+## Deployment
+
+Deploy your Quartz site for free using [GitHub Pages](https://pages.github.com/) or [Vercel](https://vercel.com/).
+
+## Resources
+
+- [Quartz Documentation](https://quartz.jzhao.xyz/)
+- [Markdown Guide](https://www.markdownguide.org/)
+
+---
+
+Happy learning and note-taking!
