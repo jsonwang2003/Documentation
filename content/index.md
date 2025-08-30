@@ -4,8 +4,8 @@ Welcome to my personal knowledge base and documentation repository. This site co
 
 ## Study Areas
 
-- [[Leetcode Problems]] - Programming problems, solutions, and algorithmic concepts
-- [[Machine Learning]] - ML concepts, algorithms, and implementations
+- [[leetcode/index|Leetcode]] - Programming problems, solutions, and algorithmic concepts
+- [[machine-learning/index|Machine Learning]] - ML concepts, algorithms, and implementations
 
 ## About This Documentation
 
