@@ -1,7 +1,7 @@
 ---
 tags:
-  - Easy
   - BinaryTree
+  - Easy
 ---
 
 ## Description
