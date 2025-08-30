@@ -14,7 +14,8 @@ This section contains my solutions and notes for various Leetcode problems organ
 - [Validate Binary Search Tree](Binary%20Search%20Tree/Validate%20Binary%20Search%20Tree.md)
 
 ### Binary Tree
-- Coming soon...
+- [[Univalued Binary Tree]]
+- [[Symmetric Tree]]
 
 ---
 
