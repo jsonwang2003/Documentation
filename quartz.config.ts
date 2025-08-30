@@ -16,7 +16,7 @@ const config: QuartzConfig = {
       provider: "plausible",
     },
     locale: "en-US",
-    baseUrl: "",
+    baseUrl: "example.com",
     ignorePatterns: ["private", "templates", ".obsidian", "public/**", "dist/**", ".quartz-cache/**", "node_modules/**", "*.log"],
     defaultDateType: "modified",
     theme: {
