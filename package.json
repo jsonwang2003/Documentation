@@ -82,7 +82,6 @@
     "remark-parse": "^11.0.0",
     "remark-rehype": "^11.1.2",
     "remark-smartypants": "^3.0.2",
-    "remark-sub-super": "^1.0.21",
     "rfdc": "^1.4.1",
     "satori": "^0.16.2",
     "serve-handler": "^6.1.6",
