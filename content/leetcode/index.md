@@ -10,7 +10,7 @@ This section contains my solutions and notes for various Leetcode problems organ
 ## Problem Index
 
 ### Binary Search Tree
-- [Binary Search Tree Overview](Binary%20Search%20Tree/Binary%20Search%20Tree.md)
+- [Binary Search Tree Overview](Binary%20Search%20Tree/index.md)
 - [Validate Binary Search Tree](Binary%20Search%20Tree/Validate%20Binary%20Search%20Tree.md)
 
 ### Binary Tree
