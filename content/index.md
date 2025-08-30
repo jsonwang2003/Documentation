@@ -1,11 +1,13 @@
-# Welcome to My Documentation
+# Jason's Personal Notes
 
-This is my personal knowledge base and documentation site built with Quartz.
+Welcome to my personal knowledge base and documentation repository. This site contains my notes, studies, and reference materials organized for easy access and review.
 
-## Categories
+## Study Areas
 
-- [[leetcode/Topics|Leetcode Questions]] - Programming problems and solutions
+- [[leetcode/Topics|Leetcode Questions]] - Programming problems, solutions, and algorithmic concepts
 
-## Getting Started
+## About This Documentation
 
-Browse through the different sections using the navigation or search functionality.
+This is my digital workspace where I organize and maintain notes from various subjects I'm studying. The content is structured to help me quickly find and review concepts, solutions, and insights I've gathered over time.
+
+Feel free to browse through the different sections using the navigation or search functionality.
