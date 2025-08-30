@@ -67,12 +67,25 @@ const config: QuartzConfig = {
         },
         keepBackground: false,
       }),
-      Plugin.ObsidianFlavoredMarkdown({ enableInHtmlEmbed: false }),
+      Plugin.ObsidianFlavoredMarkdown({ 
+        enableInHtmlEmbed: false,
+        enableCheckbox: true,
+        enableYouTubeEmbed: true,
+        enableVideoEmbed: true,
+        callouts: true,
+        mermaid: true,
+        parseTags: true,
+        parseArrows: true,
+        parseBlockReferences: true
+      }),
       Plugin.GitHubFlavoredMarkdown(),
       Plugin.TableOfContents(),
       Plugin.CrawlLinks({ markdownLinkResolution: "shortest" }),
       Plugin.Description(),
       Plugin.Latex({ renderEngine: "katex" }),
+      // Plugin.Citations(), // Disabled for now - requires bibliography setup
+      Plugin.SuperscriptSubscript(),
+      Plugin.HardLineBreaks(),
     ],
     filters: [Plugin.RemoveDrafts()],
     emitters: [

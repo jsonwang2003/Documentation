@@ -8,9 +8,9 @@ A Binary Search Tree (BST) is a tree data structure where each node has the foll
 - Both left and right subtrees are also binary search trees
 
 ## Common Operations
-- Search: O(log n) average, O(n) worst case
-- Insert: O(log n) average, O(n) worst case  
-- Delete: O(log n) average, O(n) worst case
+- **Search**: O(log n) average, O(n) worst case
+- **Insert**: O(log n) average, O(n) worst case  
+- **Delete**: O(log n) average, O(n) worst case
 
 ## Related Problems
 - [[Validate Binary Search Tree]]
