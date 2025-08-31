@@ -52,8 +52,18 @@
     overflow: hidden;
     flex-shrink: 0;
     align-self: flex-start;
-    margin-top: auto;
-    margin-bottom: auto;
+
+    // Only add margin-y auto when collapsed
+    &.collapsed {
+      margin-top: auto;
+      margin-bottom: auto;
+    }
+    
+    // Remove margin-y when open to prevent movement
+    &:not(.collapsed) {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
   }
 
   button.mobile-explorer {
@@ -67,6 +77,10 @@
   @media all and ($mobile) {
     button.mobile-explorer {
       display: flex;
+      position: absolute;
+      top: 1.35rem;
+      left: 0.2rem;
+      z-index: 101;
     }
 
     button.desktop-explorer {
@@ -249,13 +263,62 @@ li:has(> .folder-outer:not(.open)) > .folder-container > svg {
       height: 100dvh;
       max-height: 100dvh;
       visibility: hidden;
+
+      .mobile-menu-components {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 2rem;
+        margin-bottom: 2rem;
+        border-bottom: 1px solid var(--lightgray);
+        padding-bottom: 2rem;
+
+        .mobile-menu-item {
+          // Hide search on desktop but show in mobile menu
+          .search {
+            display: flex !important;
+            width: 100%;
+            flex-grow: 1;
+          }
+
+          // Style darkmode and reader mode buttons for mobile menu
+          .darkmode,
+          .reader-mode {
+            display: inline-block;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 0.5rem 0;
+          }
+
+          // Make flex components fill full width in mobile menu
+          .flex-component {
+            display: flex !important;
+            flex-direction: row !important;
+            gap: 1rem !important;
+            align-items: center !important;
+            width: 100%;
+
+            & > div {
+              &:first-child {
+                flex-grow: 1 !important;
+                flex-basis: 0 !important;
+              }
+              
+              &:not(:first-child) {
+                flex-shrink: 0 !important;
+                flex-grow: 0 !important;
+              }
+            }
+          }
+        }
+      }
+
+      .explorer-ul {
+        padding: 0 2rem;
+      }
     }
 
     .mobile-explorer {
-      margin: 0;
-      padding: 5px;
-      z-index: 101;
-
       .lucide-menu {
         stroke: var(--darkgray);
       }

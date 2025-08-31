@@ -28,7 +28,7 @@ This project is a digital garden for my studies, leveraging Quartz to create a c
 
 3. **Start the local server:**
   ```bash
-  npm run dev
+  npm run docs
   ```
 
 4. **Edit notes:**  
@@ -36,12 +36,15 @@ This project is a digital garden for my studies, leveraging Quartz to create a c
 
 ## Deployment
 
-Deploy your Quartz site for free using [GitHub Pages](https://pages.github.com/) or [Vercel](https://vercel.com/).
+Deploy your Quartz site for free using [Vercel](https://vercel.com/).
 
 ## Resources
 
 - [Quartz Documentation](https://quartz.jzhao.xyz/)
 - [Markdown Guide](https://www.markdownguide.org/)
+  - [Markdown Extended Syntax](https://www.markdownguide.org/extended-syntax/)
+  - [Markdown Basic Syntax](https://www.markdownguide.org/basic-syntax/)
+  - [Markdown Syntax Cheatsheet](https://www.markdownguide.org/cheat-sheet/)
 
 ---
 
