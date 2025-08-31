@@ -35,12 +35,43 @@ export const ObsidianLinkResolver: QuartzTransformerPlugin = () => {
         const [targetFile] = linkText.split("|")
         const cleanTarget = targetFile.trim()
         
-        // If it's already a full path, return as is
+        // Get current directory
+        const currentDir = path.dirname(currentFile)
+        
+        // If it contains a slash, it's a relative path
         if (cleanTarget.includes("/")) {
-          return cleanTarget
+          // For relative paths like "String/index", resolve relative to current directory
+          const relativePath = currentDir ? `${currentDir}/${cleanTarget}` : cleanTarget
+          
+          console.log(`Resolving wikilink: [[${cleanTarget}]] from ${currentFile}`)
+          console.log(`Current dir: ${currentDir}`)
+          console.log(`Trying relative path: ${relativePath}`)
+          
+          // Check if this relative path exists in our file index
+          const relativeExists = Object.values(fileIndex).some(paths => 
+            paths.some(p => p === relativePath || p === relativePath.replace(/\/index$/, ""))
+          )
+          
+          if (relativeExists) {
+            console.log(`Found relative path: ${relativePath}`)
+            return relativePath
+          }
+          
+          // If relative path doesn't exist, try as absolute path
+          const absoluteExists = Object.values(fileIndex).some(paths => 
+            paths.some(p => p === cleanTarget || p === cleanTarget.replace(/\/index$/, ""))
+          )
+          
+          if (absoluteExists) {
+            console.log(`Found absolute path: ${cleanTarget}`)
+            return cleanTarget
+          }
+          
+          console.log(`No match found, returning relative path: ${relativePath}`)
+          return relativePath
         }
         
-        // Look up in file index
+        // Look up in file index for simple names
         const possiblePaths = fileIndex[cleanTarget] || []
         
         if (possiblePaths.length === 0) {
@@ -54,7 +85,6 @@ export const ObsidianLinkResolver: QuartzTransformerPlugin = () => {
         
         // Multiple matches - try to find the best one
         // Prefer files in the same directory as current file
-        const currentDir = path.dirname(currentFile)
         const sameDir = possiblePaths.find(p => path.dirname(p) === currentDir)
         if (sameDir) return sameDir
         
@@ -70,10 +100,69 @@ export const ObsidianLinkResolver: QuartzTransformerPlugin = () => {
             buildFileIndex()
             const currentFile = file.data.slug as string || ""
             
-            visit(tree, "wikilink", (node: any) => {
-              if (node.value) {
-                const resolvedPath = resolveWikilink(node.value, currentFile)
-                node.value = resolvedPath
+            // Process wikilinks in text nodes
+            visit(tree, "text", (node: any, index, parent) => {
+              if (!node.value || typeof node.value !== 'string') return
+              
+              // Find all wikilinks in the text
+              const wikilinkPattern = /\[\[([^\]]+)\]\]/g
+              const text = node.value
+              let match
+              const replacements: Array<{start: number, end: number, replacement: any}> = []
+              
+              while ((match = wikilinkPattern.exec(text)) !== null) {
+                const fullMatch = match[0]
+                const linkContent = match[1]
+                const [target, displayText] = linkContent.split('|')
+                
+                const resolvedPath = resolveWikilink(linkContent, currentFile)
+                
+                // Create a link node
+                const linkNode = {
+                  type: 'link',
+                  url: resolvedPath,
+                  children: [{
+                    type: 'text',
+                    value: displayText || target.trim()
+                  }]
+                }
+                
+                replacements.push({
+                  start: match.index,
+                  end: match.index + fullMatch.length,
+                  replacement: linkNode
+                })
+              }
+              
+              // Apply replacements in reverse order to maintain indices
+              if (replacements.length > 0 && parent && typeof index === 'number') {
+                const newNodes = []
+                let lastEnd = 0
+                
+                for (const replacement of replacements) {
+                  // Add text before the wikilink
+                  if (replacement.start > lastEnd) {
+                    newNodes.push({
+                      type: 'text',
+                      value: text.slice(lastEnd, replacement.start)
+                    })
+                  }
+                  
+                  // Add the link node
+                  newNodes.push(replacement.replacement)
+                  lastEnd = replacement.end
+                }
+                
+                // Add remaining text
+                if (lastEnd < text.length) {
+                  newNodes.push({
+                    type: 'text',
+                    value: text.slice(lastEnd)
+                  })
+                }
+                
+                // Replace the text node with the new nodes
+                parent.children.splice(index, 1, ...newNodes)
               }
             })
           }
