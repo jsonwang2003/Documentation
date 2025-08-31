@@ -1,0 +1,14 @@
+# Regression Technique Comparison
+
+| Regression Type                 | Best For                                            | Advantages                                                   | Disadvantages                                                                     |
+| ------------------------------- | --------------------------------------------------- | ------------------------------------------------------------ | --------------------------------------------------------------------------------- |
+| Linear Regression               | Simple linear trends                                | Easy to interpret, computationally efficient                 | Assumes a linear relationship, sensitive to outliers                              |
+| Polynomial Regression           | Non-linear patterns                                 | Captures curvilinear trends, flexible                        | Prone to overfitting, requires careful tuning of polynomial degree                |
+| Ridge Regression                | Multicollinearity (correlated features)             | Reduces overfitting, stabilizes coefficients                 | Doesn’t perform feature selection                                                 |
+| Lasso Regression                | Feature selection (reducing unnecessary predictors) | Performs feature selection by shrinking coefficients to zero | May remove useful variables                                                       |
+| ElasticNet Regression           | High-dimensional data with correlated features      | Balances Ridge and Lasso, good for complex models            | Requires tuning of two hyperparameters (L1 and L2 regularization)                 |
+| Logistic Regression             | Binary classification (0/1)                         | Easy to interpret, probabilistic output                      | Assumes linear decision boundary, may not work well with non-linear relationships |
+| Multivariate Regression         | Predicting multiple dependent variables             | Handles multiple outcomes, useful for interdependent factors | Complex interpretation, requires more data                                        |
+| Support Vector Regression (SVR) | Complex, non-linear relationships                   | Handles non-linearity, robust to outliers                    | Computationally expensive, requires careful kernel selection                      |
+| Decision Tree Regression        | Simple, rule-based predictions                      | Easy to interpret, works well with mixed data types          | Prone to overfitting, sensitive to outliers                                       |
+| Random Forest Regression        | High accuracy, generalization                       | Handles large datasets, reduces overfitting                  | Computationally expensive, less interpretable                                     |
