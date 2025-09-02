@@ -21,6 +21,7 @@ title: Deep Learning
 
 - [[Summary of Deep Learning]]
 - [[Unsupervised Deep Learning Models]]
+- [[Reinforced Deep Learning Models]]
 ## Video Resource
 
 [MIT Introduction to Deep Learning | 6.S191](https://youtu.be/alfdI7S6wCY)
