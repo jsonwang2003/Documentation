@@ -1,4 +1,6 @@
-# Binary Tree
+---
+title: "Binary Tree"
+---
 
 A Binary Tree is a hierarchical data structure in which each node has **at most two children**, referred to as the left and right child. Unlike Binary Search Trees, Binary Trees do not enforce any ordering constraints between node values.
 

@@ -1,4 +1,6 @@
-# Drawing Insights
+---
+title: "Drawing Insights"
+---
 
 - central task in data science
 	- serving as the linchpin between raw data and informed decision-making

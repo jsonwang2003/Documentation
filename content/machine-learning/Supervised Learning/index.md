@@ -1,4 +1,6 @@
-# Supervised Learning
+---
+title: "Supervised Learning"
+---
 
 > [!INFO]
 > fundamental paradigm in machine learning that **relies on labeled datasets to train models for predictive tasks**
@@ -42,10 +44,11 @@
 	- advancements in transfer learning
 		- allow pre-trained models to be fine-tuned on smaller datasets
 		- reducing the need for extensive labeled data
-
 # Resources
 
 - [[Summary of Supervised Learning]]
+- [[Classification Models]]
+- [[Time Series Analysis]]
 # Video Resource
 
 [Supervised vs. Unsupervised Learning](https://youtu.be/W01tIRP_Rqs)

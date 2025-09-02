@@ -1,4 +1,6 @@
-# Statistical Inference
+---
+title: "Statistical Inference"
+---
 
 > [!INFO]
 > Fundamental aspect of data science that enables researchers to draw meaningful conclusions from data by utilizing probabilistic frameworks

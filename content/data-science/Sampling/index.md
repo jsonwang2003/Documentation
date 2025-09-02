@@ -1,4 +1,6 @@
-# Sampling
+---
+title: "Sampling"
+---
 
 > [!INFO]
 > enabling researchers to draw meaningful conclusions about a population based on a representative subset of data

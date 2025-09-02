@@ -10,33 +10,33 @@
 	- **multiclass**: classifying handwritten digits into ten categories
 	- **multi-label**: identifying multiple objects in an image
 - most common algorithms for classification
-	- Logistic Regression
-	- Decision Tree
-	- Random Forest
-	- Support Vector Machines
-	- Naïve Bayes
-	- k-Nearest Neighbors (k-NN)
+	- [[Classification Models#Logistic Regression|Logistic Regression]]
+	- [[Classification Models#Classification Decision Trees|Classification Decision Tree]]
+	- [[Classification Models#Random Forest Classification|Random Forest]]
+	- [[Classification Models#Support Vector Machines (SVM)|Support Vector Machine (SVM)]]
+	- [[Classification Models#Naïve Bayes|Naïve Bayes]]
+	- [[Classification Models#k-Nearest Neighbors (k-NN)|k-Nearest Neighbors (k-NN)]]
 - Deep Learning models leveraged
-	- Convolutional Neural Networks (CNNs) for image classification
-	- Transformer-based architectures for natural language processing
+	- [[Convolutional Neural Networks]] (CNNs) for image classification
+	- Transformer-based architectures for [[natural language processing]]
 - Classification models evaluated using metrics
-	- accuracy
-	- precision
-	- recall
-	- F1-score
-	- ROC-AUC
+	- [[Model Evaluation#Accuracy|Accuracy]]
+	- [[Model Evaluation#Precision|Precision]]
+	- [[Model Evaluation#Recall|Recall]]
+	- [[Model Evaluation#F1-Score|F1-Score]]
+	- [[Model Evaluation#ROC-AUC|ROC-AUC]]
 # Regression
 
 - used to predict **continuous numerical values based on input features**
 - essential for forecasting and estimating quantities in various domains
 - use various regression models for different problems at hand
-	- from [[Linear Regression/index|Linear Regression]] to [[Neural Network Regression/index|Neural Network Regression]]
+	- from [[Regression Models#Linear Regression|Linear Regression]] to [[Neural Network Regression/index|Neural Network Regression]]
 - Performance metrics which measures how well the model fits the data
 
-	- Mean Absolute Error (MAE)
-	- Mean Squared Error (MSE)
-	- Root Mean Squared Error (RMSE)
-	- R-squared ($R^2$)
+	- [[Model Evaluation#Mean Absolute Error (MAE)|Mean Absolute Error (MAE)]]
+	- [[Regression Model Evaluation#Mean Squared Error ($MSE$)|Mean Squared Error (MSE)]]
+	- [[Model Evaluation#Root Mean Squared Error (RMSE)|Root Mean Squared Error]]
+	- [[Regression Model Evaluation#Coefficient of Determination ($R 2$)|Coefficient of Determination]]
 # Ordinal Regression
 
 - supervised learning approach that **combines elements of both classification and regression by predicting ordered categorical outcomes**
@@ -71,9 +71,9 @@
 		- Facebook's Prophet
 		- XGBoost
 - Performance evaluation metrics
-	- [[Supervised Model Evaluation|Mean Absolute Percentage Error (MAPE)]]
-	- [[Supervised Model Evaluation|Mean Squared Error (MSE)]]
-	- [[Supervised Model Evaluation|Root Mean Squared Error (RMSE)]]
+	- [[Model Evaluation#Mean Absolute Percentage Error (MAPE)|Mean Absolute Percentage Error (MAPE)]]
+	- [[Model Evaluation#Mean Squared Error (MSE)|Mean Squared Error (MSE)]]
+	- [[Model Evaluation#Root Mean Squared Error (RMSE)|Root Mean Squared Error (RMSE)]]
 
 # Survival Analysis
 
@@ -83,29 +83,29 @@
 	- customer churn
 - accounts for **censored data, where the event of interest may not have occurred for all observations during the study period**
 - Methods
-	- Kaplan-Meier estimator
+	- [[Kaplan-Meier estimator]]
 		- non-parametric
 		- used for estimating survival functions
-	- Cox Proportional Hazards Model
+	- [[Cox Proportional Hazards Model]]
 		- semi-parametric approach for analyzing effects of covariates on event occurrence
-	- [[Random Survival Forests]] and [[Deep Learning/index|Deep Learning-based survival models]]
+	- [[Classification Models#Random Forest Classification|Random Forest Classification]] and [[Deep Learning/index|Deep Learning-based survival models]]
 		- allow for higher accuracy in complex, high-dimensional datasets
 - Evaluation Metrics
 	- Concordance index (C-index)
 	- Log-Rank Test
 
-# Anomaly detection
+# Anomaly Detection
 
 - identifying **rare or unexpected patterns** based on labeled data
 - widely used in fraud detection, cybersecurity threat identification, and predictive maintenance
 - requires **labeled examples of both normal and anomalous instances to train the model**
 - Techniques
-	- One-Class [[Support Vector Machines (SVM)]]
+	- One-Class [[Classification Models#Support Vector Machines (SVM)|Support Vector Machine (SVM)]]
 	- [[Isolation Forest]] (if trained with labeled data)
 	- ensemble methods
 		- combines multiple models for improved neural networks
 - Model Performance evaluated using
-	- precision-recall curves
-	- F1-score
-	- area under the ROC curve (AUC-ROC)
+	- [[Model Evaluation#PR-AUC (Precision-Recall Area Under Curve)|Precision-Recall Area Under Curve]]
+	- [[Model Evaluation#F1-Score|F1-Score]]
+	- [[Model Evaluation#ROC-AUC|ROC-AUC]]
 	- ensure effective identification of anomalies with minimal false positives

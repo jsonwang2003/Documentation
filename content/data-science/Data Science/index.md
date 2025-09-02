@@ -1,4 +1,6 @@
-# What is Data Science
+---
+title: "What is Data Science"
+---
 
 Data science is the interdisciplinary field that extracts meaningful insights from data using a blend of statistics, computer science, and domain expertise. It involves collecting, cleaning, analyzing, and visualizing data to uncover patterns, make predictions, and inform decisions. Data scientists use tools like Python, R, machine learning algorithms, and databases to transform raw information into actionable knowledge—whether it's optimizing business operations, detecting fraud, or powering recommendation systems. At its core, data science turns complexity into clarity, helping organizations and individuals make smarter, data-driven choices.
 

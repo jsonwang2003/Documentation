@@ -1,4 +1,6 @@
-# Leetcode Problems
+---
+title: "Leetcode Problems"
+---
 
 This section contains my solutions and notes for various Leetcode problems organized by topic.
 

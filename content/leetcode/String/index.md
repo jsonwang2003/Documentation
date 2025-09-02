@@ -1,4 +1,6 @@
-# String
+---
+title: "String"
+---
 
 A **string** is a sequence of characters used to represent text. It is one of the most fundamental data types in programming and is typically enclosed in quotes.
 

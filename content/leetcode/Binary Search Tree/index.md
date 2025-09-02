@@ -1,4 +1,6 @@
-# Binary Search Tree
+---
+title: "Binary Search Tree"
+---
 
 A Binary Search Tree (BST) is a tree data structure where each node has the following properties:
 - **Value Property**:  

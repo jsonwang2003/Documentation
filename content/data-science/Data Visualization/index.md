@@ -1,4 +1,6 @@
-# Data Visualization
+---
+title: "Data Visualization"
+---
 
 - presenting complex information in a graphical format that is easy to interpret
 	- critical in **transforming raw data into meaningful insights**

@@ -1,5 +1,6 @@
-# Regression Analysis
-
+---
+title: "Regression Analysis"
+---
 > [!INFO]
 > used to describe the relationship between the dependent variable (y) and independent variable (x)
 
@@ -13,6 +14,7 @@
 # Resources
 
 - [[Regression Models]]
+- [[Regression Model Evaluation]]
 - [[Regression Technique Comparison]]
 - [[Training Regression Models]]
 - [[Testing Regression Models]]
