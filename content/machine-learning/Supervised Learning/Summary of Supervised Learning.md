@@ -17,8 +17,8 @@
 	- [[Classification Models#Naïve Bayes|Naïve Bayes]]
 	- [[Classification Models#k-Nearest Neighbors (k-NN)|k-Nearest Neighbors (k-NN)]]
 - Deep Learning models leveraged
-	- [[Convolutional Neural Networks]] (CNNs) for image classification
-	- Transformer-based architectures for [[natural language processing]]
+	- [[machine-learning/Deep Learning/Supervised Deep Learning Models/index#Convolutional Neural Network (CNN)|Convolutional Neural Networks (CNNs)]] for image classification
+	- Transformer-based architectures for **natural language processing**
 - Classification models evaluated using metrics
 	- [[Model Evaluation#Accuracy|Accuracy]]
 	- [[Model Evaluation#Precision|Precision]]
@@ -30,7 +30,7 @@
 - used to predict **continuous numerical values based on input features**
 - essential for forecasting and estimating quantities in various domains
 - use various regression models for different problems at hand
-	- from [[Regression Models#Linear Regression|Linear Regression]] to [[Neural Network Regression/index|Neural Network Regression]]
+	- from [[Regression Models#Linear Regression|Linear Regression]] to [[machine-learning/Deep Learning/Supervised Deep Learning Models/index#Neural Network Regression|Neural Network Regression]]
 - Performance metrics which measures how well the model fits the data
 
 	- [[Model Evaluation#Mean Absolute Error (MAE)|Mean Absolute Error (MAE)]]
@@ -45,7 +45,7 @@
 		- traditional classification models are not well suited for such tasks
 		- specialized models are used
 			- Ordinal Logistic Regression
-			- Gradient Boosting Methods
+			- [[Classification Models#Gradient Boosting Machines (GBM)|Gradient Boosting Methods]]
 			- Neural Networks with ranking loss functions
 - model evaluated using metrics to measure their effectiveness in **preserving the ordinal structure in predictions**
 	- Spearman's rank correlation
@@ -65,7 +65,7 @@
 		- Autoregressive Integrated Moving Average (ARIMA)
 		- Exponential Smoothing
 	- improved performance for capturing long-term dependencies in sequential data
-		- Long Short-Term Memory Networks (LSTMs)
+		- [[machine-learning/Deep Learning/Supervised Deep Learning Models/index#Long Short-Term Memory (LSTM)|Long Short-Term Memory Networks (LSTMs)]]
 		- Gated Recurrent Units (GRUs)
 	- for handling irregular trends and seasonality
 		- Facebook's Prophet
@@ -83,11 +83,8 @@
 	- customer churn
 - accounts for **censored data, where the event of interest may not have occurred for all observations during the study period**
 - Methods
-	- [[Kaplan-Meier estimator]]
-		- non-parametric
-		- used for estimating survival functions
-	- [[Cox Proportional Hazards Model]]
-		- semi-parametric approach for analyzing effects of covariates on event occurrence
+	- **Kaplan-Meier estimator**[^1]
+	- **Cox Proportional Hazards Model**[^2]
 	- [[Classification Models#Random Forest Classification|Random Forest Classification]] and [[Deep Learning/index|Deep Learning-based survival models]]
 		- allow for higher accuracy in complex, high-dimensional datasets
 - Evaluation Metrics
@@ -109,3 +106,7 @@
 	- [[Model Evaluation#F1-Score|F1-Score]]
 	- [[Model Evaluation#ROC-AUC|ROC-AUC]]
 	- ensure effective identification of anomalies with minimal false positives
+
+[^1]: a **non-parametric method** commonly used for _estimating survival functions_
+
+[^2]: Cox Proportional Hazards Model: provides a **semi-parametric approach** for analyzing the _effect of **covariates on event occurrence**_

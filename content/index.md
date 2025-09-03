@@ -1,7 +1,6 @@
 ---
 title: "Jason's Personal Notes"
 ---
-
 Welcome to my personal knowledge base and documentation repository. This site contains my notes, studies, and reference materials organized for easy access and review.
 
 # Study Areas
