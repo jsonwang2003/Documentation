@@ -16,8 +16,8 @@ title: "Data Visualization"
 
 # Resources
 
-- [[Summarizing and Visualizing Data]]
-- [[Summarizing and Visualizing Data in Python]]
+- [[data-science/Data Visualization/Summarizing and Visualizing Data]]
+- [[data-science/Data Visualization/Summarizing and Visualizing Data in Python]]
 
 # Video Resource
 

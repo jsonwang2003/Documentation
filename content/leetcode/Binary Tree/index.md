@@ -31,5 +31,5 @@ A Binary Tree is a hierarchical data structure in which each node has **at most 
 - Tree-based traversal algorithms
 
 ## Related Problems
-- [[Symmetric Tree]]
-- [[Univalued Binary Tree]]
+- [[leetcode/Binary Tree/Symmetric Tree]]
+- [[leetcode/Binary Tree/Univalued Binary Tree]]

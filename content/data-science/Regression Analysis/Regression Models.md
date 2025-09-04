@@ -14,7 +14,9 @@ The technique for **creating linear models**
 ### Simple Linear Regression
 - Considers $n$ samples of a single variable $x \in R^n$ and describes the relationship between the variable and the response with the model: 
 
-$$y = a_0 +a_1x$$
+	$$
+	y = a_0 +a_1x
+	$$
 
 - The relationship between the variable and the response are described with a straight line. 
 - The constant $a_0$ 
@@ -30,10 +32,9 @@ $$y = a_0 +a_1x$$
 The objective of performing a regression is to build a model to express the relation between the response $y \in R^n$ and a combination of one or more (independent) variables $x_i \in R^n$. 
 - The model allows us to predict the response $y$ from the predictors. 
 - The simplest model which can be considered is a linear model, where the response $y$ depends linearly on the $d$ predictors $x_i$:
-
-$$
-	y = a_0 +a_1x_1 +···+a_dx_d
-$$
+	$$
+		y = a_0 +a_1x_1 +···+a_dx_d
+	$$
 
 Where:
 - $a_i$ = **parameters** = **coefficients of the model**

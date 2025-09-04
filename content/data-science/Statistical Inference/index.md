@@ -12,5 +12,5 @@ title: "Statistical Inference"
 
 # Resource
 
-- [[Types of Statistical Inference]]
-- [[Correlation Analysis]]
+- [[data-science/Statistical Inference/Types of Statistical Inference]]
+- [[data-science/Statistical Inference/Correlation Analysis]]

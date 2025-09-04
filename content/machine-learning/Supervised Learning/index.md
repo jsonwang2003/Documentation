@@ -46,9 +46,9 @@ title: "Supervised Learning"
 		- reducing the need for extensive labeled data
 # Resources
 
-- [[Summary of Supervised Learning]]
-- [[Classification Models]]
-- [[Time Series Analysis]]
+- [[machine-learning/Supervised Learning/Summary of Supervised Learning|Summary of Supervised Learning]]
+- [[machine-learning/Supervised Learning/Classification Models|Classification Models]]
+- [[machine-learning/Supervised Learning/Time Series Analysis|Time Series Analysis]]
 # Video Resource
 
 [Supervised vs. Unsupervised Learning](https://youtu.be/W01tIRP_Rqs)

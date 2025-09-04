@@ -62,11 +62,11 @@ Data science is the interdisciplinary field that extracts meaningful insights fr
 
 # Resources
 
-- [[Data Science Career Path]]
-- [[Data Science Lifecycle]]
-- [[Data Sources]]
-- [[Measurement Types]]
-- [[Types of Data]]
+- [[data-science/Data Science/Data Science Career Path]]
+- [[data-science/Data Science/Data Science Lifecycle]]
+- [[data-science/Data Science/Data Sources]]
+- [[data-science/Data Science/Measurement Types]]
+- [[data-science/Data Science/Types of Data]]
 # Video Resources
 
 [Demystifying Data Science | Mr. Asitang Mishra | TED x OakLawn](https://youtu.be/iJUzouXg5kY)

@@ -1,5 +1,8 @@
-# Reinforcement Learning
+---
+title: Reinforcement Learning
+---
 
+> [!INFO]
 > Reinforcement Learning (RL) is a machine learning paradigm where an agent learns to make decisions by interacting with an environment and receiving feedback in the form of rewards. The goal is to learn a policy that maximizes cumulative reward over time.
 
 ## Overview
@@ -25,8 +28,8 @@ RL problems are typically formalized as **Markov Decision Processes (MDPs)**, de
 
 ## Related Topics
 
-- [[Monte Carlo Tree Search]] — Monte Carlo Tree Search: A planning algorithm often used in hybrid RL systems for decision-making under uncertainty  
-- [[Policy Gradient Methods]] — Probabilistic Graphical Models: Useful for modeling structured uncertainty and reasoning in model-based or hybrid RL approaches
+- [[machine-learning/Reinforcement Learning/Monte Carlo Tree Search]] — Monte Carlo Tree Search: A planning algorithm often used in hybrid RL systems for decision-making under uncertainty  
+- [[machine-learning/Reinforcement Learning/Policy Gradient Methods]] — Probabilistic Graphical Models: Useful for modeling structured uncertainty and reasoning in model-based or hybrid RL approaches
 
 ## Applications
 
@@ -39,7 +42,7 @@ RL problems are typically formalized as **Markov Decision Processes (MDPs)**, de
 
 ## Suggested Links
 
-- [[Reinforced Deep Learning Models/index|Reinforced Deep Learning Models]] — Deep RL algorithms using neural networks  
-- [[Hybrid Deep Learning Models]] — For architectures combining RL with other paradigms  
-- [[Model Evaluation]] — For metrics and validation strategies in RL  
-- [[Supervised Learning/index|Supervised Learning]] — For comparison with supervised paradigms
+- [[machine-learning/Deep Learning/Reinforced Deep Learning Models/index|Reinforced Deep Learning Models]] — Deep RL algorithms using neural networks  
+- [[machine-learning/Deep Learning/Hybrid Deep Learning Models|Hybrid Deep Learning Models]] — For architectures combining RL with other paradigms  
+- [[machine-learning/Model Evaluation|Model Evaluation]] — For metrics and validation strategies in RL  
+- [[machine-learning/Supervised Learning/index|Supervised Learning]] — For comparison with supervised paradigms

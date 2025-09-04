@@ -4,8 +4,6 @@ title: Deep Learning
 >[!INFO]
 > A subset of machine learning that focuses on **training artificial neural networks** to recognize patterns and make complex decisions based on **large volumes of data**.
 
-# Deep Learning Overview
-
 ## Purpose
 
 - Enable models to automatically extract hierarchical features from raw data  
@@ -30,7 +28,7 @@ title: Deep Learning
 
 # Deep Learning Paradigms
 
-## [[Supervised Deep Learning Models/index|Supervised Deep Learning]]
+## [[machine-learning/Deep Learning/Supervised Deep Learning Models/index|Supervised Deep Learning]]
 
 
 > [!INFO]
@@ -52,7 +50,7 @@ title: Deep Learning
 
 ---
 
-## [[Unsupervised Deep Learning Models/index|Unsupervised Deep Learning]]
+## [[machine-learning/Deep Learning/Unsupervised Deep Learning Models/index|Unsupervised Deep Learning]]
 
 > [!INFO]  
 > Focuses on extracting meaningful patterns and representations from data **without explicit labels**.
@@ -66,7 +64,7 @@ title: Deep Learning
 
 ---
 
-## [[Reinforced Deep Learning Models/index|Reinforced Deep Learning]]
+## [[machine-learning/Deep Learning/Reinforced Deep Learning Models/index|Reinforced Deep Learning]]
 
 > [!INFO]  
 > Integrates **Deep Learning** to enable agents to make **sequential decisions** based on interactions with an environment.
@@ -90,7 +88,7 @@ title: Deep Learning
 
 ---
 
-## [[Hybrid Deep Learning Models|Hybrid Deep Learning]]
+## [[machine-learning/Deep Learning/Hybrid Deep Learning Models|Hybrid Deep Learning]]
 
 > [!INFO]  
 > Combines neural networks with **domain-specific constraints** such as differential equations or symbolic rules.
@@ -129,10 +127,10 @@ title: Deep Learning
 
 ## Suggested Links
 
-- [[Supervised Deep Learning Models/index|Supervised Deep Learning Models]]  
-- [[Unsupervised Deep Learning Models/index|Unsupervised Deep Learning Models]]  
-- [[Reinforced Deep Learning Models/index|Reinforced Deep Learning Models]]  
-- [[Hybrid Deep Learning Models]]  
-- [[Semi-Supervised Learning/index]]  
-- [[Self-Supervised Learning/index]]  
-- [[Model Evaluation]]
+- [[machine-learning/Deep Learning/Supervised Deep Learning Models/index|Supervised Deep Learning Models]]  
+- [[machine-learning/Deep Learning/Unsupervised Deep Learning Models/index|Unsupervised Deep Learning Models]]  
+- [[machine-learning/Deep Learning/Reinforced Deep Learning Models/index|Reinforced Deep Learning Models]]  
+- [[machine-learning/Deep Learning/Hybrid Deep Learning Models|Hybrid Deep Learning Models]]  
+- [[machine-learning/Supervised Learning/index|Semi-Supervised Learning]]  
+- [[machine-learning/Supervised Learning/index|Self-Supervised Learning]]  
+- [[machine-learning/Model Evaluation|Model Evaluation]]

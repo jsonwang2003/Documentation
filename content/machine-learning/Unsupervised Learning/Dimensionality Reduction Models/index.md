@@ -1,3 +1,7 @@
+---
+title: Dimensionality Reduction
+---
+
 > [!INFO]
 > **Dimensionality Reduction** is a technique used to reduce the number of input variables in a dataset while preserving its essential structure. It simplifies high-dimensional data, improves model performance, and enhances interpretability. Dimensionality reduction is foundational in preprocessing pipelines, visualization, and noise reduction.
 
@@ -19,19 +23,19 @@ These techniques are widely used in **natural language processing**, **image com
 
 ## Included Algorithms
 
-- ### [[Principal Component Analysis (PCA)]]
+- ### [[machine-learning/Unsupervised Learning/Dimensionality Reduction Models/Principal Component Analysis (PCA)]]
 > Projects data onto orthogonal components that capture maximum variance. Fast and widely used, but assumes linear relationships.
 
-- ### [[t-Distributed Stochastic Neighbor Embedding (t-SNE)]]
+- ### [[machine-learning/Unsupervised Learning/Dimensionality Reduction Models/t-Distributed Stochastic Neighbor Embedding (t-SNE)]]
 > Non-linear technique for visualizing high-dimensional data in 2D or 3D. Preserves local structure but not global distances.
 
-- ### [[Uniform Manifold Approximation and Projection (UMAP)]]
+- ### [[machine-learning/Unsupervised Learning/Dimensionality Reduction Models/Uniform Manifold Approximation and Projection (UMAP)]]
 > Preserves both local and global structure. Faster than t-SNE and effective for visualization and clustering prep.
 
-- ### [[Independent Component Analysis (ICA)]]
+- ### [[machine-learning/Unsupervised Learning/Dimensionality Reduction Models/Independent Component Analysis (ICA)]]
 > Separates multivariate signals into statistically independent components. Effective for blind source separation and uncovering latent factors.
 
-- ### [[Feature Selection Techniques]]
+- ### Feature Selection Techniques
 > Includes methods like variance thresholding, mutual information, and recursive feature elimination. Focuses on selecting informative features rather than transforming them.
 
 ---
@@ -57,6 +61,6 @@ These techniques are widely used in **natural language processing**, **image com
 ---
 ## Suggested Links
 
-- [[Unsupervised Learning/index|Unsupervised Learning]] — Dimensionality reduction often precedes unsupervised tasks
-- [[Model Evaluation]] — Evaluate reconstruction error, explained variance, and classification accuracy
-- [[Clustering Models/index|Clustering Models]] — Clustering often benefits from reduced dimensionality
+- [[machine-learning/Unsupervised Learning/index|Unsupervised Learning]] — Dimensionality reduction often precedes unsupervised tasks
+- [[machine-learning/Model Evaluation|Model Evaluation]] — Evaluate reconstruction error, explained variance, and classification accuracy
+- [[machine-learning/Unsupervised Learning/Clustering Models/index|Clustering Models]] — Clustering often benefits from reduced dimensionality

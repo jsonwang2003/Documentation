@@ -15,13 +15,13 @@
 
 1. **Exploration vs Exploitation via UCB1**
 	- Uses **Upper Confidence Bound (UCB1)** to select nodes: 
-$$
-\text{UCB1}(i) = \bar{X}_i + c\sqrt{\frac{\ln N}{n_i}}
-$$
-		- $\bar{X}_i$: average reward of node $i$
-		- $N$: total visits to parent
-		- $n_i$: visits to node $i$
-		- $c$: exploration constant (typically $\sqrt{2}$)
+	$$
+	\text{UCB1}(i) = \bar{X}_i + c\sqrt{\frac{\ln N}{n_i}}
+	$$
+	- $\bar{X}_i$: average reward of node $i$
+	- $N$: total visits to parent
+	- $n_i$: visits to node $i$
+	- $c$: exploration constant (typically $\sqrt{2}$)
 2. **Anytime Algorithm**
 	- Can be stopped at any time and still return the best-known action
 	- Ideal for **real-time decision-making** under computational constraints

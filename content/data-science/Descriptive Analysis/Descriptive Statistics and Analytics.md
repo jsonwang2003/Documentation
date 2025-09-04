@@ -22,9 +22,9 @@
 ## Mean
 - the **arithmetic average**
 - fundamental measure of central tendency
-$$
-mean = \frac{\displaystyle\sum_{i=0}^N x_i}{N}
-$$
+	$$
+	mean = \frac{\displaystyle\sum_{i=0}^N x_i}{N}
+	$$
 - provides insight into the overall trend of a dataset
 ![Important](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAqSURBVDhPY2DAA97aWp55a2t5Bl0cGTChC5AKRg0YNYBhUBgwyAFdciMAGBcI1YEA4usAAAAASUVORK5CYII=) can be misleading when the data contains outliers or is highly skewed
 

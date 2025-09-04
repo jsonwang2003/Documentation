@@ -12,7 +12,7 @@ title: "Drawing Insights"
 
 # Resources
 
-- [[Descriptive Statistics and Analytics]]
-- [[Data Analysis]]
-- [[Probability Distributions]]
-- [[Descriptive Statistics Lab]]
+- [[data-science/Descriptive Analysis/Descriptive Statistics and Analytics]]
+- [[data-science/Descriptive Analysis/Data Analysis]]
+- [[data-science/Descriptive Analysis/Probability Distributions]]
+- [[data-science/Descriptive Analysis/Descriptive Statistics Lab]]

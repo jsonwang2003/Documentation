@@ -20,4 +20,4 @@ A **string** is a sequence of characters used to represent text. It is one of th
 
 ## Related Problems
 
-- [[Length of Last Word]]
+- [[leetcode/String/Length of Last Word]]

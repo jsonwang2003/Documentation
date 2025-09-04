@@ -22,13 +22,13 @@ Unsupervised deep learning is often used as a **pretraining step**, a **data com
 
 ## Included Models
 
-- ### [[Autoencoders]]
+- ### [[machine-learning/Deep Learning/Unsupervised Deep Learning Models/Autoencoders]]
 > Learns to compress and reconstruct input data. Useful for dimensionality reduction, denoising, and anomaly detection.
 
-- ### [[Generative Adversarial Networks (GANs)]]
+- ### [[machine-learning/Deep Learning/Unsupervised Deep Learning Models/Generative Adversarial Networks (GANs)]]
 > Consists of a generator and discriminator in a minimax game. Used for realistic data generation, image synthesis, and augmentation.
 
-- ### [[Self-Organizing Maps (SOMs)]]
+- ### [[machine-learning/Deep Learning/Unsupervised Deep Learning Models/Self-Organizing Maps (SOMs)]]
 > Topology-preserving neural networks that project high-dimensional data onto a low-dimensional grid. Useful for clustering, visualization, and exploratory analysis.
 
 ---
@@ -55,6 +55,6 @@ Unsupervised deep learning is often used as a **pretraining step**, a **data com
 
 ## Suggested Links
 
-- [[Unsupervised Learning/index|Unsupervised Learning]] — Broader context including classical models  
-- [[Hybrid Deep Learning Models]] — For architectures combining unsupervised and supervised components  
-- [[Model Evaluation]] — For metrics like reconstruction error, clustering purity, or likelihood
+- [[machine-learning/Unsupervised Learning/index|Unsupervised Learning]] — Broader context including classical models  
+- [[machine-learning/Deep Learning/Hybrid Deep Learning Models]] — For architectures combining unsupervised and supervised components  
+- [[machine-learning/Model Evaluation]] — For metrics like reconstruction error, clustering purity, or likelihood

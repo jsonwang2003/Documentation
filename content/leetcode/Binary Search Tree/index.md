@@ -24,5 +24,5 @@ A Binary Search Tree (BST) is a tree data structure where each node has the foll
 - **Delete**: O(log n) average, O(n) worst case
 
 ## Related Problems
-- [[Validate Binary Search Tree]]
-- [[Recover Binary Search Tree]]
+- [[leetcode/Binary Search Tree/Validate Binary Search Tree]]
+- [[leetcode/Binary Search Tree/Recover Binary Search Tree]]

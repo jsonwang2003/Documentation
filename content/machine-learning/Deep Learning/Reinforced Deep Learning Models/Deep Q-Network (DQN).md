@@ -32,8 +32,8 @@
 	- Starts with high $\epsilon$ (more exploration), decays over time to favor learned policy
 - **Bellman Loss Optimization**
 	- Uses the Bellman equation to compute temporal difference (TD) error
-$$
-L(\theta) = \mathbb{E}[(r + \gamma \max_{a'} Q(s', a'; \theta^-) - Q(s, a; \theta))^2]
-$$
+		$$
+		L(\theta) = \mathbb{E}[(r + \gamma \max_{a'} Q(s', a'; \theta^-) - Q(s, a; \theta))^2]
+		$$
 - **Scalability to Visual Input**
 	- Can process raw image frames using convolutional layers

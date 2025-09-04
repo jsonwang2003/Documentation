@@ -20,25 +20,25 @@ These models typically use **gradient-based optimization** to minimize a loss fu
 
 ## Included Models
 
-- ### [[Convolutional Neural Network (CNN)]]
+- ### [[machine-learning/Deep Learning/Supervised Deep Learning Models/Convolutional Neural Network (CNN)]]
 > Convolutional Neural Network — specialized for visual data. Uses convolutional layers to extract spatial hierarchies.
 
-- ### [[Recurrent Neural Network (RNN)]]
+- ### [[machine-learning/Deep Learning/Supervised Deep Learning Models/Recurrent Neural Network (RNN)]]
 > Recurrent Neural Network — designed for sequential data. Maintains temporal dependencies across time steps.
 
-- ### [[Long Short-Term Memory (LSTM)]]
+- ### [[machine-learning/Deep Learning/Supervised Deep Learning Models/Long Short-Term Memory (LSTM)]]
 > Long Short-Term Memory — a gated RNN variant that captures long-range dependencies in sequences.
 
-- ### [[Transformer]]
+- ### [[machine-learning/Deep Learning/Supervised Deep Learning Models/Transformer]]
 > Attention-based architecture for sequence modeling. Dominates NLP tasks with scalable parallelism.
 
-- ### [[Deep Neural Network (DNN)]]
+- ### [[machine-learning/Deep Learning/Supervised Deep Learning Models/Deep Neural Network (DNN)]]
 > Deep Neural Network — fully connected layers for structured data. Used in regression and classification.
 
-- ### [[Neural Network Regression]]
+- ### [[machine-learning/Deep Learning/Supervised Deep Learning Models/Neural Network Regression]]
 > A supervised model for predicting continuous values using deep feedforward networks.
 
-- ### [[Graph Neural Network (GNN)]]
+- ### [[machine-learning/Deep Learning/Supervised Deep Learning Models/Graph Neural Network (GNN)]]
 > Graph Neural Network — operates on graph-structured data. Performs node, edge, and graph-level predictions.
 
 ---
@@ -56,9 +56,9 @@ These models typically use **gradient-based optimization** to minimize a loss fu
 
 ## Suggested Links
 
-- [[Supervised Learning/index|Supervised Learning]] ← Broader context including classical models  
-- [[Hybrid Deep Learning Models]] ← For architectures combining multiple paradigms  
-- [[Model Evaluation]] ← For metrics and validation strategies
+- [[machine-learning/Supervised Learning/index|Supervised Learning]] ← Broader context including classical models  
+- [[machine-learning/Deep Learning/Hybrid Deep Learning Models]] ← For architectures combining multiple paradigms  
+- [[machine-learning/Model Evaluation]] ← For metrics and validation strategies
 
 ---
 

@@ -20,13 +20,13 @@ They are commonly used in robotics, game AI, autonomous systems, and industrial 
 
 ## Included Models
 
-- ### [[Deep Q-Network (DQN)]]
+- ### [[machine-learning/Deep Learning/Reinforced Deep Learning Models/Deep Q-Network (DQN)]]
 > A value-based method that uses a deep neural network to approximate the Q-function. Introduced experience replay and target networks for stability.
 
-- ### [[Deep Deterministic Policy Gradient (DDPG)]]
+- ### [[machine-learning/Deep Learning/Reinforced Deep Learning Models/Deep Deterministic Policy Gradient (DDPG)]]
 > An off-policy actor-critic algorithm for continuous action spaces. Combines deterministic policy gradients with Q-learning.
 
-- ### [[Proximal Policy Optimization (PPO)]]
+- ### [[machine-learning/Deep Learning/Reinforced Deep Learning Models/Proximal Policy Optimization (PPO)]]
 > A policy optimization algorithm that balances exploration and stability using clipped surrogate objectives.
 
 ---
@@ -44,9 +44,9 @@ They are commonly used in robotics, game AI, autonomous systems, and industrial 
 
 ## Suggested Links
 
-- [[Reinforcement Learning/index]] ← Broader RL context
-- [[machine-learning/Deep Learning/Supervised Deep Learning Models/index]] ← For hybrid comparisons  
-- [[Hybrid Deep Learning Models]] ← For models combining DRL with other paradigms
+- [[machine-learning/Reinforcement Learning/index|Reinforcement Learning]] ← Broader RL context
+- [[machine-learning/Deep Learning/Supervised Deep Learning Models/index|Supervised Deep Learning]] ← For hybrid comparisons  
+- [[machine-learning/Deep Learning/Hybrid Deep Learning Models|Hybrid Deep Learning Models]] ← For models combining DRL with other paradigms
 
 ---
 

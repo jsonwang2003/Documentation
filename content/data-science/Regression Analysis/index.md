@@ -13,11 +13,11 @@ title: "Regression Analysis"
 
 # Resources
 
-- [[Regression Models]]
-- [[Regression Model Evaluation]]
-- [[Regression Technique Comparison]]
-- [[Training Regression Models]]
-- [[Testing Regression Models]]
+- [[data-science/Regression Analysis/Regression Models]]
+- [[data-science/Regression Analysis/Regression Model Evaluation]]
+- [[data-science/Regression Analysis/Regression Technique Comparison]]
+- [[data-science/Regression Analysis/Training Regression Models]]
+- [[data-science/Regression Analysis/Testing Regression Models]]
 # Video Resource
 
 [Regression Analysis: An introduction to Linear and Logistic Regression](https://youtu.be/FLJ0yYetywE)

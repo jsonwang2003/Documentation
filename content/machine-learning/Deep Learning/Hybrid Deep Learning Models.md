@@ -7,23 +7,23 @@
 	- problem domains
 ## Architectural Combinations
 
-- [[machine-learning/Deep Learning/Supervised Deep Learning Models/index#Convolutional Neural Network (CNN)|Convolutional Neural Networks]]: Extract **spatial features** from image or grid-like data
-- [[machine-learning/Deep Learning/Supervised Deep Learning Models/index#Recurrent Neural Network (RNN)|Recurrent Neural Networks]] / [[machine-learning/Deep Learning/Supervised Deep Learning Models/index|Long Short-Term Memory Networks]]: Model sequential or temporal dependencies
-- [[machine-learning/Deep Learning/Supervised Deep Learning Models/index#Transformer|Transformers]]: Capture **long-range contextual relationships** in text or sequences
-- [[machine-learning/Deep Learning/Supervised Deep Learning Models/index#Graph Neural Network (GNN)|Graph Neural Networks]]: Represent relational structures and graph-based data
-- [[Classification Models|Classical Machine Learning]]: Provide interpretability and structured decision logic
+- [[Convolutional Neural Network (CNN)|Convolutional Neural Networks]]: Extract **spatial features** from image or grid-like data
+- [[Recurrent Neural Network (RNN)|Recurrent Neural Networks]] / [[Long Short-Term Memory (LSTM)|Long Short-Term Memory Networks]]: Model sequential or temporal dependencies
+- [[Transformer|Transformers]]: Capture **long-range contextual relationships** in text or sequences
+- [[Graph Neural Network (GNN)]]: Represent relational structures and graph-based data
+- [[machine-learning/Supervised Learning/Classification Models|Classical Machine Learning]]: Provide interpretability and structured decision logic
 
 ## Key Features
 
 1. **Complementary Strengths**
-	- [[machine-learning/Deep Learning/Supervised Deep Learning Models/index#Convolutional Neural Network (CNN)|Convolutional Neural Networks]] handle spatial patterns
-	- [[machine-learning/Deep Learning/Supervised Deep Learning Models/index#Recurrent Neural Network (RNN)|Recurrent Neural Networks]] / [[machine-learning/Deep Learning/Supervised Deep Learning Models/index#Transformer|Transformers]] model sequences
+	- [[Convolutional Neural Network (CNN)]] handle spatial patterns
+	- [[Recurrent Neural Network (RNN)]] / [[Transformer]] model sequences
 	- Combining them enables robust analysis of **video, audio, and dynamic imagery**
 2. **Architectural Flexibility**
 	- Modular design allows tailored pipelines for specific tasks
 	- Example: 
-		- [[machine-learning/Deep Learning/Supervised Deep Learning Models/index#Convolutional Neural Network (CNN)|CNN]] &rarr; [[machine-learning/Deep Learning/Supervised Deep Learning Models/index#Transformer|Transformer]] for video captioning
-		- [[machine-learning/Deep Learning/Supervised Deep Learning Models/index#Convolutional Neural Network (CNN)|CNN]] &rarr; [[Classification Models#Support Vector Machines (SVM)|SVM]] for image classification
+		- [[Convolutional Neural Network (CNN)|CNN]] &rarr; [[Transformer|Transformer]] for video captioning
+		- [[Convolutional Neural Network (CNN)|CNN]] &rarr; [[Classification Models#Support Vector Machines (SVM)|SVM]] for image classification
 3. **Improved Interpretability**
 	- Deep models extract complex features
 	- Classical models provide **transparent decisions**

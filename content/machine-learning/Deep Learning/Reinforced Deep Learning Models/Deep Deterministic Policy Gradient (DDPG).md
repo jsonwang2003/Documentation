@@ -2,7 +2,7 @@
 >[!INFO]
 > An **off-policy**, **actor-critic algorithm** designed for environments with **continuous action spaces**.
 
-- Blends the strength of [[Deep Q-Network (DQN)|DQN]] and [[#Policy Gradient Methods]] to learn both a [[Q-function]] and a **deterministic policy** simultaneously
+- Blends the strength of [[machine-learning/Deep Learning/Reinforced Deep Learning Models/Deep Q-Network (DQN)|DQN]] and [[Policy Gradient Methods]] to learn both a [[Q-function]] and a **deterministic policy** simultaneously
 
 ## Components
 
@@ -19,15 +19,15 @@
 2. **Off-Policy Learning**
 	- Learns from stored experiences, improving sample efficiency
 	- Enables reuse of past trajectories for training
-3. **[Actor-Critic Architecture](https://www.geeksforgeeks.org/machine-learning/actor-critic-algorithm-in-reinforcement-learning/)[^2]**
+3. **[Actor-Critic Architecture](https://www.geeksforgeeks.org/machine-learning/actor-critic-algorithm-in-reinforcement-learning/)**
 	- **Actor** proposes actions
 	- **Critic** evaluates them
 	- **Critic** guides **actor** updates via _gradient of Q-values_
 4. **Target Networks**
 	- Reduce training instability by slowing updating target parameters
-$$
-\theta^- \leftarrow \tau \theta + (1 - \tau) \theta^-
-$$
+		$$
+		\theta^- \leftarrow \tau \theta + (1 - \tau) \theta^-
+		$$
 5. **Exploration via Noise**
 	- Adds temporary correlated noise (e.g. [[Ornstein-Uhlenbeck]]) to encourage exploration
 	- especially useful in **physical control tasks**

@@ -12,5 +12,5 @@ title: "Sampling"
 
 # Resource
 
-- [[Probability Sampling]]
-- [[Non-Probability Sampling]]
+- [[data-science/Sampling/Probability Sampling]]
+- [[data-science/Sampling/Non-Probability Sampling]]

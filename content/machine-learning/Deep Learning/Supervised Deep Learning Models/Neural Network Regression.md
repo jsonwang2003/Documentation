@@ -23,7 +23,7 @@
 1. **Continuous Output Prediction**
 	- Unlike classification, outputs are real-valued (e.g., prices, temperatures)
 2. **Non-Linear Modeling**
-	- Captures complex relationships beyond [[Regression Models#Linear Regression|linear regression]]
+	- Captures complex relationships beyond [[data-science/Regression Analysis/Regression Models#Linear Regression|linear regression]]
 3. **Flexible Architecture**
 	- Depth and width can be tuned for task complexity
 4. **End-to-End Learning**

@@ -23,13 +23,13 @@ These algorithms are often used in **retail analytics**, **web usage mining**, a
 
 ## Included Algorithms
 
-- ### [[Apriori Algorithm]]
+- ### [[machine-learning/Unsupervised Learning/Association Rule Learning Models/Apriori Algorithm]]
 > Uses breadth-first search and candidate generation to find frequent itemsets. Simple and interpretable, but computationally expensive.
 
-- ### [[Equivalence Class Clustering and Bottom-Up Lattice Traversal (ECLAT)]]
+- ### [[machine-learning/Unsupervised Learning/Association Rule Learning Models/Equivalence Class Clustering and Bottom-Up Lattice Traversal (ECLAT)]]
 > Groups itemsets into equivalence classes for efficient rule generation. Often used in vertical data formats.
 
-- ### [[Frequent Pattern Growth]]
+- ### [[machine-learning/Unsupervised Learning/Association Rule Learning Models/Frequent Pattern Growth]]
 > Avoids candidate generation by using a compact prefix-tree structure. Fast and memory-efficient for large datasets.
 
 ---
@@ -56,6 +56,6 @@ These algorithms are often used in **retail analytics**, **web usage mining**, a
 
 ## Suggested Links
 
-- [[Unsupervised Learning/index|Unsupervised Learning]] — Broader context for pattern discovery without labels  
-- [[Model Evaluation]] — Metrics like support, confidence, lift, and conviction  
-- [[Hybrid Deep Learning Models]] — For combining rule-based and neural architectures
+- [[machine-learning/Unsupervised Learning/index|Unsupervised Learning]] — Broader context for pattern discovery without labels  
+- [[machine-learning/Model Evaluation|Model Evaluation]] — Metrics like support, confidence, lift, and conviction  
+- [[machine-learning/Deep Learning/Hybrid Deep Learning Models|Hybrid Deep Learning Models]] — For combining rule-based and neural architectures

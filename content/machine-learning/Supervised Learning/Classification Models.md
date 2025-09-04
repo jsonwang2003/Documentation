@@ -59,9 +59,9 @@ print(report)
 - provides accuracy score indicating how well it predicts the data
 - confusion matrix shows the number of **true positives, true negatives, false positives, false negatives**
 - classification report provides essential metrics for **evaluating classification performance**
-	- [[Model Evaluation#Precision|Precision]]
-	- [[Model Evaluation#Recall|Recall]]
-	- [[Model Evaluation#F1-Score|F1-Score]]
+	- [[machine-learning/Model Evaluation|Precision]]
+	- [[machine-learning/Model Evaluation|Recall]]
+	- [[machine-learning/Model Evaluation|F1-Score]]
 ### Advantages
 
 - interpretability
@@ -142,9 +142,9 @@ plt.show()
 - providing insights through to understand how well the model is performing
 	- Accuracy score: high score = model effectively identifies patterns based on dependent variables
 	- classification report contains these for both churn and non-churn predictions
-		- [[Model Evaluation#Precision|Precision]]
-		- [[Model Evaluation#Recall|Recall]]
-		- [[Model Evaluation#F1-Score|F1-Score]]
+		- [[machine-learning/Model Evaluation|Precision]]
+		- [[machine-learning/Model Evaluation|Recall]]
+		- [[machine-learning/Model Evaluation|F1-Score]]
 ### Advantages
 
 - highly interpretable
@@ -232,9 +232,9 @@ plt.show()
 - outputs an accuracy score
 	- representing the proportion of correctly classified cases in the test set
 - key metrics for evaluating model performance across different classes
-	- [[Model Evaluation#Precision|Precision]]
-	- [[Model Evaluation#Recall|Recall]]
-	- [[Model Evaluation#F1-Score|F1-Score]]
+	- [[machine-learning/Model Evaluation|Precision]]
+	- [[machine-learning/Model Evaluation|Recall]]
+	- [[machine-learning/Model Evaluation|F1-Score]]
 - confusion matrix reveals true positive, true negative, false positive, and false negative
 	- helps in assessing misclassification trends
 - feature importance plot
@@ -321,9 +321,9 @@ print("\nClassification Report:\n", class_report)
 - confufion matrix provide insight into the model's performance by
 	- indicating the number of true positives, true negatives, false positives, and false negatives
 - classification report includes
-	- [[Model Evaluation#Precision|Precision]]
-	- [[Model Evaluation#Recall|Recall]]
-	- [[Model Evaluation#F1-Score|F1-Score]]
+	- [[machine-learning/Model Evaluation|Precision]]
+	- [[machine-learning/Model Evaluation|Recall]]
+	- [[machine-learning/Model Evaluation|F1-Score]]
 ### Advantages
 
 - effectiveness in high-dimensional spaces, suitable for
@@ -347,10 +347,9 @@ print("\nClassification Report:\n", class_report)
 # Naïve Bayes
 
 - probabilistic classification algorithm based on **Bayes' Theorem**
-
-$$
-P(A|B) = \frac{P(B|A)P(A)}{P(B)}
-$$
+	$$
+	P(A|B) = \frac{P(B|A)P(A)}{P(B)}
+	$$
 
 >[!INFO]
 >calculates the posterior probability of a class given a set of features by **multiplying the prior probability of the class with the likelihood of the features occurring within that class**normalized by the probability of the features across all classes
@@ -398,9 +397,9 @@ print("Classification Report:\n", report)
 
 - accuracy score
 - classification report
-	- [[Model Evaluation#Precision|Precision]]
-	- [[Model Evaluation#Recall|Recall]]
-	- [[Model Evaluation#F1-Score|F1-Score]]
+	- [[machine-learning/Model Evaluation|Precision]]
+	- [[machine-learning/Model Evaluation|Recall]]
+	- [[machine-learning/Model Evaluation|F1-Score]]
 - precision and recall must be examined individually to assess performance on each class
 ### Advantages
 
@@ -419,7 +418,7 @@ print("Classification Report:\n", report)
 
 # k-Nearest Neighbors (k-NN)
 
-- simple but effective non-parametric machine learning technique used for both [[Summary of Supervised Learning#Classification|Classification]] and [[data-science/Regression Analysis/index|Regression]] tasks
+- simple but effective non-parametric machine learning technique used for both [[machine-learning/Supervised Learning/Classification Models|Classification]] and [[machine-learning/Supervised Learning/index|Regression]] tasks
 - operates on the principle of similarity
 	- observation is assigned to a class (or given a numerical value) based on the **majority / average of its k-nearest neighbors in the feature space**
 - does not build an explicit model
@@ -477,9 +476,9 @@ print("\nClassification Report:\n", report)
 ### Output
 
 - classification report
-	- [[Model Evaluation#Precision|Precision]]
-	- [[Model Evaluation#Recall|Recall]]
-	- [[Model Evaluation#F1-Score|F1-Score]]
+	- [[machine-learning/Model Evaluation|Precision]]
+	- [[machine-learning/Model Evaluation|Recall]]
+	- [[machine-learning/Model Evaluation|F1-Score]]
 - accuracy score
 	- gives an overall measure of how well the model classifies the data
 	- tuning k, adjust feature scaling, and increasing dataset size can optimize the performance
@@ -648,9 +647,9 @@ print('Classification Report:\n', report)
 	- provides a measure of how well the model predicts the correct class labels
 	- high accuracy score (85+ %): model is effective at distinguishing between the classes
 - classification report for each class
-	- [[Model Evaluation#Precision|Precision]]
-	- [[Model Evaluation#Recall|Recall]]
-	- [[Model Evaluation#F1-Score|F1-Score]]
+	- [[machine-learning/Model Evaluation|Precision]]
+	- [[machine-learning/Model Evaluation|Recall]]
+	- [[machine-learning/Model Evaluation|F1-Score]]
 ### Advantages
 
 - able to improve weak learners
@@ -679,8 +678,8 @@ print('Classification Report:\n', report)
 	- more computationally efficient and suitable for large datasets
 - often used with linear models for classification tasks
 - can incorporate different loss functions
-	- hinge loss ([[Classification Models#Support Vector Machines (SVM)|Support Vector Machine]])
-	- log loss ([[Classification Models#Logistic Regression|Logistic Regression]])
+	- hinge loss ([[machine-learning/Supervised Learning/Classification Models|Support Vector Machine]])
+	- log loss ([[machine-learning/Supervised Learning/Classification Models|Logistic Regression]])
 
 ```python
 import numpy as np
@@ -728,16 +727,16 @@ print("Classification Report:\n", report)
 	- including accuracy
 	- measures the proportion of correctly predicted customer purchase decisions over the total number of test samples
 	- high accuracy score &rarr; the model is effective in distinguishing between users likely to purchase and those who will not
-- [[Model Evaluation#Precision|Precision]]
+- [[machine-learning/Model Evaluation|Precision]]
 	- indicates  the percentage of predicted purchases that were actually purchases
 	- $accuracy >= 80\%$:
 		- SGD Classifier is performing well in predicting purchasing behavior
-- [[Model Evaluation#Recall|Recall]]
+- [[machine-learning/Model Evaluation|Recall]]
 	- how many actual purchases were correctly identified
-- [[Model Evaluation#F1-Score|F1-Score]]
+- [[machine-learning/Model Evaluation|F1-Score]]
 	- balanced measure of precision and recall
 	- useful for assessing the model's ability to capture positive cases effectively
-- if [[Model Evaluation#Recall|Recall]] or [[Model Evaluation#Precision|Precision]] score are low:
+- if [[machine-learning/Model Evaluation|Recall]] or [[machine-learning/Model Evaluation|Precision]] score are low:
 	- suggests issues where one class dominates the dataset
 	- techniques like these may be necessary to improve performance and ensure the model generalizes well to real-world data
 		- oversampling the minority

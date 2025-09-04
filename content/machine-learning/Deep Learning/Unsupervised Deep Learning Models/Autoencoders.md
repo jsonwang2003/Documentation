@@ -11,7 +11,7 @@
 
 - uses [[machine-learning/Unsupervised Learning/index|Unsupervised Learning]], minimizing a **reconstruction loss** between the input and output
 ## Goal
-- [[Summary of Unsupervised Learning#Dimensionality Reduction|Dimensionality Reduction]]: distill complex, high-dimensional data into a reduced, meaningful representation or latent space
+- [[machine-learning/Unsupervised Learning/Dimensionality Reduction Models/index|Dimensionality Reduction]]: distill complex, high-dimensional data into a reduced, meaningful representation or latent space
 ## Reconstruction error
 - Discrepancy between **original data** and **decoded reconstruction**
 - When minimized will
