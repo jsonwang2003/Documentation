@@ -1,7 +1,7 @@
 - One of the key aspects of supervised machine learning is **model evaluation and validation**. 
 - Two popular measures of evaluation
 
-## Coefficient of Determination ($R^2$) 
+## Coefficient of Determination 
 
 - Measures the **proportion of variance** in the target variable that is explained by the model
 	- The best possible score for $R^2$ is 1.0 (when $u = 0$)

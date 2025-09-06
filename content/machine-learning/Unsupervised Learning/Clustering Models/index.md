@@ -10,7 +10,6 @@ title: Clustering
 Clustering focuses on partitioning datasets into groups (clusters) where data points within the same group are more similar to each other than to those in other groups. It is widely used in domains where understanding natural groupings or patterns is essential.
 
 Key tasks include:
-
 - Identifying inherent structures in data  
 - Segmenting populations or behaviors  
 - Detecting anomalies or outliers  

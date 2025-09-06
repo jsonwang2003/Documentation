@@ -107,21 +107,45 @@ title: Deep Learning
 
 ---
 
-## Semi-Supervised & Self-Supervised Learning
+## [[Semi-Supervised Deep Learning|Semi-Supervised Deep Learning]]
 
-> [!INFO]  
-> Leverage small amounts of **labeled data** with large volumes of **unlabeled data** to improve model efficiency.
+> [!INFO]
+> Combines **supervised and unsupervised learning** to leverage small amounts of labeled data with large volumes of unlabeled data. Useful when annotation is costly or limited.
 
-### Semi-Supervised Learning
+### Example
 
-- Useful when labeled data is scarce or expensive  
-- Combines supervised and unsupervised objectives
+- **Semi-Supervised Classification**
+	- Initial training on labeled samples
+	- Refined using unlabeled data via techniques like pseudo-labeling and consistency regularization
 
-### Self-Supervised Learning
+### Applications
 
-- Models generate pseudo-labels from raw data  
-- Enables pretraining without manual annotation  
-- Foundational in modern NLP and vision models
+- Healthcare diagnostics
+- Natural Language Processing
+- Computer Vision
+- Fraud detection in financial systems
+
+---
+
+## [[Self-Supervised Deep Learning]]
+
+> [!INFO]
+> Operates entirely on **unlabeled data** by generating pseudo-labels from intrinsic data properties. Enables scalable pretraining without manual annotation.
+
+### Example
+
+- **Masked Language Modeling (e.g., BERT)**
+	- Predict missing tokens in text
+	- Learn rich representations for downstream NLP tasks
+- **Contrastive Learning (e.g., SimCLR)**
+	- Learn embeddings by comparing augmented views of the same data
+
+### Applications
+
+- Image classification
+- Video analysis
+- Language modeling
+- Recommendation systems
 
 ---
 
@@ -131,6 +155,4 @@ title: Deep Learning
 - [[machine-learning/Deep Learning/Unsupervised Deep Learning Models/index|Unsupervised Deep Learning Models]]  
 - [[machine-learning/Deep Learning/Reinforced Deep Learning Models/index|Reinforced Deep Learning Models]]  
 - [[machine-learning/Deep Learning/Hybrid Deep Learning Models|Hybrid Deep Learning Models]]  
-- [[machine-learning/Supervised Learning/index|Semi-Supervised Learning]]  
-- [[machine-learning/Supervised Learning/index|Self-Supervised Learning]]  
 - [[machine-learning/Model Evaluation|Model Evaluation]]

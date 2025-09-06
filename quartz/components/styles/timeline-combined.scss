@@ -1,0 +1,777 @@
+// Material UI Timeline Component for Quartz
+// Comprehensive timeline styles combining all variants and features
+// Based on Material UI Timeline: https://mui.com/material-ui/react-timeline/
+
+@use "sass:math";
+
+// Material Design Variables
+$timeline-dot-size: 0.9rem;
+$timeline-dot-border: 2px;
+$timeline-connector-width: 2px;
+$timeline-spacing: 1rem;
+$timeline-content-margin: 1rem;
+$timeline-card-radius: 8px;
+$timeline-elevation: 0 2px 8px rgba(0, 0, 0, 0.1);
+$timeline-elevation-hover: 0 4px 16px rgba(0, 0, 0, 0.15);
+
+.timeline {
+  // CSS Variables for theming
+  --timeline-primary: #1976d2;
+  --timeline-secondary: #dc004e;
+  --timeline-success: #4caf50;
+  --timeline-error: #f44336;
+  --timeline-warning: #ff9800;
+  --timeline-info: #2196f3;
+  --timeline-grey: #e0e0e0;
+  --timeline-surface: var(--light);
+  --timeline-on-surface: var(--dark);
+  --timeline-outline: var(--lightgray);
+  
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding: $timeline-spacing 0;
+  
+  // Timeline Item Container
+  .timeline-item {
+    display: flex;
+    position: relative;
+    margin-bottom: $timeline-spacing;
+    min-height: 70px;
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  
+  // Timeline Separator (Dot + Connector)
+  .timeline-separator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+    margin-right: $timeline-content-margin;
+  }
+  
+  // Timeline Dot (Material Design style)
+  .timeline-dot {
+    width: $timeline-dot-size;
+    height: $timeline-dot-size;
+    margin-top: 0.3rem;
+    border-radius: 50%;
+    border: $timeline-dot-border solid var(--timeline-surface);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 
+      0px 2px 1px -1px rgba(0,0,0,0.2),
+      0px 1px 1px 0px rgba(0,0,0,0.14),
+      0px 1px 3px 0px rgba(0,0,0,0.12);
+    transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    cursor: pointer;
+    
+    // Variant dot styles
+    &.dot-outlined {
+      background: var(--timeline-surface);
+      border: 3px solid var(--timeline-primary);
+    }
+    
+    &.dot-large {
+      width: $timeline-dot-size * 1.5;
+      height: $timeline-dot-size * 1.5;
+    }
+    
+    &.dot-success {
+      background: var(--timeline-success);
+    }
+    
+    &.dot-warning {
+      background: var(--timeline-warning);
+    }
+    
+    &.dot-error {
+      background: var(--timeline-error);
+    }
+  }
+  
+  // Timeline Connector
+  .timeline-connector {
+    width: $timeline-connector-width;
+    background-color: var(--timeline-grey);
+    flex: 1;
+    margin-top: 0.5rem;
+    min-height: 30px;
+  }
+  
+  // Timeline Content Container
+  .timeline-content {
+    flex: 1;
+    padding-top: 2px;
+    background: var(--timeline-on-surface);
+    border-radius: $timeline-card-radius;
+    box-shadow: $timeline-elevation;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid var(--timeline-outline);
+    padding: 1rem;
+    padding-top: 0.5rem;
+  }
+  
+  // Timeline Time (Material Design typography)
+  .timeline-time {
+    font-size: 0.9rem;
+    color: var(--timeline-surface);
+    width: 15%;
+    margin-top: 0.3rem;
+    margin-right: 3px;
+    font-weight: 500;
+    opacity: 0.8;
+    letter-spacing: 0.0178571429em;
+    text-align: right;
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
+  
+  // Timeline Title (Material Design headline)
+  .timeline-title {
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--timeline-surface);
+    line-height: 1.6;
+    margin-right: $timeline-content-margin;
+    letter-spacing: 0.0125em;
+  }
+  
+  // Timeline Description (Material Design body)
+  .timeline-description {
+    font-size: 1rem;
+    color: var(--timeline-surface);
+    line-height: 1.7;
+    margin: 0;
+    letter-spacing: 0.0178571429em;
+    
+    p {
+      margin: 0 0 0.75rem 0;
+      
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+// Material UI Color Variants
+.timeline.primary .timeline-dot {
+  background-color: var(--timeline-primary);
+}
+
+.timeline.secondary .timeline-dot {
+  background-color: var(--timeline-secondary);
+}
+
+.timeline.success .timeline-dot {
+  background-color: var(--timeline-success);
+}
+
+.timeline.error .timeline-dot {
+  background-color: var(--timeline-error);
+}
+
+.timeline.warning .timeline-dot {
+  background-color: var(--timeline-warning);
+}
+
+.timeline.info .timeline-dot {
+  background-color: var(--timeline-info);
+}
+
+// Material UI Outlined Variant
+.timeline.outlined .timeline-dot {
+  background-color: transparent;
+  border: 3px solid var(--timeline-primary);
+}
+
+.timeline.outlined.secondary .timeline-dot {
+  border-color: var(--timeline-secondary);
+}
+
+.timeline.outlined.success .timeline-dot {
+  border-color: var(--timeline-success);
+}
+
+.timeline.outlined.error .timeline-dot {
+  border-color: var(--timeline-error);
+}
+
+.timeline.outlined.warning .timeline-dot {
+  border-color: var(--timeline-warning);
+}
+
+.timeline.outlined.info .timeline-dot {
+  border-color: var(--timeline-info);
+}
+
+// Dense variant (Material UI style)
+.timeline.dense {
+  .timeline-item {
+    margin-bottom: 0.75rem;
+  }
+  
+  .timeline-content {
+    padding: 0.75rem;
+    max-width: 300px;
+  }
+  
+  .timeline-connector {
+    min-height: 20px;
+  }
+  
+  .timeline-title {
+    font-size: 1.125rem;
+  }
+  
+  .timeline-description {
+    font-size: 0.8125rem;
+  }
+}
+
+// Large variant
+.timeline.large {
+  .timeline-dot {
+    width: $timeline-dot-size * 1.5;
+    height: $timeline-dot-size * 1.5;
+  }
+  
+  .timeline-item {
+    margin-bottom: 2rem;
+  }
+  
+  .timeline-content {
+    max-width: 500px;
+  }
+  
+  .timeline-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+  
+  .timeline-description {
+    font-size: 1rem;
+  }
+}
+
+// Small variant
+.timeline.small {
+  .timeline-dot {
+    width: $timeline-dot-size * 0.75;
+    height: $timeline-dot-size * 0.75;
+  }
+  
+  .timeline-title {
+    font-size: 1rem;
+  }
+  
+  .timeline-description {
+    font-size: 0.8125rem;
+  }
+  
+  .timeline-content {
+    max-width: 280px;
+    padding: 0.75rem;
+  }
+}
+
+// Alternative layouts
+
+// Alternating layout (centered line with items on both sides)
+.timeline.alternate {
+  align-items: center;
+  
+  // &::before {
+  //   content: '';
+  //   position: absolute;
+  //   left: 50%;
+  //   top: 0;
+  //   bottom: 0;
+  //   width: $timeline-connector-width;
+  //   background: var(--timeline-outline);
+  //   transform: translateX(-50%);
+  //   z-index: 1;
+  // }
+  
+  .timeline-item {
+    width: 100%;
+    
+    // Even items on left, odd on right
+    &:nth-child(even) {
+      flex-direction: row;
+      text-align: left;
+      
+      .timeline-content {
+        margin-left: $timeline-content-margin;
+        margin-right: 0;
+      }
+      
+      .timeline-separator {
+        order: 1;
+        margin: 0 $timeline-content-margin;
+      }
+    }
+    
+    &:nth-child(odd) {
+      flex-direction: row-reverse;
+      text-align: right;
+      
+      .timeline-content {
+        margin-right: $timeline-content-margin;
+        margin-left: 0;
+      }
+      
+      .timeline-separator {
+        order: 1;
+        margin: 0 $timeline-content-margin;
+      }
+    }
+  }
+}
+
+// Right-side timeline (all items on left side)
+.timeline.right {
+  &::before {
+    content: '';
+    position: absolute;
+    left: calc(100% - #{calc($timeline-dot-size / 2)});
+    top: 0;
+    bottom: 0;
+    width: $timeline-connector-width;
+    background: var(--timeline-outline);
+    z-index: 1;
+  }
+  
+  .timeline-item {
+    flex-direction: row-reverse;
+    text-align: right;
+    
+    .timeline-content {
+      margin-right: $timeline-content-margin;
+      margin-left: 0;
+    }
+  }
+}
+
+// Obsidian Plugin Compatible Semantic Classes
+// These match the semantic classes used in the Obsidian timeline plugin
+
+// Semantic Dot Styles (matching Obsidian plugin)
+.timeline.dot {
+  .timeline-dot {
+    background-color: transparent;
+    border: 3px solid var(--timeline-primary);
+    width: $timeline-dot-size * 0.9;
+    height: $timeline-dot-size * 0.9;
+  }
+  
+  .timeline-connector {
+    width: 3px;
+    opacity: 0.3;
+  }
+}
+
+.timeline.success {
+  .timeline-dot {
+    background-color: var(--timeline-success);
+    border: 3px solid var(--timeline-surface);
+    width: $timeline-dot-size * 0.8;
+    height: $timeline-dot-size * 0.8;
+  }
+  
+  .timeline-connector {
+    width: 4px;
+    background-color: var(--timeline-success);
+    opacity: 0.3;
+  }
+}
+
+.timeline.warning {
+  .timeline-dot {
+    background-color: var(--timeline-warning);
+    border: 3px solid var(--timeline-outline);
+    width: $timeline-dot-size * 1.1;
+    height: $timeline-dot-size * 1.1;
+  }
+  
+  .timeline-connector {
+    width: 2px;
+    background-image: linear-gradient(var(--timeline-outline) 60%, transparent 0%);
+    background-size: 2px 20px;
+    background-repeat: repeat-y;
+  }
+}
+
+.timeline.error {
+  .timeline-dot {
+    background-color: var(--timeline-error);
+    width: $timeline-dot-size * 1.5;
+    height: $timeline-dot-size * 1.5;
+    border: none;
+  }
+  
+  .timeline-connector {
+    width: 3px;
+    background-color: var(--timeline-error);
+    opacity: 0.4;
+  }
+}
+
+// Semantic Content Styles (matching Obsidian plugin)
+.timeline.card {
+  .timeline-content {
+    background-color: var(--timeline-on-surface);
+    border: 1px solid var(--timeline-outline);
+    border-radius: 12px;
+    box-shadow: $timeline-elevation;
+    padding: 1.2rem;
+    
+    .timeline-title {
+      background-color: var(--timeline-outline);
+      margin: -1.2rem -1.2rem 1rem -1.2rem;
+      padding: 1rem 1.2rem;
+      border-radius: 12px 12px 0 0;
+      font-weight: 600;
+    }
+    
+    .timeline-description {
+      margin: 0;
+    }
+  }
+}
+
+.timeline.elevated {
+  .timeline-content {
+    background-color: var(--timeline-surface);
+    border: none;
+    border-radius: 8px;
+    box-shadow: $timeline-elevation-hover;
+    margin-left: 1rem;
+    position: relative;
+    
+    .timeline-title {
+      background-color: var(--timeline-primary);
+      color: var(--timeline-surface);
+      margin: 0 -1rem 1rem -2rem;
+      padding: 0.8rem 1.5rem 0.8rem 2rem;
+      border-radius: 0 8px 0 0;
+      font-weight: 600;
+      position: relative;
+      
+      &::before {
+        content: '';
+        position: absolute;
+        left: -1rem;
+        top: 0;
+        bottom: 0;
+        width: 2rem;
+        background-color: var(--timeline-primary);
+        clip-path: polygon(1rem 0, 100% 0, 100% 100%, 1rem 100%, 0 50%);
+      }
+    }
+    
+    .timeline-description {
+      margin: 0;
+      padding: 0 1rem 1rem 1rem;
+    }
+  }
+}
+
+.timeline.bordered {
+  .timeline-content {
+    background-color: var(--timeline-surface);
+    border: 1px solid var(--timeline-outline);
+    border-left: 4px solid var(--timeline-primary);
+    border-radius: 4px;
+    box-shadow: none;
+    
+    .timeline-title {
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--timeline-outline);
+    }
+    
+    .timeline-description {
+      margin: 0;
+    }
+  }
+}
+
+// Semantic Color Variants (matching Obsidian plugin active colors)
+.timeline.success.card .timeline-title,
+.timeline.success.elevated .timeline-title,
+.timeline.success.bordered {
+  --timeline-primary: var(--timeline-success);
+}
+
+.timeline.warning.card .timeline-title,
+.timeline.warning.elevated .timeline-title,
+.timeline.warning.bordered {
+  --timeline-primary: var(--timeline-warning);
+}
+
+.timeline.error.card .timeline-title,
+.timeline.error.elevated .timeline-title,
+.timeline.error.bordered {
+  --timeline-primary: var(--timeline-error);
+}
+
+// Additional Semantic Modifiers
+.timeline.spaced-lines {
+  .timeline-description {
+    line-height: 1.8;
+    
+    p {
+      margin-bottom: 1rem;
+    }
+  }
+}
+
+.timeline.hide-titles {
+  .timeline-title {
+    display: none;
+  }
+}
+
+// Legacy Class Compatibility (for backward compatibility)
+.timeline.line-2 {
+  .timeline-dot {
+    background-color: transparent;
+    border: 3px solid var(--timeline-primary);
+    width: $timeline-dot-size * 0.9;
+    height: $timeline-dot-size * 0.9;
+  }
+  
+  .timeline-connector {
+    width: 3px;
+    opacity: 0.3;
+  }
+}
+
+.timeline.line-3 {
+  .timeline-dot {
+    background-color: var(--timeline-success);
+    border: 3px solid var(--timeline-surface);
+    width: $timeline-dot-size * 0.8;
+    height: $timeline-dot-size * 0.8;
+  }
+  
+  .timeline-connector {
+    width: 4px;
+    background-color: var(--timeline-success);
+    opacity: 0.3;
+  }
+}
+
+.timeline.line-4 {
+  .timeline-dot {
+    background-color: var(--timeline-warning);
+    border: 3px solid var(--timeline-outline);
+    width: $timeline-dot-size * 1.1;
+    height: $timeline-dot-size * 1.1;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      width: 70%;
+      height: 70%;
+      background-color: var(--timeline-warning);
+      border-radius: 50%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+  
+  .timeline-connector {
+    width: 2px;
+    background-image: linear-gradient(var(--timeline-outline) 60%, transparent 0%);
+    background-size: 2px 20px;
+    background-repeat: repeat-y;
+  }
+}
+
+.timeline.line-5 {
+  .timeline-dot {
+    background-color: var(--timeline-error);
+    width: $timeline-dot-size * 1.5;
+    height: $timeline-dot-size * 1.5;
+    border: none;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      width: 40%;
+      height: 40%;
+      background-color: var(--timeline-surface);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(45deg);
+    }
+  }
+  
+  .timeline-connector {
+    width: 3px;
+    background-color: var(--timeline-error);
+    opacity: 0.4;
+  }
+}
+
+.timeline.body-1 {
+  .timeline-content {
+    background-color: var(--timeline-surface);
+    border: 1px solid var(--timeline-outline);
+    border-radius: 12px;
+    box-shadow: $timeline-elevation;
+    padding: 1.2rem;
+    
+    .timeline-title {
+      background-color: var(--timeline-outline);
+      margin: -1.2rem -1.2rem 1rem -1.2rem;
+      padding: 1rem 1.2rem;
+      border-radius: 12px 12px 0 0;
+      font-weight: 600;
+    }
+    
+    .timeline-description {
+      margin: 0;
+    }
+  }
+}
+
+.timeline.body-2 {
+  .timeline-content {
+    background-color: var(--timeline-surface);
+    border: none;
+    border-radius: 8px;
+    box-shadow: $timeline-elevation-hover;
+    margin-left: 1rem;
+    position: relative;
+    
+    .timeline-title {
+      background-color: var(--timeline-primary);
+      color: var(--timeline-surface);
+      margin: 0 -1rem 1rem -2rem;
+      padding: 0.8rem 1.5rem 0.8rem 2rem;
+      border-radius: 0 8px 0 0;
+      font-weight: 600;
+      position: relative;
+      
+      &::before {
+        content: '';
+        position: absolute;
+        left: -1rem;
+        top: 0;
+        bottom: 0;
+        width: 2rem;
+        background-color: var(--timeline-primary);
+        clip-path: polygon(1rem 0, 100% 0, 100% 100%, 1rem 100%, 0 50%);
+      }
+    }
+    
+    .timeline-description {
+      margin: 0;
+      padding: 0 1rem 1rem 1rem;
+    }
+  }
+}
+
+.timeline.body-3 {
+  .timeline-content {
+    background-color: var(--timeline-surface);
+    border: 1px solid var(--timeline-outline);
+    border-left: 4px solid var(--timeline-primary);
+    border-radius: 4px;
+    box-shadow: none;
+    
+    .timeline-title {
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--timeline-outline);
+    }
+    
+    .timeline-description {
+      margin: 0;
+    }
+  }
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+  .timeline {
+    padding: 0.75rem 0;
+    
+    // Switch to single column on mobile
+    &.alternate {
+      &::before {
+        left: calc(#{$timeline-dot-size} / 2);
+        transform: none;
+      }
+      
+      .timeline-item {
+        &:nth-child(even), &:nth-child(odd) {
+          flex-direction: row;
+          text-align: left;
+          
+          .timeline-content {
+            margin-left: $timeline-content-margin;
+            margin-right: 0;
+            max-width: none;
+          }
+          
+          .timeline-separator {
+            order: 0;
+            margin-right: $timeline-content-margin;
+            margin-left: 0;
+          }
+        }
+      }
+    }
+    
+    .timeline-separator {
+      margin-right: 0.75rem;
+    }
+    
+    .timeline-dot {
+      width: 10px;
+      height: 10px;
+    }
+    
+    .timeline-content {
+      padding: 0.75rem;
+    }
+    
+    .timeline-title {
+      font-size: 1.125rem;
+    }
+    
+    .timeline-description {
+      font-size: 0.8125rem;
+    }
+  }
+}
+
+// Dark theme support
+@media (prefers-color-scheme: dark) {
+  .timeline {
+    --timeline-surface: var(--darkgray);
+    --timeline-on-surface: var(--light);
+    --timeline-outline: var(--gray);
+    --timeline-grey: var(--gray);
+  }
+}
+
+// Ripple effect animation (added by JavaScript)
+@keyframes timeline-ripple {
+  to {
+    transform: scale(2);
+    opacity: 0;
+  }
+}

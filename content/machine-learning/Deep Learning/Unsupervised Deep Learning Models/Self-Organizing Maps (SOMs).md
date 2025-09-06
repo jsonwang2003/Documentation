@@ -16,7 +16,7 @@
 
 - [[machine-learning/Unsupervised Learning/Clustering Models/index|Clustering]] - Grouping similar data points
 - [[machine-learning/Unsupervised Learning/Dimensionality Reduction Models/index|Dimensionality Reduction]] - Visualizing complex datasets in 2D
-- [[machine-learning/Supervised Learning/Summary of Supervised Learning#Anomaly Detection|Anomaly Detection]]
+- [[machine-learning/Supervised Learning/index#machine-learning/Supervised Learning/Anomaly Detection/index Anomaly Detection|Anomaly Detection]]
 - Utilize competitive learning to **map high-dimensional input data onto a typically 2D grid**
 	- Preserves topological relationships in the process
 		- Similar inputs are grouped closer together in the map

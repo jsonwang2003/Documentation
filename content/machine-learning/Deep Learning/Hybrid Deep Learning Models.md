@@ -11,7 +11,7 @@
 - [[Recurrent Neural Network (RNN)|Recurrent Neural Networks]] / [[Long Short-Term Memory (LSTM)|Long Short-Term Memory Networks]]: Model sequential or temporal dependencies
 - [[Transformer|Transformers]]: Capture **long-range contextual relationships** in text or sequences
 - [[Graph Neural Network (GNN)]]: Represent relational structures and graph-based data
-- [[machine-learning/Supervised Learning/Classification Models|Classical Machine Learning]]: Provide interpretability and structured decision logic
+- [[machine-learning/Supervised Learning/Classification Models/index|Classical Machine Learning]]: Provide interpretability and structured decision logic
 
 ## Key Features
 
@@ -23,7 +23,7 @@
 	- Modular design allows tailored pipelines for specific tasks
 	- Example: 
 		- [[Convolutional Neural Network (CNN)|CNN]] &rarr; [[Transformer|Transformer]] for video captioning
-		- [[Convolutional Neural Network (CNN)|CNN]] &rarr; [[Classification Models#Support Vector Machines (SVM)|SVM]] for image classification
+		- [[Convolutional Neural Network (CNN)|CNN]] &rarr; [[Support Vector Machine (SVM)|SVM]] for image classification
 3. **Improved Interpretability**
 	- Deep models extract complex features
 	- Classical models provide **transparent decisions**
