@@ -4,7 +4,9 @@ import { CSSResourceToStyleElement, JSResourceToScriptElement } from "../util/re
 import { googleFontHref, googleFontSubsetHref } from "../util/theme"
 import { QuartzComponent, QuartzComponentConstructor, QuartzComponentProps } from "./types"
 import { unescapeHTML } from "../util/escape"
-import { CustomOgImagesEmitterName } from "../../.quartz/plugins"
+// Fallback name for custom OG images emitter. Avoid importing from the generated
+// .quartz folder which may not exist at edit time.
+const CustomOgImagesEmitterName = "custom-og-images"
 export default (() => {
   const Head: QuartzComponent = ({
     cfg,
