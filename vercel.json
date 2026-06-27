@@ -2,7 +2,7 @@
   "buildCommand": "npx quartz build",
   "outputDirectory": "public",
   "framework": null,
-  "installCommand": "npm install",
+  "installCommand": "npx quartz plugin install",
   "trailingSlash": false,
   "cleanUrls": true
 }
