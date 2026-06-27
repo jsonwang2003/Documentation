@@ -1,13 +1,13 @@
 # yaml-language-server: $schema=./quartz/plugins/quartz-plugins.schema.json
 configuration:
-  pageTitle: Quartz 5
+  pageTitle: Jason's Notebook
   pageTitleSuffix: ""
   enableSPA: true
   enablePopovers: true
   analytics:
     provider: plausible
   locale: en-US
-  baseUrl: jason-notebook.vercel.app
+  baseUrl: json-notebook.vercel.app
   ignorePatterns:
     - private
     - templates
@@ -16,9 +16,10 @@ configuration:
     fontOrigin: googleFonts
     cdnCaching: true
     typography:
-      header: Schibsted Grotesk
-      body: Source Sans Pro
-      code: IBM Plex Mono
+      title: Space Grotesk
+      header: Inter
+      body: Inter
+      code: JetBrains Mono
     colors:
       lightMode:
         light: "#faf8f8"
@@ -26,20 +27,20 @@ configuration:
         gray: "#b8b8b8"
         darkgray: "#4e4e4e"
         dark: "#2b2b2b"
-        secondary: "#284b63"
+        secondary: "#000000"
         tertiary: "#84a59d"
-        highlight: rgba(143, 159, 169, 0.15)
-        textHighlight: "#fff23688"
+        highlight: "febe3b"
+        textHighlight: "#FFBF3B88"
       darkMode:
-        light: "#161618"
-        lightgray: "#393639"
+        light: "#0A0908"
+        lightgray: "#1A1A1A"
         gray: "#646464"
         darkgray: "#d4d4d4"
         dark: "#ebebec"
-        secondary: "#7b97aa"
-        tertiary: "#84a59d"
-        highlight: rgba(143, 159, 169, 0.15)
-        textHighlight: "#b3aa0288"
+        secondary: "#ffbf3b"
+        tertiary: "#ffcfa8"
+        highlight: "#8b671f60"
+        textHighlight: "#FFBF3B88"
 plugins:
   - source: github:quartz-community/created-modified-date
     enabled: true
@@ -186,7 +187,7 @@ plugins:
       position: beforeBody
       priority: 20
   - source: github:quartz-community/tag-list
-    enabled: false
+    enabled: true
     layout:
       position: beforeBody
       priority: 30
@@ -225,10 +226,11 @@ plugins:
     enabled: true
     options:
       links:
-        GitHub: https://github.com/jackyzha0/quartz
-        Discord Community: https://discord.gg/cRFFHYye7t
+        GitHub: https://github.com/jsonwang2003
+        Portfolio: https://jsonwang.vercel.app/
   - source: github:quartz-community/recent-notes
-    enabled: false
+    enabled: true
+    linkToMore: true
   - source: github:quartz-community/spacer
     enabled: true
     options: {}
@@ -264,13 +266,18 @@ plugins:
       subdir: plugin
     enabled: true
     options:
-      theme: default
+      theme: "misty"
+      mode: both
   - source: github:quartz-community/obsidian-plugin-excalidraw
     enabled: true
     options:
       enableInteraction: true
       darkMode: auto
       exportPadding: 20
+    order: 50
+  - source: github:quartz-community/tui
+    enabled: true
+    options: {}
     order: 50
 layout:
   groups:
