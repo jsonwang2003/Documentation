@@ -41,7 +41,7 @@ If you have cloned this repository and want to run it locally:
 
 1.  **Install Dependencies:**
     ```bash
-    npm install
+    npx quartz plugin install
     ```
 2.  **Start the Local Server:**
     ```bash
