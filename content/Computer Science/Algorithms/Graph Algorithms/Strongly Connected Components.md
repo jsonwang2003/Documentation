@@ -1,0 +1,2 @@
+> [Abstract] Definition
+> Two vertices $u$ and $v$ in a directed graph are **strongly connected** if there exists a path **from $u$ to $v$ *and* a path from $v$ to $u$**. The maximal set of strongly connected vertices is called a **Strongly Connected Component** (**SCC**)

@@ -151,7 +151,11 @@ Suppose we have a graph where vertex 4 has an odd degree:
 
 ---
 ## Directed Acyclic Graphs (DAG)
-A directed graph with **no cycles**. DAGs are essential for representing dependencies.
+A directed graph with **no cycles** (acyclic). DAGs are essential for representing dependencies.
+
+### Test if Graph is Acyclic using [[Depth First Search (DFS)]]
+1. Perform **DFS** on the graph
+2. Test each edge to see if it is a [[]]
 ### Topological Ordering (Linearization)
 An ordered list of vertices where for every edge $(v, w)$, $v$ appears before $w$ in the list.
 - Only possible if the graph is a DAG.
@@ -168,6 +172,8 @@ An ordered list of vertices where for every edge $(v, w)$, $v$ appears before $w
 
 > [!IMPORTANT]
 > Every finite DAG must have at least one source and **at least one sink**.
+
+### Property of DAG
 
 ---
 ## Related Notes

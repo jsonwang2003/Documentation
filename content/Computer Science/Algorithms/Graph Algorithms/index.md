@@ -15,10 +15,11 @@ $$
 
 ### [[Graphs#Graph Representations|Graph Representations]]
 
+![[Pasted image 20260404010858.png|559]]
 
-| Original Graph                            | Adjacency Matrix                          | Adjacency List                            |
-| ----------------------------------------- | ----------------------------------------- | ----------------------------------------- |
-| ![[Pasted image 20260404010858.png\|264]] | ![[Pasted image 20260404010715.png\|181]] | ![[Pasted image 20260404010821.png\|184]] |
+| Adjacency Matrix                          | Adjacency List                            |
+| ----------------------------------------- | ----------------------------------------- |
+| ![[Pasted image 20260404010715.png\|181]] | ![[Pasted image 20260404010821.png\|184]] |
 #### Adjacency Matrix
 An $V \times V$ matrix $A$
 $$
@@ -36,6 +37,7 @@ For each node, there is a list of outgoing edges
 - PRO: easily iterate through node's neighbors
 - CON: check for an edge in $\mathcal{O}(V)$ time
 
+---
 ## Graph Search
 - Instance: a graph $G = (V, E)$ and a starting vertex $s$
 - Output: a list of all vertices reachable from s by a directed path in $G$
@@ -46,14 +48,50 @@ At each point in a graph search algorithm, the vertices are partitioned into:
 - $U$: unreached
 
 ### Pseudocode
-![[Pasted image 20260404004257.png]]
+```pseudo
+	\begin{algorithm}
+	\caption{Graph Search}
+	\begin{algorithmic}
+		\Procedure{GraphSearch}{$G, s$}
+			\State $X$ = empty, $F$ = $\{ s \}$, $U = V - F$
+			\While{$F$ is not empty}
+				\State Pick $w$ in $F$
+				\ForAll{$(w, y) \in E$}
+					\If{$y \not\in X$ or $F$}
+						\State move $y$ from $U$ to $F$
+                    \EndIf
+                \EndFor
+                \State move $w$ from $F$ to $X$
+            \EndWhile
+            \Return X
+        \EndProcedure
+	\end{algorithmic}
+	\end{algorithm}
+```
 
+> [!Note]
+> $X$ is a set: **Array of Booleans** indexed by vertex
+> - Test Membership: $O(1)$
+> - Insert: $O(1)$
+> 
+> $F$ is a set: **Stack** or **Queue** + **Array of Booleans**
+> - Find and Delete (Pop, Dequeue, Flip Boolean): $O(1)$
+> - Test Membership: $O(1)$
+> - Insert (Push, Enqueue, Flip Boolean): $O(1)$
+> 
+> $U$ is a set: $Array of Booleans$
+> - Test Membership: $O(1)$
+> - Delete: $O(1)$
 ### Runtime Analysis
+
 $$
-\begin{align*}
-\text{Runtime} &= \Sigma_{w \in V}(c + c' * (out)deg(w) + c'')\\
-\mathcal{O}(\Sigma_{v\in V}(1 + (out)deg(v))) &= \boxed{\mathcal{O}(|V| + |E|)}
-\end{align*}
+\text{Runtime} = \Sigma_{w \in V}(c + c' * (out)deg(w) + c'')
+$$
+
+Since each $v$ is added to $F$ at most once, therefore each $v$ is deleted from $F$ at most once:
+
+$$
+O(\Sigma_{v\in V}(1 + (out)deg(v))) = \boxed{O(|V| + |E|)}
 $$
 
 ### Correctness

@@ -18,7 +18,7 @@ A **Spanning Tree** of a connected, undirected graph $G$ is a subgraph that:
 
 While both algorithms find the MST in $O(|E| \log |E|)$ time, they approach the problem with different "greedy" strategies.
 
-### [[Prim’s Algorithm]] (Vertex-Centric)
+### [[Prim's Algorithm]] (Vertex-Centric)
 
 Prim’s grows the tree from a **starting root**, similar to how Dijkstra’s explores a graph.
 
@@ -29,7 +29,7 @@ Prim’s grows the tree from a **starting root**, similar to how Dijkstra’s ex
 
 **Implementation Note:** Uses a **Priority Queue** to store edges connected to the growing tree, sorted by individual edge weight.
 
-### [[Kruskal’s Algorithm]] (Edge-Centric)
+### [[Kruskal's Algorithm]] (Edge-Centric)
 
 Kruskal’s treats the graph as a **forest** of individual nodes and merges them together.
 

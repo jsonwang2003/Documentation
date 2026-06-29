@@ -59,6 +59,5 @@ A hash function takes input of **any size** and returns a **fixed-size integer**
 ---
 ### Module Navigation
 This section links closely with upcoming topics on how the OS manages data and processes.
-- **[[index]]**: Back to Memory and System Calls Index.
 - **[[Process of Operating System]]**: How the OS uses these concepts for process identity.
 - **[[Pointers and Reference]]**: How we handle the memory addresses where these hashes are stored.
