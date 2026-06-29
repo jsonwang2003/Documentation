@@ -199,6 +199,12 @@
       "commit": "a1c1fe0a9c6a5ce1acf6efa01d473a7d9850e2a3",
       "installedAt": "2026-06-26T22:41:25.279Z"
     },
+    "pseudocode-component": {
+      "source": "github:tuero/pseudocode-component",
+      "resolved": "https://github.com/tuero/pseudocode-component.git",
+      "commit": "4dc0ae24156d85cbb64b0fc2e4bed196f567ecdd",
+      "installedAt": "2026-06-28T23:22:45.684Z"
+    },
     "quartz-themes": {
       "source": {
         "name": "quartz-themes",
