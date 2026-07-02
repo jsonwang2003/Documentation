@@ -107,25 +107,6 @@ When `explore` discovers an unvisited neighbor `u` from vertex `s`, it records `
 > If DFS visits A → B → D → C, the output tree contains edges A–B, B–D, and D–C. Any edge encountered along the way that pointed to an already-visited vertex is not included.
 
 ---
-# Back Edges and Cycles in Undirected Graphs
-## [[Edge Types#Back Edge|Back Edge]]
-Back edges in an undirected graph $G$ that has been explored are edges in $G$ that are **not** in the DFS tree of $G$ but connects vertices in the DFS output tree.
-
-Having back edges suggests that the graph has a cycle
-
-$(u, v)$ is back edge if either of the following is true: $\begin{cases} pre(u) &= v\\ &\text{or}\\ pre(v) &= u \end{cases}$
-
-> [!Note] Removing a back edge will not disconnect the graph
-> Removing an edge that is in a cycle will not disconnect an undirected graph and removing an edge that is not in a cycle will disconnect an undirected graph
-
-## Theorem
-An undirected connected graph $G$ has a cycle if and only if it's DFS output tree has a back edge.
-
-**Proof:**
-1. If $G$ has a cycle → DFS output has a back edge
-2. If DFS has a back edge → $G$ has a cycle
-
----
 # Connected Undirected Graph
 > [!Abstraction] Definition
 > An undirected graph $G$ is connected if **for every pair of vertices $(v, u)$** in $G$, there exists **a path from $v$ to $u$**

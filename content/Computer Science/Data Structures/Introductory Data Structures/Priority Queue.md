@@ -15,18 +15,16 @@ A **Priority Queue** is a **"Highest Priority In, First Out" (HPIFO)** data type
 
 ---
 ## Implementation Trade-offs
-
+### Array (Hash Table)
 While a Priority Queue can be backed by simple linear data structures, they often result in inefficient worst-case time complexities:
-### 1. Linked List / Array (Unsorted)
+#### 1. Linked List / Array (Unsorted)
 - **Insertion**: $O(1)$ (just add to the end).
 - **Peek/Pop**: $O(n)$ (must scan the entire list to find the highest priority).
 
-### 2. Linked List / Array (Sorted)
+#### 2. Linked List / Array (Sorted)
 - **Peek/Pop**: $O(1)$ (the highest priority is always at the front/back).
 - **Insertion**: $O(n)$ (must scan to find the correct position to maintain order).
-
----
-## The Optimal Solution: The Heap
+### The Optimal Solution: The Heap
 
 To achieve a balance between insertion and removal speeds, developers use a specialized tree-based data structure called a **[[Heap]]**.
 

@@ -155,7 +155,7 @@ A directed graph with **no cycles** (acyclic). DAGs are essential for representi
 
 ### Test if Graph is Acyclic using [[Depth First Search (DFS)]]
 1. Perform **DFS** on the graph
-2. Test each edge to see if it is a [[]]
+2. Test each edge to see if it is a [[Edge Types#Back Edge|back edge]]
 ### Topological Ordering (Linearization)
 An ordered list of vertices where for every edge $(v, w)$, $v$ appears before $w$ in the list.
 - Only possible if the graph is a DAG.
@@ -174,6 +174,25 @@ An ordered list of vertices where for every edge $(v, w)$, $v$ appears before $w
 > Every finite DAG must have at least one source and **at least one sink**.
 
 ### Property of DAG
+
+#### Every edge in a DAG goes from a **higher post number** to **lower post number**
+**Proof**:
+	Suppose $(u, v)$ is an edge in a DAG, then it **can't be a back edge**, therefore it can only be a [[Edge Types#Tree Edge (Forward Edge)|Forward Edge / Tree Edge]] or a [[Edge Types#Cross Edge|Cross Edge]]. Both of which have the property that $post(v) < post(u)$
+
+#### Linearization of a DAG
+Given that edges go in the direction of **decreasing post numbers**, if we order the vertices by decreasing post numbers, then we will have a linearization
+
+```pseudo
+	\begin{algorithm}
+	\caption{Linearize}
+	\begin{algorithmic}
+		\Procedure{linearize}{$G = (V, E)$ where $G$ is a DAG}
+			\State DFS($G$)
+			\Return list of vertices in decreasing oder of post numbers
+        \EndProcedure
+	\end{algorithmic}
+	\end{algorithm}
+```
 
 ---
 ## Related Notes
