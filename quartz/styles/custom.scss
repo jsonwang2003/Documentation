@@ -1,3 +1,58 @@
 @use "./variables.scss" as *;
 
 // put your custom CSS here!
+:root[saved-theme="dark"] {
+  --bold-color: var(--secondary);
+  --lightgray: #393939;
+
+  body{
+    .callout{
+      background-color: rgb(from var(--callout-color) r g b / 0.08);
+    }
+
+    .recent-notes > h3{
+      font-family: "Schibsted Grotesk";
+      font-weight: var(--inline-title-weight);
+      font-size: var(--h2-size);
+    }
+
+    .search > .search-container > .search-space > * {
+      background-color: #1d1d1c;
+    }
+
+    .search > .search-container > .search-space > .search-layout {
+      border-width: 1px !important;
+      border-radius: 14px !important;
+      margin-top: 15px !important;
+      padding: 10px !important;
+    }
+  }
+}
+
+:root[saved-theme="light"] {
+  --bold-color: var(--secondary);
+  --lightgray: #e5e5e5;
+
+  body{
+    .callout{
+      background-color: rgb(from var(--callout-color) r g b / 0.08);
+    }
+
+    .recent-notes > h3{
+      font-family: "Schibsted Grotesk";
+      font-weight: var(--inline-title-weight);
+      font-size: var(--h2-size);
+    }
+
+    .search > .search-container > .search-space > * {
+      background-color: #fdfdfc;
+    }
+
+    .search > .search-container > .search-space > .search-layout {
+      border-width: 1px !important;
+      border-radius: 14px !important;
+      margin-top: 15px !important;
+      padding: 10px !important;
+    }
+  }
+}
