@@ -16,6 +16,7 @@ A **Priority Queue** is a **"Highest Priority In, First Out" (HPIFO)** data type
 ---
 ## Implementation Trade-offs
 ### Array (Hash Table)
+
 While a Priority Queue can be backed by simple linear data structures, they often result in inefficient worst-case time complexities:
 #### 1. Linked List / Array (Unsorted)
 - **Insertion**: $O(1)$ (just add to the end).
