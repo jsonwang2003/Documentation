@@ -81,7 +81,7 @@ plugins:
   - source: github:quartz-community/table-of-contents
     enabled: true
     options: 
-      layout: legacy
+      layout: modern
     order: 50
     layout:
       position: right
@@ -243,7 +243,7 @@ plugins:
     layout:
       position: left
       priority: 60
-      display: mobile-only
+      display: desktop-only
   - source: github:quartz-community/spacer
     enabled: true
     options: {}
