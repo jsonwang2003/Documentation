@@ -1,6 +1,6 @@
 > [!ABSTRACT]
 > 
-> An **[[Array Lists|Array]]** implementation of a Lexicon relies on **Random Access** to enable **[[Binary Search]]**. While it incurs a high cost for modifications ($O(n)$ to shift elements), it is a superior choice for a Lexicon where word lookups are frequent and the dictionary remains relatively static.
+> An **[[Array Lists|Array]]** implementation of a Lexicon relies on **Random Access** to enable **[[Computer Science/Discrete Structures/Discrete Algorithms/Searching/Binary Search]]**. While it incurs a high cost for modifications ($O(n)$ to shift elements), it is a superior choice for a Lexicon where word lookups are frequent and the dictionary remains relatively static.
 
 ---
 ## 1. Why Sorting Matters

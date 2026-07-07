@@ -7,11 +7,11 @@ title: Sorting
 
 ---
 ## Why Sort?
-- **Efficiency**: Sorted data enables faster operations (e.g., [[Binary Search]] or finding Min/Max).
+- **Efficiency**: Sorted data enables faster operations (e.g., [[Computer Science/Discrete Structures/Discrete Algorithms/Searching/Binary Search]] or finding Min/Max).
 - **Organization**: Helps in ranking and finding duplicates.
 - **Algorithmic Variety**: Sorting is the perfect playground for learning:
     - **Iterative** (Bubble, Selection)
-    - **Recursive / Divide & Conquer** ([[Merge Sort]])
+    - **Recursive / Divide & Conquer** ([[Computer Science/Discrete Structures/Discrete Algorithms/Recursive Algorithms/Divide and Conquer/Merge Sort]])
     - **Randomized** (Quick Sort)
 
 ---

@@ -3,7 +3,9 @@ tags:
   - algorithm
   - graph-traversal
   - DepthFirstSearch
-aliases: DFS
+aliases:
+  - DFS
+  - Depth First Search
 description: Graph traversal algorithm that explores as far as possible along each branch before backtracking; O(V+E) time, memory-efficient on wide/shallow graphs.
 ---
 

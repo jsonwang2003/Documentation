@@ -18,7 +18,7 @@ While Divide and Conquer splits a problem into multiple sub-problems, searching 
 - **The Big Picture**: Check the first element; if it's not the target, search the remaining $n-1$ elements.
 - **Data Requirement**: None (works on unsorted data).
 - **Analysis**: $T(n) = T(n-1) + c \implies \mathbf{O(n)}$.
-### [[Binary Search]]
+### [[Computer Science/Discrete Structures/Discrete Algorithms/Searching/Binary Search]]
 - **The Big Picture**: Compare the target with the middle element of a **sorted** list. Eliminate the half that cannot contain the target and recurse on the other half.
 - **Verification**: Proven using **Strong Induction** because the search space is halved.
 - **Analysis**: $T(n) = T(n/2) + c \implies \mathbf{O(\log n)}$.

@@ -141,18 +141,20 @@ $$ O\left(\sum_{v\in V}(1 + (out)deg(v))\right) = \boxed{O(|V| + |E|)} $$
 **Conclusion:** since both directions hold — $v \in X \iff$ there is a path from $s$ to $v$ — the algorithm correctly computes exactly the set of vertices reachable from $s$.
 
 ---
-
 # Notes in This Section
 
-| Note                                                                   | Desciption                                                                                                                          |
-| ---------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| [[Depth First Search (DFS)]]                                           | Graph Search with $F$ = stack (via recursion), run over all vertices to cover disconnected components                               |
-| [[Explore]]                                                            | The low-level, single-component recursive implementation of Graph Search with $F$ = stack                                           |
-| [[Breadth First Search (BFS)]]                                         | Graph Search with $F$ = queue; guarantees shortest paths on unweighted graphs                                                       |
-| [[Dijkstra's Algorithm]]                                               | Graph Search with $F$ = priority queue keyed by cumulative distance; handles weighted graphs (non-negative weights)                 |
-| [[Prim's Algorithm]]                                                   | Same loop shape as Dijkstra's, but $F$ is keyed by single-edge cost to build a minimum spanning tree instead                        |
-| [[Kruskal's Algorithm]]                                                | A different greedy MST approach — sorts all edges globally and uses [[Disjoint Sets & Up-Trees]] instead of a frontier-based search |
-| [[Strongly Connected Components\|Strongly Connected Components (SCC)]] | Two-pass DFS (with a reversed graph) that decomposes a directed graph into its strongly connected components                        |
+| Note                                                                   | Description                                                                                                                                                                           |
+| ---------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [[Graph Algorithms Summary]]                                           | A quick, notesheet-style overview of **Graph Algorithms**                                                                                                                             |
+| [[Depth First Search (DFS)]]                                           | Graph Search with $F$ = stack (via recursion), run over all vertices to cover disconnected components                                                                                 |
+| [[Explore]]                                                            | The low-level, single-component recursive implementation of Graph Search with $F$ = stack                                                                                             |
+| [[Breadth First Search (BFS)]]                                         | Graph Search with $F$ = queue; guarantees shortest paths on unweighted graphs                                                                                                         |
+| [[Dijkstra's Algorithm]]                                               | Graph Search with $F$ = priority queue keyed by cumulative distance; handles weighted graphs (non-negative weights)                                                                   |
+| [[Prim's Algorithm]]                                                   | Same loop shape as Dijkstra's, but $F$ is keyed by single-edge cost to build a minimum spanning tree instead                                                                          |
+| [[Kruskal's Algorithm]]                                                | A different greedy MST approach — sorts all edges globally and uses [[Disjoint Sets & Up-Trees]] instead of a frontier-based search                                                   |
+| [[Strongly Connected Components\|Strongly Connected Components (SCC)]] | Two-pass DFS (with a reversed graph) that decomposes a directed graph into its strongly connected components                                                                          |
+| [[A-Star Search]]                                                      | Graph Search with $F$ = priority queue keyed by cumulative distance $+$ distance away from goal; handles weighted graphs (non-negative) and more efficient compared to **Dijkstra's** |
+
 
 ---
 # Related Categories

@@ -63,6 +63,6 @@ Can we ever search faster than $\log n$?
 
 ---
 ## Related Notes
-- [[Binary Search]] — The algorithm that meets this lower bound.
+- [[Computer Science/Discrete Structures/Discrete Algorithms/Searching/Binary Search]] — The algorithm that meets this lower bound.
 - [[Asymptotic Notation]] — Understanding the $\Omega$ (Big-Omega) notation for lower bounds.
 - [[Computer Science/Discrete Structures/Discrete Algorithms/Sorting/index|Sorting Algorithms]] — Sorting also has a lower bound of $\Omega(n \log n)$ based on decision trees.

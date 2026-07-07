@@ -1,6 +1,6 @@
 > [!ABSTRACT]
 > 
-> While a [[Heap]] provides $O(1)$ access to the highest-priority element, it is inefficient for finding arbitrary values. A Binary Search Tree solves this by **maintaining a sorted structure** that allows for fast searching, similar to [[Binary Search]] in an [[Array Lists#Array|Array]].
+> While a [[Heap]] provides $O(1)$ access to the highest-priority element, it is inefficient for finding arbitrary values. A Binary Search Tree solves this by **maintaining a sorted structure** that allows for fast searching, similar to [[Computer Science/Discrete Structures/Discrete Algorithms/Searching/Binary Search]] in an [[Array Lists#Array|Array]].
 
 ## 1. Core Properties
 

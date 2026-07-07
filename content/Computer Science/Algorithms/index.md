@@ -41,5 +41,5 @@ The CPU is designed to process instructions on word sized inputs
 ### [[Computer Science/Algorithms/Greedy Algorithms/index|Greedy Algorithm]]
 ### [[Computer Science/Algorithms/Divide and Conquer/index|Divide and Conquer]]
 ### [[Computer Science/Algorithms/Dynamic Programming/index|Dynamic Programming]]
-### [[Computer Science/Algorithms/Iterative Improvement/index|Iterative Improvement]]
+### [[Computer Science/Algorithms/Reduce and Conquer/index|Iterative Improvement]]
 

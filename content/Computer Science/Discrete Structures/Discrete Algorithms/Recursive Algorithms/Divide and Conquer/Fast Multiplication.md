@@ -62,5 +62,5 @@ Since $3 > 2^1$ (Case 3), the complexity is $O(n^{\log_b a})$.
 
 ---
 ## Related Notes
-- [[Merge Sort|Merge Sort]] — Another $O(n \log n)$ D&C application.
+- [[Computer Science/Discrete Structures/Discrete Algorithms/Recursive Algorithms/Divide and Conquer/Merge Sort|Merge Sort]] — Another $O(n \log n)$ D&C application.
 - [[Master Theorem]] — The tool used to analyze these runtimes.

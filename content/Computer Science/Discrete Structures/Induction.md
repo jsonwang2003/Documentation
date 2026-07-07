@@ -66,7 +66,7 @@ Since the base case and inductive step are true, the claim is proven for all $n 
 ## 3. Strong Induction
 In some cases, assuming only the _previous_ step ($k$) isn't enough to prove the next step ($k+1$). In **Strong Induction**, you assume the statement is true for **all** values from $n_0$ up to $k$.
 - **Hypothesis**: Assume $P(n_0), P(n_0+1), \dots, P(k)$ are all true.
-- **Application**: Frequently used in [[Time Analysis]] (like [[Merge Sort]]) or proving properties of prime numbers.
+- **Application**: Frequently used in [[Time Analysis]] (like [[Computer Science/Discrete Structures/Discrete Algorithms/Recursive Algorithms/Divide and Conquer/Merge Sort]]) or proving properties of prime numbers.
 
 ---
 ## 4. Induction in Algorithms

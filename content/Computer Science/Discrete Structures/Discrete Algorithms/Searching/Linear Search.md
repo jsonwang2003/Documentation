@@ -43,7 +43,7 @@ On a list of length $n$, the performance is measured by the number of comparison
 | **Strengths**                                     | **Weaknesses**                                                        |
 | ------------------------------------------------- | --------------------------------------------------------------------- |
 | Works on **unsorted** data.                       | Very slow for large datasets ($n=1,000,000$ takes $1,000,000$ steps). |
-| Simple to implement and requires no extra memory. | Inefficient compared to [[Binary Search]] for sorted data.            |
+| Simple to implement and requires no extra memory. | Inefficient compared to [[Computer Science/Discrete Structures/Discrete Algorithms/Searching/Binary Search]] for sorted data.            |
 
 ---
 ## Related Notes

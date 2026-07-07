@@ -1,84 +1,87 @@
 ---
+description: Quick-reference summary of BFS, DFS, Dijkstra's, Prim's, and Kruskal's — what each explores with, and their time/space complexity.
+tags:
+  - summary
+  - graph-algorithms
 aliases:
   - Graph Algorithms Cheatsheet
-created: 6/28/2026
-modified: 6/28/2026
-draft: "True"
+---
+> [!Note] Section Overview
+> 
+> - In all graph traversal algorithms discussed, we choose a specific vertex at which to begin our traversal.
+> - We disallow "multigraphs" (parallel edges — multiple edges with the same start and end node), so every graph here has at most $|V|^2$ edges.
+
 ---
 
 # Graph Traversal Algorithms
 
-> [!Note] Summary Description
-> - In all graph traversal algorithms we discussed, we choose a specific vertex at which to begin our traversal
-> - For our purposes in this text, we disallow "multigraphs" (i.e., we are disallowing "parallel edges": multiple edges with the same start and end node), meaning our graphs have at most |_V_|² edges  
+## [[Breadth First Search (BFS)]]
+
+We explore the starting vertex, then its neighbors, then their neighbors, etc. — the graph is explored in layers spreading out from the starting vertex. Easily implemented using a [[Queue]] to keep track of vertices to explore. See [[Breadth First Search (BFS)]] for the complete write-up.
+
+- **Time Complexity:** $O(|V| + |E|)$ — we potentially visit all $|V|$ vertices and traverse all $|E|$ edges, each in $O(1)$.
+- **Space Complexity:** $O(|V| + |E|)$ — we might have to keep track of every possible vertex and edge during exploration. If we wanted to also keep track of the entire current path of every vertex in the [[Queues|Queue]], the space complexity would blow up.
+- **Key detail:** layer-by-layer exploration via a [[Queue]] is what guarantees shortest paths on unweighted graphs.
+
+## [[Depth First Search (DFS)]]
+
+We explore the current path as far as possible before going back to explore other alternative paths. Easily implemented using a [[Computer Science/Data Structures/Introductory Data Structures/Stack|Stack]] to keep track of vertices to explore. See [[Depth First Search (DFS)]] for the complete write-up.
+
+- **Time Complexity:** $O(|V| + |E|)$ — we potentially visit all $|V|$ vertices and traverse all $|E|$ edges, each in $O(1)$.
+- **Space Complexity:** $O(|V| + |E|)$ — we might have to keep track of every possible vertex and edge during exploration.
+- **Key detail:** because we only explore a single path at a time, tracking the _entire current path_ only costs $O(|E|)$, since a single path can have at most $|E|$ edges — much cheaper than BFS's equivalent.
+
+## [[Dijkstra's Algorithm]]
+
+We explore the shortest possible path at any given moment. Easily implemented using a [[Priority Queue]], ordered by _shortest distance_ from the starting vertex, to keep track of vertices to explore. See [[Dijkstra's Algorithm]] for the complete write-up.
+
+- **Time Complexity:** $O(|V| + |E|\log|E|)$ — we initialize each of $|V|$ vertices, and in the worst case insert (and remove) one element into the Priority Queue per edge, assuming the **Priority Queue** is implemented intelligently (e.g. using a [[Heap]]).
+- **Space Complexity:** $O(|V| + |E|)$ — we might have to keep track of every possible vertex and edge during exploration.
+- **Key detail:** requires non-negative edge weights; the **Priority Queue** is keyed by _cumulative_ distance from the source, not a single edge weight (contrast with [[#Prim's Algorithm|Prim's]] below).
 
 ---
-## Time/Space Complexities of [[Breadth First Search (BFS)|Breadth First Search]]
 
- We explore the starting vertex, then its neighbors, then their neighbors, etc. In other words, we explore the graph in layers spreading out from the starting vertex **BFS** can be easily implemented using a [[Queue]] to keep track of vertices to explore.
-### Time Complexity
+# Minimum Spanning Tree Algorithms
 
-- Exploring the entire graph using Breadth First Search would take time $O(|V| + |E|)$ because we have to potentially visit all $|V|$ vertices and traverse all $|E|$ edges, where each visit/traversal is $O(1)$.
-### Space Complexity
+> [!Note] Section Overview
+> 
+> - Given a graph $G$, a [[Minimum Spanning Trees#1. Defining the Spanning Tree|Spanning Tree]] is a tree that hits every node in $G$.
+> - A [[Minimum Spanning Trees|Minimum Spanning Tree]] of $G$ is a Spanning Tree of $G$ with minimum overall cost (minimizes the sum of all edge weights).
+> - Prim's and Kruskal's both find an MST in an arbitrary graph $G$ equally efficiently, using different strategies.
 
-- **$O(|V| + |E|)$** — We might theoretically have to keep track of every possible vertex and edge in the graph during our exploration.
-- If we wanted to keep track of the entire current path of every vertex in our [[Queues|Queue]], the space complexity would blow up.
----
-## Time/Space Complexities of [[Depth First Search (DFS)|Depth First Search]] 
+## [[Prim's Algorithm]]
 
-We explore the current path as far as possible before going back to explore other alternative paths **DFS** can be easily implemented using a [[Computer Science/Data Structures/Introductory Data Structures/Stack|Stack]] to keep track of vertices to explore.
+Starts with a one-node tree and repeatedly finds a minimum-weight edge that connects a node in the tree to a node not yet in the tree, adding that edge to the tree. See [[Prim's Algorithm]] for the complete write-up.
 
-### Time Complexity
+- **Time Complexity:** $O(|V| + |E|\log|E|)$ — initialize all $|V|$ vertices, and add each of $|E|$ edges to a [[Priority Queue]] (implemented using a [[Heap]]).
+- **Key detail:** vertex-centric — grows _one_ tree at a time; the **Priority Queue** is keyed by cost of the single cheapest edge connecting to the tree, not cumulative path weight (contrast with [[#Dijkstra's Algorithm|Dijkstra's]] above).
 
-- Exploring the entire graph using Depth First Search would take time $O(|V| + |E|)$ because we have to potentially visit all $|V|$ vertices and traverse all $|E|$ edges, where each visit/traversal is $O(1)$
+## [[Kruskal's Algorithm]]
 
-### Space Complexity
-- **$O(|V| + |E|)$** — We might theoretically have to keep track of every possible vertex and edge in the graph during our exploration  
+Starts with a forest of one-node trees and repeatedly finds the minimum-weight edge that connects two previously unconnected trees in the forest, merging them using that edge. See [[Kruskal's Algorithm]] for the complete write-up.
 
-> [!Note] 
-> Because we are only exploring a single path at a time, even if we wanted to keep track of the entire current path, the space required to do so would only be $O(|E|)$ because a single path can have at most $|E|$ edges
+- **Time Complexity:** $O(|V| + |E|\log|E|)$ — initialize all $|V|$ vertices, and sort all $|E|$ edges (the fastest comparison sorts run in $O(n\log n)$).
+- **Key detail:** edge-centric — grows a whole _forest_ at once; relies on [[Disjoint Sets & Up-Trees]] to check whether two endpoints are already connected before merging.
 
 ---
-## Time/Space Complexities of [[Dijkstra's Algorithm]]
 
-We explore the shortest possible path at any given moment. **Dijkstra's Algorithm** can be easily implemented using a [[Priority Queue]], ordered by ***shortest distance*** from starting vertex, to keep track of vertices to explore.
+# Quick Reference Table
 
-### Time Complexity
-
-- We must initialize each of our $|V|$ vertices, and in the worst case, we will insert (and remove) one element into a [[Priority Queue]] for each of our $|E|$ edges, resulting in an overall worst-case time complexity of **$O(|V| + |E|\log|E|)$** overall if our Priority Queue is implemented intelligently (e.g. using a [[Heap]])
-
-### Space Complexity  
-
-- **$O(|V| + |E|)$** — We might theoretically have to keep track of every possible vertex and edge in the graph during our exploration
-
----
-# Minimum Spanning Trees Algorithms
-
-> [!Note] Summary Description
-> - Given a graph $G$
-> 	- a [[Minimum Spanning Trees#1. Defining the Spanning Tree|Spanning Tree]] is a tree that hits every node in G
-> 	- a [[Minimum Spanning Trees]] of $G$ is a **Spanning Tree** of $G$ that has the *minimum overall cost* (minimizes the sum of all edge weights)
-> - 
-
-- Given a graph _G_, a Spanning Tree of _G_ is a tree that hits every node in _G_
-- Given a graph _G_, a Minimum Spanning Tree of _G_ is a Spanning Tree of _G_ that has the minimum overall cost (i.e., that minimizes the sum of all edge weights)
-- We discussed two algorithms that can find a Minimum Spanning Tree in an arbitrary graph _G_ equally efficiently
-- 
-- Kruskal's Algorithm starts with a forest of one-node trees and repeatedly finds a minimum-weight edge that connects two previously unconnected trees in the forest and merges the two trees using the edge
----
-## Time Complexity of [[Minimum Spanning Trees#Prim’s Algorithm (Vertex-Centric)|Prim's Algorithm]]
-
-**Prim's Algorithm** starts with a one-node tree and repeatedly finds a minimum-weight edge that connects a node in the tree to a node that is not in the tree, and adds that connecting edge to the tree.
-
-### **Worst-Case Time Complexity**
-
-**$O(|V| + |E|\log|E|)$** — We need to initialize all $|V|$ vertices, and we may need to add each of our $|E|$ edges to a [[Priority Queue]] (which should be implemented using a [[Heap]]).
+|Algorithm|Time|Space|Key Structure Used|
+|---|---|---|---|
+|[[Breadth First Search (BFS)]]|$O(\|V\|+\|E\|)$|$O(\|V\|+\|E\|)$|Queue|
+|[[Depth First Search (DFS)]]|$O(\|V\|+\|E\|)$|$O(\|V\|+\|E\|)$|Stack (or recursion)|
+|[[Dijkstra's Algorithm]]|$O(\|V\|+\|E\|\log\|E\|)$|$O(\|V\|+\|E\|)$|Priority Queue (by cumulative distance)|
+|[[Prim's Algorithm]]|$O(\|V\|+\|E\|\log\|E\|)$|$O(\|V\|+\|E\|)$|Priority Queue (by single edge cost)|
+|[[Kruskal's Algorithm]]|$O(\|V\|+\|E\|\log\|E\|)$|$O(\|V\|+\|E\|)$|Sorted edge list + Disjoint Sets|
 
 ---
-## Time Complexity of [[Minimum Spanning Trees#Kruskal’s Algorithm (Edge-Centric)|Kruskal's Algorithm]]
 
-Kruskal's Algorithm starts with a forest of one-node trees and repeatedly finds a minimum-weight edge that connects two previously unconnected trees in the forest and merges the two trees using the edge
+# References / Links
 
-### **Time Complexity**
-
-**$O(|V| + |E|\log|E|)$** — We need to initialize all $|V|$ vertices, and we need to sort all $|E|$ edges. Note that the fastest algorithms to sort a list of $n$ elements are $O(n\log n)$.
+- [[Breadth First Search (BFS)]]
+- [[Depth First Search (DFS)]]
+- [[Dijkstra's Algorithm]]
+- [[Prim's Algorithm]]
+- [[Kruskal's Algorithm]]
+- [[Minimum Spanning Trees]]

@@ -69,6 +69,6 @@ To prevent the "line" scenario and ensure $O(\log n)$ performance, various self-
 ## Related Notes
 - **[[Graphs]]**: Rooted trees are a specialized subset of directed graphs.
 - **[[Graph Reachability]]**: Trees are a type of Directed Acyclic Graph (DAG) where every node is reachable from the root.
-- **[[Binary Search]]**: BSTs are the dynamic data structure implementation of the binary search principle.
+- **[[Computer Science/Discrete Structures/Discrete Algorithms/Searching/Binary Search]]**: BSTs are the dynamic data structure implementation of the binary search principle.
 - **[[Computer Science/Discrete Structures/Discrete Algorithms/Recursive Algorithms/index|Recursive Algorithms]]**: Most tree operations, including height calculation and BST traversal, are defined and analyzed using recursion.
 - **[[Huffman Code]]**: Uses the rooted tree structure to create optimal prefix-free variable-length codes.

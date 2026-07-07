@@ -14,7 +14,7 @@ title: Divide and Conquer
 ---
 ## Knowledge Map
 
-### [[Merge Sort]]
+### [[Computer Science/Discrete Structures/Discrete Algorithms/Recursive Algorithms/Divide and Conquer/Merge Sort]]
 - **Concept**: An $O(n \log n)$ sorting algorithm that halves the input and merges sorted results.
 - **Key Logic**: Uses a linear-time `RMerge` helper.
 - **Formal Verification**: Requires **Strong Induction** for the main sort (due to $\frac{n}{2}$ shrinkage) and **Regular Induction** for the merge helper.

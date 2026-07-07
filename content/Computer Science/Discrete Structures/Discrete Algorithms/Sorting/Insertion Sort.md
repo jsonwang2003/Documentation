@@ -48,4 +48,4 @@ On a list of length $n$:
 ## Related Notes
 - [[Bubble Sort]] – Another $O(n^2)$ sort, but usually less efficient than Insertion Sort.
 - [[Selection Sort (Min Sort)]] – $O(n^2)$ but performs fewer swaps (at most $n-1$).
-- [[Merge Sort]] – The $O(n \log n)$ alternative for larger datasets.
+- [[Computer Science/Discrete Structures/Discrete Algorithms/Recursive Algorithms/Divide and Conquer/Merge Sort]] – The $O(n \log n)$ alternative for larger datasets.

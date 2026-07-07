@@ -24,7 +24,7 @@ As shown in the graph, Binary Search is not just faster; its runtime becomes a *
 
 > [!INFO]
 > 
-> Mathematically, we say [[Binary Search]] is **asymptotically faster** than [[Linear Search]]. Even if *Linear Search* was running on a supercomputer and *Binary Search* on a calculator, for a large enough $n$, **Binary Search will always win**.
+> Mathematically, we say [[Computer Science/Discrete Structures/Discrete Algorithms/Searching/Binary Search]] is **asymptotically faster** than [[Linear Search]]. Even if *Linear Search* was running on a supercomputer and *Binary Search* on a calculator, for a large enough $n$, **Binary Search will always win**.
 
 ---
 ## Summary Table
@@ -39,5 +39,5 @@ As shown in the graph, Binary Search is not just faster; its runtime becomes a *
 ---
 ## Related Notes
 - [[Asymptotic Notation]] – Understanding the math behind the "Gap."
-- [[Merge Sort]] – Often used as a prerequisite to enable Binary Search.
+- [[Computer Science/Discrete Structures/Discrete Algorithms/Recursive Algorithms/Divide and Conquer/Merge Sort]] – Often used as a prerequisite to enable Binary Search.
 - [[Lower Bounds for Searching]] – Why we can't do better than $O(\log n)$ for comparisons.

@@ -93,7 +93,7 @@ find(element):
 
 > [!Abstract] Summary **Best Case**: O(1) (element at the first index) **Worst Case**: O(n) (element at the last index or not present)
 #### Binary Search
-If the array is sorted, searching runtime improves to **O(logn)** via [[Binary Search]].
+If the array is sorted, searching runtime improves to **O(logn)** via [[Computer Science/Discrete Structures/Discrete Algorithms/Searching/Binary Search]].
 ### Deletion
 - **Last Element**: Simply remove it → **Constant Time O(1)**.
 - **First Element**: Requires moving all subsequent elements left one spot → **Linear Time O(n)**.
