@@ -3,11 +3,16 @@
 // put your custom CSS here!
 :root[saved-theme="dark"] {
   --bold-color: var(--secondary);
+  --italic-color: var(--secondary); 
   --lightgray: #393939;
 
   body{
     .callout{
       background-color: rgb(from var(--callout-color) r g b / 0.08);
+    }
+
+    div.sidebar.right{
+      padding-top: 2rem;
     }
 
     .recent-notes > h3{
@@ -26,16 +31,25 @@
       margin-top: 15px !important;
       padding: 10px !important;
     }
+
+    .toc:has(button.toc-header.collapsed){
+      flex: 0 2.5rem;
+    }
   }
 }
 
 :root[saved-theme="light"] {
   --bold-color: var(--secondary);
+  --italic-color: var(--secondary);
   --lightgray: #e5e5e5;
 
   body{
     .callout{
       background-color: rgb(from var(--callout-color) r g b / 0.08);
+    }
+
+    div.sidebar.right{
+      padding-top: 2rem;
     }
 
     .recent-notes > h3{
@@ -53,6 +67,10 @@
       border-radius: 14px !important;
       margin-top: 15px !important;
       padding: 10px !important;
+    }
+
+    .toc:has(button.toc-header.collapsed){
+      flex: 0 2.5rem;
     }
   }
 }
