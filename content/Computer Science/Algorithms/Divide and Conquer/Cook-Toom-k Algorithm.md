@@ -15,7 +15,7 @@ aliases:
 > - **Category:** Divide and Conquer / Integer Multiplication
 > - **Input:** Two $n$-bit numbers (represented as degree-$(k-1)$ polynomials once split into $k$ parts)
 > - **Output:** The product
-> - **Paradigm:** Divide and Conquer, generalizing [[Multiply Problem|Karatsuba's]] 2-way split to a $k$-way split
+> - **Paradigm:** Divide and Conquer, generalizing [[Computer Science/Algorithms/Divide and Conquer/index#Multiplying n-bit Numbers (Classic Recursive Approach)|Karatsuba's]] 2-way split to a $k$-way split
 > - **Typical use cases:** fast big-integer / big-polynomial multiplication; a stepping stone toward understanding how multiplication can approach near-linear time
 
 ---
@@ -30,12 +30,18 @@ $$ (a_{k-1}x^{k-1} + a_{k-2}x^{k-2} + \dots + a_{1}x + a_{0})(b_{k-1}x^{k-1} + b
 
 Multiplying these two polynomials the schoolbook way requires $k^2$ coefficient multiplications (every $a_i$ against every $b_j$). The recursion:
 
-$$ \begin{align*} T(n) &= k^{2} T\left( \frac{n}{k} \right) + O(n) \qquad (a = k^{2},\ b=k,\ d=1)\ &= O(n^{\log_{k}k^{2}})\ &= \boxed{O(n^{2})} \end{align*} $$
+$$ 
+\begin{align*} 
+T(n) &= k^{2} T\left( \frac{n}{k} \right) + O(n) \qquad (a = k^{2},\ b=k,\ d=1)\\
+&= O(n^{\log_{k}k^{2}})\\
+&= \boxed{O(n^{2})} 
+\end{align*} 
+$$
 
 So a naive $k$-way split, at _any_ $k$, is still $O(n^2)$ — exactly as slow as the classic 2-way split. Splitting into more pieces doesn't help unless the _combine_ step also improves.
 
 > [!tip] Key Idea 
-> If you split a number into $k$ equally-sized parts, you can combine them with only $\boxed{2k-1}$ multiplications instead of $k^2$ — by evaluating both degree-$(k-1)$ polynomials at $2k-1$ distinct points, multiplying the resulting values pointwise, and interpolating to recover the product polynomial's coefficients. (This evaluate → pointwise-multiply → interpolate structure is the general Toom-Cook technique; Karatsuba is the special case $k=2$, needing only $2(2)-1 = 3$ multiplications — matching the "Multiply KS" trick in [[Multiply Problem]].)
+> If you split a number into $k$ equally-sized parts, you can combine them with only $\boxed{2k-1}$ multiplications instead of $k^2$ — by evaluating both degree-$(k-1)$ polynomials at $2k-1$ distinct points, multiplying the resulting values pointwise, and interpolating to recover the product polynomial's coefficients. (This evaluate → pointwise-multiply → interpolate structure is the general Toom-Cook technique; Karatsuba is the special case $k=2$, needing only $2(2)-1 = 3$ multiplications — matching the "Multiply KS" trick in [[Computer Science/Algorithms/Divide and Conquer/index#Multiplying n-bit Numbers (Classic Recursive Approach)|Multiply Problem]].)
 
 ---
 
@@ -105,7 +111,7 @@ where $M(k) = O(k^2)$ is the coefficient of the linear combine-step term (evalua
 | Choice of $k$     | Exponent $\frac{\log(2k-1)}{\log k}$ | Combine overhead $M(k)$               | Notes                                                                                                                                                            |
 | ----------------- | ------------------------------------ | ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | $k=2$ (Karatsuba) | $\log_2 3 \approx 1.585$             | Small, constant                       | The classic special case — see [[Computer Science/Algorithms/Divide and Conquer/index#Multiplying n-bit Numbers (Classic Recursive Approach)\|Multiply Problem]] |
-| Larger $k$        | Approaches $1$ as $k \to \infty$     | Grows as $O(k^2)$ — larger and larger | Better asymptotic exponent, but a rapidly growing constant factor                                                                                                |
+| Larger $k$        | Approaches $1$ as $k \to \infty$     | Grows as $O(k^2)$ — larger and larger | Better asymptotic exponent, but a rapidly growing constant factor ― practically not worth it cause the **non-recursive** part grows *quadratically*              |
 
 ## Best / Worst / Average Case
 

@@ -1,0 +1,31 @@
+filters:
+  and:
+    - file.folder.contains("Computer Science/Algorithms")
+formulas:
+  Untitled: ""
+views:
+  - type: table
+    name: Table
+    order:
+      - file.name
+      - title
+      - file.ctime
+      - file.folder
+      - formula.Untitled
+    sort:
+      - property: file.name
+        direction: ASC
+  - type: cards
+    name: View
+    order:
+      - file.name
+      - file.backlinks
+      - file.basename
+      - file.ctime
+      - file.folder
+      - file.links
+      - file.mtime
+      - aliases
+      - description
+      - tags
+    cardSize: 340

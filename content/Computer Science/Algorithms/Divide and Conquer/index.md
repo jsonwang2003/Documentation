@@ -4,9 +4,8 @@ description: Overview of the Divide and Conquer paradigm, the classic and Karats
 tags:
   - divide-and-conquer
 aliases:
+  - Divide and Conquer
 ---
-
-
 > [!Note] Section Overview
 > 
 > - **Divide and Conquer:** break a problem into similar subproblems, solve each subproblem recursively, then combine the results.
@@ -31,8 +30,11 @@ aliases:
 
 Suppose we want to multiply two $n$-bit numbers, $n$ a power of 2. Split each into left/right halves of $n/2$ bits each:
 
-$$ \begin{align*} 
-x &= 2^{n/2}x_{L} + x_{R}\\ y &= 2^{n/2}y_{L} + y_{R}\\ \\ xy &= 2^{n}\boxed{x_{L}y_{L}} + 2^{n/2}(\boxed{x_{L}y_{R}} + \boxed{x_{R}y_{L}}) + \boxed{x_{R}y_{R}} 
+$$ 
+\begin{align*}
+x &= 2^{n/2}x_{L} + x_{R}\\
+y &= 2^{n/2}y_{L} + y_{R}\\ \\ 
+xy &= 2^{n}\boxed{x_{L}y_{L}} + 2^{n/2}(\boxed{x_{L}y_{R}} + \boxed{x_{R}y_{L}}) + \boxed{x_{R}y_{R}} 
 \end{align*} 
 $$
 
@@ -125,6 +127,15 @@ $$ T(n) = O\left(n^{d}\left(\frac{a}{b^{d}}\right)^{\log_{b} n}\right) = O(n^{\l
 > [!Info] Recall $$\sum_{k=0}^{n} r^{k} = \frac{r^{n+1}-1}{r-1} = O(r^{n})$$
 
 ---
+# Deterministic vs. Randomized Approaches
+**Sorting** and **Selection** each have a deterministic and a randomized solution, trading a worse worst-case bound for a simpler algorithm and better typical-case performance:
+
+|               | Deterministic                                            | Randomized                                                                    |
+| ------------- | -------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| **Sorting**   | [[Merge Sort]] — $O(n\log n)$                            | [[Quick Sort]] — Best: $O(n\log n)$, Worst: $O(n^{2})$, Average: $O(n\log n)$ |
+| **Selection** | [[Deterministic Selection]] (Median of Medians) — $O(n)$ | [[QuickSelect]] — Best: $O(n)$, Worst: $O(n^{2})$, Average: $O(n)$            |
+
+---
 
 # Quick Reference Table
 
@@ -137,28 +148,28 @@ $$ T(n) = O\left(n^{d}\left(\frac{a}{b^{d}}\right)^{\log_{b} n}\right) = O(n^{\l
 
 # Notes in This Section
 
-> [!note] These descriptions are inferred from standard algorithm names only — this section's actual notes weren't available when building this index, so double-check/replace these one-liners once each note is filled in.
-
-|Note|One-line description|
-|---|---|
-|[[Binary Search]]|Halves the search space each comparison on a sorted array; $O(\log n)$|
-|[[Cook-Toom-k algorithm]]|Generalizes Karatsuba's trick to split into $k$ parts instead of 2, trading extra combine-step overhead for fewer recursive multiplications|
-|[[Deterministic Selection]]|Likely the median-of-medians algorithm — finds the $k^{th}$ smallest element in worst-case $O(n)$ without randomization|
-|[[Merge Sort]]|Splits the array in half, recursively sorts each half, merges the two sorted halves; $O(n\log n)$|
-|[[Quick Sort]]|Partitions around a pivot, recursively sorts each side; $O(n\log n)$ expected, $O(n^2)$ worst case|
-|[[QuickSelect]]|Quick Sort-style partitioning used to find the $k^{th}$ smallest element directly; $O(n)$ expected|
-|[[Selection]]|Likely the general "find the $k^{th}$ smallest element" problem statement, with [[QuickSelect]] and [[Deterministic Selection]] as two algorithms solving it|
-|[[Two-Runners]]|Uncertain — possibly the fast/slow pointer ("tortoise and hare") technique; confirm against the actual note|
+| Note                        | One-line description                                                                                                                                                                                    |
+| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [[Binary Search]]           | Halves the search space each comparison on a sorted array; $O(\log n)$                                                                                                                                  |
+| [[Cook-Toom-k algorithm]]   | Generalizes Karatsuba's trick to split into $k$ parts instead of 2, trading extra combine-step overhead for fewer recursive multiplications                                                             |
+| [[Deterministic Selection]] | Median-of-medians (BFPRT) — splits into groups of 5 to construct a provably-good pivot, guaranteeing $O(n)$ worst case without randomization                                                            |
+| [[Sorting]]                 | Foundational note for this family ― the decision tree argument for the $\Omega(n \log n)$ comparison-sort lower bound                                                                                   |
+| [[Merge Sort]]              | Splits the array in half, recursively sorts each half, merges the two sorted halves; $O(n\log n)$                                                                                                       |
+| [[Quick Sort]]              | Partitions around a pivot, recursively sorts each side; $O(n\log n)$ expected, $O(n^2)$ worst case                                                                                                      |
+| [[QuickSelect]]             | Quick Sort-style partitioning used to find the $k^{th}$ smallest element directly, via a random pivot; $O(n)$ expected, $O(n^{2})$ worst case                                                           |
+| [[Selection]]               | The general "find the $k^{th}$ smallest element" problem, plus the shared in-place `Partition with Pivot` subroutine; [[QuickSelect]] and [[Deterministic Selection]] are the two algorithms solving it |
+| [[Two Runners]]             | Binary search for the "turning point" where a slower-starting runner overtakes a faster one — a discrete analogue of the Intermediate Value Theorem; $O(\log n)$                                        |
 
 ---
 
 # References / Links
 
 - [[Binary Search]]
+- [[Sorting]]
 - [[Merge Sort]]
 - [[Quick Sort]]
 - [[QuickSelect]]
 - [[Deterministic Selection]]
 - [[Selection]]
 - [[Cook-Toom-k algorithm]]
-- [[Two-Runners]]
+- [[Two Runners]]
