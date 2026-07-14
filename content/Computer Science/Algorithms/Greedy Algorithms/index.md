@@ -8,6 +8,7 @@ tags:
 aliases:
   - Greedy Algorithms
   - Greedy Algorithm
+  - Greedy
 ---
 > [!abstract] Overview 
 > A **Greedy Algorithm** builds a solution step by step, at each step making the choice that looks best _right now_, without reconsidering earlier choices. See [[The Greedy Method]] for the full definition and general schema.

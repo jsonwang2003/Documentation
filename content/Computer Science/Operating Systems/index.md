@@ -1,3 +1,52 @@
 ---
 title: Operating Systems
 ---
+- Protection: how can the OS perform special tasks and protect itself from applications
+	- priviledged instructions
+	- Memory Protection
+- Interacting with the OS
+	- Faults
+	- System Calls
+	- Interrupts
+- Run multiple applications → processes
+	- what is a process
+	- process management
+- Perform multiple tasks within one application → threads
+	- thread vs. process
+	- thread scheduling
+	- different kind of threads
+- How can different tasks running concurrently safely share state? → synchronization
+	- problem with concurrency ― what can go wrong
+	- what is synchronization
+	- Synchronization primitives
+		- lock
+		- semaphore
+		- condition variable
+		- Monitors
+	- Deadlock
+	- CPU Scheduling
+- Memory Management
+	- what goals are we trying to achieve
+		- Multitasking
+		- transparency
+		- isolation
+		- efficiency
+	- what mechanisms can we use to achieve those goals
+		- physical and virtual memory addressing
+		- segmentation and paging
+		- page table management, TLB, and VM tricks
+	- policies
+		- page replacement algorithms
+	- Virtual Memory allocation
+- File system layout
+	- Common file operations
+	- Optimized disk layout
+	- file buffer cache
+	- file system reliability
+		- `fsck`
+		- Ordered writes
+		- Journaling
+- Virtualization
+	- Virtual Machines
+	- Containers
+- Protection: mechanisms that prevent accidental or intentional misuse of a system

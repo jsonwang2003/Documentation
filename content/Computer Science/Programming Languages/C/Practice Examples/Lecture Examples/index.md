@@ -25,7 +25,7 @@ The interface between your code and the Operating System kernel.
 - **Virtualization**: The illusion of private memory via **Virtual Memory** and Copy-on-Write.
 
 ---
-## 4. [[Memory Management/index|Memory Management]]
+## 4. [[Computer Science/Programming Languages/C/Practice Examples/Lecture Examples/Memory Management/index|Memory Management]]
 The deep-dive into the "Heap." Learn how to build the memory management tools that modern languages take for granted.
 - **Struct Design**: How padding and alignment affect memory footprint.
 - **Custom Allocators**: Implementing `malloc`, `free`, and `realloc` using block metadata and coalescing logic to fight fragmentation.
@@ -51,5 +51,5 @@ Scaling your C knowledge to talk to other computers.
 ### Suggested Learning Path
 1. **The Foundations**: [[Intro to Systems Programming/index|Intro]] $\rightarrow$ [[Strings and Data/index|Strings]]
 2. **The Environment**: [[Systems and Processes/index|Systems & Processes]]
-3. **The Internals**: [[Memory Management/index|Memory Management]]
+3. **The Internals**: [[Computer Science/Programming Languages/C/Practice Examples/Lecture Examples/Memory Management/index|Memory Management]]
 4. **The Application**: [[Digital Communication/index|Digital Communication]]
