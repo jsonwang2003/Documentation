@@ -1,144 +1,234 @@
-> [!ABSTRACT]
+---
+description: "A self-balancing binary search tree enforcing a strict height-invariant constraint via node rotations to secure absolute logarithmic time bounds."
+aliases:
+  - AVL Tree
+  - Self-Balancing BST
+  - Adelson-Velsky and Landis Tree
+tags:
+  - data-structures
+  - trees
+  - avl
+---
+> [!abstract] Abstract 
+> Named after inventors Adelson-Velsky and Landis, the AVL Tree is a self-balancing [[Binary Search Tree (BSTs)|Binary Search Tree (BST)]] that guarantees a worst-case time complexity of $O(\log n)$ for search, insertion, and deletion operations. It achieves this performance by enforcing a strict structural balance property maintained through deterministic node rotations.
 > 
-> Named after Adelson-Velsky and Landis, the AVL Tree is a self-balancing BST that ensures a worst-case time complexity of $O(\log n)$ for search, insertion, and deletion. It achieves this by maintaining a strict balance property through structural rotations.
+> - **Category:** Balanced Hierarchical Tree
+> - **Core Invariant:** Balance factors across all nodes must strictly reside within the set $\{-1, 0, 1\}$.
+> - **Balancing Strategy:** Localized single or double pointer rotations executed during stack rollbacks.
 
 ---
-## 1. Core Properties
 
-An AVL tree must satisfy the **Balance Condition**: For every node $u$, the height of its left and right subtrees can differ by at most **1**.
-- **Balance Factor ($BF$):** $BF(u) = Height(RightSubtree) - Height(LeftSubtree)$
-- **Validity:** A node is balanced if $BF(u) \in \{-1, 0, 1\}$.
+# Core Structural Properties
 
-| **Valid AVL Tree**                   | **Invalid AVL Tree**                 |
-| ------------------------------------ | ------------------------------------ |
+To prevent height degradation into a linear $O(n)$ chain, an AVL tree enforces the **Balance Condition** at every internal node coordinate:
+
+> [!important] The Balance Invariant
+> For every individual node $u$ inside the tree, the structural heights of its left and right subtrees can differ by at most 1.
+
+The mathematical representation of this tracking metric is the **Balance Factor (BF)**:
+
+$$ \text{BF}(u) = \text{Height}(\text{RightSubtree}(u)) - \text{Height}(\text{LeftSubtree}(u)) $$
+
+A node state is considered structurally valid if and only if:
+
+$$ \text{BF}(u) \in \{-1, 0, 1\} $$
+
+| Valid AVL Tree | Invalid AVL Tree |
+|---|---|
 | ![[Pasted image 20260116111242.png]] | ![[Pasted image 20260116111257.png]] |
 
----
-## 2. Mathematical Proof of Height
-We can prove the worst-case height $h$ is $O(\log n)$ by finding the minimum number of nodes $N_h$ required to form an AVL tree of height $h$.
-- **Recurrence:** $N_h = N_{h-1} + N_{h-2} + 1$
-- **Base Cases:** $N_1 = 1$, $N_2 = 2$ (using a 1-based height definition).
-- **Result:** This recurrence grows faster than the Fibonacci sequence. Since $N_h \approx \phi^h$ (where $\phi$ is the golden ratio), it follows that $h \approx \log_{\phi}(n)$, confirming $h = O(\log n)$.
+If an insertion or erasure causes $\text{BF}(u)$ to drift to $\pm 2$, the node is flagged as imbalanced, immediately triggering structural rebalancing.
 
 ---
-## 3. Rebalancing: AVL Rotations
-When an insertion or removal causes a node to have a $BF$ of $\pm 2$, rotations are used to restore balance.
-### Single Rotations (The "Straight Line" Case)
 
-Used when the imbalance is caused by an insertion into the "outside" child (Left-Left or Right-Right).
+# Mathematical Proof of Bounded Height
 
-- **Right Rotation:** Fixes Left-Left imbalance.
-- **Left Rotation:** Fixes Right-Right imbalance.
+We can prove that the maximum height $h$ of an AVL tree containing $n$ nodes is bounded at $O(\log n)$ by determining the minimum number of nodes $N_h$ required to form a valid AVL tree of height $h$.
+
+To construct the most sparse AVL tree possible of height $h$, we provide one child with the minimum valid height $h-1$ and the opposing child with the minimum valid height $h-2$, plus the root node itself:
+
+$$ N_h = N_{h-1} + N_{h-2} + 1 $$
+
+Using a 1-based height index framework where base cases resolve to $N_1 = 1$ and $N_2 = 2$, this recurrence relation matches the growth trajectory of the Fibonacci sequence. Because Fibonacci terms scale exponentially relative to the golden ratio ($\phi \approx 1.618$), we establish that:
+
+$$ N_h \approx \phi^h \implies h \approx \log_{\phi}(n) $$
+
+This mathematical relationship confirms that the height of an AVL tree is strictly bounded at $h \le 1.44 \log_2 n$, ensuring guaranteed $O(\log n)$ performance.
+
+---
+
+# Rebalancing: Structural AVL Rotations
+
+When mutations push an asset's balance factor to $\pm 2$, pointer adjustments are executed to restore the structural balance of the tree.
+
+### 1. Single Rotations (The Straight-Line Cases)
+Single rotations resolve imbalances caused by insertions or removals occurring on the outer margins of a node's extended subtree lineage (Left-Left or Right-Right configurations).
+
+*   **Right Rotation:** Corrects a Left-Left ($\text{L-L}$) linear imbalance.
+*   **Left Rotation:** Corrects a Right-Right ($\text{R-R}$) linear imbalance.
 
 ![[Pasted image 20260116111325.png]]
 
+```pseudo
+	\begin{algorithm}
+	\caption{AVL Single Right Rotation}
+	\begin{algorithmic}
+		\Procedure{AVLRight}{b}
+			\State $a \gets b.\text{leftChild}$
+			\State $y \gets a.\text{rightChild}$
+			\State $p \gets b.\text{parent}$
+			\If{$p \neq \text{NULL}$ \and $b == p.\text{rightChild}$}
+				\State $p.\text{rightChild} \gets a$
+			\ElseIf{$p \neq \text{NULL}$ \and $b == p.\text{leftChild}$}
+				\State $p.\text{leftChild} \gets a$
+			\EndIf
+			\State $a.\text{parent} \gets p$
+			\State $b.\text{leftChild} \gets y$
+			\If{$y \neq \text{NULL}$}
+				\State $y.\text{parent} \gets b$
+			\EndIf
+			\State $a.\text{rightChild} \gets b$
+			\State $b.\text{parent} \gets a$
+		\EndProcedure
+	\end{algorithmic}
+	\end{algorithm}
 ```
-AVLRight(b): // Perform a right AVL rotation on node b
-    a = left child of b
-    y = right child of a (or NULL if a does not have a right child)
-    p = parent of b (or NULL if b does not have a parent)
-    if p is not NULL and b is the right child of p:
-        make a the right child of p
-    otherwise, if p is not NULL and b is the left child of p:
-        make a the left child of p
-    make y the left child of b
-    make b the right child of a
 
-AVLLeft(a): // Perform a left AVL rotation on node a
-    b = right child of a
-    y = left child of b (or NULL if b does not have a left child)
-    p = parent of a (or NULL if a does not have a parent)
-    if p is not NULL and a is the right child of p:
-        make b the right child of p
-    otherwise, if p is not NULL and a is the left child of p:
-        make b the left child of p
-    make y the right child of a
-    make a the left child of b
+```pseudo
+	\begin{algorithm}
+	\caption{AVL Single Left Rotation}
+	\begin{algorithmic}
+		\Procedure{AVLLeft}{a}
+			\State $b \gets a.\text{rightChild}$
+			\State $y \gets b.\text{leftChild}$
+			\State $p \gets a.\text{parent}$
+			\If{$p \neq \text{NULL} $\and$ a == p.\text{rightChild}$}
+				\State $p.\text{rightChild} \gets b$
+			\ElseIf{$p \neq \text{NULL} $\and$ a == p.\text{leftChild}$}
+				\State $p.\text{leftChild} \gets b$
+			\EndIf
+			\State $b.\text{parent} \gets p$
+			\State $a.\text{rightChild} \gets y$
+			\If{$y \neq \text{NULL}$}
+				\State $y.\text{parent} \gets a$
+			\EndIf
+			\State $b.\text{leftChild} \gets a$
+			\State $a.\text{parent} \gets b$
+		\EndProcedure
+	\end{algorithmic}
+	\end{algorithm}
 ```
-### Double Rotations (The "Kink" Case)
-Used when the imbalance is caused by an insertion into the "inside" child (Left-Right or Right-Left). A single rotation cannot fix a "kink" shape.
+
+### 2. Double Rotations (The Kink Cases)
+Double rotations correct zig-zag imbalances caused by mutations nested deep inside inner child coordinates (Left-Right or Right-Left configurations). A single rotation cannot resolve a zig-zag imbalance.
 
 ![[Pasted image 20260116120605.png]]
 
-**Solution: Double Rotations**:
-1. **First Rotation:** Rotate the child to transform the "kink" into a "straight line."
-2. **Second Rotation:** Rotate the parent to restore overall balance.
+*   **Left-Right Double Rotation:** Executes a primary left rotation on the child node, transforming the zig-zag into a straight line, followed by a right rotation on the parent node.
+*   **Right-Left Double Rotation:** Executes a primary right rotation on the child node, transforming the zig-zag into a straight line, followed by a left rotation on the parent node.
 
 ![[Pasted image 20260116120703.png]]
 
+```pseudo
+	\begin{algorithm}
+	\caption{AVL Double Right Rotation}
+	\begin{algorithmic}
+		\Procedure{DoubleAVLRightKink}{a}
+			\State \Call{AVLRight}{$a.\text{rightChild}$}
+			\State \Call{AVLLeft}{a}
+		\EndProcedure
+	\end{algorithmic}
+	\end{algorithm}
 ```
-DoubleAVLLeftKink(a): // Shape: <
-    AVLLeft(a.leftChild)
-    AVLRight(a)
 
-DoubleAVLRightKink(a): // Shape: >
-    AVLRight(a.rightChild)
-    AVLLeft(a)
+```pseudo
+	\begin{algorithm}
+	\caption{AVL Double Left Rotation}
+	\begin{algorithmic}
+		\Procedure{DoubleAVLLeftKink}{a}
+			\State \Call{AVLLeft}{$a.\text{leftChild}$}
+			\State \Call{AVLRight}{a}
+		\EndProcedure
+	\end{algorithmic}
+	\end{algorithm}
 ```
 
-> [!Example]- Insertion Example Requiring Double Rotation
-> Below is a more complex example in which we insert 10 into the following **AVL Tree**:
-> 
-> ![[Pasted image 20260116120820.png]]
-> 
-> Following the traditional **Binary Search Tree** insertion algorithm, we would get the following tree (note that we have updated balance factors as well):
-> 
-> ![[Pasted image 20260116120831.png]]
-> 
-> As you can see, the root node is now out of balance, and as a result, we need to fix its balance. However, as we highlighted via the bent red arrow above, this time, our issue is in a "kink" shape (not a "straight line" shape, as it was in the previous complex example). As a result, a single AVL rotation will no longer suffice, and we are forced to perform a double rotation. The first rotation will be a left rotation on node 5 in order to transform this "kink" shape into a "straight line" shape:
-> 
-> ![[Pasted image 20260116120846.png]]
-> 
-> Now, we have successfully transformed our problematic "kink" shape into the "straight line" shape we already know how to fix. Thus, we can perform a right rotation on the root to fix our tree:
-> 
-> ![[Pasted image 20260116120900.png]]
+### Insertion Example Requiring Double Rotation
+If we append a value of $10$ into our active tree array:
+
+![[Pasted image 20260116120820.png]]
+
+Following a traditional BST insertion path yields an imbalanced parent node structured in a zig-zag "kink" configuration:
+
+![[Pasted image 20260116120831.png]]
+
+To resolve this imbalance, a double rotation sequence is triggered. First, we execute a left rotation on child node $5$ to unroll the kink structure into a clean straight line:
+
+![[Pasted image 20260116120846.png]]
+
+With the straight line achieved, we complete a right rotation on the root ancestor node to restore absolute tree height balance parameters:
+
+![[Pasted image 20260116120900.png]]
 
 ---
-## 4. Basic Operations
 
-BST operations in an AVL tree are enhanced with a "rebalancing" phase to ensure the $O(\log n)$ height is maintained.
-### `find(element)`
-- **Logic:** Identical to the standard **Binary Search Tree** find algorithm.
-- **Process:** Compare the target to the current node; traverse left if smaller or right if larger.
-- **Complexity:** Guaranteed $O(\log n)$ because the tree height is strictly controlled.
-### `insert(element)`
-- **BST Phase:** Perform a standard BST insertion to place the new node as a leaf.
-- **Update Phase:** Traverse **upwards** from the new leaf toward the root.
-- **Balance Phase:** At each ancestor, update the balance factor. If any node reaches a factor of $\pm 2$, perform the appropriate **Single** or **Double Rotation**.
-- **Complexity:** $O(\log n)$ for the initial search plus $O(\log n)$ for the upward rebalancing pass.
+# Data Structure Operations
+
+Every mutations pipeline couples traditional binary search tree logic with an integrated upward rebalancing sweep to maintain tree balance.
+
+## `Find(element)`
+Operates identically to a standard [[Binary Search Tree (BSTs)|BST]] lookup. The engine traverses down tree branches by comparing target values against active node keys.
+- **Time Complexity:** Guaranteed $O(\log n)$ since tree height is strictly controlled.
+
+## `Insert(element)`
+1.  **BST Phase:** Trace downward to find the target leaf slot and insert the element.
+2.  **Update Phase:** Walk back up toward the root starting from the new leaf node.
+3.  **Balance Phase:** Recalculate balance factors at each ancestor node. If any ancestor registers $\text{BF} = \pm 2$, execute the appropriate single or double rotation.
+
+- **Time Complexity:** $O(\log n)$ to search downward plus $O(\log n)$ for the upward rebalancing path.
 
 ![[Pasted image 20260116111623.png]]
 
-> [!Example]- More Complex Insert
-> Below is a more complex example in which we insert 20 into the following **AVL Tree**:
-> 
-> ![[Pasted image 20260116115439.png]]
-> 
-> Following the traditional **[[Binary Search Tree (BSTs)]]** insertion algorithm, we would get the following tree (note that we have updated balance factors as well):
-> 
-> ![[Pasted image 20260116115455.png]]
-> 
->As you can see, the root node is now out of balance, and as a result, we need to fix its balance using an AVL rotation. Specifically, we need to rotate left at the root, meaning 10 will become the new root, 7 will become the right child of 5, and 5 will become the left child of 10:
-> 
-> ![[Pasted image 20260116115506.png]]
-### `remove(element)`
-- **BST Phase:** Perform standard BST removal (handling the 0, 1, or 2-child cases).
-- **Update Phase:** Start at the parent of the physically removed node and traverse **upwards** to the root.
-- **Balance Phase:** Check balance factors at every level. Unlike insertion (where one rotation fix is often enough), removal may require multiple rotations along the path to the root.
-- **Complexity:** $O(\log n)$ for both the search and the potential multi-step rebalancing pass.
+### Complex Insertion Walkthrough
+Consider inserting item $20$ into the following initial state:
+
+![[Pasted image 20260116115439.png]]
+
+A basic insertion drops the new leaf to the right margin, breaking balance codes up the chain:
+
+![[Pasted image 20260116115455.png]]
+
+The engine immediately runs a left rotation centered at the root. Node $10$ assumes the root position, node $7$ is re-assigned to the right child slot of node $5$, and node $5$ shifts into the left child coordinate of node $10$:
+
+![[Pasted image 20260116115506.png]]
+
+## `Remove(element)`
+1.  **BST Phase:** Execute standard BST node removal rules (managing the 0, 1, or 2-child structural configurations).
+2.  **Update Phase:** Start at the parent coordinate of the physically removed item and trace upward to the root.
+3.  **Balance Phase:** Check balance factors at every level. Unlike insertion (where a single rotation fix is guaranteed to restore balance across the entire tree), removal mutations can alter heights globally, occasionally requiring multiple independent rotations along the path to the root.
+
+- **Time Complexity:** $O(\log n)$ search cost plus an $O(\log n)$ multi-step balancing sweep.
 
 ![[Pasted image 20260116111630.png]]
 
 ---
-## 5. Performance Comparison
 
-| **Feature**            | **Standard BST** | **AVL Tree**          |
-| ---------------------- | ---------------- | --------------------- |
-| **Average Search**     | $O(\log n)$      | $O(\log n)$           |
-| **Worst Search**       | $O(n)$           | **$O(\log n)$**       |
-| **Balancing Strategy** | None             | Height-based (Strict) |
-| **Passes per Update**  | 1 (Down)         | 2 (Down and Up)       |
+# Balanced Structural Performance Matrix
 
-> [!NOTE]
-> 
-> While AVL trees provide the best lookup times due to their strict balance, they require **two** passes (one down to *find/insert*, one up to *rebalance*). The [[Red-Black Tree]] is often preferred in high-performance libraries because it can rebalance in a **single pass**.
+| Evaluation Metric | Standard Binary Search Tree | AVL Self-Balancing Tree |
+|---|---|---|
+| **Average Search Time** | $O(\log n)$ | $O(\log n)$ |
+| **Worst-Case Search Time** | $O(n)$ (Degrades into a linear list) | $O(\log n)$ (Strictly enforced) |
+| **Balancing Strategy** | None | Height-based balance factors ($\pm 1$) |
+| **Operational Passes** | 1 Pass (Downward trajectory only) | 2 Passes (Downward mutation + Upward repair) |
+
+> [!note] Architectural Design Trade-off
+> While AVL trees offer excellent lookup speeds due to their strict balance property, they require a two-pass update cycle (down to mutate, then back up to balance). In heavy write-dominated production libraries, developers often select **Red-Black Trees**, which compromise on strict height balancing to complete structural repairs in a single pass.
+
+---
+
+# Related Notes
+
+- [[Lexicon/Binary Search Tree Implementation|Binary Search Tree Implementation]]
+- [[Binary Search Tree (BSTs)]]
+- [[Introductory Data Structures/Priority Queue|Priority Queue]]

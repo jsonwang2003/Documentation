@@ -1,79 +1,91 @@
 ---
-tags:
+description: "A linear restricted ADT enforcing the strict Last In, First Out (LIFO) operational protocol."
+aliases:
   - Stack
+  - Stack ADT
+  - LIFO Container
+tags:
+  - data-structures
+  - adt
+  - stack
 ---
-> [!INFO] Definition 
-> An [[Abstract Data Types (ADT)]] where the element that is the **last** to go in is the **first** to be removed. This is known as the **Last In, First Out (LIFO)** principle—similar to a physical stack of dishes.
+> [!abstract] Abstract 
+> A Stack is an [[Introductory Data Structures/Abstract Data Types (ADT)|Abstract Data Type]] that enforces the Last In, First Out ($\text{LIFO}$) operational protocol. Elements are added and extracted strictly from a single boundary margin called the **top**.
+> 
+> - **Category:** Boundary Restricted ADT
+> - **Core Rule:** The most recently added element is always the first one removed.
+> - **Common Backing Implementations:** [[Introductory Data Structures/Array Lists|Array Lists]], [[Introductory Data Structures/Linked List|Singly-Linked Lists]], or [[Introductory Data Structures/Deques|Deques]].
 
-### Operations
+---
 
-The Stack ADT is defined by three primary operations:
+# Core Functional Interface
 
-|Operation|Description|
+A compliant Stack interface exposes three primary operations:
+
+| Operation | Detailed Functional Execution |
 |---|---|
-|**`push(element)`**|Adds an element to the **top** of the Stack.|
-|**`top()`**|Returns the value of the element at the **top** without removing it.|
-|**`pop()`**|Removes the element at the **top** of the Stack.|
+| `push(element)` | Places a new element onto the top boundary of the Stack. |
+| `pop()` | Extracts and removes the top-most element from the Stack. |
+| `peek()` / `top()` | Evaluates and returns the top-most element without removing it. |
 
 ---
-### Implementation via Deque
 
-Just like the [[Queue]], a [[Deques]] serves as a perfect backing structure for a Stack. By restricting access to only **one end** of the Deque, we can implement all Stack features trivially.
+# Implementation Frameworks
 
-#### C++ Implementation
+A Stack interface can be efficiently implemented using several concrete backing data structures:
 
-```cpp
-class Stack {
-    private:
-        Deque deque; // Backed by a Doubly-Linked List or Circular Array
-    public:
-        bool push(Data element) { return deque.addBack(element); }
-        Data top() { return deque.peekBack(); }
-        void pop() { deque.removeBack(); }
-        int size() { return deque.size(); }
-};
+### 1. Array List Backbone
+*   **`push(element)`:** Appends to the trailing array index in amortized $O(1)$ time.
+*   **`pop()`:** Decrements size and removes the trailing element in $O(1)$ time without requiring data shifting.
+*   **`peek()`:** Accesses the trailing index directly in $O(1)$ constant time.
+
+### 2. Singly-Linked List Backbone
+*   **`push(element)`:** Prepends a new node at the `head` in $O(1)$ time.
+*   **`pop()`:** Advances the `head` pointer to `head.next` in $O(1)$ time.
+*   **`peek()`:** Inspects `head.data` in $O(1)$ constant time.
+
+---
+
+# Operational Complexity Analysis
+
+$$\begin{array}{ccc} \mathbf{Operation} & \mathbf{Array\ List\ Backbone} & \mathbf{Singly\text{-}Linked\ List\ Backbone} \\  \hline  \text{push(element)} & \text{Amortized } O(1) & O(1) \\ \text{pop()} & O(1) & O(1) \\ \text{peek() / top()} & O(1) & O(1)  \end{array}$$
+
+```pseudo
+	\begin{algorithm}
+	\caption{Stack Interface Operations (Linked List Implementation)}
+	\begin{algorithmic}
+		\Procedure{Push}{$element, top$}
+			\State $newNode \gets \text{Allocate new node with } data = element$
+			\State $newNode.next \gets top$
+			\State $top \gets newNode$
+		\EndProcedure
+
+		\Procedure{Pop}{$top$}
+			\If{$top == \text{NULL}$}
+				\Return $\text{Underflow Error}$
+			\EndIf
+			\State $poppedData \gets top.data$
+			\State $top \gets top.next$
+			\Return $poppedData$
+		\EndProcedure
+	\end{algorithmic}
+	\end{algorithm}
 ```
 
-#### Python Implementation
+---
 
-```python
-class Stack:
-    def __init__(self):
-        self.deque = Deque()
-    def push(self, element):
-        return self.deque.addBack(element)
-    def top(self):
-        return self.deque.peekBack()
-    def pop(self):
-        self.deque.removeBack()
-    def __len__(self):
-        return len(self.deque)
-```
+# Core Architectural Applications
 
-> [!WARNING] Implementation Detail 
-> Note that `pop()` here is `void` (it only removes). While languages like Java combine removal and return into one step, C++ keeps them separate for architectural clarity.
+*   **Function Call Stack & Recursion:** Manages activation records, local variables, and return addresses during nested function calls in programming language runtimes.
+*   **Expression Parsing & Evaluation:** Evaluates mathematical expressions and converts infix notation to postfix using algorithms like Dijkstra's Shunting-Yard.
+*   **Backtracking Algorithms:** Powers Depth-First Search (DFS) graph exploration routines and maze-solving algorithms.
+*   **Undo/Redo History:** Stores historical state snapshots in text editors and browser navigation buffers.
 
 ---
-### Visualization: The LIFO Process
 
-![[Pasted image 20260104135638.png]]
+# Related Notes
 
-In the example above:
-1. **Push**: Elements are added to the top (A, then B, then C).
-2. **State**: The Stack is currently [A,B,C], where C is at the top.
-3. **Pop**: The operation removes C first, even though A was there the longest.
-4. **Result**: The new top of the Stack becomes B.
-
----
-### Analysis & Patterns
-
-**STOP and Think:** Could we have used `addFront()`, `peekFront()`, and `removeFront()` instead?
-- **Yes.** For a Stack, it does not matter which end of the backing structure we use, as long as **both insertion and removal happen at the same end**. This maintains the LIFO property.
-
----
-### Applications
-The Stack is a foundational tool for managing nested or recursive logic:
-- **Expression Evaluation**: Keeping track of parentheses and operations in complex math (1+(2∗(3+4))).
-- **Memory Management**: The "Function Call Stack" in programming languages tracks active subroutines.
-- **Graph Exploration**: Powering the **Depth-First Search (DFS)** algorithm.
-- **Undo Mechanisms**: Storing a history of actions where the most recent action is the first to be undone.
+- [[Introductory Data Structures/Queues|Queues]]
+- [[Introductory Data Structures/Deques|Deques]]
+- [[Introductory Data Structures/Array Lists|Array Lists]]
+- [[Introductory Data Structures/Linked List|Linked List]]

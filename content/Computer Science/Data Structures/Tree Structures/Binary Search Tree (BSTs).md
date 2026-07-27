@@ -1,332 +1,312 @@
-> [!ABSTRACT]
+---
+description: "A rooted hierarchical tree tracking ordered elements where left branches store smaller values and right branches store larger values."
+aliases:
+  - Binary Search Tree
+  - BST
+  - Standard Search Tree
+tags:
+  - data-structures
+  - trees
+  - bst
+---
+> [!abstract] Abstract 
+> While a [[Tree Structures/Heap|Heap]] data structure provides $O(1)$ constant-time access to its highest-priority element, it is highly inefficient for discovering arbitrary values. A Binary Search Tree (BST) solves this retrieval limitation by maintaining a structurally sorted branch topology that allows for high-speed value location operations.
 > 
-> While a [[Heap]] provides $O(1)$ access to the highest-priority element, it is inefficient for finding arbitrary values. A Binary Search Tree solves this by **maintaining a sorted structure** that allows for fast searching, similar to [[Computer Science/Discrete Structures/Discrete Algorithms/Searching/Binary Search]] in an [[Array Lists#Array|Array]].
-
-## 1. Core Properties
-
-A BST is a rooted binary tree that must satisfy the **BST Property**:
-- For any given node, all nodes in its **left subtree** have smaller values.
-- All nodes in its **right subtree** have larger values.
-- This implies that the tree cannot contain duplicate elements.
-
-![[Pasted image 20260112163730.png]]
-
-![[Pasted image 20260112164144.png]]
+> - **Category:** Sorted Hierarchical Node Collection
+> - **Core Requirement:** Subtree keys must conform to strict left-to-right element ordering.
+> - **Search Complexity:** Bounded by tree height: $O(h)$ worst-case; average case scales to $O(\log n)$.
 
 ---
-## 2. Basic Operations
 
-BST operations are typically proportional to the **height ($h$)** of the tree.
+# Core Architectural Properties
 
-### `find(element)`
+A Binary Search Tree is a rooted [[Tree Structures/Binary Tree|Binary Tree]] structure that enforces the **BST Property** at every node boundary:
 
-Used to check if a specific value exists within the tree. It leverages the BST property to achieve $O(h)$ time complexity.
+*   **Left Subtree Rule:** For any given internal node, all elements residing within its left subtree must hold values strictly smaller than the node's own key.
+*   **Right Subtree Rule:** All elements residing within its right subtree must hold values strictly larger than the node's own key.
 
-```C++
-find(element): // returns True if element exists in BST, otherwise returns False
-    current = root                 // start at the root
-    while current != element:
-        if element < current:      // if element < current, traverse left
-            current = current.leftChild
-        else if element > current: // if element > current, traverse right
-            current = current.rightChild
-        if current == NULL:        // if we traversed and there was no such child, failure
-            return False
-    return True // we only reach here if current == element, which means we found element
 ```
+                  [ 50 ]
+                 /      \
+             [ 30 ]    [ 70 ]
+            /    \      /    \
+         [ 20 ] [40]  [60]  [80]
+```
+
+> [!important] Duplicate Constraints
+> The strict inequality definitions of the BST property imply that the tree architecture cannot natively capture duplicate elements within its node paths.
+
+| Balanced Symmetrical Layout | Skewed Degenerate Layout |
+|---|---|
+| ![[Pasted image 20260112163730.png]] | ![[Pasted image 20260112164144.png]] |
+
+---
+
+# Data Structure Operations
+
+The execution runtime of standard BST routines scales proportionally with the maximum height ($h$) of the tree block.
+
+## `Find(element)`
+Traces downward from the root, branching left if the target value is smaller than the current node key or right if it is larger.
+
+- **Time Complexity:** $O(h)$ operations.
 
 ![[Pasted image 20260112165727.png]]
 
-### `insert(element)`
-
-Adds a new node to the tree. It traverses the tree until it finds a `NULL` child where the element should logically reside.
-
-```C++
-insert(element): // inserts element into BST and returns True on success (or False on failure)
-    if no elements exist in the BST:       // empty tree, so element becomes the root
-        root = element
-        size = size + 1
-        return True
-    current = root                         // start at the root
-    while current != element:
-        if element < current:
-            if current.leftChild == NULL:  // if no left child exists, insert element as left child
-                current.leftChild = element
-                size = size + 1
-                return True
-            else:                          // if a left child does exist, traverse left
-                current = current.leftChild
-        else if element > current:
-            if current.rightChild == NULL: // if no right child exists, insert element as right child
-                current.rightChild = element
-                size = size + 1
-                return True
-            else:                          // if a right child does exist, traverse right
-                current = current.rightChild
-    return False // we only reach here if current == element, and we can't have duplicate elements
+```pseudo
+	\begin{algorithm}
+	\caption{BST Value Search}
+	\begin{algorithmic}
+		\Procedure{Find}{$element, root$}
+			\State $current \gets root$
+			\While{$current \neq \text{NULL} $\and$ current.\text{data} \neq element$}
+				\If{$element < current.\text{data}$}
+					\State $current \gets current.\text{leftChild}$
+				\Else
+					\State $current \gets current.\text{rightChild}$
+				\EndIf
+			\EndWhile
+			\Return $current \neq \text{NULL}$
+		\EndProcedure
+	\end{algorithmic}
+	\end{algorithm}
 ```
+
+## `Insert(element)`
+Traverses down branching pathways to discover an available `NULL` child reference slot where the incoming element logically fits, appending it as a new leaf node.
+
+- **Time Complexity:** $O(h)$ operations.
 
 ![[Pasted image 20260112170815.png]]
 
-### `clear()`
-
-Resets the tree by removing the reference to the root and resetting the counter.
-
-```C++
-clear(): // clears BST
-    root = NULL
-    size = 0
+```pseudo
+	\begin{algorithm}
+	\caption{BST Leaf Insertion}
+	\begin{algorithmic}
+		\Procedure{Insert}{$element, root, size$}
+			\If{$root == \text{NULL}$}
+				\State $root \gets \text{CreateNode}(element)$
+				\State $size \gets size + 1$
+				\Return $\text{true}$
+			\EndIf
+			\State $current \gets root$
+			\While{$current.\text{data} \neq element$}
+				\If{$element < current.\text{data}$}
+					\If{$current.\text{leftChild} == \text{NULL}$}
+						\State $current.\text{leftChild} \gets \text{CreateNode}(element)$
+						\State $size \gets size + 1$
+						\Return $\text{true}$
+					\Else
+						\State $current \gets current.\text{leftChild}$
+					\EndIf
+				\Else
+					\If{$current.\text{rightChild} == \text{NULL}$}
+						\State $current.\text{rightChild} \gets \text{CreateNode}(element)$
+						\State $size \gets size + 1$
+						\Return $\text{true}$
+					\Else
+						\State $current \gets current.\text{rightChild}$
+					\EndIf
+				\EndIf
+			\EndWhile
+			\Return $\text{false}$
+		\EndProcedure
+	\end{algorithmic}
+	\end{algorithm}
 ```
 
-### `size()`
-
-Returns the total number of nodes currently stored in the BST.
-
-```cpp
-size(): // returns the number of elements in BST
-    return size
-```
-
-### `empty()`
-
-A boolean check to see if the tree contains any data.
-
-```cpp
-empty(): // returns True if BST is empty, otherwise returns False
-    if size == 0:
-        return True
-    else:
-        return False
-```
+## Administrative Interface Metrics
+*   **`clear()`:** Resets the collection by severing the root pointer reference and resetting tracking allocations:
+    $$\text{root} = \text{NULL}, \quad \text{size} = 0$$
+*   **`size()`:** Returns the total active node count.
+*   **`empty()`:** Evaluates true if `size == 0`.
 
 ---
-## 3. Successor and Removal Logic
 
-### Finding the Successor
-The **successor** of a node $u$ is the next largest node in the BST.
-- **Case 1 (Right child exists)**: The successor is the **left-most** node of $u$'s right subtree.
+# Successor and Removal Structural Logic
 
-![[Pasted image 20260112162419.png]]
+## Finding the In-Order Successor
+The in-order successor of a node $u$ represents the node holding the next largest key value across the entire tree sequence.
 
-- **Case 2 (No right child)**: Traverse up until you find a node that is the **left child** of its parent. That parent is the successor.
+*   **Case 1 (Right Subtree Exists):** The successor is located at the absolute left-most node coordinate of $u$'s right subtree branch.
+    ![[Pasted image 20260112162419.png]]
+*   **Case 2 (No Right Subtree):** Trace upward toward the root until encountering an ancestor node that acts as the left child of its parent. That specific parent node is the successor.
+    ![[Pasted image 20260112162426.png]]
 
-![[Pasted image 20260112162426.png]]
-
-```cpp
-successor(u): // returns u's successor, or NULL if u does not have a successor
-    if u.rightChild != NULL:             // Case 1: u has a right child
-        current = u.rightChild
-        while current.leftChild != NULL: // find the smallest node in u's right subtree
-            current = current.leftChild
-        return current
-    else:                                // Case 2: u does not have a right child
-        current = u
-        while current.parent != NULL:    // traverse up until current node is its parent's left child
-            if current == current.parent.leftChild:
-                return current.parent
-            else:
-                current = current.parent
-        return NULL // we have reached the root and didn't find a successor, so no successor exists
+```pseudo
+	\begin{algorithm}
+	\caption{In-Order Successor Resolution}
+	\begin{algorithmic}
+		\Procedure{Successor}{$u$}
+			\If{$u.\text{rightChild} \neq \text{NULL}$}
+				\State $current \gets u.\text{rightChild}$
+				\While{$current.\text{leftChild} \neq \text{NULL}$}
+					\State $current \gets current.\text{leftChild}$
+				\EndWhile
+				\Return $current$
+			\Else
+				\State $current \gets u$
+				\While{$current.\text{parent} \neq \text{NULL}$}
+					\If{$current == current.\text{parent}.\text{leftChild}$}
+						\Return $current.\text{parent}$
+					\EndIf
+					\State $current \gets current.\text{parent}$
+				\EndWhile
+				\Return $\text{NULL}$
+			\EndIf
+		\EndProcedure
+	\end{algorithmic}
+	\end{algorithm}
 ```
-#### Examples
 
 ![[Pasted image 20260112171711.png]]
 
-### Removal Cases
-1. **Zero Children (Leaf)**: Simply delete the node.
+## Removal Cases
+Erasing a node requires structural reorganization depending on child density:
 
-![[Pasted image 20260112172805.png]]
+1.  **Zero Children (Leaf Node Removal):** Simply delete the node and set the parent's matching child pointer reference to `NULL`.
+    ![[Pasted image 20260112172805.png]]
+2.  **One Child Leaf Node Promotion:** Splice the isolated node out by mapping its parent's child reference directly to the node's single child.
+    ![[Pasted image 20260112172832.png]]
+3.  **Two Children Substitution:** Locate the node's in-order successor. Overwrite the target node's value with the successor's key, then execute a sub-removal routine to drop the successor node (which is mathematically guaranteed to possess at most one child).
+    ![[Pasted image 20260112172843.png]]
 
-2. **One Child**: Connect the node's parent directly to its child.
-
-![[Pasted image 20260112172832.png]]
-
-3. **Two Children**: Find the node's **successor**, replace the node's value with the successor's value, and then delete the successor (which is guaranteed to have at most one child).
-
-![[Pasted image 20260112172843.png]]
-
-```cpp
-remove(element): // removes element if it exists in BST (returns True), or returns False otherwise
-    current = root                 // start at the root
-    while current != element:
-        if element < current:      // if element < current, traverse left
-            current = current.leftChild
-        else if element > current: // if element > current, traverse right
-            current = current.rightChild
-        if current == NULL:        // if we traversed and there was no such child, failure
-            return False
-    // we only reach here if current == element, which means we found element
-    if current.leftChild == NULL and current.rightChild == NULL:     // Case 1 (no children)
-        remove the edge from current.parent to current
-    else if current.leftChild == NULL or current.rightChild == NULL: // Case 2 (one child)
-        have current.parent point to current’s child instead of to current
-    else:                                                            // Case 3 (two children)
-        s = current’s successor
-        if s is its parent's left child:
-            s.parent.leftChild = s.rightChild  // s.rightChild will either be NULL or a node
-        else:
-            s.parent.rightChild = s.rightChild // s.rightChild will either be NULL or a node
-        replace current's value with s's value
+```pseudo
+	\begin{algorithm}
+	\caption{BST Node Removal}
+	\begin{algorithmic}
+		\Procedure{Remove}{$element, root$}
+			\State $current \gets \text{LocateNode}(element, root)$
+			\If{$current == \text{NULL}$}
+				\Return $\text{false}$
+			\EndIf
+			\If{$current.\text{leftChild} == \text{NULL} $\and$ current.\text{rightChild} == \text{NULL}$}
+				\State \Call{DisconnectFromParent}{current}
+			\ElseIf{$current.\text{leftChild} == \text{NULL} $\or$ current.\text{rightChild} == \text{NULL}$}
+				\State \Call{BypassNodeWithChild}{current}
+			\Else
+				\State $s \gets$ \Call{Successor}{current}
+				\State $savedVal \gets s.\text{data}$
+				\State \Call{Remove}{$s.\text{data}, root$}
+				\State $current.\text{data} \gets savedVal$
+			\EndIf
+			\Return $\text{true}$
+		\EndProcedure
+	\end{algorithmic}
+	\end{algorithm}
 ```
 
 ---
-## 4. Traversals
-An **In-Order Traversal** visits nodes in the sequence: **Left $\to$ Current $\to$ Right**.
-- **Result**: This always visits nodes in **sorted order**.
-- **Algorithm**: Start at the left-most element and repeatedly call the `successor()` function.
 
-```cpp
-inOrder(): // perform an in-order traversal over the elements of BST using successor()
-    current = the left-most element of BST
-    while current != NULL:
-        output current
-        current = successor(current)
+# Sequence Traversals
+
+An **In-Order Traversal** walks the tree layout following the structural sequence: **Left Subtree $\to$ Current Node $\to$ Right Subtree**. This specific traversal is guaranteed to encounter items in perfectly sorted ascending sequence.
+
+```pseudo
+	\begin{algorithm}
+	\caption{In-Order Successor Traversal Walk}
+	\begin{algorithmic}
+		\Procedure{InOrderTraversal}{$root$}
+			\State $current \gets root$
+			\While{$current.\text{leftChild} \neq \text{NULL}$}
+				\State $current \gets current.\text{leftChild}$
+			\EndWhile
+			\While{$current \neq \text{NULL}$}
+				\State \Call{Output}{$current.\text{data}$}
+				\State $current \gets$ \Call{Successor}{$current$}
+			\EndWhile
+		\EndProcedure
+	\end{algorithmic}
+	\end{algorithm}
 ```
 
 ---
-## 5. Performance and Balance
 
-The efficiency of a BST is entirely dependent on its **Shape**, which is determined by the order in which elements are inserted.
-### Tree Height ($h$)
-The number of edges from the root to the deepest leaf.
-- **Empty Tree**: $h = -1$
-- **Single Node**: $h = 0$
-- **Worst Case**: $h = n - 1$ (where $n$ is the number of nodes).
+# Sizing Performance and Tree Shapes
 
-### Detailed Balance Comparison
+The operational utility of a standard BST relies entirely on its physical geometric shape, which is dictated by the chronological sequence of item insertions.
 
-| **Feature**      | **Perfectly Balanced**                           | **Self-Balancing (AVL/RB)**                            | **Degenerate (Unbalanced)**                |
-| ---------------- | ------------------------------------------------ | ------------------------------------------------------ | ------------------------------------------ |
-| **Visual Shape** | Full, symmetrical triangle.                      | Mostly full; slight height differences allowed.        | A straight line (resembles a Linked List). |
-| **Logic**        | Every level is filled before starting a new one. | Stricter rules ($BF \leq 1$) keep height near-optimal. | Nodes are added only to one side.          |
-| **Height**       | $\approx \log_2(n)$                              | $O(\log n)$                                            | $O(n)$                                     |
-| **Search Time**  | **$O(\log n)$** (Fastest)                        | **$O(\log n)$** (Guaranteed)                           | **$O(n)$** (Slowest)                       |
-| **In-Practice**  | Rare/Hard to maintain.                           | **The Industry Standard.**                             | Happens with sorted data.                  |
+*   **Tree Height Configuration ($h$):** Measured as the count of structural edge jumps separating the root from the deepest leaf node. An empty tree sets $h = -1$; a single isolated node sits at $h = 0$; a worst-case unbalance peaks at $h = n - 1$.
+
 ![[Pasted image 20260125192110.png]]
 
-### The Three "States" of a BST
+### The Core Tree Balance Configurations
 
-#### 1. The Ideal: Perfectly Balanced
-A tree where all leaves are at the same depth or differ by at most one level, and every internal node has exactly two children. While this provides the absolute minimum $h$, it is computationally expensive to keep a tree "perfect" after every insertion or deletion.
-#### 2. The Standard: Height-Balanced
-This is what we usually mean when we say a "Balanced Tree." Data structures like **AVL Trees** or **Red-Black Trees** don't have to be perfect; they just need to ensure the height remains logarithmic.
-- **AVL Rule**: The heights of the left and right subtrees of any node differ by at most **1**.
-- **Performance**: You get $O(\log n)$ speed without the massive overhead of keeping the tree "perfect."
-#### 3. The Failure: Degenerate (Skewed)
-This happens when the BST property is technically satisfied, but the structure fails. If the tree only grows in one direction, you lose the "branching" power of the tree.
+| Feature Parameter | Perfectly Balanced Shape | Self-Balancing ([[Tree Structures/AVL Tree\|AVL]] / Red-Black) | Degenerate (Skewed Chain) |
+|---|---|---|---|
+| **Structural Layout** | Full symmetrical triangle topology | Mostly full; bounded height variances | A straight linear line arrangement |
+| **Operational Logic** | Levels fill completely before jumping down | Height constraints are dynamically managed | Elements land on one side exclusively |
+| **Height Bound** | $h \approx \log_2 n$ | $h = O(\log n)$ | $h = n - 1$ |
+| **Search Time** | $O(\log n)$ | $O(\log n)$ guaranteed worst-case | $O(n)$ linear scan bottleneck |
+| **Production Context** | Complex/Costly to enforce perfectly | Industry standard default models | Triggered by sorting data streams |
 
-> [!DANGER] The Insertion Order Trap
-> 
-> If you insert elements into a standard BST in **sorted order** (e.g., 1, 2, 3, 4, 5) or **reverse sorted order**, the tree will become perfectly unbalanced.
-> 
-> - **Result**: Your "Search Tree" is now a **Linked List**.
->     
-> - **Fix**: This is why we use **AVL** or **Red-Black Trees**, which use "rotations" to force the tree back into a balanced shape regardless of insertion order.
+> [!warning] The Sorted Insertion Trap
+> Introducing sorted array streams (such as `[1, 2, 3, 4, 5]`) directly into a naive BST causes the structure to grow exclusively in one direction. This turns your search tree into an expensive, linear linked list layout. Production systems avoid this issue by implementing self-balancing tree architectures like [[Tree Structures/AVL Tree|AVL Trees]] to force geometric balance via structural rotations.
 
 ---
-## 6. Average-Case Performance Analysis
-While the worst-case height of a BST is $O(n)$, the average case is significantly more efficient. Under specific conditions, the expected time complexity for a successful `find` operation is **$O(\log n)$**.
-### 6.1 The Assumptions
-To formally prove the average-case complexity, we make two key assumptions:
-1. **Uniform Search Probability**: All $n$ elements in the tree are **equally** likely to be the target of a search.
-2. **Uniform Insertion Probability**: All $n!$ **possible insertion orders** (permutations) of the elements are equally likely.
-### 6.2 Defining Expected Depth
-We define the **depth of node $i$ ($d_i$)** as the *number of nodes* along the path from the *root* to *node $i$*.
-- The root has a depth of $1$.
-- "Average-case time complexity" is equivalent to computing the **expected depth** of a node in a BST with $n$ nodes.
 
-![[Pasted image 20260112184908.png]]
+# Average-Case Performance Analysis
 
-> [!info] Recall
-> From statistics, the expected value of a discrete random variable $X$ is 
-> 
-> $$
-> \sum_{i=1}^n p_i X_i
-> $$
-> 
-> where $p_i$ is the probability that outcome $X_i$ occurs
-> 
-> For more information, visit [[Expected Value]]
+While a naive insertion path can degrade to a worst-case $O(n)$ footprint, its average-case behavior across random distributions matches a highly efficient $O(\log n)$ curve.
 
-For a specific BST $j$, the expected depth $E_j(d)$ is:
+### 1. Underlying Statistical Assumptions
+To prove average-case performance bounds, we establish two constraints:
+1.  **Uniform Search Distribution:** Every element tracking inside the tree has an equal likelihood of being selected during a lookup query.
+2.  **Uniform Insertion Sequence:** All $n!$ possible insertion permutations of the target set have an equal probability of occurring.
 
-$$
-E_j(d) = \frac{1}{n} \sum_{i=1}^{n} d_{ji} = \frac{1}{n} D_j(n)
-$$
+### 2. Defining Expected Node Depth
+We define the depth of node $i$ ($d_i$) as the count of node blocks on the path tracking from the root to node $i$. The root sits at depth 1. The expected total depth across a given tree structure $j$ resolves to:
 
-where $D_j(n)$ = Total Depth of tree $j$. 
+$$E_j(d) = \frac{1}{n}\sum_{i=1}^{n}d_{ji} = \frac{1}{n}D_j(n)$$
 
-To find the average across all trees, we solve for $D(n)$, the expected total depth among all possible BSTs.
+where $D_j(n)$ represents the combined aggregate depth of tree configuration $j$.
 
-### 6.3 Calculating Expected Total Depth
-Let $D(n)$ denote the **expected total depth** among *ALL* BSTs with $n$ nodes. 
-
-We can find each BST $j$ as the result of insertion order $j$ since a BST can be defined by the order in which we inserted its elements
-- **First Insertion**: insert any of our first $n$ elements
-- **Second Insertion**: insert any of the $n-1$ remaining elements
-
-If we continue this pattern, there are $n \cdot (n-1) \cdot (n-2) \cdot \dots = n!$ possible insertion orders. 
-
-According to our [[#6.1 The Assumptions|second assumption]], all insertion orders are equally likely. Therefore we could rewrite $D(n)$ to be:
-
-$$
-D(n) = \frac{1}{n!} \sum_{j = 1}^{n!} D_j(n)
-$$
-
-> [!Failure] This approach is far too inefficient
-### 6.4 The Recurrence Relation
-
-Instead of brute-forcing all $n!$ trees, we use a recurrence relation based on the root's position. If the root is the $(i+1)^{th}$ smallest element, there are $i$ nodes in the **left subtree** and $n-i-1$ nodes in the **right subtree**.
+### 3. The Structural Recurrence Model
+Instead of evaluating all $n!$ layout shapes individually, we construct a structural recurrence relation modeled on the root element placement. If the root occupies the $(i+1)$-th smallest sorted coordinate position, then exactly $i$ nodes settle inside the left subtree branch, leaving $(n - i - 1)$ nodes in the right subtree branch.
 
 ![[Pasted image 20260112190251.png]]
 
-The expected total depth given $i$ nodes in the left subtree is:
+The expected aggregate depth calculation given a subtree density split of $i$ items maps to:
 
-$$
-D(n|i) = D(i) + D(n-i-1) + n
-$$
+$$D(n \mid i) = D(i) + D(n - i - 1) + n$$
 
-(The $+n$ accounts for the fact that every node in the subtrees is now one level deeper due to the new root ancestor).
+*(The $+n$ factor accounts for the structural constraint that appending a root node shifts every nested subtree node exactly one level deeper).*
 
-> [!Note]
-> $i$ can be 
-> - at minimum $0$ → there is a possibility that there is no left/right subtree
-> - at maximum $n-1$ → there is a possibility that all nodes (aside from the root) is in left/right subtree
+Since each element has an equal probability of being selected as the first item inserted (assuming the root position), the probability of choosing any subtree configuration $i$ tracks to $\frac{1}{n}$. This gives us the following recurrence relation:
 
-Since every element is equally likely to be the first one inserted (the root), the probability of any specific $i$ is $1/n$. This gives us:
+$$D(n) = \frac{2}{n}\sum_{i=0}^{n-1}D(i) + n$$
 
-$$
-D(n) = \frac{2}{n} \sum_{i=0}^{n-1} D(i) + n
-$$
-### 6.5 Mathematical Solution
+### 4. Mathematical Solution Proof
+Multiplying the recurrence layout expression by $n$ yields:
 
-By manipulating the recurrence (multiplying by $n$, substituting $n-1$, and subtracting the equations), we arrive at a telescoping form:
+$$n D(n) = 2\sum_{i=0}^{n-1}D(i) + n^2 \quad \text{--- (Equation 1)}$$
 
-$$
-n D(n) = (n+1) D(n-1) + 2n - 1
-$$
+Substituting the parameter size boundary to $(n-1)$ produces:
 
-Solving this results in the closed-form solution:
+$$(n-1) D(n-1) = 2\sum_{i=0}^{n-2}D(i) + (n-1)^2 \quad \text{--- (Equation 2)}$$
 
-$$
-D(n) = 2(n+1) \sum_{i=1}^{n} \frac{1}{i} - 3n
-$$
-#### Final Approximation
+Subtracting Equation 2 from Equation 1 simplifies the summation chain down to a telescoping form:
 
-Using the harmonic series approximation ($\sum_{i=1}^{n} \frac{1}{i} \approx \ln n$), the average-case number of comparisons for a successful find is:
+$$n D(n) - (n-1) D(n-1) = 2 D(n-1) + n^2 - (n-1)^2$$
 
-$$
-\frac{D(n)}{n} \approx 2 \ln n \approx 1.386 \log_2 n
-$$
+$$n D(n) = (n+1) D(n-1) + 2n - 1$$
 
-Since $1.386$ is a constant, we have formally proven that the average-case complexity is **$O(\log n)$**.
+Solving this relation yields the exact closed-form depth solution for the structure:
 
-### 6.6 Limitations and Self-Balancing Trees
+$$D(n) = 2(n+1)\sum_{i=1}^{n}\frac{1}{i} - 3n$$
 
-In practice, real-life data often violates the assumption of random insertion order. For example, inserting pre-sorted data leads to a "degenerate" tree (essentially a Linked List).
+### 5. Final Harmonic Approximation
+Applying the standard harmonic series expansion approximation ($\sum_{i=1}^{n}\frac{1}{i} \approx \ln n$), the expected average count of character comparisons for a lookup query matches:
 
-To guarantee $O(\log n)$ performance regardless of insertion order, we use **Self-Balancing Trees**:
+$$\frac{D(n)}{n} \approx 2\ln n \approx 1.386 \log_2 n$$
 
-- **[[Randomized Search Trees (Treap, RST)]]**: Uses random priorities to simulate random insertion order.
-- **[[AVL Tree]]**: Uses height-based rotations to maintain balance.
-- **[[Red-Black Tree]]**: Uses color-coding rules to ensure the tree remains roughly balanced.
+Because the multiplier $1.386$ is a fixed constant coefficient, this proves that the average-case runtime complexity for a standard binary search tree is strictly bounded at $O(\log n)$.
+
+---
+
+# Related Notes
+
+- [[Tree Structures/AVL Tree|AVL Tree]]
+- [[Lexicon/Binary Search Tree Implementation|Binary Search Tree Implementation]]
+- [[Introductory Data Structures/Priority Queue|Priority Queue]]
+- [[Tree Structures/Binary Tree|Binary Tree]]

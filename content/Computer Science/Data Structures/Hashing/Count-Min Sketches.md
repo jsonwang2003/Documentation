@@ -1,77 +1,115 @@
-> [!ABSTRACT]
+---
+description: "A space-efficient probabilistic frequency table structure mapping data streams onto a fixed-size 2D matrix to track item frequencies under bounded error limits."
+aliases:
+  - Count-Min Sketch
+  - CM Sketch
+  - Probabilistic Frequency Table
+tags:
+  - data-structures
+  - hashing
+  - streaming-algorithms
+  - probabilistic
+---
+> [!abstract] Abstract 
+> A Count-Min Sketch is a space-efficient, probabilistic data structure that functions like a frequency table. While a Hash Map stores every individual key-value pair, the Count-Min Sketch uses a fixed-size 2D array to provide an over-estimate of an element's frequency. It functions as a frequency-tracking extension of a Bloom Filter, trading exact precision for massive memory savings in high-volume, massive-scale data streams.
 > 
-> A **Count-Min Sketch** is a space-efficient, probabilistic data structure that functions like a frequency table. While a [[Hash Tables|Hash Map]] stores every key-value pair, the Count-Min Sketch uses a fixed-size 2D array to provide an **over-estimate** of an element's frequency. It is the "big brother" of the [[Bloom Filters|Bloom Filter]], trading exact counts for massive memory savings in high-volume data streams.
+> - **Category:** Probabilistic Frequency Structure
+> - **Stores:** Bounded frequency approximations using cell counting arrays.
+> - **Built on top of:** A 2D matrix layout paired with a bank of independent hash functions.
+> - **Typical use cases:** Heavy-hitter stream identification, network packet frequency tracking, high-volume media view count estimation layers.
 
 ---
-## 1. The Memory Wall: Netflix Scale
 
-Imagine tracking the view counts of every episode on Netflix over 48 hours.
-- **The Hash Map Problem:** Storing millions of unique episode IDs as keys and their 64-bit integer counts as values would consume gigabytes of RAM. As the lead engineer, your system would crash under the weight of this metadata.
-- **The Solution:** Instead of storing the keys themselves, we use a **Count-Min Sketch**. It allows us to track frequencies using a constant amount of memory, regardless of how many unique episodes exist.
+# Core Structure
 
----
-## 2. Structure and Mechanism
-
-A Count-Min Sketch consists of a 2D array (matrix) with:
-- **$k$ rows:** Each row corresponds to a unique hash function.
-- **$m$ columns:** The range of each hash function.
+The structure discards the source data keys entirely to save memory space. It maintains a 2D matrix holding numerical counters with $k$ independent horizontal rows and $m$ vertical columns. Each row is assigned its own independent hash function.
 
 ![[Pasted image 20260202102456.png]]
-### Incrementing a Count
 
-To record an event (e.g., a user watches an episode of _Friends_):
-
-1. Pass the episode ID through each of the $k$ hash functions.
-2. Each function $h_i$ gives you a column index for its specific row.
-3. **Increment** the counter in each of those $k$ cells.
-### Estimating a Count (The "Find" Operation)
-
-Because different keys might hash to the same cells (**collisions**), the values in the cells can be higher than the actual count of a specific key.
-
-1. Retrieve the values from the $k$ hashed positions.
-2. The **minimum** of these $k$ values is your estimate.
-
-> [!IMPORTANT] **Why the minimum?** 
-> Since collisions only ever **increase** the values in the cells, the smallest value among all $k$ rows is guaranteed to be the "cleanest" estimate. While this minimum can still be an over-estimate, the true count $c_x$ will **never** be greater than this value.
+> [!tip] Key Idea 
+> Because distinct keys can map to overlapping cell locations, hash collisions only ever increase or bloat the counters inside individual cells. Therefore, the **minimum value** across all $k$ hashed positions is guaranteed to be the cleanest, least-corrupted estimate. The true frequency will never exceed this returned minimum.
 
 ---
-## 3. Mathematical Design
 
-To minimize the error in our estimates, we design the dimensions of the sketch based on our tolerance for error ($\epsilon$) and our desired confidence level ($1-\delta$):
-- **Width (Columns $m$):** $m = \lceil \frac{e}{\epsilon} \rceil$. More columns reduce the chance of collisions in any single row.
-- **Depth (Rows $k$):** $k = \lceil \ln(\frac{1}{\delta}) \rceil$. More rows (hash functions) decrease the probability that every row will have a significant collision for a specific key.
+# Data Structure Operations
 
----
-## 4. Pseudocode
+## `Increment(x)`
+Passes the input through each row's hash function to resolve specific column coordinates, incrementing the counter at every targeted matrix cell by 1.
 
-### `increment(x)`
+- **Time Complexity:** $O(k)$ where $k$ matches the fixed row depth count.
 
-```C++
-increment(x):
-    for i from 0 to k-1:
-        column = hash_functions[i](x) % m
-        matrix[i][column] += 1
+```pseudo
+	\begin{algorithm}
+	\caption{Count-Min Sketch Counter Increment}
+	\begin{algorithmic}
+		\Procedure{Increment}{$x, \text{matrix}, k, m$}
+			\For{$i \gets 0 \text{ to } k - 1$}
+				\State $column \gets$ \Call{HashFunc}{$i, x$} $\pmod m$
+				\State $\text{matrix}[i][column] \gets \text{matrix}[i][column] + 1$
+			\EndFor
+		\EndProcedure
+	\end{algorithmic}
+	\end{algorithm}
 ```
 
-### `estimate(x)`
+## `Estimate(x)`
+Queries the $k$ hashed matrix cell coordinates for the key and screens out inflated error noise by isolating the absolute minimum value among them.
 
-```C++
-estimate(x):
-    min_val = infinity
-    for i from 0 to k-1:
-        column = hash_functions[i](x) % m
-        current_val = matrix[i][column]
-        if current_val < min_val:
-            min_val = current_val
-    return min_val
+- **Time Complexity:** $O(k)$ operational calculations.
+- **Notes:** While the isolated count can occasionally over-estimate due to collision footprints, it will never under-estimate the true frequency.
+
+```pseudo
+	\begin{algorithm}
+	\caption{Count-Min Sketch Frequency Estimation}
+	\begin{algorithmic}
+		\Procedure{Estimate}{$x, \text{matrix}, k, m$}
+			\State $min\_val \gets \infty$
+			\For{$i \gets 0 \text{ to } k - 1$}
+				\State $column \gets$ \Call{HashFunc}{$i, x$} $\pmod m$
+				\State $current\_val \gets \text{matrix}[i][column]$
+				\If{$current\_val < min\_val$}
+					\State $min\_val \gets current\_val$
+				\EndIf
+			\EndFor
+			\Return $min\_val$
+		\EndProcedure
+	\end{algorithmic}
+	\end{algorithm}
 ```
 
 ---
-## 5. Summary Comparison
 
-|**Feature**|**[[Hash Tables\|Hash Map]]**|**[[Count-Min Sketches\|Count-Min Sketch]]**|
+# Mathematical Design
+
+To limit estimation error margins, the layout dimensions of the matrix grid are derived from a chosen error tolerance threshold ($\epsilon$) alongside a targeted confidence level ($1 - \delta$):
+
+*   **Matrix Width (Columns $m$):** Dictates the range bounds of the hashing calculations. More columns compress the numerical probability of a collision occurring inside any single row:
+    $$ m = \left\lceil \frac{e}{\epsilon} \right\rceil $$
+*   **Matrix Depth (Rows $k$):** Dictates the number of independent hash functions. More rows reduce the probability that every row will sustain a significant collision overlap for a specific item:
+    $$ k = \left\lceil \ln\left(\frac{1}{\delta}\right) \right\rceil $$
+
+---
+
+# Common Pitfalls
+
+*   **Assuming Absolute Counting Precision:** Using a sketch structure when exact counts are mandatory. The structure is inherently lossy and tailored to identifying broad trends or heavy-hitters rather than ledger accounting entries.
+*   **Neglecting to Size Matrix Grids to Stream Volumes:** If the chosen column width count $m$ is too narrow for the total aggregate frequency volume of the stream, cells saturate uniformly, causing estimation errors to exceed the planned $\epsilon$ limit.
+
+---
+
+# Trade-offs Compared to Other Data Structures
+
+| Evaluation Parameter | Hash Map Structure | Count-Min Sketch Structure |
 |---|---|---|
-|**Accuracy**|100% Precise|Probabilistic (Over-estimates)|
-|**Memory**|$O(n)$ — Grows with unique keys|$O(m \times k)$ — Fixed size|
-|**Keys Stored**|Yes|No|
-|**Best Use Case**|Small/Medium datasets|Heavy-hitter detection in massive streams|
+| **Accuracy Standard** | 100% Precise Exact Results | Probabilistic Estimates (Over-estimates) |
+| **Memory Footprint Scaling** | $O(n)$ — Expands with every unique key added | $O(m \times k)$ — Bounded flat matrix layout size |
+| **Explicit Key Preservation** | Yes | No |
+| **Optimal Use Cases** | Bounded local datasets | Heavy-hitter stream mining in massive streams |
+
+---
+
+# Related Notes
+
+- [[Hashing/Bloom Filters|Bloom Filters]]
+- [[Hashing/Collision Resolution/Open Addressing (Linear Probing)|Open Addressing (Linear Probing)]]
+- [[Hashing/Hash Maps (Maps)|Hash Maps (Maps)]]

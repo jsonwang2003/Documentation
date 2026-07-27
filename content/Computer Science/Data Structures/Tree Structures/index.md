@@ -1,84 +1,62 @@
 ---
-title: Tree Structures
+title: "Tree Structures"
+description: "A foundational directory breaking down hierarchical tree topologies, self-balancing search mechanisms, priority heaps, and digital string search trees."
+aliases:
+  - Tree Structures Hub
+  - Hierarchical Structures Index
+  - Trees Index
+tags:
+  - index
+  - data-structures
+  - trees
 ---
-## 1. From Linked Lists to Graphs
-
-A **Graph** is a collection of **nodes** (vertices) connected by **edges**.
-- **Linked List as Graph**: A simple graph where nodes are connected in a linear sequence.
-    - **Singly-Linked**: Each node has one "forward" edge.
-    - **Doubly-Linked**: Each node has a "forward" and a "backward" edge.
-- **Tree as Graph**: A more complex graph structure that is **connected** and contains **no undirected cycles**.
-
-![[Pasted image 20260110143724.png]]
-
----
-## 2. Defining a Tree
-A graph $T$ is a tree if it meets these equivalent criteria:
-- It is connected and has no undirected cycles.
-- It is acyclic, but adding any single edge creates a cycle.
-- It is connected, but removing any single edge makes it disconnected.
-- There is a **unique simple path** between any two vertices.
-- For $n$ vertices, the tree has exactly **$n-1$ edges**.
-
-> **Note on Edge Cases**: An "empty" (null) tree with 0 nodes and a tree with a single node are both considered valid trees in data structure contexts.
+> [!abstract] Overview
+> Tree structures provide hierarchical non-linear data organization optimized for logarithmic search, priority extraction, string prefix searching, and pattern mining. This directory covers foundational binary architectures, self-balancing search trees, probabilistic treaps, priority heaps, and digital tries.
 
 ---
-## 3. Rooted vs. Unrooted Trees
-### Rooted Trees (Hierarchical)
-Rooted trees have a clear top-down structure defined by parent-child relationships.
-- **Root**: The single top node with no parent.
-- **Parent/Child**: Direct vertical relationships.
-- **Ancestors/Descendants**: All nodes along the path upward or downward.
-- **Leaves**: Nodes with no children.
-- **Internal Nodes**: Nodes that have at least one child.
 
-![[Pasted image 20260110150215.png]]
+# Core Architectural Classifications
 
-> [!EXAMPLE] Y-Chromosome Evolutionary Trees 
-> In Bioinformatics, researchers study paternal lineages by constructing evolutionary trees from **Y chromosomes**. Because the Y chromosome is passed directly from father to son as a single DNA sequence, it creates a clear hierarchical record.
-> - **Directionality**: The tree represents time in a **"top-down"** fashion. Traversing from the **root** toward the **leaves** move you forward in time.
-> - **The Root**: In this context, the root node represents the **Most Recent Common Ancestor (MRCA)** of all the individuals in the dataset.
-> - **The Leaves**: These represent the specific individuals whose DNA was sequenced.
-> 
-> ![[Pasted image 20260110150401.png]]
-### Unrooted Trees (Relational)
-Unrooted trees lack a hierarchy or a specific starting "root."
-- **Neighbors**: Any nodes directly connected by an edge. 
-- **Leaf**: A node with exactly **one** neighbor.
-- **Internal Node**: A node with **more than one** neighbor.
-- **Application**: Used in Bioinformatics to show biological similarity between species when the common ancestor is unknown.
+### Foundational & Unbalanced Trees
+*   **[[Tree Structures/Binary Tree|Binary Tree]]:** The foundational non-linear node topology restricting child branching to at most 2 outgoing paths per node.
+*   **[[Tree Structures/Binary Search Tree|Binary Search Tree (BST)]]:** A sorted tree structure enforcing left-to-right element ordering to enable high-speed value lookups.
 
-![[Pasted image 20260110150245.png]]
+### Self-Balancing Search Trees
+*   **[[Tree Structures/AVL Tree|AVL Tree]]:** A strictly height-balanced search tree enforcing balance factor invariants ($\pm 1$) via localized single and double rotations.
+*   **[[Tree Structures/Red-Black Tree|Red-Black Tree]]:** A single-pass color-balanced BST that relaxes strict height constraints to achieve faster write operations with fewer total rotations.
+*   **[[Randomized Search Trees (Treap, RST)]]:** A probabilistic structure assigning randomized priorities to simulate uniform random insertion orders, securing expected $O(\log n)$ performance.
 
-> [!EXAMPLE] Unrooted Evolutionary Trees 
-> When constructing evolutionary trees for diverse organisms, scientists often lack information about the "true ancestor" or the exact starting point of a lineage. In these cases, an **unrooted tree** is used.
-> - **Relational Information**: Although there is no "top-down" hierarchy, the tree visualizes the **biological distance** between species.
-> - **Closeness vs. Difference**: 
-> 	- **Leaves closer together** on the tree branches are more biologically or genetically similar.
-> 	- **Leaves farther apart** represent organisms that are more biologically distinct.
-> - **No Root**: Because there is no assumed ancestor (root node), the tree focuses entirely on the relationships between the observed organisms rather than the chronological order of their evolution.
-> 
-> ![[Pasted image 20260110150406.png]]
+### Digital & String Search Trees
+*   **[[Tree Structures/Multiway Trie|Multiway Trie]]:** A character-path digital search tree mapping keys along edges rather than node bodies to achieve deterministic $O(k)$ lookup times.
+*   **[[Tree Structures/Ternary Search Tree|Ternary Search Tree (TST)]]:** A space-efficient hybrid structure combining Trie prefix-matching logic with BST memory efficiency using 3 child pointers per node.
+
+### Priority & Array-Backed Trees
+*   **[[Tree Structures/Heap|Heap]]:** A complete binary tree mapping directly onto contiguous flat arrays, providing $O(1)$ constant-time root access for priority processing pipelines.
+
+### Pattern Mining Trees
+*   **[[Tree Structures/Frequent Pattern Tree (FP-Tree)|Frequent Pattern Tree (FP-Tree)]]:** A compact prefix tree compressing transaction logs to discover frequent itemsets without candidate pair generation.
 
 ---
-## 4. Rooted Binary Trees
-A **Binary Tree** is a rooted tree with two specific restrictions:
-1. Every node except the root has exactly one parent.
-2. Every node has **at most two children** (commonly referred to as the "left" and "right" child).
 
-![[Pasted image 20260110151013.png]]
+# Notes in This Section
+
+| Note Link | Description |
+|---|---|
+| [[Tree Structures/Binary Tree\|Binary Tree]] | Foundational non-linear hierarchical node network serving as the blueprint for search trees and heaps. |
+| [[Tree Structures/Binary Search Tree\|Binary Search Tree]] | Left-to-right sorted tree structure providing average $O(\log n)$ search, insertion, and removal operations. |
+| [[Tree Structures/AVL Tree\|AVL Tree]] | Strictly height-balanced BST guaranteeing worst-case $O(\log n)$ lookup bounds via structural rotations. |
+| [[Tree Structures/Red-Black Tree\|Red-Black Tree]] | Single-pass color-balanced BST optimizing write-heavy workloads with relaxed height rules. |
+| [[Tree Structures/Randomized Search Tree\|Randomized Search Tree]] | Probabilistic Treap maintaining expected $O(\log n)$ bounds regardless of input sorting patterns. |
+| [[Tree Structures/Multiway Trie\|Multiway Trie]] | Digital search tree routing lookup queries along character-labeled edges for deterministic $O(k)$ searches. |
+| [[Tree Structures/Ternary Search Tree\|Ternary Search Tree]] | Memory-efficient hybrid trie replacing large node pointer arrays with Left/Middle/Right child pointers. |
+| [[Tree Structures/Heap\|Heap]] | Array-backed complete binary tree powering priority queue dispatch pipelines with $O(1)$ peek speed. |
+| [[Tree Structures/Frequent Pattern Tree (FP-Tree)\|Frequent Pattern Tree (FP-Tree)]] | Dense prefix-tree structure optimizing transaction pattern mining in FP-Growth workflows. |
 
 ---
-## 5. Binary Tree Traversals
-To access data in a tree, we typically start at the **root** and follow a traversal algorithm. There are four primary methods.
 
-Consider a tree where **V** = Visit, **L** = Left Child, and **R** = Right Child:
+# Related Categories
 
-|**Traversal**|**Logic**|**Description**|
-|---|---|---|
-|**Pre-order**|**VLR**|Visit node, then traverse Left, then Right.|
-|**In-order**|**LVR**|Traverse Left, visit node, then traverse Right.|
-|**Post-order**|**LRV**|Traverse Left, then Right, then visit node.|
-|**Level-order**|**BFS**|Visit nodes level-by-level, left-to-right.|
-
-> All traversals' worst case time complexity to traverse a binary tree of $n$ nodes = $O(n)$
+- [[Introductory Data Structures/index\|Introductory Data Structures]]
+- [[Lexicon/index\|Lexicon ADT Implementations]]
+- [[String Searching Data Structures/index\|String Searching Data Structures]]
+- [[Hashing/index\|Hashing and Probabilistic Structures]]

@@ -1,48 +1,73 @@
 ---
-title: Data Structure
+title: "Data Structures"
+description: "A comprehensive directory covering fundamental storage models, behavioral ADTs, hierarchical tree topologies, and complexity classifications."
+aliases:
+  - Data Structure
+  - Data Structures Index
+  - Data Structures Hub
+tags:
+  - index
+  - data-structures
+  - computer-science
 ---
-> [!INFO] Definition
-> 
-> Ways to store and organize data in a computer so it can be used efficiently.
-
----
-
-## 1. Fundamentals and Linear Structures
-
-This section covers the core concepts of memory organization and basic sequential data arrangements.
-- **[[Introductory Data Structures/Data Structures vs. Abstract Data Types|Data Structures vs. ADTs]]**: The distinction between logical models and physical implementations.
-- **[[Introductory Data Structures/Abstract Data Types (ADT)|Abstract Data Types (ADT)]]**: Formal definitions of behavioral models.
-- **[[Introductory Data Structures/Array Lists|Array Lists]]**: Sequential storage using contiguous memory (Static and Dynamic).
-- **[[Introductory Data Structures/Linked List|Linked List]]**: Elements stored in nodes with pointers to sequential neighbors.
-- **[[Introductory Data Structures/Circular Arrays|Circular Arrays]]**: Memory optimization for fixed-size buffers.
+> [!abstract] Overview
+> A Data Structure is a specialized format for organizing, processing, retrieving, and storing data in computer memory so that operations can be executed efficiently. This index categorizes foundational linear layouts, abstract data type (ADT) behaviors, hierarchical trees, and computational complexity models.
 
 ---
-## 2. Common ADTs (Behavioral Models)
-Logical interfaces that define how data is accessed and manipulated, regardless of the underlying storage.
-- **[[Introductory Data Structures/Stack|Stack]]**: LIFO (Last-In, First-Out) access pattern.
-- **[[Introductory Data Structures/Queues|Queues]]**: FIFO (First-In, First-Out) access pattern.
-- **[[Introductory Data Structures/Deques|Deques]]**: Double-ended queue allowing access from both ends.
-- **[[Introductory Data Structures/Priority Queue|Priority Queue]]**: Elements processed based on urgency or value.
-- **[[Set]]**: Collection of unique elements.
-- **[[Hash Maps (Maps)]]**: Key-value pair associations.
-- **[[Pair]]**: A simple container for two related data elements.
+
+# 1. Fundamentals & Linear Structures
+
+This module covers physical memory organization and core sequential arrangements:
+
+*   **Data Structures vs. ADTs:** Distinguishing physical storage mechanics from logical behavioural contracts.
+*   **[[Data Structures/Summary of Data Structures#Array List|Array Lists]]:** Dynamic contiguous memory storage supporting $O(1)$ random indexing.
+*   **[[Data Structures/Summary of Data Structures#Linked List|Linked Lists]]:** Sequential node chains connected via explicit pointers.
+*   **Circular Arrays:** Memory-efficient ring buffers for fixed-size capacity queues.
 
 ---
-## 3. Tree Structures
 
-Hierarchical data organizations optimized for searching, sorting, and priority-based access.
-- **[[Tree Structures/Binary Tree|Binary Tree]]**: The foundational hierarchical structure where each node has at most two children.
-- **[[Binary Search Tree (BSTs)|Binary Search Tree (BST)]]**: Optimized for $O(\log n)$ search by maintaining sorted order.
-- **[[Tree Structures/Heap|Heap]]**: A complete tree used for efficient priority-based retrieval.
-- **[[Tree Structures/Frequent Pattern Tree (FP-Tree)|FP-Tree]]**: Advanced structure used for mining frequent patterns in datasets.
+# 2. Common Abstract Data Types (ADTs)
+
+Logical interfaces that define operational contracts regardless of underlying backing storage:
+
+*   **Stack:** LIFO (Last-In, First-Out) push/pop pipeline.
+*   **Queue:** FIFO (First-In, First-Out) enqueue/dequeue pipeline.
+*   **Deque:** Double-ended queue allowing operations at both ends.
+*   **[[Introductory Data Structures/Priority Queue|Priority Queue]]:** Elements ordered and retrieved based on priority rankings.
+*   **[[Data Structures/Set|Set]]:** Collection tracking unique elements.
+*   **[[Hashing/Hash Maps (Maps)|Hash Map]]:** Key-value associative container.
+*   **[[Data Structures/Pair|Pair]]:** Lightweight two-element heterogeneous container.
 
 ---
-## 4. Summary Index
 
-### By Storage Type
-- **Linear**: [[Introductory Data Structures/Array Lists|Arrays]], [[Introductory Data Structures/Linked List|Linked Lists]], [[Introductory Data Structures/Circular Arrays|Circular Buffers]].
-- **Non-Linear**: [[Tree Structures/Binary Tree|Trees]], [[Binary Search Tree (BSTs)|BSTs]], [[Tree Structures/Heap|Heaps]].
+# 3. Tree & Hierarchical Structures
+
+Data organizations optimized for fast searching, sorting, and priority-based access:
+
+*   **[[Tree Structures/Binary Tree|Binary Tree]]:** Rooted topology limiting child branching to at most 2 nodes per parent.
+*   **[[Tree Structures/Binary Search Tree|Binary Search Tree (BST)]]:** Sorted structure providing average $O(\log n)$ search efficiency.
+*   **[[Tree Structures/Heap|Heap]]:** Complete binary tree mapped to flat arrays for $O(1)$ priority root access.
+*   **[[Tree Structures/Frequent Pattern Tree (FP-Tree)|FP-Tree]]:** Dense prefix tree for mining frequent itemsets without candidate generation.
+
+---
+
+# 4. Summary Index by Categorization
+
+### By Storage Layout
+*   **Linear:** Arrays, Linked Lists, Circular Buffers.
+*   **Non-Linear:** Trees, Heaps, Graphs, Tries.
+
 ### By Access Pattern (ADTs)
-- **Sequential**: [[Introductory Data Structures/Stack|Stacks]], [[Introductory Data Structures/Queues|Queues]], [[Introductory Data Structures/Deques|Deques]].
-- **Associative**: [[Hash Maps (Maps)]], [[Set]].
-- **Ranked**: [[Introductory Data Structures/Priority Queue|Priority Queues]].
+*   **Sequential:** Stacks, Queues, Deques.
+*   **Associative:** Hash Maps, Sets, Pairs.
+*   **Ranked:** Priority Queues, Binary Heaps.
+
+---
+
+# Related Modules
+
+- [[Data Structures/Summary of Data Structures|Summary of Data Structures]]
+- [[Data Structures/Classes of Computational Complexity|Classes of Computational Complexity]]
+- [[Tree Structures/index|Tree Structures]]
+- [[Lexicon/index|Lexicon ADT Implementations]]
+- [[String Searching Data Structures/index|String Searching Data Structures]]

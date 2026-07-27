@@ -1,38 +1,53 @@
 ---
-tags:
+description: "A linear restricted container enforcing the strict First In, First Out operational scheduling protocol."
+aliases:
   - Queue
+  - Queue ADT
+  - FIFO Queue
+tags:
+  - data-structures
+  - adt
+  - queues
 ---
-> [!INFO] Definition 
-> An **Abstract Data Type (ADT)** where the element that is the **first** to go in is the **first** to be removed. This is known as the **First In, First Out (FIFO)** principle.
+> [!abstract] Abstract 
+> A Queue is an [[Introductory Data Structures/Abstract Data Types (ADT)|Abstract Data Type]] that strictly enforces the First In, First Out ($\text{FIFO}$) operational protocol. It mimics real-world waiting lines: the first element introduced into the data container is guaranteed to be the first element extracted from the structure.
+> 
+> - **Category:** Bounded Monitored ADT
+> - **Core Workflow:** Elements enter at the trailing end and exit at the leading end.
+> - **Common Structural Backbones:** [[Introductory Data Structures/Deques|Deques]], [[Introductory Data Structures/Linked List|Doubly-Linked Lists]], or [[Introductory Data Structures/Circular Arrays|Circular Arrays]].
 
-### Operations
-The Queue ADT is defined by three primary operations:
+---
 
-|Operation|Description|
+# Core Functional Interface
+
+The Queue ADT contract provides three primary operations:
+
+| Operation | Detailed Functional Execution |
 |---|---|
-|`enqueue(element)`|Adds an element to the **back** of the Queue.|
-|`peek()`|Returns the value of the element at the **front** without removing it.|
-|`dequeue()`|Removes the element at the **front** of the Queue.|
+| `enqueue(element)` | Appends a new element to the back of the Queue. |
+| `peek()` | Evaluates and returns the item sitting at the front boundary without removing it. |
+| `dequeue()` | Removes the item positioned at the front boundary of the Queue. |
 
 ---
-### Implementation via Deque
-Since a [[Deques]] allows adding/removing from both ends, it serves as an ideal backing structure for a Queue. By "restricting" the Deque's functionality, we can implement Queue operations with minimal code.
-#### C++ Implementation
 
+# Structural Composition via Deques
+
+Because a [[Introductory Data Structures/Deques|Deque]] interface natively supports data adjustments at both boundary margins, it serves as an excellent structural backbone for a Queue. Wrapping a Deque within a restricted interface implements Queue behavior with minimal code duplication.
+
+### C++ Language Composition Map
 ```cpp
 class Queue {
-    private:
-        Deque deque; // Backed by a Doubly-Linked List or Circular Array
-    public:
-        bool enqueue(Data element) { return deque.addBack(element); }
-        Data peek() { return deque.peekFront(); }
-        void dequeue() { deque.removeFront(); }
-        int size() { return deque.size(); }
+private:
+    Deque deque; // Backed internally by a Doubly-Linked List or Circular Array
+public:
+    bool enqueue(Data element) { return deque.addBack(element); }
+    Data peek() { return deque.peekFront(); }
+    void dequeue() { deque.removeFront(); }
+    int size() { return deque.size(); }
 };
 ```
 
-#### Python Implementation
-
+### Python Language Composition Map
 ```python
 class Queue:
     def __init__(self):
@@ -47,28 +62,31 @@ class Queue:
         return len(self.deque)
 ```
 
-> [!WARNING] Implementation Detail 
-> Note that `dequeue()` here is `void` (it only removes). In some languages like Java, `dequeue` (or `poll`) removes **and** returns the value. In others like C++, the removal and the access (`front()`) are separate steps.
+> [!note] Interface Return Variances
+> In this implementation pattern, `dequeue()` behaves as a void operation that modifies state without returning a value. While languages like Java combine removal and value-return into a single function call (such as `poll()`), architectures like C++ separate lookup (`front()`) and removal (`pop()`) into distinct steps for conceptual clarity.
 
 ---
-### Visualization: The FIFO Process
+
+# Sequential Processing Pipeline
 
 ![[Pasted image 20260104134953.png]]
 
-In the example above:
-1. **Enqueue**: Elements A,B,C are added to the back in order.
-2. **State**: The Queue is currently [A,B,C], where A is at the front.
-3. **Dequeue**: The operation removes A because it was the first to enter.
-4. **Result**: The new front of the Queue becomes B.
+### Interface Symmetry Challenge
+Could a valid Queue be implemented by reversing boundary roles—using `addFront()` for insertion alongside `peekBack()` and `removeBack()` for removal?
+*   **Answer:** Yes. As long as entry and exit points are kept on opposite margins of the underlying data structure, the structural $\text{FIFO}$ sequence is preserved.
 
 ---
-### Analysis & Patterns
-**STOP and Think:** Could we have used `addFront()`, `peekBack()`, and `removeBack()` instead?
-- **Yes.** As long as the entry point and the exit point are on **opposite ends**, the FIFO property is maintained. Using one end for insertion and the other for removal is the only requirement.
+
+# Core Architectural Applications
+
+*   **Buffer Management:** Directs shared system pipelines, such as network packet routing queues, print spools, or customer support lines.
+*   **OS Task Scheduling:** Sequences incoming CPU threads in their exact chronological order of arrival.
+*   **Graph Exploration Traversals:** Serves as the foundational container that powers Breadth-First Search (BFS) algorithms to discover shortest paths across unweighted graphs.
 
 ---
-### Applications
-Despite its simplicity, the Queue is essential for:
-- **Buffer Management**: Organizing people at a cash register or print jobs in a printer spooler.
-- **Scheduling**: Keeping track of CPU tasks that need to run in the order they arrived.
-- **Graph Exploration**: Powering the **Breadth-First Search (BFS)** algorithm to find the shortest path in unweighted graphs.
+
+# Related Notes
+
+- [[Introductory Data Structures/Deques|Deques]]
+- [[Introductory Data Structures/Priority Queue|Priority Queue]]
+- [[Introductory Data Structures/Stack|Stack]]

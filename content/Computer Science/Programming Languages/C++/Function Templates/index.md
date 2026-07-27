@@ -1,5 +1,5 @@
 ---
-tit: Function Templates
+title: Function Templates
 ---
 
 > [!INFO]

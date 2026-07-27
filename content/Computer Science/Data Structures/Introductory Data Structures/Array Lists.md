@@ -1,134 +1,153 @@
 ---
+description: "A contiguous, homogeneous memory structure that packs elements sequentially to provide constant-time random access alongside dynamic expansion."
+aliases:
+  - Array List
+  - Vector
+  - Dynamic Array
 tags:
-  - Arrays
-  - ArrayLists
+  - data-structures
+  - arrays
+  - memory-management
 ---
-## Array
-
-> [!INFO] Definition 
-> An **array** is a _homogeneous_ data structure where each element is stored in **adjacent memory locations**.
-> - **homogeneous**: all elements are of the same type (int, string, etc.)
->     
-
-### Properties of an Array
-
-#### Random Access
-
-Since each cell has the same type (and thus the same size), and the cells are adjacent in memory, it is possible to quickly calculate the address of any array cell given the address of the first cell.
-
-> [!Example] 
-> Suppose we allocated an array of n elements, where the elements are of a type that has a size of b bytes, starting at memory address x. Using 0-indexing:
+> [!abstract] Abstract 
+> An Array List (often called a Vector) is a dynamically resizing array where no empty slots are present between elements. Users can only insert elements at contiguous indices between $0$ and $n$ inclusive (where $n$ represents the total element count), optimizing the structure for high-speed constant-time index lookups.
 > 
-> - The element at index i=0 is at memory address $x$
-> - The element at index i=1 is at memory address $x+b$
-> - The element at index i is at memory address $x+bi$
-
-This phenomenon allows finding the memory address of any $i^{th}$ element in **constant time**, enabling O(1) access.
-
-> [!Question] Exercise 
-> You create an array of integers (assume each integer is exactly 4 bytes) in memory, and the beginning of the array happens to be at memory address 1000 (in decimal). What is the memory address of the start of cell 6 of the array, assuming 0-based indexing?
-> 
-> > [!Tip]- Answer 
-> > $x+bi=1000+(4)(6)=1024​$
+> - **Category:** Bounded Contiguous Structures
+> - **Backbone Layout:** Contiguous blocks of homogeneous computer memory.
+> - **Key Advantage:** Constant-time data location arithmetic using raw offsets.
 
 ---
 
-## Array List (Vector)
+# Properties of a Backing Array
 
-> [!INFO] Definition 
-> An **Array List** is an array where no empty cells are present between elements. Users can only add elements to indices between 0 to n (inclusive), where n is the number of total elements.
+An array is a homogeneous data structure where each element is stored in adjacent memory locations. Homogeneous means all elements are of the exact same data type (e.g., `int`, `double`) and share an identical byte size $b$.
 
-### Dynamic Implementation
+### Random Access Arithmetic
+Because each cell shares the same size $b$ and layout blocks are perfectly contiguous in hardware memory, the system calculates the location of any element $i$ in constant time given the starting base address $x$:
 
-When the number of elements is unknown, the system:
-1. Allocates a default "large" amount of memory initially.
-2. Inserts elements into this initial array.
-3. Once the array is full, creates a new larger array and copies the elements over.
-4. Replaces the old array reference with the new reference.
+$$ \text{Address}(i) = x + b \cdot i $$
 
-> [!Question] Array structures require all elements be the same size. How can they contain strings of varying lengths?
+> [!note] Memory Address Calculation Example
+> Suppose an array of integers ($b = 4 \text{ bytes}$) is initialized at base address $1000$ in decimal memory. The physical start address of cell $6$ under 0-based indexing is:
 > 
-> > [!Tip]- Answer 
-> > Strings are stored as **pointers** (fixed size) that indicate the memory location containing the actual string data.
+> $$ 1000 + 4 \cdot 6 = 1024 $$
 
-### Inserting
-- **To the Back**: If the current count is known → **Constant Time O(1)**.
-- **To the Front**: Requires moving all existing elements to create space → **Linear Time O(n)**.
+### Handling Variable Data
+If array structures require all elements to be the exact same size, how can they contain strings of varying lengths?
+*   **Answer:** The array does not store the string characters directly. Instead, it stores a fixed-size pointer indicating the independent external memory address containing that unique string data.
 
-> [!Abstract] Summary **Best Case**: O(1) (appending at the end) **Worst Case**: O(n) (insertion at front or exceeding capacity)
+---
 
-```python
-# inserts element into array and returns True on success
-insert(element, index):                  
-    if index < 0 or index > n:           # invalid indices 
-        return False 
-        
-    if n == array.length:                # if array is full 
-        newArray = empty array of length 2*array.length 
-        for i from 0 to n-1:             # copy all elements
-            newArray[i] = array[i] 
-        array = newArray                 
-        
-    if index == n:                       # insertion at end
-        array[index] = element           
-    else:                                # general insertion 
-        for i from n-1 to index:         # make space
-            array[i+1] = array[i] 
-        array[index] = element           
-        
-    n = n+1                              
-    return True
+# Dynamic Capacity Resizing
+
+When initializing an Array List with an unknown number of total elements, the structure manages memory allocation via a dynamic growth loop:
+
+1.  Allocates a default "large" capacity array in memory initially.
+2.  Inserts elements into this backing array while tracking the count $n$.
+3.  Once $n$ equals the array length capacity, it allocates a new backing array of double size ($2 \cdot \text{capacity}$).
+4.  Copies all elements from the old array into the new array sequentially, updates the reference, and frees the old space.
+
+---
+
+# Algorithmic Operations
+
+## `Insert(element, index)`
+Inserts an item at a specific target index. If adding to the front, all existing elements must slide forward to open a space.
+
+- **Time Complexity:** $O(1)$ Amortized Best Case (appending to the back); $O(n)$ Worst Case (inserting at index 0 or triggering an internal array resize).
+
+```pseudo
+	\begin{algorithm}
+	\caption{Array List Insertion}
+	\begin{algorithmic}
+		\Procedure{Insert}{$element, index, array, n$}
+			\If{$index < 0$ \or $index > n$}
+				\Return $\text{false}$
+			\EndIf
+			\If{$n == array.\text{length}$}
+				\State $newArray \gets \text{Allocate empty array of length } 2 \cdot array.\text{length}$
+				\For{$i \gets 0 \text{ to } n - 1$}
+					\State $newArray[i] \gets array[i]$
+				\EndFor
+				\State $array \gets newArray$
+			\EndIf
+			\If{$index == n$}
+				\State $array[index] \gets element$
+			\Else
+				\For{$i \gets n - 1 \text{ down to } index$}
+					\State $array[i + 1] \gets array[i]$
+				\EndFor
+				\State $array[index] \gets element$
+			\EndIf
+			\State $n \gets n + 1$
+			\Return $\text{true}$
+		\EndProcedure
+	\end{algorithmic}
+	\end{algorithm}
 ```
 
-### Searching
+## `Find(element)`
+Performs a linear scan from index 0 across the structure to match the target element.
 
-```python
-# returns True if element in array, otherwise False
-find(element):                       
-    for i from 0 to n-1:               # iterate through all n elements
-        if array[i] == element:        # match found
-            return True
-    return False                       # checked all n elements
+- **Time Complexity:** $O(1)$ Best Case (first slot match); $O(n)$ Worst Case (item missing or sitting in the final slot).
+- **Optimization:** If the underlying array is maintained in a sorted sequence, search speeds improve to $O(\log n)$ using Binary Search.
+
+```pseudo
+	\begin{algorithm}
+	\caption{Linear Array Search}
+	\begin{algorithmic}
+		\Procedure{Find}{$element, array, n$}
+			\For{$i \gets 0 \text{ to } n - 1$}
+				\If{$array[i] == element$}
+					\Return $\text{true}$
+				\EndIf
+			\EndFor
+			\Return $\text{false}$
+		\EndProcedure
+	\end{algorithmic}
+	\end{algorithm}
 ```
 
-> [!Abstract] Summary **Best Case**: O(1) (element at the first index) **Worst Case**: O(n) (element at the last index or not present)
-#### Binary Search
-If the array is sorted, searching runtime improves to **O(logn)** via [[Computer Science/Discrete Structures/Discrete Algorithms/Searching/Binary Search]].
-### Deletion
-- **Last Element**: Simply remove it → **Constant Time O(1)**.
-- **First Element**: Requires moving all subsequent elements left one spot → **Linear Time O(n)**.
+## `Remove(index)`
+Removes an entry at a given index and shifts all trailing elements left by one index to avoid leaving structural gaps.
 
-> [!Question] Can we avoid move operations when removing from the very beginning?
-> 
-> > [!Tip]- Answer 
-> > Yes, by using a [[Circular Array]], which has no fixed beginning or end.
+- **Time Complexity:** $O(1)$ Best Case (deleting the last item); $O(n)$ Worst Case (deleting from index 0).
 
-```python
-# removes element at position "index"
-remove(index): 
-    if index < 0 or index >= n:
-        return False
-        
-    remove(array[index])
-    if index < n - 1:
-        for i from index to n - 1:
-            array[i] = array[i + 1]
-        remove(array[n - 1])
-    
-    n = n - 1
-    return True
+```pseudo
+	\begin{algorithm}
+	\caption{Array List Removal}
+	\begin{algorithmic}
+		\Procedure{Remove}{$index, array, n$}
+			\If{$index < 0$ \or $index \ge n$}
+				\Return $\text{false}$
+			\EndIf
+			\If{$index < n - 1$}
+				\For{$i \gets index \text{ to } n - 2$}
+					\State $array[i] \gets array[i + 1]$
+				\EndFor
+			\EndIf
+			\State $n \gets n - 1$
+			\Return $\text{true}$
+		\EndProcedure
+	\end{algorithmic}
+	\end{algorithm}
 ```
 
 ---
-## Final Summary: Trade-offs
 
-|Feature|Performance / Detail|
-|---|---|
-|**Random Access**|O(1) — Extremely fast lookup by index|
-|**Search (Sorted)**|O(logn) — Efficient with Binary Search|
-|**Search (Unsorted)**|O(n) — Slow for large datasets|
-|**Insert/Delete**|O(n) — Costly due to shifting (except at the end)|
-|**Memory**|Potential waste if allocated space is not fully used|
+# Performance Summary
 
-- **Best Use Case**: Fixed-size data or scenarios where frequent access by index is required.
-- **Weakest Use Case**: Frequent insertions/deletions at the beginning or middle of the list.
+*   **Random Access:** $O(1)$ constant time lookup.
+*   **Search Complexity:** $O(\log n)$ if sorted via Binary Search; $O(n)$ if unsorted.
+*   **Insert/Delete Mechanics:** $O(n)$ general cost due to sequential cell shifting.
+*   **Memory Footprint:** Continuous block safety; can trade off potential memory overhead if pre-allocated block capacity goes unused.
+*   **Optimal Environment:** Fixed-size contexts or architectures dominated by index lookups.
+*   **Weakest Environment:** Systems tracking heavy insertion or removal routines targeted at the front of the sequence.
+
+---
+
+# Related Notes
+
+- [[Introductory Data Structures/Abstract Data Types (ADT)|Abstract Data Types (ADT)]]
+- [[Introductory Data Structures/Circular Arrays|Circular Arrays]]
+- [[Introductory Data Structures/Linked List|Linked List]]

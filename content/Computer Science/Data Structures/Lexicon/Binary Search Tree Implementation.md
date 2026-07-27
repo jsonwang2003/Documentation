@@ -1,56 +1,102 @@
-> [!ABSTRACT]
+---
+description: "A self-balancing search tree lexicon providing guaranteed worst-case logarithmic runtimes alongside ordered alphabetical traversals."
+aliases:
+  - BST Lexicon
+  - AVL Lexicon
+tags:
+  - lexicon
+  - data-structures
+  - trees
+---
+> [!abstract] Abstract 
+> A Self-Balancing [[Binary Search Tree (BSTs)|Binary Search Tree (BST)]], such as an [[Tree Structures/AVL Tree|AVL Tree]], offers a powerful compromise for the [[Lexicon/index|Lexicon ADT]]. It guarantees $O(\log n)$ worst-case time complexity for all three core operations while maintaining the ability to traverse, range-query, and print words in alphabetical order.
 > 
-> A **[[Binary Search Tree (BSTs)|Self-Balancing Binary Search Tree (BST)]]**, such as an **AVL Trees**, offers a powerful compromise for the Lexicon ADT. It guarantees **$O(\log n)$ worst-case** time complexity for all operations while maintaining the ability to traverse words in alphabetical order.
+> - **Category:** Hierarchical Ordered Lexicon
+> - **Core Requirement:** Continuous self-balancing logic to prevent height degradation.
+> - **Key Advantage:** Consistent logarithmic bounds across both lookups and mutations.
 
 ---
-## 1. Choosing the Right Tree
-While several types of BSTs exist, only self-balancing versions are suitable for a robust Lexicon:
-- **[[AVL Tree]]:** Preferred for Lexicons because they have stricter balance requirements than Red-Black trees. This results in a smaller tree height, leading to **faster "find" operations** in practice.
-- **[[Red-Black Tree]]:** Also viable with $O(\log n)$ guarantees, but typically optimized for scenarios with more frequent insertions than a standard Lexicon requires.
+
+# Choosing the Right Tree Architecture
+
+While several variations of Binary Search Trees exist, only self-balancing specifications are suitable for a large-scale Lexicon dataset:
+
+*   **[[Tree Structures/AVL Tree|AVL Tree]]:** Highly preferred for Lexicon engines because they maintain stricter height balance requirements ($|h_{\text{left}} - h_{\text{right}}| \le 1$). This results in a shallower overall tree height, translating to fewer string comparisons during search operations.
+*   **Red-Black Tree:** Also a viable option with $O(\log n)$ guarantees, but typically optimized for scenarios with high-frequency writes rather than the read-dominated lookup focus of a standard Lexicon.
 
 ---
-## 2. Performance Analysis
 
-By using a self-balancing tree, we ensure that the lexicon remains efficient even as it grows to contain hundreds of thousands of words.
+# Performance Analysis
 
-|**Operation**|**Worst-Case Complexity**|**Logic**|
+By employing a self-balancing tree backbone, we ensure that the lexicon remains performant even as it grows to contain hundreds of thousands of individual words:
+
+| Lexicon Operation | Worst-Case Complexity | Algorithmic Logic |
 |---|---|---|
-|**`find(word)`**|**$O(\log n)$**|Logarithmic search based on string comparisons.|
-|**`insert(word)`**|**$O(\log n)$**|Search for position + local rotations to maintain balance.|
-|**`remove(word)`**|**$O(\log n)$**|BST removal + structural rebalancing.|
-|**Space**|**$O(n)$**|Exactly one node per word.|
+| **`find(word)`** | $O(\log n)$ | Logarithmic branch traversal using character string comparisons. |
+| **`insert(word)`** | $O(\log n)$ | Traverses to target slot + triggers local rotations to restore balance. |
+| **`remove(word)`** | $O(\log n)$ | Standard tree node deletion + structural rebalancing sweeps. |
+| **Space Complexity** | $O(n)$ | Allocates exactly one node wrapper per word entry. |
 
 ---
-## 3. Ordered Iteration
-One major advantage of the BST over unordered structures is the ability to retrieve words in alphabetical order. This is achieved via an **In-Order Traversal**.
-- **Ascending Order:** Visit the left child, the current node, then the right child.
-- **Descending Order:** Visit the right child, the current node, then the left child.
 
-```C++
-ascendingInOrder(node):  // Alphabetical (A-Z)
-    ascendingInOrder(node.leftChild)   
-    output node.word                   
-    ascendingInOrder(node.rightChild)  
+# Ordered Alphabetical Iteration
 
-descendingInOrder(node): // Reverse Alphabetical (Z-A)
-    descendingInOrder(node.rightChild) 
-    output node.word                   
-    descendingInOrder(node.leftChild)  
+A major architectural advantage of the BST over unordered structures (like [[Hashing/Hash Tables|Hash Tables]]) is the native capability to retrieve words or print entire dictionaries in clean alphabetical order. This is achieved via an **In-Order Traversal**:
+
+*   **Ascending Order (A to Z):** Visit the left child node, process the current node, then traverse the right child node.
+*   **Descending Order (Z to A):** Visit the right child node, process the current node, then traverse the left child node.
+
+```pseudo
+	\begin{algorithm}
+	\caption{Lexicon In-Order Traversals}
+	\begin{algorithmic}
+		\Procedure{AscendingInOrder}{node}
+			\If{$node == \text{NULL}$}
+				\Return
+			\EndIf
+			\State \Call{AscendingInOrder}{$node.\text{leftChild}$}
+			\State \Call{Output}{$node.\text{word}$}
+			\State \Call{AscendingInOrder}{$node.\text{rightChild}$}
+		\EndProcedure
+
+		\Procedure{DescendingInOrder}{node}
+			\If{$node == \text{NULL}$}
+				\Return
+			\EndIf
+			\State \Call{DescendingInOrder}{$node.\text{rightChild}$}
+			\State \Call{Output}{$node.\text{word}$}
+			\State \Call{DescendingInOrder}{$node.\text{leftChild}$}
+		\EndProcedure
+	\end{algorithmic}
+	\end{algorithm}
 ```
 
 ---
-## 4. Evaluation for Lexicon ADT
-The BST implementation provides a significant upgrade over the Sorted Array when updates are needed:
-- **Consistency:** Unlike the Sorted Array, which struggles with $O(n)$ insertions, the BST handles all operations in $O(\log n)$.
-- **Functionality:** It supports range queries (e.g., "find all words between 'apple' and 'banana'") much more naturally than a Hash Table.
-- **Dependency:** Note that the speed still depends on $n$ (the number of words). As the lexicon grows, the height of the tree increases.
+
+# Evaluation for the Lexicon ADT
+
+The Self-Balancing BST provides a significant upgrade over the [[Lexicon/Array Implementation|Sorted Array]] when updates or vocabulary mutations are needed:
+
+*   **Consistency:** Unlike the Sorted Array, which struggles with slow $O(n)$ data-shifting insertions, the BST processes all structural operations within tight $O(\log n)$ bounds.
+*   **Advanced Queries:** It supports range boundaries natively (e.g., "find all valid dictionary words situated between 'apple' and 'banana'") much more efficiently than an unordered Hash Table.
+*   **The Sizing Bottleneck:** Note that operational latency remains directly linked to $n$ (the volume of words). As the lexicon scales, the overall height of the tree increases logarithmically.
 
 ---
-## 5. Comparison: Sorted Array vs. BST (AVL)
 
-|**Feature**|**Sorted Array**|**AVL Tree**|
+# Structural Comparison: Sorted Array vs. AVL Tree
+
+| Feature Metric | Sorted Array Implementation | AVL Tree Implementation |
 |---|---|---|
-|**Search Speed**|$O(\log n)$|$O(\log n)$|
-|**Insertion/Removal**|$O(n)$|**$O(\log n)$**|
-|**Memory Efficiency**|High (Contiguous)|Moderate (Node pointers)|
-|**Alphabetical Order**|Yes|Yes|
+| **Search Speed** | $O(\log n)$ | $O(\log n)$ |
+| **Insertion / Removal** | $O(n)$ due to element shifts | $O(\log n)$ via balance rotations |
+| **Memory Efficiency** | High (Flat contiguous block) | Moderate (Requires space for node pointers) |
+| **Alphabetical Sequencing** | Supported natively | Supported natively via in-order walks |
+
+---
+
+# Related Notes
+
+- [[Lexicon/Array Implementation|Array Implementation]]
+- [[Hash Table Implementation]]
+- [[Tree Structures/AVL Tree|AVL Tree]]
+- [[Binary Search Tree (BSTs)|Binary Search Tree]]

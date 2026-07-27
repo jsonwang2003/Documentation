@@ -1,100 +1,162 @@
-> [!ABSTRACT]
+---
+description: "A hybrid tree-heap structure assigning randomized priorities to elements to simulate random insertion orders and guarantee average-case logarithmic complexity."
+aliases:
+  - Randomized Search Tree
+  - RST
+  - Treap
+tags:
+  - data-structures
+  - trees
+  - probabilistic
+---
+> [!abstract] Abstract 
+> A Randomized Search Tree (RST) is a specialized Treap structure where priorities are randomly generated upon insertion. This application of randomness simulates a completely uniform random insertion sequence, successfully securing an $O(\log n)$ average-case time complexity across all operations regardless of the actual order in which keys are provided by the user.
 > 
-> An RST is a Treap where priorities are randomly generated upon insertion. This clever use of randomness simulates a random insertion order, successfully achieving an average-case time complexity of $O(\log n)$ regardless of the actual order in which keys are provided.
+> - **Category:** Probabilistic Self-Balancing Tree
+> - **Core Composition:** Dual-attribute node tracking mapping a unique search key alongside a priority score.
+> - **Balancing Invariant:** Simultaneously maintains binary search tree and max-heap properties.
 
 ---
-## 1. The Treap (Tree + Heap)
-A **Treap** is a binary tree where each node has two attributes: a **key** and a **priority**. It must satisfy two simultaneous properties:
-1. **[[Binary Search Tree (BSTs)#1. Core Properties|BST Properties]]**: The tree is ordered by **keys** (Left < Node < Right).
-2. **[[Heap#1. Heap Constraints|Heap Properties]]**: The tree is ordered by **priorities** (Parent priority > Child priority for a Max-Heap).
+
+# The Treap (Tree + Heap) Core Architecture
+
+A Treap is a binary tree structure where each node explicitly encapsulates two structural attributes: a **Key** and a **Priority**. To protect the integrity of the architecture, it must satisfy two data layout properties simultaneously:
+
+1.  **BST Operational Invariant:** The tree is sorted horizontally by keys ($\text{Left} < \text{Node} < \text{Right}$).
+2.  **Heap Operational Invariant:** The tree is ordered vertically by node priorities ($\text{Parent Priority} \ge \text{Child Priority}$, operating under max-heap rules).
 
 ![[Pasted image 20260114111803.png]]
 
 ---
-## 2. Fundamental Operations
 
-### Find
-Since a RST is a valid BST, the `find` algorithm is identical to a standard BST.
-- **Complexity**: $O(h)$, where $h$ is the tree height.
-- `find` algorithm found [[Binary Search Tree (BSTs)#`find(element)`|here]]
-### Insertion
-Insertion occurs in two distinct phases:
-1. **BST Insertion**: Insert the node based solely on its **key** as a leaf.
-2. **Heap Fix (Bubble Up)**: While the node’s priority is greater than its parent's, perform **[[#3. The Tool AVL Rotations|AVL Rotations]]** to move the node up without violating the BST property.
+# Fundamental Operations
+
+## `Find(element)`
+Since a Randomized Search Tree functions as a valid, standard [[Tree Structures/Binary Search Tree|Binary Search Tree]], lookups navigate down branches using key comparisons alone, bypassing priority scores entirely.
+
+- **Time Complexity:** Bounded by tree height: $O(h)$ operations.
+
+## `Insert(key, priority)`
+Insertion updates the tree topology through a two-phase lifecycle:
+
+1.  **BST Insertion Phase:** Walk down the branches based solely on key comparisons, appending the new item as a terminal leaf node.
+2.  **Heap Fix Phase (Bubble Up):** While the new node's priority is greater than its parent's priority, execute tree rotations to move the node up the structure without breaking the underlying left-to-right BST sequence.
 
 ![[Pasted image 20260114112415.png]]
 
-```C++
-insert(key, priority):
-    // Phase 1: Standard BST Insertion
-    node = perform_BST_insertion(key, priority)
-
-    // Phase 2: Bubble Up using Rotations
-    while node != root and node.priority > node.parent.priority:
-        if node == node.parent.leftChild:
-            AVLRight(node.parent)
-        else:
-            AVLLeft(node.parent)
+```pseudo
+	\begin{algorithm}
+	\caption{RST Node Insertion}
+	\begin{algorithmic}
+		\Procedure{Insert}{key, priority, root}
+			\State $node \gets$ \Call{PerformBSTInsertion}{key, priority, root}
+			\While{$node \neq root $\and$ node.\text{priority} > node.\text{parent}.\text{priority}$}
+				\If{$node == node.\text{parent}.\text{leftChild}$}
+					\State \Call{AVLRight}{$node.\text{parent}$}
+				\Else
+					\State \Call{AVLLeft}{$node.\text{parent}$}
+				\EndIf
+			\EndWhile
+		\EndProcedure
+	\end{algorithmic}
+	\end{algorithm}
 ```
 
-### Removal
-1. **BST Removal**: Remove the node based on its key.
-2. **Heap Fix (Trickle Down)**: If the successor moved into the position violates the Heap Property, use rotations to move it down until the property is restored.
+## `Remove(key)`
+1.  **BST Removal Phase:** Trace down the branches to isolate the target node matching the input key.
+2.  **Heap Fix Phase (Trickle Down):** If the substitute successor node brought into the position violates the priority hierarchy, run tree rotations to shift it down until max-heap ordering properties are restored.
 
 ---
-## 3. The Tool: [[AVL Tree#3. Rebalancing AVL Rotations|AVL Rotations]]
 
-Rotations are constant-time $O(1)$ operations that change the structure of the tree while preserving the relative sorted order of the keys.
+# The Structural Tool: Tree Rotations
+
+Rotations are constant-time $O(1)$ pointer-swapping operations that modify the physical layout of tree branches while preserving the relative left-to-right sorted sequence of the keys.
 
 ![[Pasted image 20260114111911.png]]
 
-| **Rotation**       | **Description**                                                                                |
-| ------------------ | ---------------------------------------------------------------------------------------------- |
-| **Right Rotation** | Moves a left child into the parent's position. Used when the left child has higher priority.   |
-| **Left Rotation**  | Moves a right child into the parent's position. Used when the right child has higher priority. |
-
-```pseudocode
-AVLRight(b): // Perform a right AVL rotation on node b
-    a = left child of b
-    y = right child of a (or NULL if a does not have a right child)
-    p = parent of b (or NULL if b does not have a parent)
-    if p is not NULL and b is the right child of p:
-        make a the right child of p
-    otherwise, if p is not NULL and b is the left child of p:
-        make a the left child of p
-    make y the left child of b
-    make b the right child of a
-
-AVLLeft(a): // Perform a left AVL rotation on node a
-    b = right child of a
-    y = left child of b (or NULL if b does not have a left child)
-    p = parent of a (or NULL if a does not have a parent)
-    if p is not NULL and a is the right child of p:
-        make b the right child of p
-    otherwise, if p is not NULL and a is the left child of p:
-        make b the left child of p
-    make y the right child of a
-    make a the left child of ﻿b
+| Rotation Style | Operational Description | Trigger Condition |
+|---|---|---|
+| **Right Rotation** | Promotes a left child into its parent's structural position. | Triggered when a left child node registers a higher priority score than its parent. |
+| **Left Rotation** | Promotes a right child into its parent's structural position. | Triggered when a right child node registers a higher priority score than its parent. |
+**RST Balance Rotations**
+```pseudo
+	\begin{algorithm}
+	\caption{RST Right Rotation}
+	\begin{algorithmic}
+		\Procedure{AVLRight}{b}
+			\State $a \gets b.\text{leftChild}$
+			\State $y \gets a.\text{rightChild}$
+			\State $p \gets b.\text{parent}$
+			\If{$p \neq \text{NULL} $\and$ b == p.\text{rightChild}$}
+				\State $p.\text{rightChild} \gets a$
+			\ElseIf{$p \neq \text{NULL} $\and$ b == p.\text{leftChild}$}
+				\State $p.\text{leftChild} \gets a$
+			\EndIf
+			\State $a.\text{parent} \gets p$
+			\State $b.\text{leftChild} \gets y$
+			\If{$y \neq \text{NULL}$}
+				\State $y.\text{parent} \gets b$
+			\EndIf
+			\State $a.\text{rightChild} \gets b$
+			\State $b.\text{parent} \gets a$
+		\EndProcedure
+	\end{algorithmic}
+	\end{algorithm}
+```
+```pseudo
+	\begin{algorithm}
+    \caption{RST Left Rotation}
+    \begin{algorithmic}
+		\Procedure{AVLLeft}{a}
+			\State $b \gets a.\text{rightChild}$
+			\State $y \gets b.\text{leftChild}$
+			\State $p \gets a.\text{parent}$
+			\If{$p \neq \text{NULL} $\and$ a == p.\text{rightChild}$}
+				\State $p.\text{rightChild} \gets b$
+			\ElseIf{$p \neq \text{NULL} $\and$ a == p.\text{leftChild}$}
+				\State $p.\text{leftChild} \gets b$
+			\EndIf
+			\State $b.\text{parent} \gets p$
+			\State $a.\text{rightChild} \gets y$
+			\If{$y \neq \text{NULL}$}
+				\State $y.\text{parent} \gets a$
+			\EndIf
+			\State $b.\text{leftChild} \gets a$
+			\State $a.\text{parent} \gets b$
+		\EndProcedure
+	\end{algorithmic}
+	\end{algorithm}
 ```
 
 ---
-## 4. Why Use Randomness?
-In a standard BST, if data is inserted in sorted order (1, 2, 3...), the tree becomes a linked list ($O(n)$). In an **RST**, we:
-1. Take the user's **key**.
-2. Generate a **random priority**.
-3. Insert the pair into the Treap.
 
-Because the priorities are random, the nodes "bubble up" into a topology that **mimics a tree built from a random insertion order**. This *guarantees* that the tree stays **balanced on average**, even if the keys themselves are sorted or patterned.
+# Why Use Randomness?
+
+In a native, non-balancing BST, introducing sorted data in sorted sequences (such as `[1, 2, 3, 4, 5]`) causes the nodes to stack into a single linear branch line. This degrades lookups to an expensive $O(n)$ search cost. An RST resolves this sorting risk through a distinct pipeline:
+
+1. Accepts the incoming key value from the input stream.
+2. Generates an independent, random priority score from a uniform distribution.
+3. Inserts the key-priority pair into the Treap container.
+
+Because the assigned priority weights are randomly distributed, the nodes bubble up into a balanced layout that mimics a standard tree built from a random insertion sequence. This keeps the branch height balanced on average, even if the input keys themselves are sorted or patterned.
 
 ---
-## 5. Performance Summary
 
-|**Case**|**Time Complexity**|
-|---|---|
-|**Average Case**|$O(\log n)$|
-|**Worst Case**|$O(n)$|
+# Performance Complexity Summary
 
-> [!NOTE]
-> 
-> While the RST effectively fixes the average case, the worst-case remains $O(n)$ (though it is statistically extremely unlikely). To guarantee $O(\log n)$ in the worst case, we must look toward structures like the **AVL Tree**.
+| Execution Case | Time Complexity | Structural Behavior Profile |
+|---|---|---|
+| **Average-Case** | $O(\log n)$ | Maintained via randomized priority distributions. |
+| **Worst-Case** | $O(n)$ | Occurs if random priority assignments happen to generate a sorted list layout (statistically rare). |
 
+> [!warning] Worst-Case Mitigation
+> While an RST fixes average-case degradation, its absolute worst-case boundary remains $O(n)$. In real-time production systems where worst-case delays are unacceptable, developers instead select strict, deterministic height-balanced models like the [[Tree Structures/AVL Tree|AVL Tree]] or [[Tree Structures/Red-Black Tree|Red-Black Tree]].
+
+---
+
+# Related Notes
+
+- [[Tree Structures/Binary Search Tree|Binary Search Tree]]
+- [[Tree Structures/AVL Tree|AVL Tree]]
+- [[Tree Structures/Heap|Heap]]
+- [[Tree Structures/Red-Black Tree|Red-Black Tree]]

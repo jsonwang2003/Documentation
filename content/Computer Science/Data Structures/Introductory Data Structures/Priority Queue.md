@@ -1,41 +1,68 @@
-## The Motivation: Beyond FIFO
-
-Traditional **Queues** follow the **First In, First Out (FIFO)** principle. While this works for grocery stores, it fails in environments like Emergency Rooms where urgency varies.
-- **The Problem**: A patient with a minor injury arrives first, but a patient with a life-threatening injury arrives later.
-- **The Solution**: An ordering system based on **priority** rather than arrival time.
-## The Priority Queue ADT
-
-A **Priority Queue** is a **"Highest Priority In, First Out" (HPIFO)** data type. It is defined by three primary operations:
-
-|**Function**|**Description**|
-|---|---|
-|**`insert(element)`**|Adds a new element to the collection.|
-|**`peek()`**|Returns the element with the **highest priority** without removing it.|
-|**`pop()`**|Removes the element with the **highest priority** from the collection.|
+---
+description: "An ordered dispatch container that routes elements based on individual priority scores rather than raw chronological arrival sequences."
+aliases:
+  - Priority Queue
+  - Priority Queue ADT
+  - HPIFO Queue
+tags:
+  - data-structures
+  - adt
+  - queues
+---
+> [!abstract] Abstract 
+> A Priority Queue is an [[Introductory Data Structures/Abstract Data Types (ADT)|Abstract Data Type]] governed by the Highest Priority In, First Out ($\text{HPIFO}$) dispatch model. While standard [[Introductory Data Structures/Queues|Queues]] handle items via chronological arrival sequences ($\text{FIFO}$), a Priority Queue re-orders the dispatch path so the most urgent item is consistently processed first, regardless of when it entered the collection.
+> 
+> - **Category:** Ordered Restrictions ADT
+> - **Core Rule:** Processing order follows an explicit priority score.
+> - **Optimal Implementation Backbone:** Tree-based [[Tree Structures/Heap|Binary Heaps]].
 
 ---
-## Implementation Trade-offs
-### Array (Hash Table)
 
-While a Priority Queue can be backed by simple linear data structures, they often result in inefficient worst-case time complexities:
-#### 1. Linked List / Array (Unsorted)
-- **Insertion**: $O(1)$ (just add to the end).
-- **Peek/Pop**: $O(n)$ (must scan the entire list to find the highest priority).
+# Architectural Motivation: Beyond FIFO
 
-#### 2. Linked List / Array (Sorted)
-- **Peek/Pop**: $O(1)$ (the highest priority is always at the front/back).
-- **Insertion**: $O(n)$ (must scan to find the correct position to maintain order).
-### The Optimal Solution: The Heap
+Standard queues operate on a strict First In, First Out ($\text{FIFO}$) baseline. While this provides a fair framework for linear workloads (like print jobs or checkout lines), it fails in operational environments with varying urgency levels:
 
-To achieve a balance between insertion and removal speeds, developers use a specialized tree-based data structure called a **[[Heap]]**.
+*   **The Operational Problem:** In an emergency room, a patient with a minor sprain might arrive at 8:00 AM, while a patient experiencing a life-threatening trauma arrives at 8:15 AM. A strict chronological queue would process the minor injury first, creating an unacceptable operational bottleneck.
+*   **The Structural Solution:** An ordering protocol that values priority over arrival time.
 
-> [!TIP] Performance Goal
-> 
-> By using a Heap, we can achieve the following worst-case complexities:
-> 
-> - **Peek**: $O(1)$
->     
-> - **Insert**: $O(\log n)$
->     
-> - **Pop**: $O(\log n)$
->
+---
+
+# Core Interface Contract
+
+A compliant Priority Queue ADT provides three primary operational capabilities:
+
+| Function Interface | Operational Execution Contract |
+|---|---|
+| `insert(element)` | Adds a new element to the internal collection. |
+| `peek()` | Identifies and returns the element holding the absolute highest priority score without removing it. |
+| `pop()` | Extracts and removes the element holding the absolute highest priority score from the container. |
+
+---
+
+# Backing Structural Implementation Trade-offs
+
+A Priority Queue interface can be backed by simple linear structures, but they introduce clear worst-case performance bottlenecks:
+
+### 1. Unsorted Array or Linked List Backbone
+*   **`insert(element)`:** $O(1)$ constant time, as elements are appended to the end of the linear structure without checking order.
+*   **`peek()` / `pop()`:** $O(n)$ linear time, because the engine must scan across the full collection to locate the item with the highest priority score.
+
+### 2. Sorted Array or Linked List Backbone
+*   **`peek()` / `pop()`:** $O(1)$ constant time, since the collection is sorted so the highest priority element always sits at a predictable boundary margin.
+*   **`insert(element)`:** $O(n)$ linear time, as the engine must perform a linear scan to find the correct sorted position for each incoming item.
+
+### The Optimal Backbone: Binary Heaps
+To prevent either insertion or extraction from stalling at $O(n)$, production systems implement Priority Queues using a specialized tree structure called a [[Tree Structures/Heap|Heap]]. This balances insertion and extraction times effectively:
+
+$$\begin{array}{ccc}  \mathbf{Operation} & \mathbf{Linear\ Baseline\ (Min/Max)} & \mathbf{Binary\ Heap\ Tree} \\  \hline  \text{peek()} & O(1) \text{ or } O(n) & O(1) \\  \text{insert(element)} & O(1) \text{ or } O(n) & O(\log n) \\ \text{pop()} & O(1) \text{ or } O(n) & O(\log n)  \end{array}$$
+
+> [!tip] Heap Efficiency
+> Using a [[Tree Structures/Heap|Heap]] guarantees that adding an element or popping the top item scales logarithmically, ensuring stable performance even under heavy workloads.
+
+---
+
+# Related Notes
+
+- [[Introductory Data Structures/Queues|Queues]]
+- [[Tree Structures/Heap|Heap]]
+- [[Tree Structures/index|Tree Structures]]

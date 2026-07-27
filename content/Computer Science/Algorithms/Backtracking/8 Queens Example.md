@@ -2,7 +2,7 @@
 aliases:
   - Eight Queens
   - 8 Queens
-desciption: "Classic backtracking problem: place 8 non-attacking queens on an 8x8 chessboard, pruning attacked columns as you go instead of generating full permutations."
+description: "Classic backtracking problem: place 8 non-attacking queens on an 8x8 chessboard, pruning attacked columns as you go instead of generating full permutations."
 tags:
   - algorithm
   - backtracking

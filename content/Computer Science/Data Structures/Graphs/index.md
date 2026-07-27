@@ -1,95 +1,77 @@
 ---
 title: Graphs
+description: An index covering foundational graph properties, classifications, structural constraints, and storage hub notes.
+aliases:
+  - Graph Theory Hub
+  - Network Algorithms Index
+tags:
+  - index
+  - graph-theory
+  - networks
 ---
-> [!ABSTRACT]
-> 
-> Navigation systems, social networks, and airport connections are all powered by **Graphs**. By abstracting real-world locations into **Nodes** and their connections into **Edges**, we can solve complex problems like finding the "shortest path" between any two points in the world.
 
----
-## 1. What is a Graph?
-
-A graph is a mathematical structure used to model relationships between objects. It consists of:
-- **Nodes (or Vertices):** The individual elements or "locations" in the system.
-- **Edges:** The connections between pairs of nodes.
-
-Unlike trees, graphs have no strict hierarchy. They can be:
-- **Disconnected:** Some nodes have no paths between them.
-
-![[Pasted image 20260222183847.png]]
-
-- **Sequential:** Nodes follow a linear path.
-
-![[Pasted image 20260222183859.png]]
-
-- **Hierarchical:** Organized like a tree (though trees are actually just a specific type of graph).
-
-![[Pasted image 20260222183908.png]]
-
-- **Complex:** A mix of connected and disconnected components.
-
-![[Pasted image 20260222183915.png]]
+# Overview 
+Navigation systems, social networks, and routing pipelines are all structurally powered by Graphs. By abstracting real-world components into nodes and their corresponding relationships into edges, we can apply deterministic optimization mechanics to solve complex computational challenges like discovering the absolute shortest path across an arbitrary network.
 
 ---
-## 2. Formal Definition
 
+## Foundational Concepts
+
+### What is a Graph?
+A graph is a non-linear mathematical structure used to model arbitrary relationships between discrete objects. Unlike [[Tree Structures/index|Tree Structures]], graphs have no built-in global root node or strict parent-child hierarchies. Instead, they form custom topographical networks that can be:
+*   **Disconnected:** Containing distinct structural clusters with zero path channels between them.
+*   **Sequential:** Nodes line up in a simple linear execution path.
+*   **Hierarchical:** Emulating tree-like dependencies (in fact, a tree is simply a connected, acyclic undirected graph).
+*   **Complex:** Intertwined multi-layered systems featuring dense cyclic tracking loops.
+
+### Formal Definition
 A graph $G$ is formally represented as an ordered pair $G = (V, E)$:
-- **$V$:** A set of vertices $\{v_1, v_2, \dots, v_n\}$.
-- **$E$:** A set of edges, where each edge $e$ is a pair of vertices $(v, w)$.
+*   **$V$:** A finite, non-empty set of vertices (or nodes): $X = \{v_1, v_2, \dots, v_n\}$.
+*   **$E$:** A set of edges (or links), where each individual edge $e \in E$ is a node pair $(v, w)$ mapping a connectivity lane.
+*   **Sizing Bounds:** The structural scale of a network is quantified by $|V|$ (vertex cardinality) and $|E|$ (edge cardinality). For any simple graph, $|E|$ is strictly bounded by $O(|V|^2)$.
 
-> [!Example] 
-> $e_1 = (a, b)$
-> 
-> ![[Pasted image 20260222184226.png]]
+```
+  Disconnected            Sequential            Hierarchical             Complex
+   (A)   (B)              (A) -> (B) -> (C)         (Root)              (A) <---> (B)
+                                                   /      \              ^         /
+   (C)   (D)                                    (B)        (C)           \       v
+                                               /   \                     (C) <-> (D)
+```
 
-The size of a graph is denoted by 
-- $|V|$ (number of vertices)
-- $|E|$ (number of edges).
+### Classifying Graphs
+*   **Directed Graph (Digraph):** Every edge has an explicit orientation arrow. The ordered pair $(v, w)$ defines a strictly one-way path from origin $v$ to destination $w$.
+*   **Undirected Graph:** Edges are inherently bidirectional. The pair $(v, w)$ is structurally identical to $(w, v)$, forming a shared two-way lane.
+*   **Weighted Graph:** Every edge is assigned a numerical cost metric $c$ representing physical distances, travel latency, or network bandwidth constraints.
+*   **Unweighted Graph:** All connection links are considered equal, effectively tracking unit costs of $1$.
 
----
-## 3. Classifying Graphs
-
-Graphs are categorized based on how their edges behave:
-
-### Directed vs. Undirected
-
-- **Directed Graph:** Edges have a specific direction (one-way). $(v, w)$ means you can go from $v$ to $w$, but not necessarily back.
-
-![[Pasted image 20260222184103.png]]
-
-- **Undirected Graph:** Edges are bidirectional. $(v, w)$ is equivalent to $(w, v)$.
-
-![[Pasted image 20260222184121.png]]
-
-### Weighted vs. Unweighted
-
-- **Weighted Graph:** Each edge has a "cost" or "weight" $c$ (e.g., distance or travel time).
-
-![[Pasted image 20260222184133.png]]
-
-- **Unweighted Graph:** All edges are considered equal (effectively having a weight of 1).
+### Paths and Cycles
+*   **Path:** A continuous sequence of edges linking a starting node to a destination node across a graph.
+*   **Cycle:** A path that begins and terminates at the exact same vertex without re-evaluating edges.
+*   **DAG (Directed Acyclic Graph):** A specialized directed graph architecture that contains absolutely zero internal cycles, serving as the foundational basis for scheduling and dependency sorting.
 
 ---
-## 4. Paths and Cycles
 
-- **Path:** A sequence of edges connecting a start node to an end node.
-    
-- **Cycle:** A path that starts and ends at the same node.
+## Core Shared Matrix
 
-![[Pasted image 20260222184404.png]]
+| Property | Mathematical Constraint | Real-World Paradigm Examples |
+| :--- | :--- | :--- |
+| **Directed** | Edge relations are ordered pairs: $(v, w) \neq (w, v)$ | One-way street routes; asymmetric web links. |
+| **Undirected** | Edge relations are symmetric sets: $(v, w) == (w, v)$ | Bidirectional highway lines; network peer connections. |
+| **Weighted** | Functional mapping: $E \rightarrow \mathbb{R}$ | Fiber-optic cable length paths; airline fuel costs. |
+| **Acyclic** | Graph contains no valid cyclic sub-paths | Academic course prerequisite tracks; compilation steps. |
 
-$$
-\boxed{a} \to b \to c \to d \to \boxed{a}
-$$
-
-- **DAG (Directed Acyclic Graph):** A directed graph that contains no cycles.
-
-> More information can be found [[Graph Reachability|here]]
 ---
-## 5. Summary of Properties
 
-|**Property**|**Description**|**Real-World Example**|
-|---|---|---|
-|**Directed**|Edges have arrows/direction|One-way streets; Twitter followers|
-|**Undirected**|Edges are bidirectional|Two-way streets; Facebook friends|
-|**Weighted**|Edges have numerical values|Distance in miles; Toll costs|
-|**Acyclic**|No paths loop back to start|Prerequisites for a college major|
+## Notes in This Section
+
+| Note | One-line description | Foundational Dependency |
+| :--- | :--- | :--- |
+| **[[Graph Representations]]** | Compares the architectural tradeoffs and spatial density profiles of Adjacency Matrices vs. Lists. | Memory bounds selection. |
+| **[[Disjoint Sets & Up-Trees]]** | Implements a fast tracking forest to manage elements partitioned into isolated, independent subsets. | Dynamic connectivity engine. |
+| **[[Minimum Spanning Trees]]** | Solves total edge cost reduction across weighted graphs without introducing cycles. | Optimization algorithms. |
+
+---
+
+## Related Categories
+*   [[Tree Structures/index|Tree Structures Overview]]
+*   [[Coding and Information Compression/index|Coding and Information Compression foundations]]

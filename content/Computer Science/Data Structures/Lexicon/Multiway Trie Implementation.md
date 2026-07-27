@@ -1,120 +1,170 @@
-> [!ABSTRACT]
+---
+description: "A specialized prefix tree structure optimizing string lookups and prefix auto-complete features within a deterministic worst-case path runtime."
+aliases:
+  - Multiway Trie
+  - Prefix Tree Lexicon
+  - Trie Lexicon
+tags:
+  - lexicon
+  - data-structures
+  - trees
+  - strings
+---
+> [!abstract] Abstract 
+> A Multiway Trie (or Prefix Tree) is a specialized tree structure designed specifically for storing and matching string sets. It achieves a worst-case time complexity of $O(k)$ for lookups (where $k$ matches the length of the string) while preserving alphabetical tracking order—a dual capability that standard [[Hashing/Hash Tables|Hash Tables]] cannot match.
 > 
-> A **[[Multiway Trie]]** (or Prefix Tree) is a data structure designed specifically for storing sets of strings. It achieves a **worst-case time complexity of $O(k)$** for lookups, where $k$ is the length of the word, while maintaining alphabetical ordering—a feat that Hash Tables cannot match.
+> - **Category:** Character Path Prefix Tree
+> - **Core Traversal Invariant:** Paths represent character sequences; keys match edge transitions.
+> - **Key Capabilities:** High-speed prefix queries and auto-complete indexing.
 
 ---
-## 1. Mechanics: The Path-to-Word Mapping
 
-In a Lexicon implemented via a **Multiway Trie**, words are not stored as single values within nodes. Instead, they are represented by the **edges** traversed from the root:
-1. **Traversal:** To find a word, the system follows the edges labeled with the word's characters in sequence.
-2. **Validation:** A word is only considered "in the lexicon" if the traversal ends at a node explicitly marked as a **word-node**.
+# Mechanics: The Edge-Path Mapping
 
-![[Pasted image 20260128113527.png]]
+In a Lexicon backed by a Multiway Trie, words are not stored as standalone properties inside single nodes. Instead, they are represented by the explicit sequence of labeled edges traversed starting from the root node:
 
-> [!IMPORTANT] **Edges, Not Nodes!** In a Multiway Trie, letters label the **edges**, not the nodes.
-> - An **empty** trie is a single root node with no edges.
-> - Inserting a single-letter word like "a" requires creating a **second node** so the character "a" can label the connecting edge.
+*   **Edge Tracking:** To locate a word, the search engine walks down edge transitions labeled with successive characters of the input string.
+*   **Validation Flags:** A word is confirmed to exist in the lexicon *only* if the character traversal loop terminates on a node explicitly marked with a `word-node` boundary flag.
+
+```
+       (Root Node)
+          | 'c'
+        [Node]
+          | 'a'
+        [Node]
+          | 't'
+     (Word Node: "cat")
+```
+
+> [!important] Edges vs. Nodes Notation
+> Inside a Multiway Trie, character letters label the connecting **edges**, not the nodes themselves. An empty Trie is a single root node with no outgoing transitions. Inserting a single-letter word like "a" requires creating a child node so the character "a" can label the newly formed edge.
 
 ---
-## 2. Performance Analysis
 
-### `find(word)`
+# Algorithmic Operations
 
-**Complexity: $O(k)$**
+## `Find(word)`
+Starts at the root node and sequentially follows the edge labeled with each consecutive letter of the word.
+
+- **Time Complexity:** $O(k)$ worst-case boundary.
+
+```
+[Search Logic Flow]
+1. Does edge for character exist?
+   NO  --> Stop: Word is missing.
+   YES --> Advance to child node.
+2. Exhausted all characters?
+   YES --> Is final node flagged as a word-node?
+           YES --> Return true (Word Found)
+           NO  --> Return false (Prefix Only)
+```
 
 ![[Pasted image 20260128114050.png]]
 
-To find a word, start at the root and, for each letter of the word, follow the corresponding edge of the current node.
-- **Failure (Missing Edge):** If the edge you need to traverse does not exist, the word is not in the trie.
-- **Failure (Not a Word Node):** Even if the path exists, if the final node reached is not labeled as a "word node," the word does not exist in the trie (it is merely a prefix of another word).
-- **Success:** A word only exists if you traverse all required edges and land on a labeled **word node**.
-
-```cpp
-find(word): // find word in this Multiway Trie
-    curr = root
-    for each character c in word:
-        if curr does not have an outgoing edge labeled by c:
-            return False
-        else:
-            curr = child of curr along edge labeled by c
-    if curr is a word-node:
-        return True
-    else:
-        return False
+```pseudo
+	\begin{algorithm}
+	\caption{Multiway Trie Find Algorithm}
+	\begin{algorithmic}
+		\Procedure{Find}{word, root}
+			\State $curr \gets root$
+			\For{each character $c$ in word}
+				\If{curr does not have an outgoing edge labeled by $c$}
+					\Return $\text{false}$
+				\EndIf
+				\State $curr \gets \text{child of curr along edge labeled by } c$
+			\EndFor
+			\Return curr.isWordNode
+		\EndProcedure
+	\end{algorithmic}
+	\end{algorithm}
 ```
 
-### `insert(word)`
+## `Insert(word)`
+Traces the character edge path from the root, creating new child nodes and labeled edges whenever a character transition is missing, and flags the final terminal node as a valid word-node.
 
-**Complexity: $O(k)$**
+- **Time Complexity:** $O(k)$ operational steps.
 
 ![[Pasted image 20260128114116.png]]
 
-The insertion algorithm attempts to follow the `find` logic but builds the path where it is missing.
-1. Start at the root and attempt to follow edges for each character in the word.
-2. **Create Missing Edges:** If at any point the required edge does not exist, create the edge and the node it points to.
-3. **Label Final Node:** Once the end of the word is reached, label the final node as a **word node**.
-
-```cpp
-insert(word): // insert word into this Multiway Trie
-    curr = root
-    for each character c in word:
-        if curr does not have an outgoing edge labeled by c:
-            create a new child of curr with the edge labeled by c
-        curr = child of curr along edge labeled by c
-    if curr is not a word-node:
-        label curr as a word-node
+```pseudo
+	\begin{algorithm}
+	\caption{Multiway Trie Insertion}
+	\begin{algorithmic}
+		\Procedure{Insert}{word, root}
+			\State $curr \gets root$
+			\For{each character $c$ in word}
+				\If{curr does not have an outgoing edge labeled by $c$}
+					\State \Call{CreateChildNode}{curr, c}
+				\EndIf
+				\State $curr \gets \text{child of curr along edge labeled by } c$
+			\EndFor
+			\If{curr.isWordNode $\neq$ \True}
+				\State curr.isWordNode $\gets \text{true}$
+			\EndIf
+		\EndProcedure
+	\end{algorithmic}
+	\end{algorithm}
 ```
 
-### `remove(word)`
+## `Remove(word)`
+Follows the character path to the terminal node and unmarks the `word-node` flag. The parent nodes and character edges are preserved to protect other words that share those prefixes.
 
-**Complexity: $O(k)$**
+- **Time Complexity:** $O(k)$ operational steps.
 
 ![[Pasted image 20260128114106.png]]
 
-Removing a word is essentially a `find` operation followed by an unmarking step.
-1. Follow the `find` algorithm to locate the word's terminal node.
-2. If the word is not found, no action is needed.
-3. If found, simply **remove the "word node" label** from that node. The path remains to preserve other words that may share those prefixes.
-
-```cpp
-remove(word): // remove word from this Multiway Trie
-    curr = root
-    for each character c in word:
-        if curr does not have an outgoing edge labeled by c:
-            return
-        else:
-            curr = child of curr along edge labeled by c
-    if curr is a word-node:
-        remove the word-node label of curr
+```pseudo
+	\begin{algorithm}
+	\caption{Multiway Trie Removal}
+	\begin{algorithmic}
+		\Procedure{Remove}{word, root}
+			\State $curr \gets root$
+			\For{each character $c$ in word}
+				\If{curr does not have an outgoing edge labeled by $c$}
+					\Return
+				\EndIf
+				\State $curr \gets \text{child of curr along edge labeled by } c$
+			\EndFor
+			\If{curr.isWordNode == \True}
+				\State curr.isWordNode $\gets \text{false}$
+			\EndIf
+		\EndProcedure
+	\end{algorithmic}
+	\end{algorithm}
 ```
 
-### Space Complexity
+---
 
-**Complexity: $O(n \times |\Sigma|)$**
+# Advanced Lexicon Features
 
-To maintain $O(1)$ access to each child during traversal, nodes typically use an array of size $|\Sigma|$ (the alphabet size). While fast, this is memory-inefficient as many slots remain empty.
+The hierarchical prefix structure of the Trie enables operations that are difficult to implement using standard arrays or hash structures:
+
+*   **Alphabetical Iteration:** By performing a **Pre-Order Traversal** (visiting child branches in alphabetical order), the entire lexicon can be printed in sorted order.
+*   **Auto-complete Prefix Extraction:** By traversing down a chosen prefix path (e.g., "cat") and then executing a traversal across that isolated subtree, the engine instantly returns all stored words starting with that specific prefix (e.g., "cats", "catnip", "cathedral").
 
 ---
-## 3. Advanced Lexicon Features
-The hierarchical structure of the Trie enables features essential for modern digital dictionaries.
-- **Alphabetical Iteration:** By performing a **Pre-order Traversal** (visiting children in alphabetical order), the entire lexicon can be printed in sorted order.
-- **Auto-complete:** By traversing to a specific prefix node (e.g., "cat") and then performing a traversal on its subtree, the system can instantly retrieve all words starting with that prefix (e.g., "cats", "catnip", "cathedral").
+
+# Space Complexity and Memory Allocation Trade-offs
+
+*   **Space Complexity:** $O(n \times |\Sigma|)$ where $|\Sigma|$ represents alphabet size.
+*   **The Memory Bottleneck:** To maintain quick direct access to children during transitions, each node typically encapsulates an array of size $|\Sigma|$ (e.g., 26 pointers for English text). If the Trie is sparse, the vast majority of these pointer slots sit empty as `NULL`, introducing significant memory overhead.
 
 ---
-## 4. Evaluation for Lexicon ADT
 
-While the Multiway Trie is incredibly fast, it is often criticized for its memory consumption:
-- **Speed:** It offers **worst-case $O(k)$** speed. Unlike Hash Tables, there is no risk of collisions degrading performance to $O(n)$.
-- **Ordering:** It is superior to Hash Tables for tasks requiring alphabetical order or prefix matching.
-- **Memory Waste:** This is the primary drawback. Each node stores an array of $|\Sigma|$ pointers (e.g., 26 for English). If the trie is sparse, most of these pointers are `NULL`, leading to significant space inefficiency.
+# Structural Comparison: Hash Table vs. Multiway Trie
 
----
-## 5. Comparison: Hash Table vs. Multiway Trie
-
-|**Feature**|**Hash Table (Average)**|**Multiway Trie (Worst-Case)**|
+| Technical Feature | Hash Table Implementation (Average) | Multiway Trie Implementation (Worst-Case) |
 |---|---|---|
-|**Search Speed**|$O(k)$|**$O(k)$**|
-|**Alphabetical Order**|No|**Yes**|
-|**Auto-complete**|No|**Yes**|
-|**Space Efficiency**|Moderate ($O(n)$)|Low (Wasted array slots)|
-|**Deterministic**|No (Average-case focus)|**Yes** (Strictly $O(k)$)|
+| **Search Speed** | $O(k)$ character hashing evaluation | $O(k)$ character path edge steps |
+| **Alphabetical Ordering** | No | Yes (Supported natively via pre-order walks) |
+| **Auto-complete Queries** | Unsupported | Supported natively via subtree sweeps |
+| **Space Efficiency** | Moderate ($O(n)$ flat bound allocations) | Low (Wasted array pointer slots per node) |
+| **Determinism Profile** | Non-deterministic average-case performance | Strictly deterministic $O(k)$ paths |
+
+---
+
+# Related Notes
+
+- [[Lexicon/Hash Table Implementation|Hash Table Implementation]]
+- [[Lexicon/Binary Search Tree Implementation|Binary Search Tree Implementation]]
+- [[Multiway Trie|Multiway Trie]]

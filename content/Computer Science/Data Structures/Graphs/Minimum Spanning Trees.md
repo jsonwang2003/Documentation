@@ -1,74 +1,126 @@
 ---
+description: "The Minimum Spanning Tree problem asks for a subset of edges that connects all vertices in an undirected weighted graph without any cycles, while minimizing total edge weight."
 aliases:
-  - MST
-description: A Minimum Spanning Tree is a subset of a graph’s edges that connects all vertices with no cycles and with the smallest possible total edge weight.
+  - MST Problem
+  - Spanning Tree Optimization
+  - Prim's Algorithm Implementation
+  - Kruskal's Algorithm Implementation
 tags:
-  - MinimumSpanningTree
-  - Tree
+  - greedy-algorithms
+  - graph-optimization
+  - network-design
 ---
 
-> [!ABSTRACT]
-> 
-> The **Minimum Spanning Tree** problem asks for a subset of edges that connects all vertices in an undirected weighted graph without any cycles, while minimizing the total edge weight. This is the foundational logic for cost-efficient network design (e.g., laying fiber-optic cables across a campus).
+# Purpose
+The **Minimum Spanning Tree (MST)** problem focuses on isolating an optimized subset of edges that completely links every vertex across a connected, weighted undirected graph without introducing structural cycles, while minimizing the absolute sum of all chosen edge weights. This serves as the computational foundation for low-cost distribution networks (e.g., minimizing physical cable layouts across a system layout).
+
+**Category:** Graph Optimization / Network Management  
+**Solves:** Total cost minimization across distribution systems.  
+**Typical use cases:** Designing high-efficiency utility routing, clustering analysis, network backbone layout design.
 
 ---
-# Defining the Spanning Tree
 
-A **Spanning Tree** of a connected, undirected graph $G = (V,E)$ is a subgraph $G' = (V', E')$ that:
+## Concepts
 
-- **Spans:** It includes every vertex of $G$.
-- **$G'$ Is a Tree:** It is connected and contains **no cycles**.
-- **Edge Count:** For a graph with $|V|$ vertices, the spanning tree must have exactly $|V| - 1$ edges.
+### Defining the Spanning Tree
+For any connected, undirected graph $G = (V, E)$, an internal Spanning Tree is a specific subgraph $G' = (V, E')$ that spans every single vertex of $V$, preserves baseline connectivity, introduces absolutely zero cycles, and maintains exactly $|V| - 1$ total edges. 
 
-> **STOP and Think:** A single graph can have many different spanning trees. However, if all edge weights are unique, there is only **one** unique Minimum Spanning Tree.
+> [!IMPORTANT] Uniqueness Invariant
+> If every single edge weight metric across a connected graph structure is distinct and unique, the graph contains exactly one absolute Minimum Spanning Tree solution.
 
----
-# MST Algorithms: Prim’s vs. Kruskal’s
-
-While both algorithms find the MST in $O(|E| \log |E|)$ time, they approach the problem with different "greedy" strategies.
-
-## [[Prim's Algorithm]] (Vertex-Centric)
-
-Prim’s grows the tree from a **starting root**, similar to how Dijkstra’s explores a graph.
-
-1. Start with an arbitrary vertex.
-2. At each step, identify all edges connecting the current tree to "untouched" vertices.
-3. Add the **cheapest** edge to the tree.
-4. Repeat until all vertices are in the tree.
-
-**Implementation Note:** Uses a **Priority Queue** to store edges connected to the growing tree, sorted by individual edge weight.
-
-## [[Kruskal's Algorithm]] (Edge-Centric)
-
-Kruskal’s treats the graph as a **forest** of individual nodes and merges them together.
-
-1. Sort **all** edges in the graph by weight from smallest to largest.
-2. Pick the smallest edge.
-3. If adding this edge does not create a cycle, add it to the MST.
-4. If it creates a cycle, discard it.
-5. Repeat until you have $|V| - 1$ edges.
-
-**Implementation Note:** Uses a **Priority Queue** for all edges and a **Union-Find (Disjoint Set)** data structure to check for cycles efficiently.
-
-> [!Important] Proving **Prim's** and **Kruskal's**
-> Use [[Cut Property]] to prove the 2 algorithm, which indicates that for any way of splitting a graph's vertices into 2 groups, the cheapest edge crossing that split is guaranteed to be in the same **Minimum Spanning Tree**
+### The Cut Property
+The foundational mathematical theorem used to prove the global correctness of greedy graph optimization models. For any valid cut that partitions a graph's vertices into two isolated tracking subsets, the single lowest-cost edge crossing that cut boundary is mathematically guaranteed to be included in an optimal Minimum Spanning Tree.
 
 ---
-# Comparison of Approaches
 
-| Feature           | Prim's Algorithm           | Kruskal's Algorithm       |
-| ----------------- | -------------------------- | ------------------------- |
-| Strategy          | Grows a single tree        | Merges a forest of trees  |
-| Priority Queue    | Stores edges from the tree | Stores ALL edges in graph |
-| Cycle Detection   | "Done" boolean check       | Union-Find structure      |
-| Best For          | Dense Graphs               | Sparse Graphs             |
-| Negative Weights? | Yes (Unlike Dijkstra)      | Yes                       |
-| Complexity        | $O(\|E\| \log \|V\|)$      | $O(\|E\| \log \|E\|)$     |
+## How It Works
+While standard weight-blind traversal engines like [[Breadth First Search (BFS)|BFS]] can discover generic spanning structures in $O(|V| + |E|)$ time, they are weight-blind. They accept the first paths they encounter, missing optimal weight choices. To handle weighted layouts safely, we deploy specialized greedy optimization routines.
+
+> [!TIP] Key Idea
+> Prim's grows a single unified tree entity out from a singular root node, while Kruskal's aggregates individual structural components across an open grid ecosystem using an underlying disjoint set lookup to bridge isolated forests.
 
 ---
-# Why BFS/DFS Isn't Enough
 
-While **BFS** and **DFS** can find _any_ spanning tree in $O(|V| + |E|)$, they are "weight-blind." They will return the first edges they find, which rarely results in the minimum cost. Prim’s and Kruskal’s ensure that the final result is the absolute cheapest configuration possible.
+## Algorithm Implementations
 
-> [!Note] 
-> In Kruskal’s, an edge connecting two already-visited vertices doesn't _always_ create a cycle. This is because those vertices might belong to two different "islands" (trees) in the forest that haven't been connected yet.
+### Prim's Algorithm (Vertex-Centric Approach)
+Prim's grows a unified spanning structure node-by-node, starting from an arbitrary root vertex. This design mirrors Dijkstra’s Algorithm by maintaining a priority queue tracking the minimum cost to attach unvisited nodes to the growing tree.
+
+```pseudo
+\begin{algorithm}
+\caption{Prim's MST Algorithm}
+\begin{algorithmic}
+\Procedure{Prim}{$G, startVertex$}
+    \ForAll{$v \in \text{Vertices}(G)$}
+        \State $\text{key}[v] \gets \infty$
+        \State $\text{parent}[v] \gets \text{NULL}$
+        \State $\text{visited}[v] \gets \text{FALSE}$
+    \EndFor
+    \State $\text{key}[startVertex] \gets 0$
+    \State $\text{Queue} \gets \text{InitializeMinPriorityQueue()}$
+    \State \Call{Insert}{$\text{Queue}, \text{startVertex}, 0$}
+    \While{$\text{Queue is not empty}$}
+        \State $u \gets$ \Call{ExtractMin}{$\text{Queue}$}
+        \State $\text{visited}[u] \gets \text{TRUE}$
+        \ForAll{$(u, v) \in \text{AdjacentEdges}(G, u)$}
+            \If{$\text{visited}[v] == \text{FALSE} \land \text{Weight}(u, v) < \text{key}[v]$}
+                \State $\text{parent}[v] \gets u$
+                \State $\text{key}[v] \gets \text{Weight}(u, v)$
+                \State \Call{DecreaseKeyOrInsert}{$\text{Queue}, v, \text{key}[v]$}
+            \endif
+        \EndFor
+    \EndWhile
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+```
+
+### Kruskal's Algorithm (Edge-Centric Approach)
+Kruskal's shifts focus to the graph edges. It handles components as a decentralized collection of small trees, repeatedly pulling the global absolute lowest-cost edge available out of a queue and merging components if they pass validation checks via a disjoint-set manager.
+
+```pseudo
+\begin{algorithm}
+\caption{Kruskal's MST Algorithm}
+\begin{algorithmic}
+\Procedure{Kruskal}{$G$}
+    \State $MST \gets \emptyset$
+    \ForAll{$v \in \text{Vertices}(G)$}
+        \State \Call{Makeset}{$v$}
+    \EndFor
+    \State $\text{Queue} \gets \text{InitializeMinPriorityQueue()}$
+    \ForAll{$e \in \text{Edges}(G)$}
+        \State \Call{Insert}{$\text{Queue}, e, \text{Weight}(e)$}
+    \EndFor
+    \While{$\text{Queue is not empty} \land$ \Call{Size}{MST} < \Call{Count}{$\text{Vertices}(G)$} - $1$}
+        \State $e \gets$ \Call{ExtractMin}{$\text{Queue}$}
+        \State $rootU \gets$ \Call{Find}{$e.u$}
+        \State $rootV \gets$ \Call{Find}{$e.v$}
+        \If{$rootU \neq rootV$}
+            \State $MST \gets MST \cup \{e\}$
+            \State \Call{Union}{$rootU, rootV$}
+        \EndIf
+    \EndWhile
+    \Return $MST$
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+```
+
+---
+
+## Comparison of Optimization Approaches
+
+| Performance Parameter          | Prim's Algorithm Strategy                       | Kruskal's Algorithm Strategy                      |
+| :----------------------------- | :---------------------------------------------- | :------------------------------------------------ |
+| **Core Architecture**          | Concentric Vertex Expansion                     | Distributed Edge Consolidation                    |
+| **Priority Queue Contents**    | Bounded Vertices ($O(\|V\|)$)                   | Total Graph Edges ($O(\|E\|)$)                    |
+| **Cycle Prevention Mechanism** | Simple `visited[]` Boolean Check                | [[Disjoint Sets & Up-Trees\|Union-Find Up-Trees]] |
+| **Ideal Performance Target**   | Dense Graph Topologies                          | Sparse Graph Topologies                           |
+| **Negative Weights Handling**  | Supported natively                              | Supported natively                                |
+| **Asymptotic Complexity**      | $O(\|E\|\log\|V\|)$ using [[Heap\|Binary Heap]] | $O(\|E\|\log\|E\|)$ driven by initial sort        |
+
+---
+
+## Related Notes
+*   **[[Disjoint Sets & Up-Trees]]** — Direct component partition manager running Kruskal's cycle verification routines.
+*   **[[Graph Representations]]** — Dictates neighbor discovery speeds ($O(|V|)$ vs $O(\text{deg}(u))$), directly scaling Prim's inner loop.

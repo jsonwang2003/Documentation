@@ -1,140 +1,169 @@
 ---
+description: "A dynamic memory collection composed of sequential node objects linked via explicit pointer addresses to provide nimble memory growth."
+aliases:
+  - Linked List
+  - Singly-Linked List
+  - Doubly-Linked List
 tags:
-  - LinkedList
+  - data-structures
+  - dynamic-memory
+  - linked-lists
 ---
-Developed in 1955 by Allen Newell, Cliff Shaw, and Herbert A. Simon at RAND Corporation, the linked list is a dynamically-allocated data structure that grows as needed in memory.
-
----
-### Core Components: Nodes
-
-Nodes are individual containers holding a single element, linked via **pointers**.
-- **Head Pointer**: Global pointer to the first node; primary entry point for traversal.
-- **Tail Pointer**: Global pointer to the last node.
-- **Access Limitation**: Only head and tail have direct access; all other nodes require traversal starting from these points.
-
----
-
-### Structure Variations
-
-| Feature               | Singly-Linked List                   | Doubly-Linked List                    |
-| --------------------- | ------------------------------------ | ------------------------------------- |
-| **Pointers per Node** | 1 (Points to the next node)          | 2 (Points to next and previous)       |
-| **Direction**         | Unidirectional (Forward only)        | Bidirectional (Forward and Backward)  |
-| **Termination**       | Tail points to NULL                  | Head.prev and Tail.next point to NULL |
-| **Illustration**      | ![[Pasted image 20260103224206.png]] | ![[Pasted image 20260103224211.png]]  |
-
-> [!Question] If I only have direct access to the **head** or **tail** pointer in a Linked List, and I can only access the other elements by following the nodes' pointers, what is the worst-case time complexity of finding an element in a Linked List with $n$ elements?
-> > [!Tip]- Answer
-> > $O(n)$
+> [!abstract] Abstract 
+> Developed in 1955 by Allen Newell, Cliff Shaw, and Herbert A. Simon at RAND Corporation, the linked list is a dynamically allocated data structure that grows as needed in memory. It bypasses the contiguous allocation constraints of standard [[Introductory Data Structures/Array Lists|Array Lists]] by linking scattered node containers via explicit system pointers.
+> 
+> - **Category:** Dynamic Linked Structures
+> - **Core Node Anatomy:** Formed of an internal data value paired with directional address pointers.
+> - **Entry Constraints:** Direct access is restricted to boundary `head` and `tail` pointers; finding interior elements requires sequential traversal.
 
 ---
-### Operations and Complexity
 
-#### Searching
-Because data is not stored contiguously, random access is impossible. Finding an element requires iterating through nodes one-by-one.
-- **Worst-Case Complexity**: O(n)
-- **Optimization**: In a **Doubly-Linked List**, if the index is closer to the end, you can start at the tail and traverse backward to save time.
+# Structural Variations
 
-![[Pasted image 20260103224648.png]]
+Linked Lists are configured into two primary architectural variants based on pointer depth:
 
-```Python
-# Search by element
-def find(element):
-    current = head
-    while current is not NULL:
-        if current.data == element: return True
-        current = current.next
-    return False
+| Architectural Feature | Singly-Linked List | Doubly-Linked List |
+|---|---|---|
+| **Pointers per Node** | 1 (Points exclusively forward to the next node) | 2 (Points symmetrically to next and previous nodes) |
+| **Traversal Direction** | Unidirectional (Forward only) | Bidirectional (Forward and backward) |
+| **Termination Bounds** | Final node's `next` reference points to `NULL` | `head.prev` and `tail.next` point to `NULL` |
 
-# Search by index
-def find(index):
-    if index < 0 or index >= n: return NULL
-    current = head
-    for i from 0 to index-1:
-        current = current.next
-    return current
+### Structural Illustrations
+
+![[Pasted image 20260103224206.png]]
+
+![[Pasted image 20260103224211.png]]
+
+> [!warning] Access Limitations Complexity
+> If direct structural references are limited to `head` or `tail` markers, finding a node inside a Linked List containing $n$ elements incurs an $O(n)$ linear time complexity, as the system must step through the pointer chain node-by-node.
+
+---
+
+# Core Operations
+
+## Searching & Value Traversal
+Finding an item or resolving an index requires sequential traversal from boundary references.
+
+- **Time Complexity:** $O(n)$ worst-case.
+- **Optimization:** In a Doubly-Linked List, if the requested index sits closer to the trailing margin, the routine can start at the `tail` and step backward to halve traversal overhead.
+
+```pseudo
+	\begin{algorithm}
+	\caption{Linked List Search Algorithms}
+	\begin{algorithmic}
+		\Procedure{FindByElement}{$element, head$}
+			\State $current \gets head$
+			\While{$current \neq \text{NULL}$}
+				\If{$current.data == element$}
+					\Return $\text{true}$
+				\EndIf
+				\State $current \gets current.next$
+			\EndWhile
+			\Return $\text{false}$
+		\EndProcedure
+
+		\Procedure{FindByIndex}{$index, head, n$}
+			\If{$index < 0$ \or $index \ge n$}
+				\Return $\text{NULL}$
+			\EndIf
+			\State $current \gets head$
+			\For{$i \gets 0 \text{ to } index - 1$}
+				\State $current \gets current.next$
+			\EndFor
+			\Return current
+		\EndProcedure
+	\end{algorithmic}
+	\end{algorithm}
 ```
 
-> [!Question] Notice that when we look for an element in the middle of the Linked List, we start at the head and step forward. This works fine if the index is towards the beginning of the list, but what about when the index of interest is large (closer to $n$)? Can we speed things up?
-> > [!Tip]- Answer
-> > Yes, if the Linked List in question is a doubly-linked list, we can traverse backward instead, having a faster time to get to the element in question
-#### Inserting
-1. **Find Target**: Locate the position directly before the insertion index.
-2. **Rearrange Pointers**:
-    - New node's _next_ → node previously at index i.
-    - New node's _prev_ → node before index i.
-    - Node before index i's _next_ → New node.
-    - Node previously at index i's _prev_ → New node.
+## Element Insertion
+Inserting an element requires locating the node preceding the target position and updating neighboring pointers to splice in the new node container.
 
-|Insertion Point|Complexity|Note|
-|---|---|---|
-|**Head / Tail**|O(1)|Direct access via global pointers.|
-|**Middle**|O(n)|Requires traversal to find the site.|
+- **Time Complexity:** $O(1)$ at boundary margins (`head`/`tail`); $O(n)$ for internal positions due to the traversal cost of locating the insertion site.
 
 ![[Pasted image 20260103230232.png]]
 
-```python
-# inserts newnode at position "index" of Linked List
-insert(newnode, index):  
-	if index == 0:                  # special case for insertion at beginning of list 
-		newnode.next = head 
-		head.prev = newnode 
-		head = newnode 
-	else if index == size:          # special case for insertion at end of list 
-		newnode.prev = tail 
-		tail.next = newnode 
-		tail = newnode 
-	else:                           # general case for insertion in middle of list 
-		curr = head 
-		repeat index-1 times:       # move curr to directly before insertion site 
-			curr = curr.next 
-		newnode.next = curr.next    # update the pointers 
-		newnode.prev = curr 
-		curr.next = newnode 
-		newnode.next.prev = newnode 
-		
-	size = size + 1                 # increment size
+```pseudo
+	\begin{algorithm}
+	\caption{Doubly Linked List Insertion}
+	\begin{algorithmic}
+		\Procedure{Insert}{$newnode, index, head, tail, size$}
+			\If{$index == 0$}
+				\State $newnode.next \gets head$
+				\State $head.prev \gets newnode$
+				\State $head \gets newnode$
+			\ElseIf{$index == size$}
+				\State $newnode.prev \gets tail$
+				\State $tail.next \gets newnode$
+				\State $tail \gets newnode$
+			\Else
+				\State $curr \gets head$
+				\For{$i \gets 0 \text{ to } index - 2$}
+					\State $curr \gets curr.next$
+				\EndFor
+				\State $newnode.next \gets curr.next$
+				\State $newnode.prev \gets curr$
+				\State $curr.next \gets newnode$
+				\State $newnode.next.prev \gets newnode$
+			\EndIf
+			\State $size \gets size + 1$
+		\EndProcedure
+	\end{algorithmic}
+	\end{algorithm}
 ```
-#### Removal
-1. **Find Target**: Locate the node to be removed.
-2. **Rearrange Pointers**: Link the surrounding nodes to each other, bypassing the target node.
+
+## Element Removal
+Bypasses a targeted node by linking its preceding and succeeding neighbors directly to each other.
+
+- **Time Complexity:** $O(1)$ at boundary edges; $O(n)$ for internal nodes.
 
 ![[Pasted image 20260103232512.png]]
 
-> [!Question] Notice that the node we removed still exists in the diagram. Not considering memory management (only thinking in terms of data structure functionality), is this an issue?
-> > [!Tip]- Answer
-> > No, the removed node no longer effects the data structure. It only wastes unnecessary memory space
-
-```python
-# removes the element at position "index" of Linked List
-remove(index):
-	if(index == 0):                  # special case for removing from beginning of list
-		head = head.next
-		head.prev = NULL
-	else if index == n - 1:          # special case for removing from end of list
-		tail = tail.prev
-		tail.next = NULL
-	else:                            # general case for removing from middle of list
-		curr = head;
-		repeat index - 1 times:      # move curr to directly before removal site
-			curr = curr.next
-		curr.next = curr.next.next   # update the pointers
-		curr.next.prev = curr
-	n = n - 1                        # decrement n
+```pseudo
+	\begin{algorithm}
+	\caption{Doubly Linked List Removal}
+	\begin{algorithmic}
+		\Procedure{Remove}{$index, head, tail, n$}
+			\If{$index == 0$}
+				\State $head \gets head.next$
+				\State $head.prev \gets \text{NULL}$
+			\EndIf
+			\If{$index == n - 1$}
+				\State $tail \gets tail.prev$
+				\State $tail.next \gets \text{NULL}$
+			\Else
+				\State $curr \gets head$
+				\For{$i \gets 0 \text{ to } index - 2$}
+					\State $curr \gets curr.next$
+				\EndFor
+				\State $curr.next \gets curr.next.next$
+				\State $curr.next.prev \gets curr$
+			\EndIf
+			\State $n \gets n - 1$
+		\EndProcedure
+	\end{algorithmic}
+	\end{algorithm}
 ```
 
+> [!note] Memory Cleanup Realities
+> In the removal diagram, the decoupled node remains stranded in system space. From a strict data structure interface perspective, this does not break functionality because the item is unreachable. However, in non-garbage-collected environments (like C++), you must explicitly delete the unlinked node to avoid memory leaks.
+
 ---
-### Summary: Linked Lists vs. Array Lists
 
-|Feature|Linked List|Array List|
+# Architectural Comparison Matrix
+
+| Technical Feature | Linked List Implementation | Array List Implementation |
 |---|---|---|
-|**Access/Search**|O(n) — Sequential only|O(1) Access / O(logn) Search (Sorted)|
-|**Head Insert/Delete**|O(1) — Pointer swap|O(n) — Requires shifting all elements|
-|**Tail Insert/Delete**|O(1) — Pointer swap|O(1) Amortized|
-|**Memory Usage**|Dynamic — No wasted slots|Static/Chunked — Potential wasted space|
-|**Memory Overhead**|Higher — Stores data + pointers|Lower — Stores only data|
+| **Access / Search Cost** | $O(n)$ linear pointer sequence traversal | $O(1)$ random access / $O(\log n)$ sorted binary search |
+| **Head Insert / Delete** | $O(1)$ quick pointer reassignment swap | $O(n)$ linear data block shifting |
+| **Tail Insert / Delete** | $O(1)$ direct pointer assignment | Amortized $O(1)$ capacity shifting |
+| **Memory Footprint** | Dynamic growth layout; no empty pre-allocated slots | Bounded continuous chunks; can leave unused margins |
+| **Pointer Overhead** | Higher cost due to storing address references | Minimal cost; tracks data elements only |
 
-**Key Takeaways:**
-- **Linked Lists** excel at the ends of the list and offer efficient memory growth without pre-allocation.
-- **Array Lists** dominate in search-heavy scenarios and random access.
-- Neither strategy is strictly superior; the choice depends on the specific frequency of operations in your application.
+---
+
+# Related Notes
+
+- [[Introductory Data Structures/Array Lists|Array Lists]]
+- [[Introductory Data Structures/Circular Arrays|Circular Arrays]]
+- [[Introductory Data Structures/Skip Lists|Skip Lists]]

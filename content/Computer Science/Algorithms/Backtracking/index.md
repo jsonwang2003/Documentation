@@ -32,18 +32,19 @@ The main implementation strategy for backtracking is to recurse on smaller subpr
 
 # Notes in This Section
 
-| Note                        | One-line description                                                                                                                                          |
-| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [[8 Queens]]                | Place 8 non-attacking queens on a chessboard — pruning attacked cells column by column instead of generating full permutations                                |
-| [[Sudoku]]                  | Fill a partially-completed grid — pick the least-constrained cell, try the smallest valid digit, backtrack on dead ends                                       |
-| [[Maximal Independent Set]] | Find the largest set of mutually non-adjacent vertices — refined through three iterations from $O(2^n)$ down to $O(1.48^n)$ by exploiting low-degree vertices |
+| Note                                                         | One-line description                                                                                                                                          |
+| ------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [[8 Queens Example\|8 Queens]]                               | Place 8 non-attacking queens on a chessboard — pruning attacked cells column by column instead of generating full permutations                                |
+| [[Sudoku Example\|Sudoku]]                                   | Fill a partially-completed grid — pick the least-constrained cell, try the smallest valid digit, backtrack on dead ends                                       |
+| [[Maximal Independent Set Example\|Maximal Independent Set]] | Find the largest set of mutually non-adjacent vertices — refined through three iterations from $O(2^n)$ down to $O(1.48^n)$ by exploiting low-degree vertices |
 
 ---
 
 # Related Categories
 
-- [[Divide and Conquer Cheatsheet]]
+- [[Computer Science/Algorithms/Divide and Conquer/index|Divide and Conquer]]
 - [[Computer Science/Algorithms/Greedy Algorithms/index|Greedy Algorithms]]
 - [[Computer Science/Algorithms/Dynamic Programming/index|Dynamic Programming]]
 
-> [!tip] Where This Leads: Dynamic Programming Backtracking recursions often revisit structurally identical subproblems multiple times along different branches — for example, [[Maximal Independent Set]]'s recursive calls on overlapping vertex subsets, or two different partial Sudoku fills that happen to leave the same remaining sub-grid. [[Computer Science/Algorithms/Dynamic Programming/index|Dynamic Programming]] is the natural next step from here: instead of recomputing a subproblem's answer every time it's encountered, cache (memoize) it — which can turn an exponential backtracking algorithm into a polynomial one, _when_ the number of distinct subproblems is itself polynomial. (Note this isn't automatic — [[Maximal Independent Set]] is a case where the subproblems, arbitrary induced subgraphs, don't collapse down to a small polynomial set, which is part of why it stays exponential even after heavy refinement.)
+> [!tip] Where This Leads: Dynamic Programming 
+> Backtracking recursions often revisit structurally identical subproblems multiple times along different branches — for example, [[Maximal Independent Set Example|Maximal Independent Set]]'s recursive calls on overlapping vertex subsets, or two different partial Sudoku fills that happen to leave the same remaining sub-grid. [[Computer Science/Algorithms/Dynamic Programming/index|Dynamic Programming]] is the natural next step from here: instead of recomputing a subproblem's answer every time it's encountered, cache (memoize) it — which can turn an exponential backtracking algorithm into a polynomial one, _when_ the number of distinct subproblems is itself polynomial. (Note this isn't automatic — [[Maximal Independent Set Example|Maximal Independent Set]] is a case where the subproblems, arbitrary induced subgraphs, don't collapse down to a small polynomial set, which is part of why it stays exponential even after heavy refinement.)

@@ -1,70 +1,107 @@
-> [!ABSTRACT]
+---
+description: "A layered probabilistic linked search structure that uses randomized express layers to achieve logarithmic performance over linked lists."
+aliases:
+  - Skip List
+  - Probabilistic Linked List
+tags:
+  - data-structures
+  - probabilistic
+  - search-optimization
+---
+> [!abstract] Abstract 
+> Invented by William Pugh in 1989, a Skip List is a space-efficient probabilistic data structure that uses multiple layers of forward pointers to simulate a binary search over a [[Introductory Data Structures/Linked List|linked list]]. It avoids the $O(n)$ data-shifting penalty of sorted [[Introductory Data Structures/Array Lists|array lists]] while bypassing the $O(n)$ search constraints of standard sequential linked lists.
 > 
-> Invented by William Pugh in 1989, the Skip List uses **multiple layers of forward pointers** and **random number generation** to simulate a binary search over a [[Computer Science/Data Structures/Introductory Data Structures/Linked List|linked structure]]. It avoids the $O(n)$ insertion/removal penalty of sorted arrays while bypassing the $O(n)$ search penalty of standard linked lists.
+> - **Category:** Probabilistic Linked Architecture
+> - **Structural Composition:** Multiple stacked layers of sorted nodes connected via skip pointers.
+> - **Average-Case Search Complexity:** $O(\log n)$ performance.
 
 ---
-## 1. Core Structure
-A Skip List is a collection of sorted nodes arranged in **layers**.
-- **Layer 0**: The bottom-most layer is a standard, sorted Linked List containing all elements.
-- **Express Layers**: Each higher layer ($1, 2, \dots, h$) contains a subset of the nodes below it, acting as "express lanes" to skip over large sections of the list.
-- **Head**: The head node contains an array of pointers, one for each level of the list.
+
+# Core Layered Topology
+
+A Skip List organizes sorted data nodes into a vertical hierarchy of express lanes:
+
+*   **Layer 0 (The Base Link):** The bottom-most layer is a complete, standard, sorted [[Introductory Data Structures/Linked List|Linked List]] tracking every element in the collection.
+*   **Express Layers (Layers 1 to $h$):** Each higher level tracks a sparser subset of the nodes below it, acting as shortcuts to skip over wide blocks of data during searches.
+*   **The Head Node Array:** The sentinel head node holds an array of forward-facing pointers, with one pointer dedicated to each level of the hierarchy.
 
 ---
-## 2. Basic Operations
-### Find
-To find element $e$, start at the **highest layer** of the head node.
-1. Move forward on the current layer until the next node is larger than $e$ or is `NULL`.
-2. Drop down one layer.
-3. Repeat until $e$ is found or you "fall off" the list at Layer 0.
 
-```C++
-find(element):
-    current = head
-    layer = head.height
-    while layer >= 0:
-        if current.key == element: return True
-        if current.next[layer] == NULL or current.next[layer].key > element:
-            layer = layer - 1 // Drop down
-        else:
-            current = current.next[layer] // Move forward
-    return False
+# Algorithmic Operations
+
+## `Find(element)`
+Starts at the highest level of the head node sentinel. It steps forward along the current layer until the next node's key is larger than the target or hits `NULL`, at which point it drops down one level to repeat the process.
+
+- **Time Complexity:** $O(\log n)$ average-case; degrades to $O(n)$ in the worst case if coin-flip distributions fail.
+
+```pseudo
+	\begin{algorithm}
+	\caption{Skip List Search Routine}
+	\begin{algorithmic}
+		\Procedure{Find}{$element, head$}
+			\State $current \gets head$
+			\State $layer \gets head.height$
+			\While{$layer \ge 0$}
+				\If{$current.key == element$}
+					\Return $\text{true}$
+				\EndIf
+				\If{$current.next[layer] == \text{NULL}$ \or $current.next[layer].key > element$}
+					\State $layer \gets layer - 1$
+				\Else
+					\State $current \gets current.next[layer]$
+				\EndIf
+			\EndWhile
+			\Return $\text{false}$
+		\EndProcedure
+	\end{algorithmic}
+	\end{algorithm}
 ```
 
-### Remove
-1. Perform the `find` algorithm to locate the node.
-2. Update the `next` pointers of the preceding nodes on every layer the target node occupied to point to the target's successors.
-
-### Insert
-1. Search for the insertion position.
-2. Determine the **height** of the new node using a **coin-flip game**.
-3. Update pointers to splice the new node into the appropriate layers.
+## `Insert(key)` & `Remove(key)`
+*   **Insertion Steps:** The system runs the search routine to identify the correct insertion slot at the base layer. It then uses a randomized coin-flip game to determine the vertical height of the new node, updating the forward-facing pointers of preceding neighbors across all assigned levels.
+*   **Removal Steps:** The system uses the search routine to locate the target node, tracks its predecessors across all levels it occupies, and updates their pointers to bypass the removed item.
 
 ---
-## 3. The Probability Mechanics
-The height of a new node is determined randomly to ensure a balanced distribution.
 
-### The Coin-Flip Game
-- Start at height 0.
-- Flip a coin with probability $p$ of success (Heads).
-- If Heads: Increase height by 1 and flip again.
-- If Tails: Stop.
+# Probability Mechanics & Node Height Sizing
 
-This process follows a **Geometric Distribution**: $P(X=k) = p^k(1-p)$, where $k$ is the number of successes before the first failure.
-### "Smart Choices" for $p$
-The performance of a Skip List depends on the probability $p$ and the maximum height.
-- **Average Search Complexity**: $O(\log n)$.
-- **Worst-Case Complexity**: $O(n)$ (if all nodes have height 0).
-- **Optimal Height**: Usually defined as $\log_{1/p} n$.
-- **Choosing $p$**: While $p=0.5$ is common (standard coin), smaller values of $p$ reduce the space overhead (fewer pointers) while slightly increasing the number of comparisons.
+The vertical node height distribution is managed dynamically via an internal randomized coin-flip routine to avoid requiring complex structural rebalancing operations:
+
+### The Coin-Flip Game Strategy
+1.  Start tracking at a baseline height of 0.
+2.  Flip a random coin with a success probability metric $p$ (Heads).
+3.  If Heads manifests, increment the tracking height by 1 and execute another flip step.
+4.  If Tails manifests, stop flipping and assign the accumulated height value to the node.
+
+This operational process fits a **Geometric Distribution**: 
+
+$$ P(X = k) = p^k \cdot (1 - p) $$
+
+where $k$ represents the number of sequential successes completed before encountering the first failure.
+
+### Selecting the Probability Metric $p$
+*   **Average Search Boundary:** $O(\log n)$ time.
+*   **Worst-Case Boundary:** $O(n)$ time (manifests if coin flips fail to generate express layers, leaving only the base layer).
+*   **Optimal Height Bound:** Typically defined as $\log_{1/p} n$.
+*   **Design Tuning:** While $p = 0.5$ is standard, reducing $p$ saves memory by decreasing pointer overhead at the cost of slightly increasing the average number of search comparisons.
 
 ---
-## 4. Performance Comparison
 
-|**Feature**|**Sorted Array**|**Linked List**|**Skip List (Avg)**|
+# Architectural Performance Matrix
+
+| Metric Performance | Sorted Array List | Standard Linked List | Skip List (Average) |
 |---|---|---|---|
-|**Search**|$O(\log n)$|$O(n)$|**$O(\log n)$**|
-|**Insert**|$O(n)$|$O(1)^*$|**$O(\log n)$**|
-|**Remove**|$O(n)$|$O(1)^*$|**$O(\log n)$**|
-|**Space**|$O(n)$|$O(n)$|**$O(n)$**|
+| **Search / Find** | $O(\log n)$ | $O(n)$ | $O(\log n)$ |
+| **Insert Operation** | $O(n)$ | $O(1)^*$ | $O(\log n)$ |
+| **Remove Operation** | $O(n)$ | $O(1)^*$ | $O(\log n)$ |
+| **Space Overhead** | $O(n)$ | $O(n)$ | $O(n)$ |
 
-_*Note: Linked List insert/remove is $O(1)$ only if the position is already known; finding the position is $O(n)$._
+> [!note] Core Comparison Details
+> Standard [[Introductory Data Structures/Linked List|Linked List]] insertions and removals run in $O(1)$ constant time only if the system already holds a direct pointer to the target edit location. Locating that specific node profile using standard list searching still introduces an $O(n)$ linear traversal cost. The Skip List avoids this bottleneck, matching the fast search speed of a sorted array while keeping modifications efficient.
+
+---
+
+# Related Notes
+
+- [[Introductory Data Structures/Linked List|Linked List]]
+- [[Introductory Data Structures/Array Lists|Array Lists]]

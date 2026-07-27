@@ -1,40 +1,67 @@
-> [!ABSTRACT]
+---
+description: "A compact Lexicon architecture leveraging sorted contiguous slots to provide logarithmic binary search lookups."
+aliases:
+  - Array Lexicon
+  - Sorted Array Lexicon
+tags:
+  - lexicon
+  - data-structures
+  - arrays
+---
+> [!abstract] Abstract 
+> An Array implementation of a Lexicon relies on hardware Random Access to enable high-speed Binary Search algorithms. While it incurs a high cost for word list modifications ($O(n)$ to shift elements), it is a superior choice for a Lexicon where word lookups dominate and the underlying dictionary remains relatively static.
 > 
-> An **[[Array Lists|Array]]** implementation of a Lexicon relies on **Random Access** to enable **[[Computer Science/Discrete Structures/Discrete Algorithms/Searching/Binary Search]]**. While it incurs a high cost for modifications ($O(n)$ to shift elements), it is a superior choice for a Lexicon where word lookups are frequent and the dictionary remains relatively static.
+> - **Category:** Contiguous Sorted Lexicon
+> - **Key Advantage:** Instant random access to any relative index coordinate.
+> - **Optimal Environment:** Static, read-heavy word list validation.
 
 ---
-## 1. Why Sorting Matters
 
-In a Lexicon, an unsorted array is no better than a [[Linked List Implementation]] (requiring a $O(n)$ Linear Search). However, a **Sorted Array** changes the math:
-- **Random Access:** Because array slots are contiguous in memory, we can calculate the address of any index in $O(1)$ time.
-- **Binary Search:** Using random access, we can check the middle element, discard half the list, and repeat. This reduces the search space from $n$ to $1$ in just $\log_2 n$ steps.
+# Why Sorting and Random Access Matter
 
----
-## 2. Performance Analysis
+In a Lexicon context, an unsorted array is no more efficient than a [[Introductory Data Structures/Linked List|linear linked list]], requiring an $O(n)$ linear scan. However, keeping the contiguous array in a sorted alphabetical sequence fundamentally shifts the operational math:
 
-Because we keep the array sorted and compact (no gaps), our complexity reflects the cost of maintaining that order.
-
-| **Operation**      | **Complexity**  | **Logic**                                                          |
-| ------------------ | --------------- | ------------------------------------------------------------------ |
-| **`find(word)`**   | **$O(\log n)$** | Enabled by **Binary Search**.                                      |
-| **`insert(word)`** | $O(n)$          | Must shift existing elements to maintain alphabetical order.       |
-| **`remove(word)`** | $O(n)$          | Must shift elements to fill the gap left by the deleted word.      |
-| **Space**          | $O(n)$          | $n$ slots for words, plus potential overhead for dynamic resizing. |
+*   **Random Access:** Because array slots sit perfectly contiguous in hardware memory blocks, the platform calculates the exact address of any index position in $O(1)$ constant time.
+*   **Binary Search:** Utilizing random access, the search engine samples the middle element, discards the unmatching half of the list, and repeats the split. This compresses the search space from $n$ elements down to a single element in just $\log_2 n$ steps.
 
 ---
-## 3. Evaluation for Lexicon ADT
 
-The Array implementation aligns well with our specific Lexicon assumptions:
-- **Fast Lookups:** $O(\log n)$ is a massive improvement over $O(n)$. For a dictionary of 170,000 words, Binary Search takes about **18 comparisons**, whereas a Linked List could take **170,000**.
-- **Infrequent Updates:** While $O(n)$ insertion is slow, it is acceptable in this context because we rarely add or remove words from a language.
-- **Memory Efficiency:** Arrays are very space-efficient, though **Dynamic Arrays** may temporarily double their allocated space ($2n$) to accommodate growth.
+# Performance Analysis
 
----
-## 4. Comparison: Linked List vs. Array
+Because we maintain the backing array in a tightly sorted, compact arrangement with no internal gaps, our operational complexity reflects the cost of maintaining that order:
 
-|**Feature**|**Linked List**|**Sorted Array**|
+| Lexicon Operation | Complexity | Algorithmic Logic |
 |---|---|---|
-|**Search Speed**|$O(n)$|**$O(\log n)$**|
-|**Random Access**|No|**Yes**|
-|**Insertion**|$O(1)$ (if unsorted)|$O(n)$|
-|**Memory Overhead**|Pointers for every node|Contiguous block|
+| **`find(word)`** | $O(\log n)$ | Enabled by rapid Binary Search splits. |
+| **`insert(word)`** | $O(n)$ | Requires shifting trailing elements right to open an alphabetical slot. |
+| **`remove(word)`** | $O(n)$ | Requires shifting trailing elements left to close the gap of the deleted word. |
+| **Space Complexity** | $O(n)$ | Tracks $n$ slots for words, plus transient buffers for dynamic resizing. |
+
+---
+
+# Evaluation for the Lexicon ADT
+
+The Sorted Array implementation aligns cleanly with our core [[Lexicon/index|Lexicon ADT]] design rules:
+
+*   **Fast Lookups:** An $O(\log n)$ boundary is a massive improvement over linear lists. For a standard lexicon containing 170,000 words, Binary Search resolves a lookup in roughly 18 comparisons, whereas a linked list could exhaust all 170,000 pointer records.
+*   **Infrequent Updates:** While $O(n)$ element shifting is computationally slow, it is acceptable here because we rarely introduce or remove terms from a language dictionary in everyday use.
+*   **Memory Efficiency:** Arrays offer excellent space efficiency, though dynamic vectors may temporarily double their memory footprint ($2n$) during reallocation steps to accommodate growth.
+
+---
+
+# Structural Comparison: Linked List vs. Sorted Array
+
+| Technical Parameter | Linked List Implementation | Sorted Array Implementation |
+|---|---|---|
+| **Search Speed** | $O(n)$ linear traversal | $O(\log n)$ binary search |
+| **Random Access** | Impossible | Native ($O(1)$ address math) |
+| **Insertion Mechanism** | Pointer redirection ($O(n)$ sorted) | Contiguous cell shifting ($O(n)$) |
+| **Memory Overhead** | High (Node pointers tracking elements) | Low (Contiguous data block allocation) |
+
+---
+
+# Related Notes
+
+- [[Introductory Data Structures/Array Lists|Array Lists]]
+- [[Lexicon/Binary Search Tree Implementation|Binary Search Tree Implementation]]
+- [[Lexicon/Linked List Implementation|Linked List Implementation]]

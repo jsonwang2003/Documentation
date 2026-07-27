@@ -1,100 +1,141 @@
-> [!ABSTRACT]
+---
+description: "A specialized multi-pattern string matching finite state machine that incorporates failure paths to deliver linear scans across text streams."
+aliases:
+  - Aho-Corasick Automaton
+  - Aho-Corasick Algorithm
+  - AC Automaton
+  - Dictionary Matching Machine
+tags:
+  - data-structures
+  - string-searching
+  - automata
+  - bioinformatics
+---
+> [!abstract] Abstract 
+> The Aho-Corasick Automaton is a space-efficient multi-pattern matching data structure that functions as a specialized finite state machine. By adding sequential "failure loops" and "dictionary links" onto a standard [[Lexicon/Multiway Trie Implementation|Multiway Trie]] backbone, it enables the simultaneous search of an entire dictionary of motif sequences during a single linear scan over a target text stream.
 > 
-> In molecular biology, finding restriction enzyme motifs in a genome is a massive string-matching problem. While naive algorithms take $O(nmk)$ time, the **Aho-Corasick Algorithm** uses a specialized finite state machine called an **Automaton** to find all occurrences of all motifs in a single $O(n)$ linear scan.
+> - **Category:** Automata-Based Search Structure
+> - **Input Constraints:** Preprocesses a static dictionary of multiple pattern string motifs.
+> - **Key Advantage:** Bypasses manual pointer rollbacks, processing text in strictly linear time.
+> - **Typical use cases:** Genomic restriction enzyme motif mining, intrusion detection signature matching, text spam filtering layers.
 
 ---
-## 1. The Scaling Problem
 
-Searching for millions of short motifs ($m$) within a 3-billion-base genome ($n$) is computationally expensive.
-- **Naive Search:** $O(nmk)$. Each motif is searched individually across every position in the genome.
+# The Scaling and Restart Problem
 
-```cpp
-// Naive Search
-for each word w in D: 
-	for each valid start position i of Q: 
-		if w == Q's substring of length |w| starting at i: 
-			w was found at position i of Q
-```
+In fields like molecular biology, discovering millions of short motif sub-sequences (of aggregate count $m$) inside a massive genome string (of length $n$) introduces major computational bottlenecks:
 
-- **[[Multiway Trie]]:** $O(nk)$. By combining motifs into a tree, we check multiple words simultaneously, but we still have to restart the search for every new starting position in the genome.
+*   **The Naive Scanning Baseline:** Searching for each motif sequence individually against every text offset yields a sluggish execution runtime of $O(n \cdot m \cdot k)$ (where $k$ represents the average character length of a motif pattern).
+*   **The Multiway Trie Deficit:** Combining motifs into a [[Lexicon/Multiway Trie Implementation|prefix tree]] enables checking multiple candidate words simultaneously. However, whenever a character mismatch manifests down a path, the text search pointer must roll back and restart the matching loop from the very next character offset in the genome, leading to a degraded $O(n \cdot k)$ runtime.
 
 ![[Pasted image 20260202103725.png]]
 
 ---
-## 2. The Aho-Corasick Automaton
 
-The **Aho-Corasick Automaton** solves the restart problem by adding "shortcuts" to a standard **Trie**. This allows the algorithm to transition between motifs without ever re-reading a character of the genome.
+# The Structural Tracking Shortcuts
 
-### Failure Links: The Error Recovery
+The Aho-Corasick Automaton solves this tracking restart bottleneck by constructing secondary fallback shortcuts across the Trie layout. These allow the search pointer to pivot to alternative word branches without ever re-reading characters in the text stream.
 
-A **Failure Link** connects a node $u$ to another node $v$ if the path to $v$ is the longest possible suffix of the path to $u$.
-- **If you fail:** When the next character in the genome doesn't match any child edge, you follow the failure link.
-- **Why it works:** It preserves the progress you've already made by jumping to the start of another word that shares a suffix with what you just typed.
+### 1. Failure Links (Error Recovery Routing)
+A Failure Link connects an active node $u$ to an alternative internal node $v$ if and only if the characters trace-path leading to $v$ constitutes the longest possible proper suffix of the trace-path leading to $u$.
 
-> [!Note] Not including the full path from the root to $u$
-> This will cause the **failure link** to always point to $u$
-
-```cpp
-for each node 'curr' in a BFS starting at the root:
-    if curr is the root or is a child of the root:
-        create failure link from curr to the root
-    else:
-        p = parent of curr
-        c = label of edge going into curr
-        x = node pointed to by p's failure link
-        repeat infinitely:
-            if x has a child with edge label c:
-                create failure link from curr to that child of x
-                break
-            else if x is the root:
-                create failure link from curr to the root
-                break
-            else:
-                x = node pointed to by x's failure link
-```
+*   **Fallback Behavior:** When an incoming character from the text stream fails to match any available child edge of the current node state, the automaton follows the failure link to recover.
+*   **State Preservation:** This jump preserves the lookahead progress already made by immediately landing the pointer at the prefix of another dictionary word sharing matching characters.
 
 ![[Pasted image 20260202104005.png]]
 
-### Dictionary Links: Finding Hidden Words
+```pseudo
+	\begin{algorithm}
+	\caption{Aho-Corasick Failure Link Construction}
+	\begin{algorithmic}
+		\Procedure{BuildFailureLinks}{root}
+			\State $queue \gets \text{Initialize empty FIFO queue}$
+			\For{each child $curr$ of root}
+				\State $curr.\text{failure} \gets root$
+				\State \Call{Enqueue}{queue, curr}
+			\EndFor
+			\While{\Call{IsEmpty}{queue} == $\text{false}$}
+				\State $curr \gets$ \Call{Dequeue}{queue}
+				\For{each child $child$ of curr with edge label $c$}
+					\State $x \gets curr.\text{failure}$
+					\While{$x \neq \text{NULL}$}
+						\If{x has child with edge label $c$}
+							\State $child.\text{failure} \gets \text{child of } x \text{ along edge } c$
+							\Break
+						\EndIf
+						\If{$x == root$}
+							\State $child.\text{failure} \gets root$
+							\Break
+						\EndIf
+						\State $x \gets x.\text{failure}$
+					\EndWhile
+					\State \Call{Enqueue}{queue, child}
+				\EndFor
+			\EndWhile
+		\EndProcedure
+	\end{algorithmic}
+	\end{algorithm}
+```
 
-Sometimes, a word exists completely inside another word (e.g., "A" exists inside "GCA"). If you are at the end of "GCA," you might miss "A" because it ended earlier.
-- **Dictionary Links** point to the nearest node that represents a complete word in your database.
-- When you land on a node, you follow its dictionary links to report every word that ends at that current position in the genome.
-- For each node $u$, draw a link to the first word node you would encounter if you were to repeatedly traverse **failure links**. If no such word node exists, $u$ will not have a **dictionary link**.
+### 2. Dictionary Links (Nested Keyword Detection)
+When short patterns reside entirely inside longer words (e.g., motif `"A"` nested inside string `"GCA"`), a search engine can easily glide past the shorter pattern because its terminal match occurs early.
+
+*   **The Blueprint:** A Dictionary Link points from a node $u$ directly to the nearest reachable node that represents an explicit complete word entry by following failure tracks.
+*   **Reporting:** Whenever the tracking pointer lands on a node state, the engine follows its dictionary links to emit notifications for every nested keyword ending at that exact text offset.
 
 ![[Pasted image 20260202105153.png]]
 
 ---
-## 3. Algorithm Summary
 
-### Construction (Preprocessing)
+# Data Structure Operations
 
-1. Build a **Multiway Trie** of all motifs in your database.
-2. Use a **Breadth-First Search (BFS)** to calculate failure links.
-3. Calculate dictionary links to ensure no overlapping motifs are missed.
+### Preprocessing Automaton Setup
+1. Assemble a standard [[Lexicon/Multiway Trie Implementation|Multiway Trie]] containing all targeted search patterns.
+2. Run a Breadth-First Search (BFS) traversal loop across the tree nodes to map failure links row by row.
+3. Pre-calculate dictionary link pointers to capture overlapping and nested matches.
 
-### Scanning (The Linear Scan)
+### The Linear Scanning Cycle
+The search pass operates in strictly deterministic $O(n)$ time because the stream index pointer only moves forward. If an edge mismatch triggers fallback tracking, the automaton state updates via failure jumps while the text pointer remains stationary.
 
-The scan is $O(n)$ because the pointer in the genome only ever moves forward. If a mismatch occurs, the "state" of the automaton shifts via failure links, but the genome index remains the same.
+- **Time Complexity:** $O(n + \text{matches})$ runtime execution.
 
-```C++
-scan(genome):
-    curr = root
-    for each nucleotide c in genome:
-        while curr cannot move to c:
-            if curr == root: break
-            curr = follow_failure_link(curr)
-        
-        curr = move_to_child(curr, c)
-        // Report every motif found ending at this position
-        report_all_matches(curr) 
+```pseudo
+	\begin{algorithm}
+	\caption{Aho-Corasick Text Stream Scanning}
+	\begin{algorithmic}
+		\Procedure{ScanStream}{text, root}
+			\State $curr \gets root$
+			\For{each character $c$ in text}
+				\While{curr cannot move to $c$}
+					\If{$curr == root$}
+						\Break
+					\EndIf
+					\State $curr \gets curr.\text{failure}$
+				\EndWhile
+				\If{curr has child with edge label $c$}
+					\State $curr \gets \text{child of curr along edge } c$
+				\EndIf
+				\State \Call{ReportAllMatches}{curr}
+			\EndFor
+		\EndProcedure
+	\end{algorithmic}
+	\end{algorithm}
 ```
 
 ---
-## 4. Performance Comparison
 
-|**Algorithm**|**Complexity**|**Efficiency**|
+# Performance Complexity Comparison
+
+| Search Architecture Pattern | Time Complexity Profile | Operational Scan Efficiency |
 |---|---|---|
-|**Naive Search**|$O(nmk)$|Extremely Slow|
-|**Multiway Trie**|$O(nk)$|Much Faster|
-|**Aho-Corasick**|**$O(n)$**|**Optimal**|
+| **Naive Scan Pattern** | $O(n \cdot m \cdot k)$ | Extremely Slow (Redundant rescans) |
+| **[[Lexicon/Multiway Trie Implementation\|Multiway Trie Structure]]** | $O(n \cdot k)$ | Moderate (Requires pattern rollbacks) |
+| **[[String Searching Data Structures/Aho-Corasick Automaton\|Aho-Corasick Automaton]]** | $O(n)$ | Optimal Linear Throughput |
+
+---
+
+# Related Notes
+
+- [[Lexicon/Multiway Trie Implementation|Multiway Trie Implementation]]
+- [[String Searching Data Structures/Suffix Arrays|Suffix Arrays]]
+- [[String Searching Data Structures/Burrows-Wheeler Transformation|Burrows-Wheeler Transformation]]

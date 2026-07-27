@@ -1,253 +1,220 @@
-> [!ABSTRACT]
+---
+description: "A hybrid structure combining Multiway Trie prefix searching with Binary Search Tree memory efficiency by using three child branches per node."
+aliases:
+  - Ternary Search Tree
+  - TST
+tags:
+  - data-structures
+  - trees
+  - strings
+---
+> [!abstract] Abstract 
+> A Ternary Search Tree (TST) is a hybrid data structure that combines the prefix-searching logic of a [[Tree Structures/Multiway Trie|Multiway Trie]] with the space-efficient storage of a [[Tree Structures/Binary Search Tree|Binary Search Tree (BST)]]. Each node stores a single character and has exactly three potential children: **Left**, **Middle**, and **Right**.
 > 
-> A **Ternary Search Tree** is a hybrid data structure that combines the prefix-searching logic of a [[Multiway Trie]] with the space-efficient storage of a [[Binary Search Tree (BSTs)]]. Each node stores a single character and has exactly three potential children: **Left**, **Middle**, and **Right**.
+> - **Category:** Hybrid Character Branching Tree
+> - **Branching Factor:** Exactly 3 pointers per node (`leftChild`, `middleChild`, `rightChild`).
+> - **Key Advantage:** Eliminates the empty pointer array overhead of Multiway Tries while retaining prefix searching capabilities.
 
 ---
-## 1. Structural Logic
+
+# Structural Logic
+
 In a TST, the relationship between a node and its children is determined by character comparisons and word progression:
-- **Left Child:** Stores characters that are **alphabetically smaller** than the current node's character.
-- **Right Child:** Stores characters that are **alphabetically larger** than the current node's character.
-- **Middle Child:** Represents the **next character** in the current word string.
-- **Word Nodes:** Nodes representing the end of a valid word are marked (e.g., colored blue).
+
+*   **Left Child:** Stores characters that are alphabetically *smaller* than the current node's character.
+*   **Right Child:** Stores characters that are alphabetically *larger* than the current node's character.
+*   **Middle Child:** Represents the *next character* in the current word string.
+*   **Word Nodes:** Nodes representing the end of a valid word are marked (e.g., colored blue).
 
 ![[Pasted image 20260126124053.png]]
 
 ---
-## 2. Core Operations
 
-### Find
-To search for a key, we compare the current character of the key with the current node's label:
-1. **If Key Char < Node Label:** Move to the **Left** child.
-2. **If Key Char > Node Label:** Move to the **Right** child.
-3. **If Key Char == Node Label:** * If this is the last character of the key, check if the node is a **word-node**.
-    - Otherwise, move to the **Middle** child and move to the next character in the key.
+# Core Operations
 
-```cpp
-find(key): // return True if key exists in this TST, otherwise return False
-    node = root node of the TST
-    letter = first letter of key
-    loop infinitely:
-        // left child
-        if letter < node.label:
-            if node has a left child:
-                node = node.leftChild
-            else:
-                return False     // key cannot exist in this TST
+## `Find(key)`
+To search for a key, compare the current character of the key with the current node's label:
 
-        // right child
-        else if letter > node.label:
-            if node has a right child:
-                node = node.rightChild
-            else:
-                return False     // key cannot exist in this TST
+*   **Key Char < Node Label:** Move to the **Left** child.
+*   **Key Char > Node Label:** Move to the **Right** child.
+*   **Key Char == Node Label:** 
+    *   If this is the last character of the key, check if the node is a word-node.
+    *   Otherwise, move to the **Middle** child and advance to the next character in the key.
 
-        // middle child
-        else:
-            if letter is the last letter of key and node is a word-node:
-                return True      // we found key in this TST!
-            else:
-                if node has a middle child and letter is not the last letter of key:
-                    node = node.middleChild
-                    letter = next letter of key
-                else:
-                    return False // key cannot exist in this TST
+```pseudo
+	\begin{algorithm}
+	\caption{Ternary Search Tree Find Operation}
+	\begin{algorithmic}
+		\Procedure{Find}{key, root}
+			\State $node \gets root$
+			\State $idx \gets 0$
+			\While{$node \neq \text{NULL} $\and$ idx < \text{length}(key)$}
+				\State $c \gets key[idx]$
+				\If{$c < node.\text{label}$}
+					\State $node \gets node.\text{leftChild}$
+				\ElseIf{$c > node.\text{label}$}
+					\State $node \gets node.\text{rightChild}$
+				\Else
+					\If{$idx == \text{length}(key) - 1$}
+						\Return node.isWordNode
+					\EndIf
+					\State $node \gets node.\text{middleChild}$
+					\State $idx \gets idx + 1$
+				\EndIf
+			\EndWhile
+			\Return $\text{false}$
+		\EndProcedure
+	\end{algorithmic}
+	\end{algorithm}
 ```
 
-> [!Example]- Walk Through Example (Success)
-> Below is the same example from before, and we will step through the process of finding the word _mid_:
-> 
-> ![[Pasted image 20260126124507.png]]
-> 
-> 1. We start with _node_ as the root node ('c') and _letter_ as the first letter of _mid_ ('m')
-> 2. _letter_ ('m') is greater than the label of _node_ ('c'), so set _node_ to the right child of _node_ ('m')  
-> 3. _letter_ ('m') is equal to the label of _node_ ('m'), so set _node_ to the middle child of _node_ ('e') and set _letter_ to the next letter of _mid_ ('i')  
-> 4. _letter_ ('i') is greater than the label of _node_ ('e'), so set _node_ to the right child of _node_ ('i')  
-> 5. _letter_ ('i') is equal to the label of _node_ ('i'), so set _node_ to the middle child of _node_ ('n') and set _letter_ to the next letter of _mid_ ('d')  
-> 6. _letter_ ('d') is less than the label of _node_ ('n'), so set _node_ to the left child of _node_ ('d') 
-> 7. _letter_ ('d') is equal to the label of _node_ ('d'), _letter_ is already on the last letter of _mid_ ('d'), and _node_ is a "word node," so **success**!
-> 
+### Walk-Through Example (Success)
+Searching for the word `"mid"`:
 
-> [!Example]- Walk Through Example (Fail)
-> Using the same example as before, let's try finding the word _cme_, which might _seem_ like it exists, but it actually doesn't:
-> 
-> ![[Pasted image 20260126124559.png]]
-> 
-> 1. We start with _node_ as the root node ('c') and _letter_ as the first letter of _cme_ ('c')
-> 2. _letter_ ('c') is equal to the label of _node_ ('c'), so set _node_ to the middle child of _node_ ('a') and set _letter_ to the next letter of _cme_ ('m')  
-> 3. _letter_ ('m') is greater than the label of _node_ ('a'), but _node_ does not have a right child, so we **failed**
-### Insert
-To insert a **key**, compare the current character with the **node's label**:
-- **If Key Char < Node Label:** Move to the **Left** child. If null, create a new Left child and build a Middle-child "spine" for the remaining characters.
-- **If Key Char > Node Label:** Move to the **Right** child. If null, create a new Right child and build a Middle-child "spine" for the remaining characters.
-- **If Key Char == Node Label:** **If last character:** Mark current node as a **word-node**.
-    - **If not last character:** Move to **Middle** child and next character. If Middle is null, build a "spine" of Middle children for the remaining characters.
+![[Pasted image 20260126124507.png]]
 
-```cpp
-insert(key): // insert key into this TST
-    node = root node of the TST
-    letter = first letter of key
+1. Start with `node` as root (`'c'`) and letter as `'m'`.
+2. `'m' > 'c'`, so move to right child (`'m'`).
+3. `'m' == 'm'`, advance to middle child (`'e'`) and letter `'i'`.
+4. `'i' > 'e'`, so move to right child (`'i'`).
+5. `'i' == 'i'`, advance to middle child (`'n'`) and letter `'d'`.
+6. `'d' < 'n'`, so move to left child (`'d'`).
+7. `'d' == 'd'`, last letter reached, and node is marked as word-node $\to$ **Success!**
 
-    loop infinitely:
-        // left child
-        if letter < node.label:
-            if node has a left child:
-                node = node.leftChild
+### Walk-Through Example (Failure)
+Searching for the word `"cme"`:
 
-            else:
-                node.leftChild = new node labeled by letter
-                node = node.leftChild
+![[Pasted image 20260126124559.png]]
 
-                iterate letter over the remaining letters of key:
-                    node.middleChild = new node labeled by letter
-                    node = node.middleChild
-
-                label node as a word-node
-                break
-
-        // right child
-        else if letter > node.label:
-            if node has a right child:
-                node = node.rightChild
-
-            else:
-                node.rightChild = new node labeled by letter
-                node = node.rightChild
-
-                iterate letter over the remaining letters of key:
-                    node.middleChild = new node labeled by letter
-                    node = node.middleChild
-
-                label node as a word-node
-                break
-
-        // middle child
-        else:
-            if letter is the last letter of key:
-                label node as a word-node
-                return true
-
-            else:
-                if node has a middle child:
-                    node = node.middleChild
-                    letter = next letter of key
-                else:
-                    iterate letter over the remaining letters of key:
-                        node.middleChild = new node labeled by letter
-                        node = node.middleChild
-
-                    label node as a word-node
-                    break
-```
-
-> [!Example]- Walk Through Example
-> Below is the initial example of a **Ternary Search Tree**, and we will demonstrate the process of inserting the word _cabs_:
-> 
-> ![[Pasted image 20260126154049.png]]
-> 1. We start with _node_ as the root node ('c') and _letter_ as the first letter of _cabs_ ('c')
-> 2. _letter_ ('c') is equal to the label of _node_ ('c'), so set _node_ to the middle child of _node_ ('a') and set _letter_ to the next letter of _cabs_ ('a')  
-> 3. _letter_ ('a') is equal to the label of _node_ ('a'), so set _node_ to the middle child of _node_ ('l') and set _letter_ to the next letter of _cabs_ ('b')  
-> 4. _letter_ ('b') is less than the label of _node_ ('l'), but _node_ does not have a left child:
-> 5. Create a new node as the left child of _node_, and label the new node with _letter_ ('b')
-> 6. Set __node__ to the left child of _node_ ('b') and set _letter_ to the next letter of _cabs_ ('s')
-> 7. Create a new node as the middle child of _node_ ('s'), and label the new node with _letter_ ('s')
-> 8. Set __node__ to the middle child of _node_ ('s')
-> 9. _letter_ is already on the last letter of _cabs_, so label _node_ as a "word node" and we're done!
-
-### Remove
-To remove a **key**, use the search logic to locate the target node:
-- **If search fails:** The key does not exist; no action is taken.
-- **If search succeeds:**
-    - Navigate to the node representing the last character of the key.
-    - **Action:** Unmark the **word-node** status (e.g., change the color from blue to white).
-
-> [!Note] 
-> To optimize memory, you could *recursively* delete nodes that no longer lead to any word-nodes, though simply unmarking is the standard logical removal.
-
-```cpp
-remove(key): // remove key if it exists in this TST
-    node = root node of the TST
-    letter = first letter of key
-    loop infinitely:
-        // left child
-        if letter < node.label:
-            if node has a left child:
-                node = node.leftChild
-            else:
-                return                               // key cannot exist in this TST
-
-        // right child
-        else if letter > node.label:
-            if node has a right child:
-                node = node.rightChild
-            else:
-                return                               // key cannot exist in this TST
-
-        // middle child
-        else:
-            if letter is the last letter of key and node is a word-node:
-                remove the word-node label from node // found key, so remove it from the TST
-                return
-            else:
-                if node has a middle child:
-                    node = node.middleChild
-                    letter = next letter of key
-                else:
-                    return                           // key cannot exist in this TST
-```
-
-> [!Example]- Walk Through Example
-> Below is the initial example of a **Ternary Search Tree**, and we will demonstrate the process of removing the word _mid_:
-> 
-> ![](https://ucarecdn.com/78791ffc-151c-40b0-a879-306366b27780/)
-> 
-> 1. We start with _node_ as the root node ('c') and _letter_ as the first letter of _mid_ ('m')
-> 2. _letter_ ('m') is greater than the label of _node_ ('c'), so set _node_ to the right child of _node_ ('m')  
-> 3. _letter_ ('m') is equal to the label of _node_ ('m'), so set _node_ to the middle child of _node_ ('e') and set _letter_ to the next letter of _mid_ ('i')  
-> 4. _letter_ ('i') is greater than the label of _node_ ('e'), so set _node_ to the right child of _node_ ('i') 
-> 5. _letter_ ('i') is equal to the label of _node_ ('i'), so set _node_ to the middle child of _node_ ('n') and set _letter_ to the next letter of _mid_ ('d')  
-> 6. _letter_ ('d') is less than the label of _node_ ('n'), so set _node_ to the left child of _node_ ('d')  
-> 7. _letter_ ('d') is equal to the label of _node_ ('d'), _letter_ is already on the last letter of _mid_, and _node_ is a "word node," so _mid_ exists in the tree
-> 8. Remove the "word node" label from _node_
+1. Start with `node` as root (`'c'`) and letter as `'c'`.
+2. `'c' == 'c'`, move to middle child (`'a'`) and letter `'m'`.
+3. `'m' > 'a'`, but node (`'a'`) has no right child $\to$ **Failure!**
 
 ---
-## 3. Advanced Features
 
-Like the Multiway Trie, the TST supports ordered operations and prefix-based utilities.
+## `Insert(key)`
+Compare the current character with the node's label:
+
+*   **Key Char < Node Label:** Move Left. If `NULL`, create a new Left child and build a Middle-child "spine" for remaining characters.
+*   **Key Char > Node Label:** Move Right. If `NULL`, create a new Right child and build a Middle-child "spine" for remaining characters.
+*   **Key Char == Node Label:** If last character, mark as word-node. Otherwise, move Middle and advance character.
+
+```pseudo
+	\begin{algorithm}
+	\caption{Ternary Search Tree Insertion}
+	\begin{algorithmic}
+		\Procedure{Insert}{key, root}
+			\State $node \gets root$
+			\State $idx \gets 0$
+			\While{$idx < \text{length}(key)$}
+				\State $c \gets key[idx]$
+				\If{$c < node.\text{label}$}
+					\If{$node.\text{leftChild} == \text{NULL}$}
+						\State $node.\text{leftChild} \gets \text{CreateNode}(c)$
+					\EndIf
+					\State $node \gets node.\text{leftChild}$
+				\ElseIf{$c > node.\text{label}$}
+					\If{$node.\text{rightChild} == \text{NULL}$}
+						\State $node.\text{rightChild} \gets \text{CreateNode}(c)$
+					\EndIf
+					\State $node \gets node.\text{rightChild}$
+				\Else
+					\If{$idx == \text{length}(key) - 1$}
+						\State $node.\text{isWordNode} \gets \text{true}$
+						\Return
+					\EndIf
+					\If{$node.\text{middleChild} == \text{NULL}$}
+						\State $node.\text{middleChild} \gets \text{CreateNode}(key[idx+1])$
+					\EndIf
+					\State $node \gets node.\text{middleChild}$
+					\State $idx \gets idx + 1$
+				\EndIf
+			\EndWhile
+		\EndProcedure
+	\end{algorithmic}
+	\end{algorithm}
+```
+
+### Walk-Through Example
+Inserting the word `"cabs"` into an existing tree:
+
+![[Pasted image 20260126154049.png]]
+
+1. Start at root (`'c'`) with letter `'c'`. Match $\to$ move to middle (`'a'`), next letter `'a'`.
+2. Match at (`'a'`) $\to$ move to middle (`'l'`), next letter `'b'`.
+3. `'b' < 'l'`, but `'l'` has no left child $\to$ create left child (`'b'`).
+4. Move to (`'b'`), create middle child (`'s'`), mark as word-node.
+
+---
+
+## `Remove(key)`
+Use search logic to locate the target node representing the last character of the key. Unmark its `isWordNode` status.
+
+```pseudo
+	\begin{algorithm}
+	\caption{Ternary Search Tree Removal}
+	\begin{algorithmic}
+		\Procedure{Remove}{key, root}
+			\State $targetNode \gets$ \Call{LocateTerminalNode}{key, root}
+			\If{$targetNode \neq \text{NULL} $\and$ targetNode.\text{isWordNode}$}
+				\State $targetNode.\text{isWordNode} \gets \text{false}$
+			\EndIf
+		\EndProcedure
+	\end{algorithmic}
+	\end{algorithm}
+```
+
+---
+
+# Advanced Features
 
 ### Alphabetical Iteration
+Because TSTs maintain the BST property ($\text{Left} < \text{Node} < \text{Right}$), an **In-Order Traversal** retrieves words in sorted order.
 
-Because TSTs maintain the BST property (Left < Node < Right), an **In-Order Traversal** can retrieve words in sorted order.
-
-```Python
-# Pseudocode for Ascending Order
-ascendingInOrder(node):
-    ascendingInOrder(node.leftChild)
-    if node is a word-node:
-        output word
-    ascendingInOrder(node.middleChild)
-    ascendingInOrder(node.rightChild)
+```pseudo
+	\begin{algorithm}
+	\caption{TST Ascending In-Order Traversal}
+	\begin{algorithmic}
+		\Procedure{AscendingInOrder}{node}
+			\If{node == $\text{NULL}$}
+				\Return
+			\EndIf
+			\State \Call{AscendingInOrder}{$node.\text{leftChild}$}
+			\If{node.isWordNode}
+				\State \Call{Output}{$node.\text{word}$}
+			\EndIf
+			\State \Call{AscendingInOrder}{$node.\text{middleChild}$}
+			\State \Call{AscendingInOrder}{$node.\text{rightChild}$}
+		\EndProcedure
+	\end{algorithmic}
+	\end{algorithm}
 ```
 
-### Auto-complete
-
+### Auto-Complete
 To find all words starting with a prefix:
 1. Traverse the TST to the node representing the end of the prefix.
-2. Perform an `ascendingInOrder` traversal on that node's **middle child** subtree.
+2. Perform an `AscendingInOrder` traversal on that node's **middle child** subtree.
 
 ---
-## 4. Evaluation for Lexicon ADT
 
-The TST is often the preferred choice for implementing digital lexicons because it balances the trade-offs of other structures.
+# Evaluation for Lexicon ADT
 
-|**Feature**|**BST (AVL)**|**Multiway Trie**|**Ternary Search Tree**|
+| Feature | BST ([[Tree Structures/AVL Tree\|AVL]]) | [[Tree Structures/Multiway Trie\|Multiway Trie]] | Ternary Search Tree |
 |---|---|---|---|
-|**Search (Avg)**|$O(\log n)$|$O(k)$|**$O(k + \log n)$**|
-|**Space Efficiency**|High|Very Low|**High**|
-|**Alphabetical**|Yes|Yes|**Yes**|
-|**Auto-complete**|No|Yes|**Yes**|
+| **Search (Avg)** | $O(\log n)$ | $O(k)$ | $O(k + \log n)$ |
+| **Space Efficiency** | High | Very Low | High |
+| **Alphabetical** | Yes | Yes | Yes |
+| **Auto-Complete** | No | Yes | Yes |
 
-### Key Takeaways
+> [!summary] Key Takeaways
+> * **Space over Speed:** TSTs avoid the "wasted pointer" problem of Multiway Tries because each node only has 3 pointers instead of $|\Sigma|$ (e.g., 26 or 256).
+> * **Balance Matters:** Like a BST, a TST can become skewed if words are inserted in a poor order. Shuffling words before insertion is a common optimization.
+> * **The Middle Ground:** It provides the prefix-matching power of a Trie with the memory footprint of a Tree.
 
-- **Space over Speed:** TSTs avoid the "wasted pointer" problem of Multiway Tries because each node only has 3 pointers instead of $|\Sigma|$ (e.g., 26 or 256).
-- **Balance Matters:** Like a BST, a TST can become "skewed" (unbalanced) if words are inserted in a poor order. Shuffling words before insertion is a common optimization.
-- **The "Middle Ground":** It provides the prefix-matching power of a Trie with the memory footprint of a Tree.
+---
+
+# Related Notes
+
+- [[Tree Structures/Multiway Trie|Multiway Trie]]
+- [[Tree Structures/Binary Search Tree|Binary Search Tree]]
+- [[Lexicon/index|Lexicon ADT]]
