@@ -20,6 +20,10 @@
       font-weight: var(--inline-title-weight);
       font-size: var(--h2-size);
     }
+    
+    .mermaid {
+      border: none;
+    }
 
     .search > .search-container > .search-space > * {
       background-color: #1d1d1c;
@@ -56,6 +60,10 @@
       font-family: "Schibsted Grotesk";
       font-weight: var(--inline-title-weight);
       font-size: var(--h2-size);
+    }
+
+    .mermaid {
+      border: none;
     }
 
     .search > .search-container > .search-space > * {
