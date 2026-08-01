@@ -240,6 +240,12 @@
       "commit": "b2aad70fdf548d07b8fd28df9edbdba7f256f166",
       "installedAt": "2026-06-26T22:41:19.944Z"
     },
+    "root-index-panels": {
+      "source": "github:VingGit/root-index-panels",
+      "resolved": "https://github.com/VingGit/root-index-panels.git",
+      "commit": "c2b96a259bc6be4f6004480638097fe7084bf2cc",
+      "installedAt": "2026-07-31T22:21:12.278Z"
+    },
     "search": {
       "source": "github:quartz-community/search",
       "resolved": "https://github.com/quartz-community/search.git",

@@ -81,7 +81,7 @@ plugins:
     order: 40
   - source: github:quartz-community/table-of-contents
     enabled: true
-    options: 
+    options:
       layout: modern
     order: 50
     layout:
@@ -159,6 +159,27 @@ plugins:
     enabled: true
   - source: github:quartz-community/folder-page
     enabled: true
+  - source: github:VingGit/root-index-panels
+    enabled: true
+    options:
+      layout: cards
+      sort: alphabetical
+      showDescription: true
+      showDocCount: true
+      showTags: true
+      tagCount: 3
+      excludeDirs:
+        - archive
+      descriptionFallback: ""
+      defaultIcon: book-open
+      defaultAccent: theme
+      accents:
+        ocean: "var(--secondary)"
+        warning: "#b45309"
+      replaceExplorer: true
+    layout:
+      position: left
+      priority: 40
   - source: github:quartz-community/tag-page
     enabled: true
   - source: github:quartz-community/explorer
@@ -267,7 +288,7 @@ plugins:
         - aliases
       excludedProperties: []
       hidePropertiesView: false
-      delimiters: "---"
+      delimiters: ---
       language: yaml
     order: 5
     layout:
@@ -300,10 +321,29 @@ plugins:
       lineNumberPunc: ""
       noEnd: true
       scopeLines: false
-      indentSize: "1.2em"
-      commentDelimiter: "//"
+      indentSize: 1.2em
+      commentDelimiter: //
       titlePrefix: "Algorithm "
     order: 50
+  - source: github:VingGit/root-index-panels
+    enabled: true
+    options:
+      layout: cards
+      showDescription: true
+      showDocCount: true
+      showTags: true
+      tagCount: 3
+      sort: alphabetical
+      excludeDirs: []
+      descriptionFallback: ""
+      defaultIcon: book-open
+      defaultAccent: theme
+      accents: {}
+      replaceExplorer: true
+    order: 50
+    layout:
+      position: left
+      priority: 40
 layout:
   groups:
     toolbar:
