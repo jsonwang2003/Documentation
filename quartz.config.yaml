@@ -10,7 +10,7 @@ configuration:
   baseUrl: json-notebook.vercel.app
   ignorePatterns:
     - private
-    - templates
+    - _templates
     - .obsidian
     - "**/coursework"
   theme:
@@ -83,6 +83,9 @@ plugins:
     enabled: true
     options:
       layout: modern
+      maxDepth: 3
+      minDepth: 2
+      showByDefault: true
     order: 50
     layout:
       position: right
@@ -160,7 +163,7 @@ plugins:
   - source: github:quartz-community/folder-page
     enabled: true
   - source: github:VingGit/root-index-panels
-    enabled: true
+    enabled: false
     options:
       layout: cards
       sort: alphabetical
@@ -203,7 +206,7 @@ plugins:
   - source: github:quartz-community/backlinks
     enabled: true
     layout:
-      position: right
+      position: afterBody
       priority: 50
   - source: github:quartz-community/article-title
     enabled: true
@@ -263,8 +266,8 @@ plugins:
       limit: 2
       hideTagPages: true
     layout:
-      position: left
-      priority: 60
+      position: afterBody
+      priority: 40
       display: desktop-only
   - source: github:quartz-community/spacer
     enabled: true
@@ -291,10 +294,6 @@ plugins:
       delimiters: ---
       language: yaml
     order: 5
-    layout:
-      position: beforeBody
-      priority: 15
-      display: all
   - source:
       name: quartz-themes
       repo: github:saberzero1/quartz-themes

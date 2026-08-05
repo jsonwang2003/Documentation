@@ -6,7 +6,7 @@ tags: String
 > [!INFO] 
 > A sequence of characters used to **represent text**. It is one of the most **fundamental data types** in programming and is typically enclosed in quotes.
 
-### [[Computer Science/Programming Concepts/String|String]]
+### [[Computer Science Introduction/Programming Concepts/String|String]]
 ## Properties
 
 - Immutable in many languages (e.g., Python, JavaScript), meaning **once created, it cannot be changed**

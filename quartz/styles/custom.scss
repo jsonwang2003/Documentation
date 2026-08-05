@@ -39,6 +39,13 @@
     .toc:has(button.toc-header.collapsed){
       flex: 0 2.5rem;
     }
+
+    @media (max-width: 800px){
+      .page > div#quartz-body div.sidebar.left{
+        background-color: var(--light);
+        border-bottom: 1px solid var(--lightgray);
+      }
+    }
   }
 }
 

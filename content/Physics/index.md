@@ -5,7 +5,7 @@ title: Physics
 > The study of **matter**, **energy**, **motion**, and **fundamental interactions** &rarr; a foundational framework for **natural laws**, **technological innovation**, and **scientific modeling**
 
 - Combines **empirical observation** with **mathematical formalism**
-- Bridges domains from [[Mathematics/index|Mathematics]] and **Engineering** to **[[Computer Science/index|Computer Science]]**
+- Bridges domains from [[Mathematics/index|Mathematics]] and **Engineering** to **[[Computer Science Introduction/index|Computer Science]]**
 - Evolves through **experimentation**, **theoretical abstraction**, and **computational simulation**
 
 ## Purpose
@@ -24,7 +24,7 @@ title: Physics
 
 - **Engineering**
 	- Drives design of mechanical, electrical, and thermal systems
-- **[[Computer Science/index|Computer Science]]**
+- **[[Computer Science Introduction/index|Computer Science]]**
 	- Supports simulation, graphics, and quantum computing
 - **[[Mathematics/index|Mathematics]]**
 	- Provides structure for differential equations, linear algebra, and vector calculus

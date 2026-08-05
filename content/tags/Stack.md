@@ -7,7 +7,7 @@ tags:
 > [!INFO]
 > A **linear data structure** that follows the **Last In, First Out (LIFO)** principle. The most recently added element is the first to be removed. It’s conceptually similar to a stack of plates: you add to the top and remove from the top.
 
-### [[Computer Science/Data Structures/Introductory Data Structures/Stack|Stack]]
+### [[Computer Science Introduction/Data Structures/Introductory Data Structures/Stack|Stack]]
 ## Properties
 
 - Operates on **LIFO**: Last element added is the first to be removed

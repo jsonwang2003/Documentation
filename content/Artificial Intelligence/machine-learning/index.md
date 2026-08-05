@@ -9,4 +9,4 @@ Welcome to my Machine Learning notes and concepts.
 - [[Artificial Intelligence/machine-learning/Unsupervised Learning/index|Unsupervised Learning]] - An algorithms analyze unlabeled data to discover hidden patterns, groupings, or structures without predefined categories.
 - [[Artificial Intelligence/machine-learning/Deep Learning/index|Deep Learning]] - A subset of machine learning that uses multilayered neural networks to automatically learn complex patterns and representations from large amounts of data.
 - [[Data Science/Model Evaluation/index|Model Evaluation]] - Various model evaluating metrics, techniques, and methods
-- [[Artificial Intelligence/index|Artificial Intelligence]] - The simulation of human-like reasoning, learning, and decision-making by machines to solve complex problems and adapt to new information.
+- [[AI Overview|Artificial Intelligence]] - The simulation of human-like reasoning, learning, and decision-making by machines to solve complex problems and adapt to new information.

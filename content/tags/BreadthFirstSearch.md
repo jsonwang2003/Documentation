@@ -6,7 +6,7 @@ tags:
 > [!INFO]  
 > A traversal algorithm that explores **all neighbors at the current depth** before moving to the next level. Breadth First Search (BFS) is widely used in **graph traversal**, **shortest path algorithms**, and **level-order tree traversal**.
 
-> More Details here: [[Computer Science/Algorithms/Graph Algorithms/Breadth First Search (BFS)|Breadth First Search (BFS)]]
+> More Details here: [[Breadth First Search (BFS)|Breadth First Search (BFS)]]
 ## Properties
 
 - Explores nodes level-by-level from the starting point  

@@ -16,11 +16,11 @@ Welcome to my personal knowledge base and documentation repository. This site co
 - **Data Analysis** — applying statistical and computational methods to uncover patterns
 - **Data Visualization** — presenting data through charts, graphs, and interactive dashboards
 - **Extracting Insights from Data** — interpreting results to inform decisions and drive strategy
-## [[Artificial Intelligence/index|Artificial Intelligence]]
+## [[AI Overview|Artificial Intelligence]]
 - **Artificial Intelligence Principles** — learning, reasoning, perception, and decision-making
 - **Systems** — agents, architectures, training pipelines, and deployment frameworks
 - **Real-World Applications** — healthcare, finance, robotics, transportation, and personalization
-## [[Computer Science/index|Computer Science]]
+## [[Computer Science Introduction/index|Computer Science]]
 - **Programming Languages** — syntax, semantics, paradigms, and compiler design
 - **Data Structures** — arrays, stacks, trees, graphs, and memory organization
 - **Algorithms** — sorting, searching, recursion, and complexity analysis

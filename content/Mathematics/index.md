@@ -5,7 +5,7 @@ title: Mathematics
 > the study of **structure**, **quantity**, **space**, and **change** &rarr; a foundational language for **science**, **logic**, and **abstract reasoning**.
 
 - Encompasses both **abstract theory** and applied **problem-solving**
-- Bridges disciplines from [[Physics/index|Physics]] and [[Computer Science/index|Computer Science]] to **Economics** and **Engineering**
+- Bridges disciplines from [[Physics/index|Physics]] and [[Computer Science Introduction/index|Computer Science]] to **Economics** and **Engineering**
 - Evolves through formal systems, proofs, and symbolic reasoning
 
 ## Purpose
@@ -24,7 +24,7 @@ title: Mathematics
 
 - **[[Physics/index|Physics]]**  
   - Models motion, energy, and quantum systems  
-- **[[Computer Science/index|Computer Science]]**  
+- **[[Computer Science Introduction/index|Computer Science]]**  
   - Underpins algorithms, cryptography, and machine learning  
 - **Economics**  
   - Supports modeling of markets, risk, and optimization  

@@ -27,7 +27,7 @@ tags:
 
 ## Collision Resolution Strategies
 
-- **Chaining**: Store multiple values at the same index using [[Computer Science/Data Structures/Introductory Data Structures/Linked List|Linked List]]
+- **Chaining**: Store multiple values at the same index using [[Computer Science Introduction/Data Structures/Introductory Data Structures/Linked List|Linked List]]
 - **Open Addressing**: Probe for next available slot (e.g., linear, quadratic, double hashing)
 - **Perfect Hashing**: Collision-free hashing for static key sets
 - **Rehashing**: Resize and reassign keys when load factor exceeds threshold
