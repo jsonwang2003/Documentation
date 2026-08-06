@@ -1,51 +1,51 @@
 ---
-title: "Jason's Personal Notes"
+title: Knowledge Vault
+description: Master index and personal digital garden covering Computer Science, Computer Systems, Artificial Intelligence, Data Science, Mathematics, Physics, and Robotics.
+tags:
+  - index
+  - vault-root
+panel:
+  icon: book-open
+  accent: ocean
 ---
-Welcome to my personal knowledge base and documentation repository. This site contains my notes, studies, and reference materials organized for easy access and review.
-
----
-# Study Areas
-
-## [[Leetcode/index|Leetcode]]
-- **Programming Problems** — structured challenges testing logic, efficiency, and implementation
-- **Solutions** — optimized code strategies, edge case handling, and performance tuning
-- **Algorithmic Concepts Overview** — core ideas like recursion, dynamic programming, and greedy methods
-## [[Data Science/index|Data Science]]
-- **Data Collection** — gathering raw information from sensors, surveys, APIs, or databases
-- **Data Cleaning** — handling missing values, correcting errors, and standardizing formats
-- **Data Analysis** — applying statistical and computational methods to uncover patterns
-- **Data Visualization** — presenting data through charts, graphs, and interactive dashboards
-- **Extracting Insights from Data** — interpreting results to inform decisions and drive strategy
-## [[AI Overview|Artificial Intelligence]]
-- **Artificial Intelligence Principles** — learning, reasoning, perception, and decision-making
-- **Systems** — agents, architectures, training pipelines, and deployment frameworks
-- **Real-World Applications** — healthcare, finance, robotics, transportation, and personalization
-## [[Computer Science Introduction/index|Computer Science]]
-- **Programming Languages** — syntax, semantics, paradigms, and compiler design
-- **Data Structures** — arrays, stacks, trees, graphs, and memory organization
-- **Algorithms** — sorting, searching, recursion, and complexity analysis
-## [[Development Environemnt/index|Development Environment]]
-- **Integrated Development Environments (IDEs)** — tools for writing, debugging, and testing code efficiently
-- **Version Control Systems** — management of source code revisions and collaboration through repositories
-- **Build and Deployment Tools** — automation of compilation, packaging, and delivery processes
-- **Virtualization and Containers** — isolation of environments for consistent development and testing across systems
-## [[Mathematics/index|Math]]
-- **Algebra** — symbolic manipulation, equations, functions, and abstract structures
-- **Trigonometry** — angles, triangles, periodic functions, and unit circle relationships
-- **Calculus** — limits, derivatives, integrals, and continuous change
-- **Linear Algebra** — vectors, matrices, transformations, and eigenstructures
-- **Differential Equations** — dynamic systems, rate-of-change models, and solution techniques
-## [[Physics/index|Physics]]
-- **Mechanical** — motion, forces, energy, and Newtonian dynamics
-- **Electrical & Magnetism** — electric fields, circuits, magnetism, and Maxwell’s equations
-- **Thermodynamic** — heat, entropy, energy transfer, and laws of thermodynamics
-- **Light Optics** — reflection, refraction, wave behavior, and lens systems
-- **Early Quantum Physics** — blackbody radiation, photoelectric effect, and atomic models
-
-
+> [!abstract] Overview
+> Welcome to the **Knowledge Vault**—a structured personal knowledge base and digital garden tracking the core domains of computer science, hardware systems, artificial intelligence, software engineering, mathematics, physics, and robotics. This repository connects foundational theoretical principles with practical engineering implementations, systems architecture, and problem-solving patterns.
 
 ---
 
+# Primary Knowledge Books
+
+## 1. Computer Science & Theory
+- **[[Computer Science Introduction/index|Computer Science Introduction]]**  
+  Classical algorithm design (Divide & Conquer, Dynamic Programming, Greedy), core Abstract Data Types, C/C++ language mechanics (templates, STL), and software engineering principles.
+- **[[Computer Science Theory/index|Computer Science Theory]]**  
+  Formal mathematical foundations including discrete structures, combinatorics, graph theory, recurrences, automata, formal languages, and computability theory.
+- **[[leetcode/index|LeetCode]]**
+  Algorithmic problem-solving patterns, data structure manipulations, runtime optimizations, and technical interview preparation.
+
+## 2. Systems & Infrastructure
+- **[[Computer Systems/index|Computer Systems]]**  
+  The full hardware-software stack—spanning Digital Systems (boolean logic, ALUs, FSMs), Computer Architecture, Operating System Kernels (scheduling, memory, file systems), and low-level System Programming in C.
+- **[[Development Environemnt/index|Development Environment]]**  
+  Developer tooling, terminal workflows, shell scripting, Git version control, and debugging environments.
+
+## 3. Artificial Intelligence & Data Science
+- **[[Artificial Intelligence/index|Artificial Intelligence]]**  
+  Intelligent agent architectures, search algorithms, classical machine learning models, deep learning networks (CNNs, Transformers, GANs), reinforcement learning, and ethical AI policy frameworks.
+- **[[Machine Learning Systems/index|Machine Learning Systems]]**  
+  System-level software architectures, model training infrastructure, edge deployment, and MLOps.
+- **[[Data Science/index|Data Science]]**
+  Descriptive analytics, statistical inference, data visualization, model evaluation metrics, sampling methodologies, and domain-specific ML applications.
+
+## 4. Mathematical & Physical Sciences
+- **[[Mathematics/index|Mathematics]]**  
+  Mathematical foundations across Algebra, Calculus, Trigonometry, and Applied Statistics.
+- **[[Physics/index|Physics]]**  
+  Fundamental physical laws and systems encompassing Classical Mechanics, Thermodynamics, Electricity & Magnetism, Optics, and Early Quantum Physics.
+- **[[Robotics/index|Robotics]]**  
+  Kinematics, dynamics, motion planning, spatial reasoning, control systems, and computer vision integration for physical autonomous systems.
+
+---
 # About This Documentation
 
 This is my digital workspace where I organize and maintain notes from various subjects I'm studying. The content is structured to help me quickly find and review concepts, solutions, and insights I've gathered over time.
