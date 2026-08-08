@@ -163,7 +163,7 @@ plugins:
   - source: github:quartz-community/folder-page
     enabled: true
   - source: github:VingGit/root-index-panels
-    enabled: false
+    enabled: true
     options:
       layout: cards
       sort: alphabetical
@@ -324,25 +324,6 @@ plugins:
       commentDelimiter: //
       titlePrefix: "Algorithm "
     order: 50
-  - source: github:VingGit/root-index-panels
-    enabled: true
-    options:
-      layout: cards
-      showDescription: true
-      showDocCount: true
-      showTags: true
-      tagCount: 3
-      sort: alphabetical
-      excludeDirs: []
-      descriptionFallback: ""
-      defaultIcon: book-open
-      defaultAccent: theme
-      accents: {}
-      replaceExplorer: true
-    order: 50
-    layout:
-      position: left
-      priority: 40
 layout:
   groups:
     toolbar:
