@@ -46,7 +46,7 @@ mindmap
 - [[Function in Mathematics]]
 - [[Relations and Their Properties]]
 - [[Principle of Mathematical Induction]]
-- [[Boolean Algebra]]
+- [[Computer Systems/Digital Systems/Boolean Algebra]]
 
 ## Linear Algebra
 
