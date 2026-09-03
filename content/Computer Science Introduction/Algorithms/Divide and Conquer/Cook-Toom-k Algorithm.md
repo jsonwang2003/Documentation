@@ -26,7 +26,9 @@ aliases:
 
 Splitting each number into $k$ equal parts represents it as a degree-$(k-1)$ polynomial:
 
-$$ (a_{k-1}x^{k-1} + a_{k-2}x^{k-2} + \dots + a_{1}x + a_{0})(b_{k-1}x^{k-1} + b_{k-2}x^{k-2} + \dots + b_{1}x + b_{0}) $$
+$$
+(a_{k-1}x^{k-1} + a_{k-2}x^{k-2} + \dots + a_{1}x + a_{0})(b_{k-1}x^{k-1} + b_{k-2}x^{k-2} + \dots + b_{1}x + b_{0}) 
+$$
 
 Multiplying these two polynomials the schoolbook way requires $k^2$ coefficient multiplications (every $a_i$ against every $b_j$). The recursion:
 

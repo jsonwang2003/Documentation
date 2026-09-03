@@ -126,8 +126,8 @@ A global `clock` ticks upward each time a vertex is visited or finished. This gi
 - **`component(s) = cc`** — labels every vertex with its connected component id
 - **`prev(u) = s`** — records the discovery edge, building the **DFS output forest**
 
-> [!INFO] DFS Output Forest 
-> A **DFS output forest** is the forest structure given by the `prev` array after DFS has been performed on a graph. Each call to `explore` grows one tree in the forest. The edge `prev(u) = s` means DFS discovered `u` by traveling along the edge `(s, u)`. When the graph is connected, the output is a single **DFS tree**; when disconnected, it is a **forest** of one tree per component.
+## DFS Output Forest
+A **DFS output forest** is the forest structure given by the `prev` array after DFS has been performed on a graph. Each call to `explore` grows one tree in the forest. The edge `prev(u) = s` means DFS discovered `u` by traveling along the edge `(s, u)`. When the graph is connected, the output is a single **DFS tree**; when disconnected, it is a **forest** of one tree per component.
 
 ---
 # Proof of Correctness

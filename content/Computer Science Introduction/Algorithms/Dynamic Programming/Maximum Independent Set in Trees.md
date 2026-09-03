@@ -60,7 +60,12 @@ To compute $M[k] = (IN_k, OUT_k)$, we need to know $M[c]$ for every child $c$ of
 
 ![[Pasted image 20260712222902.png]]
 
-$$ IN_k = w(k) + \sum_{c} OUT(c) \qquad\qquad OUT_k = \sum_{c} \max(IN(c), OUT(c)) $$
+$$ 
+\begin{align*}
+IN_k &= w(k) + \sum_{c} OUT(c)  \\
+OUT_k &= \sum_{c} \max(IN(c), OUT(c)) 
+\end{align*}
+$$
 
 - **$IN_k$:** if $k$ is included, none of $k$'s children can be included (they're adjacent to $k$), so each child subtree must use its _excluding_ answer — sum $OUT(c)$ over all children $c$, plus $k$'s own weight.
 - **$OUT_k$:** if $k$ is excluded, each child subtree is free to independently pick whichever of its two answers is larger, since there's no longer any constraint coming from $k$.
@@ -71,7 +76,9 @@ Order by layers — start at the bottom (leaves) and work up to the root. Equiva
 
 ## 5. Output
 
-$$ \max(IN_{root}, OUT_{root}) $$
+$$
+\max(IN_{root}, OUT_{root}) 
+$$
 
 ---
 
@@ -125,7 +132,7 @@ Final answer: $\max(IN_r, OUT_r)$ where $(IN_r, OUT_r) = \text{TreeMIS}(r)$.
 - **Inductive Step:**
     - **$IN_k$:** if $k$ is in the chosen set, no child of $k$ can be (they're each adjacent to $k$), so every child subtree must contribute its _best excluding_ answer. Since different children's subtrees share no vertices (tree structure), these choices don't interact — the total is exactly $w(k) + \sum_c OUT(c)$, correct by the Inductive Hypothesis.
     - **$OUT_k$:** if $k$ is not in the chosen set, each child subtree is unconstrained by $k$ and can independently pick whichever of its two options is better — again, no interaction between different children's subtrees, so the total is $\sum_c \max(IN(c), OUT(c))$, correct by the Inductive Hypothesis.
-- Since every valid independent set of the subtree at $k$ either includes $k$ or doesn't, $M[k]$ correctly captures the best of each case. At the root, $\max(IN_{root}, OUT_{root})$ correctly picks the better of the two, giving the true maximum-weight independent set of the whole tree. $\blacksquare$
+- Since every valid independent set of the subtree at $k$ either includes $k$ or doesn't, $M[k]$ correctly captures the best of each case. At the root, $\max(IN_{root}, OUT_{root})$ correctly picks the better of the two, giving the true maximum-weight independent set of the whole tree. 
 
 ---
 
@@ -154,6 +161,6 @@ Final answer: $\max(IN_r, OUT_r)$ where $(IN_r, OUT_r) = \text{TreeMIS}(r)$.
 
 # References / Links
 
-- [[Dynamic Programming]]
+- [[Computer Science Introduction/Algorithms/Dynamic Programming/index|Dynamic Programming]]
 - [[Maximal Independent Set Example|Maximal Independent Set]]
 - [[Computer Science Introduction/Algorithms/Backtracking/index|Backtracking]]

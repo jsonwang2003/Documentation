@@ -71,7 +71,9 @@ aliases:
 
 **Runtime (worst case):**
 
-$$ T(n) = 2T(n-1) + O(n) = O(2^n) $$
+$$ 
+T(n) = 2T(n-1) + O(n) = O(2^n) 
+$$
 
 No better than exhaustive search.
 
@@ -100,7 +102,9 @@ Instead of top-down recursion with a cache, solve the same $n+1$ distinct subpro
 
 ## 2. What Are the Base Cases?
 
-$$ A[0] = 0 $$
+$$
+A[0] = 0 
+$$
 
 True for any input — the empty schedule has value 0.
 
@@ -114,7 +118,9 @@ $A[k] = \dots$
 - **Case 1:** $I_k$ is not part of the max-value schedule $\implies A[k] = A[k-1]$.
 - **Case 2:** $I_k$ is part of the max-value schedule $\implies A[k] = v(k) + A[j-1]$, where $j-1$ is the last event before event $k$ starts.
 
-$$ A[k] = \max(A[k-1],\ v(k) + A[j-1]) $$
+$$
+A[k] = \max(A[k-1],\ v(k) + A[j-1]) 
+$$
 
 (with $k-1 < k$ and $j-1 < k$, so both terms reference strictly smaller sub-problems.)
 
@@ -124,7 +130,9 @@ Since each sub-problem depends only on sub-problems of strictly smaller index, o
 
 ## 5. What Is the Final Output?
 
-$$ A[n] = \text{max value of non-conflicting subsets} $$
+$$
+A[n] = \text{max value of non-conflicting subsets} 
+$$
 
 ## 6. Put It All Together: Iterative Algorithm
 
@@ -176,7 +184,7 @@ $$ A[n] = \text{max value of non-conflicting subsets} $$
 - **Inductive Step (Step 3):** consider $A[n]$.
     - **Case 1 — $I_n$ is not in the max-value schedule:** the best schedule using only $I_1,\dots,I_n$ is then just the best schedule using $I_1,\dots,I_{n-1}$, so $A[n] = A[n-1]$ — correct by the Inductive Hypothesis.
     - **Case 2 — $I_n$ is in the max-value schedule:** every event that conflicts with $I_n$ (i.e. $I_j, \dots, I_{n-1}$) must be excluded, so the best schedule is $I_n$'s value plus the best schedule using only the non-conflicting events $I_1, \dots, I_{j-1}$: $A[n] = v[n] + A[j-1]$ — correct by the Inductive Hypothesis, since $j - 1 < n$.
-- Since every valid schedule falls into exactly one of these two cases, and $A[n] = \max(\text{Case 1}, \text{Case 2})$, $A[n]$ is the true maximum. $\blacksquare$
+- Since every valid schedule falls into exactly one of these two cases, and $A[n] = \max(\text{Case 1}, \text{Case 2})$, $A[n]$ is the true maximum.
 
 ---
 

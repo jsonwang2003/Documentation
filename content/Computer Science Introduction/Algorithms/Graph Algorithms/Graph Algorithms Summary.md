@@ -17,11 +17,11 @@ aliases:
 
 ## [[Breadth First Search (BFS)]]
 
-We explore the starting vertex, then its neighbors, then their neighbors, etc. — the graph is explored in layers spreading out from the starting vertex. Easily implemented using a [[tags/Queue]] to keep track of vertices to explore. See [[Breadth First Search (BFS)]] for the complete write-up.
+We explore the starting vertex, then its neighbors, then their neighbors, etc. — the graph is explored in layers spreading out from the starting vertex. Easily implemented using a [[Queues|Queue]] to keep track of vertices to explore. See [[Breadth First Search (BFS)]] for the complete write-up.
 
 - **Time Complexity:** $O(|V| + |E|)$ — we potentially visit all $|V|$ vertices and traverse all $|E|$ edges, each in $O(1)$.
 - **Space Complexity:** $O(|V| + |E|)$ — we might have to keep track of every possible vertex and edge during exploration. If we wanted to also keep track of the entire current path of every vertex in the [[Queues|Queue]], the space complexity would blow up.
-- **Key detail:** layer-by-layer exploration via a [[tags/Queue]] is what guarantees shortest paths on unweighted graphs.
+- **Key detail:** layer-by-layer exploration via a [[Queues|Queue]] is what guarantees shortest paths on unweighted graphs.
 
 ## [[Depth First Search (DFS)]]
 

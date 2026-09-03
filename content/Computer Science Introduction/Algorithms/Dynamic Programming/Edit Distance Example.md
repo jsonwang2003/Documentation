@@ -64,7 +64,9 @@ Let $E[i, j]$ be the edit distance to transform $x_1 \dots x_i$ into $y_1 \dots 
 
 When the first word is empty, the edit distance is the length of the second word; when the second word is empty, it's the length of the first word:
 
-$$ E[0, j] = j \qquad E[i, 0] = i $$
+$$ 
+E[0, j] = j \qquad E[i, 0] = i 
+$$
 
 ## 3. Express Recursively
 
@@ -76,7 +78,9 @@ What does the last column of the alignment table look like? Three cases:
 |---|---|
 |$y_1\dots y_j$|―|
 
-$$E[i, j] = 1 + E[i-1, j]$$
+$$
+E[i, j] = 1 + E[i-1, j]
+$$
 
 **Case 2 — Insert** $y_j$:
 
@@ -84,7 +88,9 @@ $$E[i, j] = 1 + E[i-1, j]$$
 |---|---|
 |$y_1\dots y_{j-1}$|$y_j$|
 
-$$E[i,j] = 1 + E[i, j-1]$$
+$$
+E[i,j] = 1 + E[i, j-1]
+$$
 
 **Case 3 — Substitute** (or match, if equal):
 
@@ -92,7 +98,9 @@ $$E[i,j] = 1 + E[i, j-1]$$
 |---|---|
 |$y_1\dots y_{j-1}$|$y_j$|
 
-$$E[i, j] = \begin{cases} 1 + E[i-1, j-1] &\text{if } x_i \neq y_j \ 0 + E[i-1, j-1] &\text{if } x_i = y_j\end{cases}$$
+$$
+E[i, j] = \begin{cases} 1 + E[i-1, j-1] &\text{if } x_i \neq y_j \\ 0 + E[i-1, j-1] &\text{if } x_i = y_j\end{cases}
+$$
 
 Since we don't know which case is cheapest, take the minimum of all three.
 
@@ -133,7 +141,9 @@ To calculate $E[i,j]$, we need $E[i-1, j]$, $E[i, j-1]$, and $E[i-1, j-1]$ — a
 
 ## 6. Final Output
 
-$$ E[n, m] $$
+$$ 
+E[n, m] 
+$$
 
 ![[Pasted image 20260711210739.png]]
 
@@ -159,7 +169,9 @@ This graph has $|V| = nm$ vertices and $|E| \approx 3nm$ edges (each cell has up
 
 We could use [[Dijkstra's Algorithm]] for a runtime of:
 
-$$ O(nm\log(nm)) $$
+$$ 
+O(nm\log(nm)) 
+$$
 
 But there's a faster way, using the fact that this graph is specifically a DAG — see [[Shortest Path in a DAG Example]].
 
@@ -203,7 +215,7 @@ But there's a faster way, using the fact that this graph is specifically a DAG �
 
 # References / Links
 
-- [[Dynamic Programming]]
+- [[Computer Science Introduction/Algorithms/Dynamic Programming/index|Dynamic Programming]]
 - [[Shortest Path in a DAG Example]]
 - [[Dijkstra's Algorithm]]
 - [[Graph Reachability]]

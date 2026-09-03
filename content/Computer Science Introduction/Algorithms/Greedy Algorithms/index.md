@@ -13,15 +13,15 @@ aliases:
 > [!abstract] Overview 
 > A **Greedy Algorithm** builds a solution step by step, at each step making the choice that looks best _right now_, without reconsidering earlier choices. See [[The Greedy Method]] for the full definition and general schema.
 
-> [!Warning] 
-> Greedy Method does not always work The **Greedy Method** does not always work. In order to use it, we must prove the correctness of the algorithm every time it's developed — or else present a counterexample showing that a particular greedy strategy will not work.
+> [!Warning] Greedy Method does not always work 
+> The **Greedy Method** does not always work. In order to use it, we must prove the correctness of the algorithm every time it's developed — or else present a counterexample showing that a particular greedy strategy will not work.
 > 
 > Furthermore, for a single problem, there may be more than one potential greedy strategy (more than one way to choose the "best" possible choice at each step). The problem may be solved by one strategy but not another — see [[Event Scheduling]] for a worked example where three plausible-looking strategies fail and only a fourth succeeds.
 
 ---
 # Foundational Concepts
 
-## [[The Greedy Method]]
+## The Greedy Method
 
 At each step, make the locally optimal choice, never revisiting or reconsidering a decision once made. This is fast and simple to implement, but — per the warning above — is only correct for certain problems, and only for certain choices of "what looks best." See [[The Greedy Method]] for the complete write-up.
 
@@ -67,5 +67,5 @@ See [[Techniques to Prove Optimality]] for the complete write-up, and [[Prove Kr
 
 # Related Categories
 
-- [[Graph Algorithms Index]]
+- [[Computer Science Introduction/Algorithms/Graph Algorithms/index|Graph Algorithms]]
 - [[Minimum Spanning Trees]]

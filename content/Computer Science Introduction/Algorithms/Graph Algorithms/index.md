@@ -19,7 +19,12 @@ A graph is specified by **nodes** and **edges**:
 
 $$ 
 \begin{align*} 
-G &= (V, E) \ \text{where}\ & V: \text{vertices/nodes}\ & E: \text{edges} \end{align*} 
+G = (V, E) \ \text{where}
+\begin{cases}
+V&: \text{vertices/nodes} \\
+E&: \text{edges} 
+\end{cases}
+\end{align*} 
 $$
 
 **Directed edge:** $(x, y)$ — an edge from $x$ to $y$.
@@ -113,11 +118,15 @@ At each point in a graph search algorithm, the vertices are partitioned into:
 
 ## Runtime Analysis
 
-$$ \text{Runtime} = \sum_{w \in V}(c + c' \cdot (out)deg(w) + c'') $$
+$$
+\text{Runtime} = \sum_{w \in V}(c + c' \cdot (out)deg(w) + c'') 
+$$
 
 Since each $v$ is added to $F$ at most once, each $v$ is also deleted from $F$ at most once:
 
-$$ O\left(\sum_{v\in V}(1 + (out)deg(v))\right) = \boxed{O(|V| + |E|)} $$
+$$
+O\left(\sum_{v\in V}(1 + (out)deg(v))\right) = \boxed{O(|V| + |E|)} 
+$$
 
 ## Correctness
 

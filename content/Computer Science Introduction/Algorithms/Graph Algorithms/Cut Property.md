@@ -37,7 +37,9 @@ But $T$ is the edge set of an MST, so it is already minimal. Therefore $cost(T \
 
 Finally, since $X$ has no edges crossing the cut $(S, V-S)$ (by assumption) and $e'$ crosses that cut, $e' \notin X$. So:
 
-$$X \cup {e} \subseteq T \cup \{e\} - \{e'\}$$
+$$
+X \cup {e} \subseteq T \cup \{e\} - \{e'\}
+$$
 
 and the right-hand side is the edge set of an MST, so $X \cup \{e\}$ is part of some MST. 
 

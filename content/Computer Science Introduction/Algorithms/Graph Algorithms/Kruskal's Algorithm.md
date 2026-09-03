@@ -93,7 +93,7 @@ Kruskal's cycle check relies on the [[Disjoint Sets & Up-Trees]] data structure 
 
 $$
 	\begin{align*}
-	&|V| makeset + 2 |E|find + (|V| - 1)union + sort(|E|)\\
+	|V| &makeset + 2 |E|find + (|V| - 1)union + sort(|E|)\\
 	=& |V|O(1) + 2|E|O(\log |V|) + (|V|-1)O(\log |V|) + O(|E|\log|E|)\\
 	=& O(V + 2|E|\log|V| + |V|\log|V| + |E|\log|E|)\\
 	=& \boxed{O(|E|\log |V|)}

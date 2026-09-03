@@ -142,9 +142,15 @@ Suppose by contradiction that $dist(u) > d(u)$, implying there exists a path $P$
 
 Therefore:
 
-$$ \begin{align*} d(u) &= \underbrace{ len(P) }_{ s \to u } \geq \underbrace{ dist(w) + \ell(w,y) }_{ s \to y } \ &= dist(y) \geq dist(u) > d(u)\ &\therefore \boxed{d(u) > d(u)} \end{align*} $$
+$$ 
+\begin{align*} 
+d(u) &= \underbrace{ len(P) }_{ s \to u } \geq \underbrace{ dist(w) + \ell(w,y) }_{ s \to y } \\ 
+&= dist(y) \geq dist(u) > d(u)\\
+&\therefore \boxed{d(u) > d(u)} 
+\end{align*} 
+$$
 
-This is a contradiction, so the negation of our assumption must be true: $dist(u) = d(u)$. $\blacksquare$
+This is a contradiction, so the negation of our assumption must be true: $dist(u) = d(u)$.
 
 ---
 
@@ -154,7 +160,9 @@ This is a contradiction, so the negation of our assumption must be true: $dist(u
 
 Total runtime is:
 
-$$ O(|V|(\text{deletemin}) + |E|(\text{decreasekey})) $$
+$$
+O(|V|(\text{deletemin}) + |E|(\text{decreasekey})) 
+$$
 
 > [!Important] Different implementations of [[Priority Queue]] have different trade-offs between the costs of `deletemin` and `decreasekey`. There isn't a single implementation that's optimal for all kinds of graphs.
 
@@ -168,8 +176,11 @@ Indexed by vertices, giving key value directly (e.g. `Array[A] = 2`, `Array[B] =
 - **`decreasekey`:** $O(1)$ — array access by index means you can immediately find and update the (key, value) pair
 
 **Total Runtime:**
-
-$$ |V| \times deletemin + |E|\times decreasekey = |V| \times O(|V|) + |E|\times O(1) = \boxed{O(|V|^{2})} $$
+$$
+\begin{gather*}
+|V| \times deletemin + |E|\times decreasekey \\=\\ |V| \times O(|V|) + |E|\times O(1) = \boxed{O(|V|^{2})} 
+\end{gather*}
+$$
 
 ### Binary Heap as Priority Queue
 
@@ -186,7 +197,12 @@ $$ |V| \times deletemin + |E|\times decreasekey = |V| \times O(|V|) + |E|\times 
 
 **Total Runtime:**
 
-$$ |V| \times deletemin + |E| \times decreasekey = |V| \times O(\log|V|) + |E| \times O(\log|V|) = \boxed{O((|V| + |E|)\log|V|)} $$
+$$
+\begin{align*}
+|V| &\times deletemin + |E| \times decreasekey \\&= |V| \times O(\log|V|) + |E| \times O(\log|V|) \\
+&= \boxed{O((|V| + |E|)\log|V|)} 
+\end{align*}
+$$
 
 ### Priority Queue Operations Overview
 

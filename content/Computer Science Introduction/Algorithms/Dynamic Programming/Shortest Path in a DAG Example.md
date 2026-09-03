@@ -54,11 +54,15 @@ Let $dist(v)$ be the shortest distance from $s$ to $v$.
 
 ## 2. Base Case
 
-$$ dist(s) = 0 $$
+$$
+dist(s) = 0 
+$$
 
 ## 3. Recursion
 
-$$ dist(x) = \min_{(v,x) \in E} { dist(v) + \ell(v,x) } $$
+$$
+dist(x) = \min_{(v,x) \in E} { dist(v) + \ell(v,x) } 
+$$
 
 ## 4. Ordering
 
@@ -105,7 +109,7 @@ $$ dist(x) = \min_{(v,x) \in E} { dist(v) + \ell(v,x) } $$
 
 - **Base case:** $dist(s) = 0$ is correct — the shortest path from $s$ to itself has length 0.
 - **Inductive Hypothesis:** every vertex processed before $v_i$ in the topological order has a correctly computed $dist$.
-- **Inductive Step:** any shortest path to $v_i$ must arrive via its last edge, $(v, v_i)$, from some predecessor $v$. Since $G$ is a DAG and vertices are processed in topological order, every such predecessor $v$ appears **before** $v_i$ in the ordering — so by the Inductive Hypothesis, $dist(v)$ is already correct when $v_i$ is processed. Taking the minimum of $dist(v) + \ell(v,v_i)$ over every incoming edge therefore considers every possible "last edge" of a shortest path to $v_i$, and picks the best one — so $dist(v_i)$ is set correctly. $\blacksquare$
+- **Inductive Step:** any shortest path to $v_i$ must arrive via its last edge, $(v, v_i)$, from some predecessor $v$. Since $G$ is a DAG and vertices are processed in topological order, every such predecessor $v$ appears **before** $v_i$ in the ordering — so by the Inductive Hypothesis, $dist(v)$ is already correct when $v_i$ is processed. Taking the minimum of $dist(v) + \ell(v,v_i)$ over every incoming edge therefore considers every possible "last edge" of a shortest path to $v_i$, and picks the best one — so $dist(v_i)$ is set correctly.
 
 ---
 
@@ -141,7 +145,7 @@ $$ dist(x) = \min_{(v,x) \in E} { dist(v) + \ell(v,x) } $$
 
 # References / Links
 
-- [[Dynamic Programming]]
+- [[Computer Science Introduction/Algorithms/Dynamic Programming/index|Dynamic Programming]]
 - [[Dijkstra's Algorithm]]
 - [[Edit Distance Example|Edit Distance]]
 - [[Longest Increasing Subsequence Example]]

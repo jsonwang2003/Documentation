@@ -68,7 +68,7 @@ aliases: ["MergeSort"]
 
 **Inductive Hypothesis:** suppose that for some $n > 1$, `mergesort(a[1...k])` correctly outputs the elements of `a` in sorted order for all inputs of size $k$ where $1 \leq k < n$. We want to show it works for inputs of size $n$.
 
-**Inductive Step:** since $n > 1$, `mergesort(a[1...n])` returns `merge(ML, MR)` where $ML = mergesort(a[1, \dots, \lfloor n/2 \rfloor])$ and $MR = mergesort(a[\lfloor n/2 \rfloor + 1, \dots, n])$. Since $\lfloor n/2 \rfloor < n$ (and the size of the second half is also $< n$), the Inductive Hypothesis ensures both $ML$ and $MR$ are sorted. And `merge` correctly combines two sorted lists into one sorted list, so the algorithm returns the elements of `a` in sorted order. $\blacksquare$
+**Inductive Step:** since $n > 1$, `mergesort(a[1...n])` returns `merge(ML, MR)` where $ML = mergesort(a[1, \dots, \lfloor n/2 \rfloor])$ and $MR = mergesort(a[\lfloor n/2 \rfloor + 1, \dots, n])$. Since $\lfloor n/2 \rfloor < n$ (and the size of the second half is also $< n$), the Inductive Hypothesis ensures both $ML$ and $MR$ are sorted. And `merge` correctly combines two sorted lists into one sorted list, so the algorithm returns the elements of `a` in sorted order. 
 
 ---
 
@@ -78,7 +78,12 @@ aliases: ["MergeSort"]
 
 Suppose `mergesort` runs in $T(n)$ time for inputs of length $n$. Each recursive call runs in $T(n/2)$ time, and `merge` runs in $O(k + \ell)$ time where $k, \ell = n/2$, so `merge` runs in $O(n)$ time:
 
-$$ \begin{align*} T(n) &= 2T\left(\frac{n}{2}\right) + O(n) \ &= \boxed{O(n\log n)} \end{align*} $$
+$$ 
+\begin{align*} 
+T(n) &= 2T\left(\frac{n}{2}\right) + O(n) \\
+&= \boxed{O(n\log n)} 
+\end{align*} 
+$$
 
 By the [[Master Theorem]] ($a=2, b=2, d=1$, so $a = b^d$ — Case 2): $T(n) = O(n^d \log n) = O(n\log n)$.
 

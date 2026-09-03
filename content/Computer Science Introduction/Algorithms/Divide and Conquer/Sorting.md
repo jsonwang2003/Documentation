@@ -28,7 +28,9 @@ Any comparison sort can be modeled as a binary **decision tree**: each internal 
 
 To correctly sort $n$ distinct elements, the tree must be able to distinguish all $n!$ possible orderings of them — so it needs at least $n!$ leaves. Since a binary tree of height $h$ has at most $2^h$ leaves, this forces:
 
-$$ 2^h \geq n! \implies h \geq \log(n!) $$
+$$ 
+2^h \geq n! \implies h \geq \log(n!) 
+$$
 
 So **any sorting algorithm that relies on comparisons between elements runs in $\Omega(\log(n!))$ time** — no comparison-based algorithm can beat this, regardless of how cleverly it's designed.
 
@@ -36,7 +38,9 @@ So **any sorting algorithm that relies on comparisons between elements runs in $
 
 $\log(n!)$ isn't just some awkward expression — by Stirling's approximation, $\log(n!) = \Theta(n\log n)$. Roughly:
 
-$$ \log(n!) = \sum_{i=1}^{n}\log i \approx \int_1^n \log x , dx = n\log n - n = \Theta(n\log n) $$
+$$
+\log(n!) = \sum_{i=1}^{n}\log i \approx \int_1^n \log x , dx = n\log n - n = \Theta(n\log n) 
+$$
 
 So **no comparison-based sorting algorithm can do better than $\Omega(n\log n)$ in the worst case.** This is why [[Computer Science Introduction/Algorithms/Divide and Conquer/Merge Sort]]'s $\Theta(n\log n)$ worst-case bound is considered _optimal_ — it's not just a good algorithm, it's asymptotically as good as any comparison sort can ever be.
 

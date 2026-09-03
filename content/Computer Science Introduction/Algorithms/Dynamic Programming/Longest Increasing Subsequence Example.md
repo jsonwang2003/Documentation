@@ -7,8 +7,6 @@ aliases:
   - LIS
   - Longest Increasing Subsequence
 ---
-
-
 > [!abstract] Abstract Given a sequence of distinct positive integers $a[1], \dots, a[n]$, an **increasing subsequence** is a sequence $a[i_1], \dots, a[i_k]$ such that $i_1 < \dots < i_k$ and $a[i_1] < \dots < a[i_k]$.
 > 
 > - **Category:** Dynamic Programming / Sequence Problems
@@ -29,7 +27,9 @@ aliases:
 
 **Example:**
 
-$$15, 18, 8, 11, 5, 12, 16, 2, 20, 9, 10, 4$$
+$$
+15, 18, 8, 11, 5, 12, 16, 2, 20, 9, 10, 4
+$$
 
 The longest increasing subsequence here is $8, 11, 12, 16, 20$ (length 5).
 
@@ -61,4 +61,4 @@ This DAG has $|V| = n$ vertices and up to $|E| = O(n^2)$ edges (every pair $i<j$
 # References / Links
 
 - [[Shortest Path in a DAG Example|Shortest Path in a DAG]]
-- [[Dynamic Programming]]
+- [[Computer Science Introduction/Algorithms/Dynamic Programming/index|Dynamic Programming]]

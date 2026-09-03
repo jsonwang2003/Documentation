@@ -55,6 +55,7 @@ The three levels form a hierarchy where correctness flows downward: prove the hi
 |Mid-Level|Exact sequence of operations, in pseudocode|Programming language / concrete data structures|Precision + portability|
 |Low-Level|Concrete data structures, language constructs, memory layout|Nothing — this is the actual implementation|Enables real time/space analysis|
 
+---
 # References / Links
 
 - [[Explore]]

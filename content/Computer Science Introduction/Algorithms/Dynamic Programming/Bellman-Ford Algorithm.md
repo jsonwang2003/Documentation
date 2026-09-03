@@ -62,7 +62,9 @@ Let $B[i,t]$ be the length of the shortest path from $v_0$ to $v_i$ using **at m
 
 ## 2. Base Cases (assuming no negative cycles)
 
-$$ B[0,t] = 0 \qquad B[i,0] = \infty, \text{ for } i \geq 1 $$
+$$ 
+B[0,t] = 0 \qquad B[i,0] = \infty, \text{ for } i \geq 1 
+$$
 
 ## 3. Recursion
 
@@ -98,7 +100,9 @@ $$
 
 What if we don't know beforehand whether the graph has negative cycles? If there are **no** negative cycles, the array values will never improve after $t$ grows past $n-1$ (there's no longer/better simple path to find). So:
 
-$$ \text{If there exists } i \text{ such that } B[i, n-1] \neq B[i, n], \text{ then a negative cycle exists.} $$
+$$ 
+\text{If there exists } i \text{ such that } B[i, n-1] \neq B[i, n], \text{ then a negative cycle exists.} 
+$$
 
 ---
 
@@ -158,13 +162,17 @@ $$ \text{If there exists } i \text{ such that } B[i, n-1] \neq B[i, n], \text{ t
 
 For a graph $G$ with $n$ vertices and $m$ edges:
 
-$$ O(n(n+m)) $$
+$$
+O(n(n+m)) 
+$$
 
 (the outer loop runs $n$ times for $t$; each round does $O(n+m)$ work — $O(n)$ for the vertices themselves, $O(m)$ summed over all the incoming-edge scans).
 
 Assuming $n = O(m)$ (a connected graph, roughly):
 
-$$ O(nm) = O(|V||E|) $$
+$$
+O(nm) = O(|V||E|) 
+$$
 
 | |Complexity|Notes|
 |---|---|---|
@@ -183,6 +191,6 @@ $$ O(nm) = O(|V||E|) $$
 
 # References / Links
 
-- [[Dynamic Programming]]
+- [[Computer Science Introduction/Algorithms/Dynamic Programming/index|Dynamic Programming]]
 - [[Dijkstra's Algorithm]]
 - [[Shortest Path in a DAG Example|Shortest Path in a DAG]]

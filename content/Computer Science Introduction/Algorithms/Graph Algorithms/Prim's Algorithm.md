@@ -105,13 +105,18 @@ Similar to [[Dijkstra's Algorithm]], **Prim's** uses the value $cost(v)$ instead
 
 **Why it doesn't miss/duplicate vertices:** Each vertex is moved into $X$ exactly once (guarded implicitly by only picking $v \in F$, and $F$ only ever contains vertices not already in $X$); since $G$ is connected, every vertex is eventually discovered as a neighbor of some vertex already in $X$, so no vertex is permanently stuck in $U$.
 
-**Conclusion:** By induction, when the loop terminates ($X = V$), `output` is a spanning tree consistent with an MST at every step, and since it spans all of $G$ with exactly $|V|-1$ minimum-cut-respecting edges, `output` **is** a minimum spanning tree. $\blacksquare$
+**Conclusion:** By induction, when the loop terminates ($X = V$), `output` is a spanning tree consistent with an MST at every step, and since it spans all of $G$ with exactly $|V|-1$ minimum-cut-respecting edges, `output` **is** a minimum spanning tree. 
 
 ---
 
 # Time & Space Complexity Analysis
 
-Basically has the same runtime as Dijkstra's, using the same $O(|V|(deletemin) + |E|(decreasekey))$ formula — the one difference is that Prim's requires a **connected input graph**, so $|E| = \Omega (|V|)$. That's why the $|V|$ term drops out of the totals below: it's always dominated by $|E|$, so the runtime is stated purely in terms of $|E|$ and $|V|$ together rather than as a sum of two competing terms.
+Basically has the same runtime as Dijkstra's, using the same formula
+
+$$
+O(|V|(deletemin) + |E|(decreasekey))
+$$
+The one difference is that Prim's requires a **connected input graph**, so $|E| = \Omega (|V|)$. That's why the $|V|$ term drops out of the totals below: it's always dominated by $|E|$, so the runtime is stated purely in terms of $|E|$ and $|V|$ together rather than as a sum of two competing terms.
 
 - **Binary Heap** — $O(|E| \log|V|)$
 - **Array** — $O(|V|^{2})$

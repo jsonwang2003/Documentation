@@ -93,13 +93,17 @@ The runtime depends entirely on how big $|SL|$ and $|SR|$ turn out to be relativ
 
 **Lucky case:** if $v$ happens to land close to the median every time, $|SL| \approx |SR| \approx n/2$, so no matter which side we recurse on:
 
-$$ T(n) = T\left(\frac{n}{2}\right) + O(n) $$
+$$ 
+T(n) = T\left(\frac{n}{2}\right) + O(n) 
+$$
 
 By the [[Master Theorem]] ($a=1, b=2, d=1$, so $a < b^d$): $T(n) = O(n)$.
 
 **Unlucky case:** if $v$ happens to be the max or min every time, $|SL| = n-1$ (or $|SR| = n-1$), so:
 
-$$ T(n) = T(n-1) + O(n) = O(n^2) $$
+$$ 
+T(n) = T(n-1) + O(n) = O(n^2) 
+$$
 
 ## Expected Runtime (Rigorous)
 
@@ -107,15 +111,23 @@ Selecting the $i^{th}$ element uniformly at random splits the list into pieces o
 
 The smallest possible max-size split is at $i = n/2$:
 
-$$ \max\left(\frac{n}{2}, n-\frac{n}{2}\right) = \frac{n}{2} $$
+$$ 
+\max\left(\frac{n}{2}, n-\frac{n}{2}\right) = \frac{n}{2} 
+$$
 
 and the worst case is at $i=1$ or $i=n$:
 
-$$ \max(1, n-1) = n-1 $$
+$$ 
+\max(1, n-1) = n-1 
+$$
 
 If $\frac{n}{4} \leq i \leq \frac{3n}{4}$ (a "good" pivot), then $\max(i-1, n-i) \leq \frac{3n}{4}$. Otherwise (a "bad" pivot), $\frac{3n}{4} < \max(i-1,n-i) < n$. Since a uniformly random pivot lands in the "good" range with probability $\geq \frac{1}{2}$, this gives an upper bound on the expected runtime:
 
-$$ \begin{align*} ET(n) &\leq \frac{1}{2}ET\left(\frac{3n}{4}\right) + \frac{1}{2}ET(n) + O(n) \ ET(n) &\leq ET\left(\frac{3n}{4}\right) + O(n) \end{align*} $$
+$$ 
+\begin{align*} 
+ET(n) &\leq \frac{1}{2}ET\left(\frac{3n}{4}\right) + \frac{1}{2}ET(n) + O(n) \\ ET(n) &\leq ET\left(\frac{3n}{4}\right) + O(n) 
+\end{align*} 
+$$
 
 Plugging into the [[Master Theorem]] with $a=1$, $b=\frac{4}{3}$, $d=1$: since $a < b^d$,
 

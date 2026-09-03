@@ -75,7 +75,7 @@ aliases:
 
 **Inductive Hypothesis:** suppose `quickSort` correctly sorts every list of size $< n$.
 
-**Inductive Step:** for a list of size $n$, partitioning around $a_i$ guarantees every element of $SL$ is $\leq$ every element of $Sv$, which is $\leq$ every element of $SR$ (by construction — that's what "partition around the pivot" means). Since $|SL| < n$ and $|SR| < n$ (as $Sv$ contains at least the pivot itself), the Inductive Hypothesis guarantees $L$ and $R$ are correctly sorted versions of $SL$ and $SR$. Concatenating $L \circ Sv \circ R$ then produces a fully sorted list, since each piece is internally sorted and the three pieces are already correctly ordered relative to each other. $\blacksquare$
+**Inductive Step:** for a list of size $n$, partitioning around $a_i$ guarantees every element of $SL$ is $\leq$ every element of $Sv$, which is $\leq$ every element of $SR$ (by construction — that's what "partition around the pivot" means). Since $|SL| < n$ and $|SR| < n$ (as $Sv$ contains at least the pivot itself), the Inductive Hypothesis guarantees $L$ and $R$ are correctly sorted versions of $SL$ and $SR$. Concatenating $L \circ Sv \circ R$ then produces a fully sorted list, since each piece is internally sorted and the three pieces are already correctly ordered relative to each other. 
 
 ---
 

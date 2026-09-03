@@ -2,8 +2,11 @@
 > Probabilistic classification algorithm based on **Bayes' Theorem**  
 > Calculates the **posterior probability** of a class given a set of features by multiplying the **prior probability** of the class with the **likelihood** of the features occurring within that class, normalized by the **probability of the features across all classes**
 
+**Bayes' Theorem**:
 
-$$P(A|B) = \frac{P(B|A)P(A)}{P(B)}$$
+$$
+P(A|B) = \frac{P(B|A)P(A)}{P(B)}
+$$
 
 - **Developed by**: **Thomas Bayes** (18th century); formalized in modern machine learning contexts in the 20th century
 - **Core Principle**: Assumes **conditional independence** between features given the class label

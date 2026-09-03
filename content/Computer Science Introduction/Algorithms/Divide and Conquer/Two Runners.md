@@ -13,7 +13,6 @@ description: Binary search for the 'turning point' where a slower-starting runne
 > - **Category:** Binary Search
 > - **Source:** Algorithm design exercise
 > - **Difficulty:** Medium
-> - **Tags:** #binary-search #discrete-ivt #arrays
 
 ---
 

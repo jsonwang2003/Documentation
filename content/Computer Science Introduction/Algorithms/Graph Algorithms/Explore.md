@@ -95,7 +95,7 @@ The output is an array `visited` such that `visited(u)` is true if and only if *
 - **`previsit(v)`** — called when `v` enters the stack; sets `pre(v) = clock` and increments `clock`
 - **`postvisit(v)`** — called when `v` leaves the stack; sets `post(v) = clock` and increments `clock`
 
-### Optional Low-Level Implementation: Keep Track of Paths
+## DFS Output Tree: Keep Track of Paths
 
 We can include another array of information. Set `prev(u)` to be the **"parent"** of `u` in the DFS output tree. By also tracking when a node **enters** (`pre`) and **leaves** (`post`) the stack, we can know the connected structure of _directed graphs_.
 
@@ -201,7 +201,8 @@ Note this is **not** $O(|V| + |E|)$ over the whole graph — `explore` only touc
 - **Reachability only, by default.** The base version only tells you _whether_ a path exists (`visited(u)`), not _what_ the path is — use the path-record version (`prev`, `pre`, `post`) if you need the actual route or timing structure.
 - **Recursion depth risk.** Since `explore` is naturally recursive, a very deep/narrow component can exhaust the call stack; an explicit-stack iterative rewrite avoids this.
 
-> [!Abstraction] Definition — Connected Undirected Graph An undirected graph $G$ is connected if **for every pair of vertices $(v, u)$** in $G$, there exists **a path from $v$ to $u$**.
+> [!Abstraction] Definition
+> Connected Undirected Graph An undirected graph $G$ is connected if **for every pair of vertices $(v, u)$** in $G$, there exists **a path from $v$ to $u$**.
 
 ---
 

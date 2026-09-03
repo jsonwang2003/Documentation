@@ -16,7 +16,8 @@ aliases:
 > 
 > This note works through both strategies using the **Max Bandwidth Problem** as a running example.
 
-> [!Question] Driving Example: Max Bandwidth Problem Graph represents a network, with edges representing communication links. Edge weights are the bandwidth of the link — what is the largest bandwidth of a path from $A$ to $H$?
+> [!Question] Driving Example: 
+> Max Bandwidth Problem Graph represents a network, with edges representing communication links. Edge weights are the bandwidth of the link — what is the largest bandwidth of a path from $A$ to $H$?
 > 
 > ![[Pasted image 20260629201804.png]]
 
@@ -38,7 +39,9 @@ Before picking a strategy, it helps to pin down the problem precisely. Any optim
 3. **Constraints:** The sequence of edges is a path $p$ from $s$ to $t$ in $G$.
 4. **Objective:** Over all possible paths $p$ between $s$ and $t$, find one that maximizes the bandwidth of a path:
 
-$$BW(p) = \underset{ e \in p }{ min } \ w(e)$$
+$$
+BW(p) = \underset{ e \in p }{ min } \ w(e)
+$$
 
 ---
 
@@ -105,7 +108,7 @@ Note this whole proof is only necessary _because_ this is a modification — not
 - Let $y$ be the first vertex along $p$ where $B(y) < b$, and $z$ the vertex right before $y$ on $p$ (so $B(z) \geq b$).
 - Since $p$ has bandwidth $b$, every edge on it — including $(z,y)$ — has weight $\geq b$, so $w(z,y) \geq b$.
 - When $z$ is processed, the algorithm computes $m = \min(B(z), w(z,y)) \geq b$. Since $B(y) < b \leq m$, the algorithm updates $B(y)$ to $m \geq b$.
-- This contradicts the assumption that $B(y) < b$ at the end of the algorithm. $\blacksquare$
+- This contradicts the assumption that $B(y) < b$ at the end of the algorithm. 
 
 ---
 

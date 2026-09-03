@@ -61,7 +61,9 @@ Start with a trivial solution, and keep trying to make it better.
 
 Let $f$ be any flow in the original graph, and $f'$ be any flow in the residual network with respect to $f$. Then $f + f'$ is a valid flow in the original network, and:
 
-$$ Flow(f+f') = Flow(f) + Flow(f') $$
+$$
+Flow(f+f') = Flow(f) + Flow(f') 
+$$
 
 So we can keep finding flow in the residual network, update the residual graph, and repeat — until we can't increase the flow any further.
 
@@ -71,7 +73,9 @@ We stop when there's no path from $s$ to $t$ left in the residual graph. Let $S$
 
 Every edge $e=(u,v)$ with $u \in S$ and $v \in T$ can't be in the residual graph (or $v$ would be reachable too) — meaning every such edge is being used at **full capacity**. Let $Cut(S,T)$ be the total capacity of all such crossing edges. Then, at termination:
 
-$$ Flow(f) = Cut(S,T) $$
+$$
+Flow(f) = Cut(S,T) 
+$$
 
 ---
 
@@ -127,7 +131,9 @@ So Ford-Fulkerson doesn't just find _a_ flow it can't improve — it provably fi
 
 At most $O(W|V|)$ iterations of the outer loop, each costing $O(|E|)$ time (one DFS), giving:
 
-$$ O(W|V||E|) $$
+$$
+O(W|V||E|) 
+$$
 
 > [!note] Where does $W|V|$ come from? 
 > $W$ (not explicitly defined in the source) is the maximum edge capacity. Each augmenting path increases total flow by at least 1 if capacities are integers, and the maximum possible flow value is bounded by (the number of edges leaving $s$) $\times$ (max capacity) $\leq O(|V| \cdot W)$ in the worst case — giving at most $O(|V|W)$ iterations before the flow can't increase any further, each costing $O(|E|)$ for the DFS.

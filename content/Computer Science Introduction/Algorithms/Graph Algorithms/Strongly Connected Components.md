@@ -87,7 +87,8 @@ This suggests a way to look for SCCs:
 
 The SCCs can be linearized by arranging them in **decreasing order of their highest post numbers**. In particular:
 
-> [!Info] The vertex with the **greatest** post number in any [DFS Output Tree](Explore#DFS Output Tree) belongs to a **source** SCC.
+> [!Info] 
+> The vertex with the **greatest** post number in any [[Explore#DFS Output Tree Keep Track of Paths|DFS Output Tree]] belongs to a **source** SCC.
 
 This follows directly from the Property above: a source SCC has no incoming edges from any other SCC, so no other component's highest post number can exceed its own.
 

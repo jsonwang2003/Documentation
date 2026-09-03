@@ -81,7 +81,10 @@ Let $KS(j, b)$ be the maximum value you can fit in a $b$-capacity knapsack using
 ## 2. Base Cases
 
 $$ 
-KS(j, 0) = 0 \quad \forall\ 0 \leq j \leq n \qquad\qquad KS(0, b) = 0 \quad \forall\ 0\leq b\leq C 
+\begin{align*}
+KS(j, 0) &= 0 \quad \forall\ 0 \leq j \leq n \\
+KS(0, b) &= 0 \quad \forall\ 0\leq b\leq C 
+\end{align*}
 $$
 
 (No capacity, or no items available, both trivially cap value at 0.)
@@ -93,7 +96,9 @@ $$
 
 Since we don't know which is bigger, compute both and take the max:
 
-$$ KS(j,b) = \max\big(KS(j-1, b),\ v(j) + KS(j, b-w(j))\big) \quad \text{if } b \geq w(j) $$
+$$ 
+KS(j,b) = \max\big(KS(j-1, b),\ v(j) + KS(j, b-w(j))\big) \quad \text{if } b \geq w(j) 
+$$
 
 (if $b < w(j)$, item $j$ doesn't fit, so $KS(j,b) = KS(j-1,b)$).
 
@@ -112,11 +117,15 @@ for j = 1 ... n
 
 ## 5. Final Output
 
-$$ KS(n, C) $$
+$$
+KS(n, C) 
+$$
 
 ## 6. Runtime
 
-$$ O(nC) $$
+$$
+O(nC) 
+$$
 
 One cell per $(j,b)$ pair, $O(1)$ work each.
 
@@ -149,7 +158,9 @@ One cell per $(j,b)$ pair, $O(1)$ work each.
 
 **Reading a cell — row 3 ($v=12, w=5$), $c=13$:**
 
-$$ K[3][13] = \max\big(\underbrace{K[2][13]}_{27},\ \ 12 + \underbrace{K[3][8]}_{18}\big) = \max(27, 30) = 30 $$
+$$ 
+K[3][13] = \max\big(\underbrace{K[2][13]}_{27},\ \ 12 + \underbrace{K[3][8]}_{18}\big) = \max(27, 30) = 30 
+$$
 
 > [!tip] Patterns Worth Noticing
 > 

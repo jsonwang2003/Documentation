@@ -49,7 +49,9 @@ Let $S(k)$ be true if $x_1, \dots, x_k$ can be separated into a sequence of Engl
 
 ## 2. Base Case
 
-$$ S[0] = \text{True} $$
+$$
+S[0] = \text{True} 
+$$
 
 (The empty prefix is vacuously a valid — empty — sequence of words.)
 
@@ -57,8 +59,8 @@ $$ S[0] = \text{True} $$
 
 $$ 
 S[k] = 
-\begin{cases}  \\
-\text{True} &\text{if } \exists j \text{ such that } S[j] = \text{True and } x_{j+1}, \dots, x_{k} \text{ is a word} \\ \\
+\begin{cases}
+\text{True} &\text{if } \exists \ j \text{ such that } S[j] = \text{True and } x_{j+1}, \dots, x_{k} \text{ is a word} \\ \\
  \text{False} &\text{otherwise} \\
  \end{cases} 
  $$
@@ -69,7 +71,9 @@ $0 \dots n$ — each $S[k]$ only ever depends on some $S[j]$ with $j < k$, so so
 
 ## 5. Output
 
-$$ S[n] $$
+$$
+S[n] 
+$$
 
 ## 6. Iterative Algorithm
 
@@ -127,7 +131,7 @@ $$ S[n] $$
 
 - **Base case:** $S(0) = \text{True}$ — the empty prefix trivially has a valid (empty) split.
 - **Inductive Hypothesis:** for all $j < k$, $S(j)$ is set correctly.
-- **Inductive Step:** the algorithm sets $S(k) = \text{True}$ exactly when it finds some $j$ with $S(j) = \text{True}$ (correct, by the Inductive Hypothesis) and $x[j+1\dots k]$ a valid word. This matches the recursive definition in Step 3 directly: $S(k)$ should be true iff _some_ such $j$ exists. Since the (corrected) loop checks every $j$ from $k-1$ down to $0$ inclusive, it examines every possible split point — so it sets $S(k) = \text{True}$ if and only if a valid $j$ actually exists. $\blacksquare$
+- **Inductive Step:** the algorithm sets $S(k) = \text{True}$ exactly when it finds some $j$ with $S(j) = \text{True}$ (correct, by the Inductive Hypothesis) and $x[j+1\dots k]$ a valid word. This matches the recursive definition in Step 3 directly: $S(k)$ should be true iff _some_ such $j$ exists. Since the (corrected) loop checks every $j$ from $k-1$ down to $0$ inclusive, it examines every possible split point — so it sets $S(k) = \text{True}$ if and only if a valid $j$ actually exists. 
 
 **Why the off-by-one mattered for correctness:** without checking $j=0$, the algorithm would incorrectly conclude $S(k) = \text{False}$ for any $k$ where the _only_ valid split has the entire prefix $x[1\dots k]$ as a single word — a real, not just cosmetic, correctness gap.
 

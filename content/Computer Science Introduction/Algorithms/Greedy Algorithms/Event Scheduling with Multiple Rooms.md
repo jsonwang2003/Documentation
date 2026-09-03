@@ -100,8 +100,8 @@ aliases:
 
 We need to show: for every instance $I$, letting $GS$ be the greedy algorithm's solution and $OS$ be _any other_ solution, $Cost(GS) \leq Cost(OS)$ (minimizing room count).
 
-> [!Important] The Tricky 
-> Part $OS$ is an arbitrary valid room assignment — we don't know its structure. Directly comparing room-by-room against it isn't feasible, so this is proven instead using the **Greedy Achieves the Bound** technique (see [[Techniques to Prove Optimality]]): find a bound that any solution must respect, then show the greedy algorithm reaches it exactly.
+> [!Important] The Tricky Part 
+> $OS$ is an arbitrary valid room assignment — we don't know its structure. Directly comparing room-by-room against it isn't feasible, so this is proven instead using the **Greedy Achieves the Bound** technique (see [[Techniques to Prove Optimality]]): find a bound that any solution must respect, then show the greedy algorithm reaches it exactly.
 
 Let $t$ be a certain time during the conference, and let $B(t)$ be the set of all events happening at time $t$ (how _busy_ the conference is at that moment). Let $R$ be the number of rooms used in an arbitrary valid schedule.
 
@@ -117,13 +117,17 @@ Let $t$ be a certain time during the conference, and let $B(t)$ be the set of al
 
 **Proof:** let $t$ be the start time of the first event scheduled into room $k$. Room $k$ was the minimum-numbered room _available_ at that time, which means at time $t$ there were already events going on in rooms $1, 2, \dots, k-1$, plus the new event now in room $k$. So $|B(t)| = k$ at this point $t$.
 
-$$ k = |B(t_g)| \leq \max_{t} |B(\bar{t})| = L \leq R \implies k \leq L $$
+$$
+k = |B(t_g)| \leq \max_{t} |B(\bar{t})| = L \leq R \implies k \leq L 
+$$
 
 Therefore, at some point in time $t$, $k = |B(t)| \leq \max_t |B(t)| = L$ — greedy achieves the bound $L$ exactly.
 
 **Conclusion:** let $GS$ be the greedy solution with $k = Cost(GS)$ rooms, and $OS$ be any schedule with $R = Cost(OS)$ rooms. By the bounding lemma, $R \geq L$. By the achieves-the-bound lemma, $k \leq L$. Putting the two together:
 
-$$ Cost(GS) = k \leq L \leq R = Cost(OS) $$
+$$
+Cost(GS) = k \leq L \leq R = Cost(OS) 
+$$
 
 Thus the greedy solution (Strategy 2: sort by start time, assign to lowest-numbered available room) is optimal.
 

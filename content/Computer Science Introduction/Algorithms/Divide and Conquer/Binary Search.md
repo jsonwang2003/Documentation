@@ -122,7 +122,11 @@ As the input size $n$ roughly doubles, the number of required comparisons only i
 
 If the list size is $n = 2^k - 1$, you need $k$ comparisons. Solving for $k$ in terms of $n$:
 
-$$ \begin{align*} n &\leq 2^k - 1 \ n+1 &\leq 2^k \ \log_{2}(n+1) &\leq k \ k &= \boxed{\lceil\log_{2}(n+1)\rceil} \end{align*} $$
+$$ 
+\begin{align*} 
+n &\leq 2^k - 1 \\ n+1 &\leq 2^k \\ \log_{2}(n+1) &\leq k \\ k &= \boxed{\lceil\log_{2}(n+1)\rceil} 
+\end{align*} 
+$$
 
 > [!CHECK] This confirms that Binary Search grows at a logarithmic rate, $O(\log n)$, making it incredibly efficient for large datasets.
 
