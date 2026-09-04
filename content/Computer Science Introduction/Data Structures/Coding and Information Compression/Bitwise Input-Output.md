@@ -33,8 +33,11 @@ When a file writing operation finishes, the active bitwise buffer register might
 ## How It Works
 The system coordinates a two-tiered buffering system to balance arbitrary bit extraction with chunk-optimized hardware writes.
 
-```
-[ Individual Bits ] <---> [ Bitwise Buffer (1 Byte) ] <---> [ Bytewise Buffer (4 KB) ] <---> [ Storage Hardware ]
+```mermaid
+flowchart LR
+    A["<b>Individual Bits</b>"] <---> B["<b>Bitwise Buffer</b><br>(1 Byte)"]
+    B <---> C["<b>Bytewise Buffer</b><br>(4 KB)"]
+    C <---> D["<b>Storage Hardware</b>"]
 ```
 
 > [!tip] Key Idea
@@ -67,8 +70,8 @@ The following functions show how a bitwise stream layer manages shifting logic a
 		\EndIf
 		\State $buf \gets buf \lor (bit \ll (7 - nbits))$
 		\State $nbits \gets nbits + 1$
+		\State
 	\EndProcedure
-	\State
 	\Procedure{ReadBit}{buf, nbits, inStream}
 		\If{nbits == 8}
 			\State $buf \gets$ \Call{GetByte}{inStream}
@@ -104,4 +107,4 @@ Suppose a compression sequence yields a 12-bit payload: `11111111 1111`.
 ## Related Notes
 *   **[[Data Structure of Huffman Code]]** — Relies completely on bitwise streaming to write its variable-length paths.
 *   **[[Entropy and Information Theory]]** — Outlines the mathematical information bounds that necessitate fractional bit streams.
-*   **[[../../Operating Systems/Execution and Scheduling/Threads/Context Switching]]** — Details why frequent, unbuffered hardware I/O requests degrade system performance.
+*   **[[Thread Context Switch & Scheduling|Thread Context Switch]]** — Details why frequent, unbuffered hardware I/O requests degrade system performance.

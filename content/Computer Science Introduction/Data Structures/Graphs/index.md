@@ -9,9 +9,8 @@ tags:
   - graph-theory
   - networks
 ---
-
-# Overview 
-Navigation systems, social networks, and routing pipelines are all structurally powered by Graphs. By abstracting real-world components into nodes and their corresponding relationships into edges, we can apply deterministic optimization mechanics to solve complex computational challenges like discovering the absolute shortest path across an arbitrary network.
+> [!abstract] Overview 
+> Navigation systems, social networks, and routing pipelines are all structurally powered by Graphs. By abstracting real-world components into nodes and their corresponding relationships into edges, we can apply deterministic optimization mechanics to solve complex computational challenges like discovering the absolute shortest path across an arbitrary network.
 
 ---
 
@@ -30,12 +29,35 @@ A graph $G$ is formally represented as an ordered pair $G = (V, E)$:
 *   **$E$:** A set of edges (or links), where each individual edge $e \in E$ is a node pair $(v, w)$ mapping a connectivity lane.
 *   **Sizing Bounds:** The structural scale of a network is quantified by $|V|$ (vertex cardinality) and $|E|$ (edge cardinality). For any simple graph, $|E|$ is strictly bounded by $O(|V|^2)$.
 
+**Disconnected**
+```mermaid
+flowchart TD
+    A["A"] ~~~ B["B"]
+    C["C"] ~~~ D["D"]
 ```
-  Disconnected            Sequential            Hierarchical             Complex
-   (A)   (B)              (A) -> (B) -> (C)         (Root)              (A) <---> (B)
-                                                   /      \              ^         /
-   (C)   (D)                                    (B)        (C)           \       v
-                                               /   \                     (C) <-> (D)
+
+**Sequential**
+```mermaid
+flowchart LR
+    A["A"] --> B["B"] --> C["C"]
+```
+
+**Hierarchical**
+```mermaid
+flowchart TD
+    Root["Root"] --> B["B"]
+    Root --> C["C"]
+    B --> D["D"]
+    B --> E["E"]
+```
+
+**Complex**
+```mermaid
+flowchart TD
+    A["A"] <--> B["B"]
+    B --> D["D"]
+    C["C"] --> A
+    C <--> D
 ```
 
 ### Classifying Graphs

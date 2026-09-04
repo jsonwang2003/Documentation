@@ -33,7 +33,9 @@ The core disadvantage of Linear Probing. As array slots fill up, sequential clum
 
 Linear Probing follows a simple deterministic path: if $H(k)$ is occupied, try $(H(k) + 1) \pmod M$, then $(H(k) + 2) \pmod M$, and so on:
 
-$$ \text{index} = (\text{index} + 1) \pmod M $$
+$$
+\text{index} = (\text{index} + 1) \pmod M 
+$$
 
 ![[Pasted image 20260206100526.png]]
 
@@ -102,3 +104,4 @@ You cannot simply set a slot to `NULL` when deleting a key because doing so woul
 - [[Closed Addressing (Separate Chaining)|Separate Chaining]]
 - [[Double Hashing]]
 - [[Random Hashing]]
+- [[Cuckoo Hashing]]

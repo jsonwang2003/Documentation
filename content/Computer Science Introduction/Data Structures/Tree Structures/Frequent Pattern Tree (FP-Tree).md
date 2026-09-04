@@ -102,5 +102,5 @@ Once the FP-Tree is constructed, frequent itemsets are extracted recursively wit
 # Related Notes
 
 - [[Binary Tree|Binary Tree]]
-- [[Multiway Trie Implementation|Multiway Trie]]
+- [[Multiway Trie]]
 - [[Count-Min Sketches|Count-Min Sketches]]

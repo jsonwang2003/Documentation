@@ -14,7 +14,7 @@ tags:
 > 
 > - **Category:** Linear Boundary ADT
 > - **Primary Interface Capability:** Direct edge manipulation.
-> - **Common Structural Implementations:** [[Computer Science Introduction/Data Structures/Introductory Data Structures/Linked List|Doubly-Linked Lists]] or [[Circular Arrays|Circular Arrays]].
+> - **Common Structural Implementations:** [[Computer Science Introduction/Data Structures/Introductory Data Structures/Linked List#Structural Variations|Doubly-Linked Lists]] or [[Circular Arrays|Circular Arrays]].
 
 ---
 
@@ -68,7 +68,10 @@ Utilizes a bounded flat array paired with wrapping indexing logic.
 
 # Operational Complexity Analysis
 
-$$\begin{array}{ccc} \mathbf{Operation} & \mathbf{Doubly\text{-}Linked\ List} & \mathbf{Circular\ Array} \\  \hline  \text{addFront / addBack} & O(1) & \text{Amortized } O(1) \\ \text{removeFront / removeBack} & O(1) & O(1) \\ \text{peekFront / peekBack} & O(1) & O(1)  \end{array}$$
+$$
+\begin{array}{ccc} \mathbf{Operation} & \mathbf{Doubly\text{-}Linked\ List} & \mathbf{Circular\ Array} \\  \hline  \text{addFront / addBack} & O(1) & \text{Amortized } O(1) \\ \text{removeFront / removeBack} & O(1) & O(1) \\ \text{peekFront / peekBack} & O(1) & O(1)
+\end{array}
+$$
 
 > [!note] Architectural Priority Details
 > Under a Doubly-Linked List backbone, `removeBack` runs in $O(1)$ constant time because each node retains an explicit pointer to its predecessor (`node.prev`). In a Singly-Linked List, `removeBack` degrades to $O(n)$ because the system must trace forward from the `head` to locate the node preceding the `tail`. This makes the Doubly-Linked List the standard backing structure for Deque variants.

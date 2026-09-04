@@ -8,7 +8,7 @@ tags:
   - collision-resolution
 ---
 > [!abstract] Abstract 
-> Random Hashing is an Open Addressing collision resolution strategy that eliminates clustering by using a Pseudorandom Number Generator (PRNG) to determine the probe sequence. By seeding the PRNG with the key itself, the algorithm ensures that the "random" path is consistent and repeatable for every search.
+> Random Hashing is an [[Open Addressing (Linear Probing)|Open Addressing]] collision resolution strategy that eliminates clustering by using a Pseudorandom Number Generator (PRNG) to determine the probe sequence. By seeding the PRNG with the key itself, the algorithm ensures that the "random" path is consistent and repeatable for every search.
 > 
 > - **Category:** Open Addressing Framework
 > - **Input:** Target element $k$ and backing storage layout.

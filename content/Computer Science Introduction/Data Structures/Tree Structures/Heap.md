@@ -129,11 +129,17 @@ Because heaps satisfy the strict structural definition of a complete tree, they 
 For an entry element located at array coordinate position $i$ under standard 0-based indexing, coordinate translations map to the following mathematical formulas:
 
 *   **Parent Offset Location:** 
-    $$\text{Parent}(i) = \left\lfloor \frac{i - 1}{2} \right\rfloor$$
+    $$
+    \text{Parent}(i) = \left\lfloor \frac{i - 1}{2} \right\rfloor
+    $$
 *   **Left Child Offset Location:** 
-    $$\text{LeftChild}(i) = 2i + 1$$
+    $$
+    \text{LeftChild}(i) = 2i + 1
+    $$
 *   **Right Child Offset Location:** 
-    $$\text{RightChild}(i) = 2i + 2$$
+    $$
+    \text{RightChild}(i) = 2i + 2
+    $$
 *   **Next Available Shape Slot:** Coordinates directly to array index $n$ (where $n$ represents the total active element count).
 
 ---
@@ -150,5 +156,5 @@ For an entry element located at array coordinate position $i$ under standard 0-b
 # Related Notes
 
 - [[Priority Queue|Priority Queue]]
-- [[Tree Structures/Binary Search Tree|Binary Search Tree]]
+- [[Binary Search Tree (BSTs)|Binary Search Tree]]
 - [[Binary Tree|Binary Tree]]

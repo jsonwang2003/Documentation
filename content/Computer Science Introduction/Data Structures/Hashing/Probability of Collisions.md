@@ -49,11 +49,15 @@ A classic illustration of this probability curve is the Birthday Paradox. Even t
 *   With a tiny cohort of only **23 people**, the probability of a collision crosses the **50%** mark.
 *   Expanding that cohort to **60 people** causes the collision probability to spike past **99%**.
 
-```
-Collision Likelihood Scale (M = 365 Slots)
-[ 1 Person  ] ---> 0% Probability
-[ 23 People ] ---> 50% Probability (Table is only 6.3% full!)
-[ 60 People ] ---> 99% Probability (Table is only 16.4% full!)
+```mermaid
+flowchart LR
+    subgraph Scale["<b>Collision Likelihood Scale (M = 365 Slots)</b>"]
+        direction TB
+        
+        N1["<b>1 Person</b>"] --> P1["0% Probability"]
+        N2["<b>23 People</b>"] --> P2["50% Probability<br><i>(Table is only 6.3% full)</i>"]
+        N3["<b>60 People</b>"] --> P3["99% Probability<br><i>(Table is only 16.4% full)</i>"]
+    end
 ```
 
 > [!tip] Key Idea

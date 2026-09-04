@@ -60,5 +60,5 @@ tags:
 # Related Modules
 
 - [[Computer Science Introduction/Data Structures/Tree Structures/index\|Tree Structures]]
-- [[AVL Tree\|AVL Tree]]
+- [[graphs/index|Graphs]]
 - [[Computer Science Introduction/Data Structures/Hashing/index\|Hashing]]

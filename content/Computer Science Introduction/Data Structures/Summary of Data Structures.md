@@ -32,7 +32,7 @@ An **Array List** is an ADT wrapper built over a dynamic array that automaticall
 | **Remove** | Avg $O(n)$, Best $O(1)$ at end | Avg $O(n)$ (Requires shifting) |
 | **Space** | $O(n)$ | $O(n)$ |
 
-## [[Computer Science Introduction/Data Structures/Introductory Data Structures/Linked List]]
+## [[Linked List|Linked List]]
 Sequential chains of individual node objects connected via explicit pointers.
 
 *   **Singly-Linked:** Node tracks `data` and a single `next` pointer.
@@ -40,12 +40,12 @@ Sequential chains of individual node objects connected via explicit pointers.
 *   **Modification Logic:** Pointer redirection takes $O(1)$ time once the target node is located.
 
 ### Complexity Analysis
-| Operation | Singly-Linked List | Doubly-Linked List |
-|---|---|---|
-| **Find** | Avg $O(n)$, Worst $O(n)$ | Avg $O(n)$ |
-| **Insert (Head/Tail)** | $O(1)$ | $O(1)$ |
-| **Insert (Middle)** | $O(n)$ search + $O(1)$ swap | $O(n)$ search + $O(1)$ swap |
-| **Space Overhead** | $O(n)$ (1 pointer/node) | $O(n)$ (2 pointers/node) |
+| Operation              | Singly-Linked List          | Doubly-Linked List          |
+| ---------------------- | --------------------------- | --------------------------- |
+| **Find**               | Avg $O(n)$, Worst $O(n)$    | Avg $O(n)$                  |
+| **Insert (Head/Tail)** | $O(1)$                      | $O(1)$                      |
+| **Insert (Middle)**    | $O(n)$ search + $O(1)$ swap | $O(n)$ search + $O(1)$ swap |
+| **Space Overhead**     | $O(n)$ (1 pointer/node)     | $O(n)$ (2 pointers/node)    |
 
 ## [[Skip Lists|Skip List]]
 A probabilistic data structure augmenting a linked list with multi-level forward pointers, enabling $O(\log n)$ logarithmic lookups.
@@ -86,6 +86,7 @@ A complete binary tree enforcing relative priority ordering between parents and 
 | **[[AVL Tree]]**                                          | $O(\log n)$  | $O(\log n)$    | $O(\log n)$    | Strict balance factors ($\pm 1$) via rotations.    |
 | **[[Red-Black Tree]]**                                    | $O(\log n)$  | $O(\log n)$    | $O(\log n)$    | Relaxed color rules; optimized for writes.         |
 
+
 ## B-Tree & B+ Tree
 "Fat" balanced search trees designed for disk storage and database indexing by maximizing branching factor $b$.
 
@@ -108,19 +109,19 @@ Associative structures mapping keys to array slots via string hash functions $h(
 *   **Open Addressing:** Linear Probing, Double Hashing, Cuckoo Hashing.
 *   **Closed Addressing:** Separate Chaining (Linked lists or BSTs per bucket).
 
-| Strategy | Find (Avg) | Find (Worst) | Key Characteristics |
-|---|---|---|---|
-| **Linear Probing** | $O(1)$ | $O(n)$ | High cache locality; sensitive to clustering ($\alpha < 0.5$). |
-| **Separate Chaining** | $O(1)$ | $O(n)$ | Handles high load factors ($\alpha > 1.0$) gracefully. |
-| **Cuckoo Hashing** | $O(1)$ | $O(1)$ worst | Guaranteed $O(1)$ lookups via two hash candidate slots. |
+| Strategy                                                         | Find (Avg) | Find (Worst) | Key Characteristics                                            |
+| ---------------------------------------------------------------- | ---------- | ------------ | -------------------------------------------------------------- |
+| **[[Open Addressing (Linear Probing)\|Linear Probing]]**         | $O(1)$     | $O(n)$       | High cache locality; sensitive to clustering ($\alpha < 0.5$). |
+| **[[Closed Addressing (Separate Chaining)\|Separate Chaining]]** | $O(1)$     | $O(n)$       | Handles high load factors ($\alpha > 1.0$) gracefully.         |
+| **[[Cuckoo Hashing]]**                                           | $O(1)$     | $O(1)$ worst | Guaranteed $O(1)$ lookups via two hash candidate slots.        |
 
 ## [[Computer Science Introduction/Data Structures/String Searching Data Structures/index|String Searching Structures]]
 
-| Structure                     | Find (Avg)                  | Space Complexity            | Primary Advantage                                               |
-| ----------------------------- | --------------------------- | --------------------------- | --------------------------------------------------------------- |
-| **Multiway Trie**             | $O(k)$                      | $O(n \cdot k \cdot \Sigma)$ | Fastest prefix queries; memory inefficient for large alphabets. |
-| **Ternary Search Tree (TST)** | $O(k + \log n)$             | $O(n \cdot k)$              | Space-efficient hybrid using 3 child pointers per node.         |
-| **Disjoint Set (Union-Find)** | $O(\alpha(n)) \approx O(1)$ | $O(n)$                      | Amortized near-constant time dynamic set partitioning.          |
+| Structure                        | Find (Avg)                  | Space Complexity            | Primary Advantage                                               |
+| -------------------------------- | --------------------------- | --------------------------- | --------------------------------------------------------------- |
+| **[[Multiway Trie]]**            | $O(k)$                      | $O(n \cdot k \cdot \Sigma)$ | Fastest prefix queries; memory inefficient for large alphabets. |
+| **[[Ternary Search Tree]]**      | $O(k + \log n)$             | $O(n \cdot k)$              | Space-efficient hybrid using 3 child pointers per node.         |
+| **[[Disjoint Sets & Up-Trees]]** | $O(\alpha(n)) \approx O(1)$ | $O(n)$                      | Amortized near-constant time dynamic set partitioning.          |
 
 ---
 
@@ -130,6 +131,8 @@ Associative structures mapping keys to array slots via string hash functions $h(
 | -------------------- | ---------------- | ------------------ | ------------------ | ---------------------------------------- |
 | **Adjacency Matrix** | $O(1)$           | $O(\|V\|)$         | $O(\|V\|^{2})$     | Dense graphs ($\|E\| \approx \|V\|^{2}$) |
 | **Adjacency List**   | $O(\|E\|)$ worst | $O(\text{deg}(u))$ | $O(\|V\| + \|E\|)$ | Sparse graphs (BFS, DFS, Dijkstra).      |
+
+For complete write up, visit [[Graph Representations]]
 
 ---
 

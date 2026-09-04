@@ -75,7 +75,9 @@ The vertical node height distribution is managed dynamically via an internal ran
 
 This operational process fits a **Geometric Distribution**: 
 
-$$ P(X = k) = p^k \cdot (1 - p) $$
+$$ 
+P(X = k) = p^k \cdot (1 - p) 
+$$
 
 where $k$ represents the number of sequential successes completed before encountering the first failure.
 

@@ -38,8 +38,8 @@ The size of the backing array affects both the memory footprint and the frequenc
 ### 3. Collision Resolution
 Because array indices are finite, two different keys will eventually map to the exact same index. This conflict is called a collision. The two primary families for handling this are:
 
-*   **Closed Addressing (Separate Chaining):** Directing occupied array slots to external linked chains (like linked lists) to keep keys at their natural hash index.
-*   **Open Addressing (Linear Probing):** Searching dynamically for alternative empty slots inside the bounds of the primary backing array.
+*   **[[Closed Addressing (Separate Chaining)]]:** Directing occupied array slots to external linked chains (like linked lists) to keep keys at their natural hash index.
+*   **[[Open Addressing (Linear Probing)]]:** Searching dynamically for alternative empty slots inside the bounds of the primary backing array.
 
 ---
 
@@ -47,8 +47,8 @@ Because array indices are finite, two different keys will eventually map to the 
 
 In high-volume streaming environments where we need to trace data elements but have a very limited memory capacity, we deploy structures built on similar hashing principles that trade exact precision for a smaller memory footprint:
 
-*   **Bloom Filters:** Space-optimized bit vectors used for fast set-membership checks with zero false negative risks.
-*   **Count-Min Sketches:** 2D counter arrays used for approximate frequency estimation across heavy-hitter data streams.
+*   **[[Bloom Filters]]:** Space-optimized bit vectors used for fast set-membership checks with zero false negative risks.
+*   **[[Count-Min Sketches]]:** 2D counter arrays used for approximate frequency estimation across heavy-hitter data streams.
 
 ---
 

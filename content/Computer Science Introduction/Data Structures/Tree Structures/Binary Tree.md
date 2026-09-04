@@ -14,7 +14,7 @@ tags:
 > 
 > - **Category:** Hierarchical Node Network
 > - **Branching Bound:** At most 2 outgoing child pointers per node ($0, 1, \text{ or } 2$).
-> - **Core Usage:** Backbone for [[Tree Structures/Binary Search Tree|Binary Search Trees]], [[Heap|Heaps]], and expression syntax trees.
+> - **Core Usage:** Backbone for [[Binary Search Tree (BSTs)|Binary Search Tree]], [[Heap|Heaps]], and expression syntax trees.
 
 ---
 
@@ -50,7 +50,7 @@ Traversing a binary tree involves systematically visiting every node in the netw
 
 ### Depth-First Traversals (DFS)
 1.  **In-Order Traversal (Left $\to$ Root $\to$ Right):**
-    Processes the left subtree, evaluates the active node, then processes the right subtree. On a [[Tree Structures/Binary Search Tree|BST]], this yields elements in sorted order.
+    Processes the left subtree, evaluates the active node, then processes the right subtree. On a [[Binary Search Tree (BSTs)|Binary Search Tree]], this yields elements in sorted order.
 2.  **Pre-Order Traversal (Root $\to$ Left $\to$ Right):**
     Evaluates the active node first before processing left and right subtrees. Ideal for copying or serializing tree structures.
 3.  **Post-Order Traversal (Left $\to$ Right $\to$ Root):**
@@ -122,7 +122,7 @@ Visits nodes horizontally level by level from top to bottom, left to right. This
 Binary trees are implemented in hardware memory using two primary architectural approaches:
 
 1.  **Dynamic Pointer-Based Nodes:**
-    Nodes hold a data value alongside dynamic heap pointers (`leftChild`, `rightChild`, optional `parent`). This is the default structure for general dynamic trees like [[AVL Tree|AVL Trees]] and [[Tree Structures/Binary Search Tree|BSTs]].
+    Nodes hold a data value alongside dynamic heap pointers (`leftChild`, `rightChild`, optional `parent`). This is the default structure for general dynamic trees like [[AVL Tree|AVL Trees]] and [[Binary Search Tree (BSTs)|BSTs]].
 2.  **Array-Based Contiguous Index Mapping:**
     Used when the tree satisfies the Complete Tree property (such as [[Heap|Binary Heaps]]). Left and right children map to array offsets via constant index arithmetic ($2i+1$ and $2i+2$), bypassing pointer storage overhead entirely.
 
@@ -130,7 +130,7 @@ Binary trees are implemented in hardware memory using two primary architectural 
 
 # Related Notes
 
-- [[Tree Structures/Binary Search Tree|Binary Search Tree]]
+- [[Binary Search Tree (BSTs)|Binary Search Tree]]
 - [[AVL Tree|AVL Tree]]
 - [[Heap|Heap]]
 - [[Abstract Data Types (ADT)|Abstract Data Types (ADT)]]

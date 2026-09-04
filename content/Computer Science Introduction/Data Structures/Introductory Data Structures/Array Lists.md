@@ -25,12 +25,16 @@ An array is a homogeneous data structure where each element is stored in adjacen
 ### Random Access Arithmetic
 Because each cell shares the same size $b$ and layout blocks are perfectly contiguous in hardware memory, the system calculates the location of any element $i$ in constant time given the starting base address $x$:
 
-$$ \text{Address}(i) = x + b \cdot i $$
+$$
+\text{Address}(i) = x + b \cdot i 
+$$
 
 > [!note] Memory Address Calculation Example
 > Suppose an array of integers ($b = 4 \text{ bytes}$) is initialized at base address $1000$ in decimal memory. The physical start address of cell $6$ under 0-based indexing is:
 > 
-> $$ 1000 + 4 \cdot 6 = 1024 $$
+> $$ 
+> 1000 + 4 \cdot 6 = 1024 
+> $$
 
 ### Handling Variable Data
 If array structures require all elements to be the exact same size, how can they contain strings of varying lengths?

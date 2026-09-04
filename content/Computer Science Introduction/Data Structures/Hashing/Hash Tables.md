@@ -31,15 +31,11 @@ In computer science, we frequently label Hash Table operations as $O(1)$. Howeve
 
 A Hash Table consists of a physical backing array of size $M$ (representing table capacity) combined with a chosen hash function $H(k)$ that compresses keys down to fit inside valid bounds ($0 \le \text{index} < M$).
 
-```
-       Key Input Context
-          [ "Giraffe" ] 
-                |
-                v
-       ( Hash Function H(k) )
-                |
-                v
-       [ Compressed Index ] ---> Backing Array: arr[index] = key
+```mermaid
+flowchart TD
+    Key["Key Input Context<br><b>'Giraffe'</b>"] --> Hash("Hash Function<br><b>H(k)</b>")
+    Hash --> Index["<b>Compressed Index</b>"]
+    Index --> Array["<b>Backing Array</b><br>arr(index) = key"]
 ```
 
 > [!tip] Key Idea

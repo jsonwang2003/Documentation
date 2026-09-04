@@ -27,14 +27,18 @@ To serve as a reliable primitive within data structures and algorithms, a hash f
 ### Property 1: Equality (The Mandatory Requirement)
 If two keys $k$ and $l$ are logically equivalent ($k = l$), then their generated hash outcomes must match identically: 
 
-$$h(k) = h(l)$$
+$$
+h(k) = h(l)
+$$
 
 This behavior guarantees that inserting an item under key $k$ allows a search engine to successfully discover it later at the exact same location using an equivalent key proxy.
 
 ### Property 2: Inequality (The Non-Deterministic Goal)
 If two keys are distinct ($k \neq l$), it is ideal for their corresponding outputs to differ: 
 
-$$h(k) \neq h(l)$$
+$$
+h(k) \neq h(l)
+$$
 
 *   **Collision:** Occurs when two unequal data keys happen to generate the exact same mathematical hash value.
 *   **Perfect Hash Function:** A specialized function guaranteed to never produce a collision across its input spectrum. These are rare and typically feasible only when the full set of keys is known in advance.
@@ -85,11 +89,12 @@ A robust hash function uses a polynomial multiplier step where the specific orde
 
 In a real-world Hash Table with a fixed array capacity $m$, locating an element's storage coordinate involves two separate phases:
 
-```
-[ Key Data ] ---> ( Hash Computation: h(key) ) ---> [ Large Integer ]
-                                                           |
-                                                           v
-[ Index Coordinate ] <--- ( Compression Step: % m ) <-------+
+```mermaid
+flowchart TD
+    KeyData["<b>Key Data</b>"] --> HashComp("<b>Hash Computation</b><br><i>h(key)</i>")
+    HashComp --> LargeInt["<b>Large Integer</b>"]
+    LargeInt --> Compress("<b>Compression Step</b><br><i>% m</i>")
+    Compress --> IndexCoord["<b>Index Coordinate</b>"]
 ```
 
 1.  **Hash Computation:** The type-specific hash algorithm processes the key to generate a wide-range integer value: $\text{hashValue} = h(\text{key})$.

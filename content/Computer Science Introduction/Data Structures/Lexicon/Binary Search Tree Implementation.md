@@ -22,7 +22,7 @@ tags:
 While several variations of Binary Search Trees exist, only self-balancing specifications are suitable for a large-scale Lexicon dataset:
 
 *   **[[AVL Tree|AVL Tree]]:** Highly preferred for Lexicon engines because they maintain stricter height balance requirements ($|h_{\text{left}} - h_{\text{right}}| \le 1$). This results in a shallower overall tree height, translating to fewer string comparisons during search operations.
-*   **Red-Black Tree:** Also a viable option with $O(\log n)$ guarantees, but typically optimized for scenarios with high-frequency writes rather than the read-dominated lookup focus of a standard Lexicon.
+*   **[[Red-Black Tree]]:** Also a viable option with $O(\log n)$ guarantees, but typically optimized for scenarios with high-frequency writes rather than the read-dominated lookup focus of a standard Lexicon.
 
 ---
 
@@ -75,7 +75,7 @@ A major architectural advantage of the BST over unordered structures (like [[Has
 
 # Evaluation for the Lexicon ADT
 
-The Self-Balancing BST provides a significant upgrade over the [[Array Implementation|Sorted Array]] when updates or vocabulary mutations are needed:
+The Self-Balancing BST provides a significant upgrade over the [[Array Implementation#Structural Comparison Linked List vs. Sorted Array|Sorted Array]] when updates or vocabulary mutations are needed:
 
 *   **Consistency:** Unlike the Sorted Array, which struggles with slow $O(n)$ data-shifting insertions, the BST processes all structural operations within tight $O(\log n)$ bounds.
 *   **Advanced Queries:** It supports range boundaries natively (e.g., "find all valid dictionary words situated between 'apple' and 'banana'") much more efficiently than an unordered Hash Table.

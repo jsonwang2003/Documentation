@@ -24,13 +24,6 @@ tags:
 
 In Separate Chaining, the primary array does not house the raw keys directly. Instead, it stores buckets which are pointers to Linked Lists.
 
-```
-Hash Table Array
-[ Slot 0 ] ---> [ Key A ] ---> [ Key B ] ---> NULL
-[ Slot 1 ] ---> NULL
-[ Slot 2 ] ---> [ Key C ] ---> NULL
-```
-
 ![[Pasted image 20260206095334.png]]
 
 > [!tip] Key Idea

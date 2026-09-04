@@ -11,13 +11,13 @@ tags:
   - amortized-analysis
   - partition-sets
 ---
-# Abstract 
-When tracking grouping properties across dynamic networks—such as monitoring unified components or tracking connections in real time—standard graph traversals like [[Depth First Search (DFS)|DFS]] or [[Breadth First Search (BFS)|BFS]] carry massive overhead costs if invoked repeatedly. The **Disjoint Set Abstract Data Type (ADT)** solves this constraint by maintaining isolated subsets under an optimization model that merges groups and checks path connectivity in near-constant execution time.
-
-**Category:** Tree-based ADT (Up-Tree Forest)  
-**Stores:** A mathematical partition of elements split into disjoint subsets, where each group is managed by a unique representative node.  
-**Built on top of:** Plain standard sequential arrays.  
-**Typical use cases:** Dynamic cycle tracking inside [[Minimum Spanning Trees|Kruskal's Algorithm]], image segmentation tracking, network component clustering.
+> [!Abstract]
+> When tracking grouping properties across dynamic networks—such as monitoring unified components or tracking connections in real time—standard graph traversals like [[Depth First Search (DFS)|DFS]] or [[Breadth First Search (BFS)|BFS]] carry massive overhead costs if invoked repeatedly. The **Disjoint Set Abstract Data Type (ADT)** solves this constraint by maintaining isolated subsets under an optimization model that merges groups and checks path connectivity in near-constant execution time.
+> 
+> - **Category:** Tree-based ADT (Up-Tree Forest)  
+> - **Stores:** A mathematical partition of elements split into disjoint subsets, where each group is managed by a unique representative node.  
+> - **Built on top of:** Plain standard sequential arrays.  
+> - **Typical use cases:** Dynamic cycle tracking inside [[Kruskal's Algorithm]], image segmentation tracking, network component clustering.
 
 ---
 
@@ -61,7 +61,7 @@ Given a total dataset constraints layout of $n$ elements, any vertex reaching ra
 
 ## Data Structure Operations
 
-### Makeset(x)
+### `Makeset(x)`
 Instantiates an independent item $x$ as its own singleton group partition.
 
 ```pseudo
@@ -76,7 +76,7 @@ Instantiates an independent item $x$ as its own singleton group partition.
 \end{algorithm}
 ```
 
-### Find(x)
+### `Find(x)`
 Chases the parent array pointers upward to discover the core root representative of item $x$.
 
 *   **Time Complexity:** $O(\log n)$ worst-case under raw balancing; drops instantly to an amortized $O(\alpha(n))$ when Path Compression is active.
@@ -105,7 +105,7 @@ Every single invocation of `Find(x)` maps out a clear path up to the root node. 
 ![[Pasted image 20260301120937.png]]
 *Resulting Flattened Topology: Future searches along this track hit in $O(1)$ time.*
 
-### Union(x, y)
+### `Union(x, y)`
 Merges the complete tree sets containing elements $x$ and $y$ by linking the root node of the smaller collection beneath the root node of the larger collection.
 
 ```pseudo
@@ -160,8 +160,8 @@ Always binds the shorter tree beneath the root node of the taller tree structure
 | Structure                                          | Check Connectivity       | Merge Groups                    | Computational Advantage                                           |
 | :------------------------------------------------- | :----------------------- | :------------------------------ | :---------------------------------------------------------------- |
 | **Up-Tree Forest**                                 | $O(\alpha(n))$ amortized | $O(\alpha(n))$ amortized        | High-efficiency lookup for asymmetric collections.                |
-| [[Graph Representations\|Standard BFS/DFS Passes]] | $O(\|V\| + \|E\|)$       | $O(1)$                          | Simple architecture, but too slow for heavy interleaving lookups. |
-| **Hash Set Map Registries**                        | $O(1)$ worst-case        | $O(\text{Size of Smaller Set})$ | Supports listing set elements, but incurs high merge overhead.    |
+| [[Graph Representations\|Standard BFS DFS Passes]] | $O(\|V\| + \|E\|)$       | $O(1)$                          | Simple architecture, but too slow for heavy interleaving lookups. |
+| **[[Hash Maps (Maps)\|Hash Map Set Registry]]**    | $O(1)$ worst-case        | $O(\text{Size of Smaller Set})$ | Supports listing set elements, but incurs high merge overhead.    |
 
 ---
 

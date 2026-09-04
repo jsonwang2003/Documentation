@@ -10,7 +10,7 @@ tags:
   - strings
 ---
 > [!abstract] Abstract 
-> A Trie (derived from "retrieval") is a tree structure designed to store a set of strings. Unlike standard [[Tree Structures/Binary Search Tree|Binary Search Trees]], the keys are not stored within the nodes themselves; instead, a key is defined by the concatenation of labels along the path from the root to a specific node.
+> A Trie (derived from "retrieval") is a tree structure designed to store a set of strings. Unlike standard [[Binary Search Tree (BSTs)|Binary Search Tree]], the keys are not stored within the nodes themselves; instead, a key is defined by the concatenation of labels along the path from the root to a specific node.
 > 
 > - **Category:** Character-Path Digital Search Tree
 > - **Input Constraints:** Expands across an explicit alphabet size $|\Sigma|$ to map contiguous character paths.
@@ -128,7 +128,7 @@ To ensure that each character transition is as fast as possible, Multiway Tries 
 ![[Pasted image 20260124161549.png]]
 
 *   **The Node Array:** Every individual node contains an array of raw pointer references equal to the total size of the alphabet ($|\Sigma|$). For the English alphabet, each node encapsulates 26 slots.
-*   **Constant Time Access:** Because each character maps directly to an array index via constant offset arithmetic (such as `'a' \to 0, \text{ 'b'} \to 1$), the time to follow an edge is constant.
+*   **Constant Time Access:** Because each character maps directly to an array index via constant offset arithmetic (such as $\text{'a'} \to 0, \text{ 'b'} \to 1$), the time to follow an edge is constant.
 *   **Complexity Bounds:** This structure results in a deterministic worst-case time complexity of $O(k)$ for search, insert, and remove operations.
 
 ---
@@ -197,5 +197,5 @@ The Trie is often called a Prefix Tree because every node represents a distinct 
 
 - [[Multiway Trie Implementation|Multiway Trie Implementation]]
 - [[Aho-Corasick Automaton|Aho-Corasick Automaton]]
-- [[Tree Structures/Binary Search Tree|Binary Search Tree]]
+- [[Binary Search Tree (BSTs)|Binary Search Tree]]
 - [[Ternary Search Tree|Ternary Search Tree]]

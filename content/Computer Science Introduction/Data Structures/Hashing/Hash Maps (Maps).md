@@ -21,14 +21,9 @@ tags:
 
 # Core Structure
 
-A Hash Map utilizes an underlying backing array of entries where each slot stores a key and its value together as a unified pair. Keys must be hashable and support an equality test to handle uniqueness checks and bucket routing.
+A Hash Map utilizes an underlying backing array of entries where each slot stores a key and its value together as a unified pair. Keys must be hash-able and support an equality test to handle uniqueness checks and bucket routing.
 
-```
-Index Mapping (via H(key) % m)
-[ Index 0 ] ---> | Key: "Kammy"  | Value: 'A' |
-[ Index 1 ] ---> | Key: "Alicia" | Value: 'C' |
-[ Index 2 ] ---> NULL
-```
+![[Pasted image 20260903233117.png]]
 
 > [!tip] Key Idea
 > When we find, insert, or remove elements in a Hash Map, the operational routing algorithms mirror those of a standard Hash Table exactly, but everything is processed strictly with respect to the key. Once the target key's slot is located, the associated value payload is exposed.

@@ -34,11 +34,11 @@ Optimized for searching fluid query terms against a massive, fixed text database
 
 # Operational Performance Summary
 
-| Architecture Scheme | Preprocessing Allocation Target | Search Time Complexity | Memory Management Footnote |
-|---|---|---|---|
-| **Aho-Corasick Automaton** | Multiple Short Patterns ($m$) | $O(n + \text{matches})$ | [[Multiway Trie Implementation\|Multiway Trie]] tracking with failure link nodes. |
-| **Suffix Arrays** | Reference Database String ($n$) | $O(k \cdot \log n)$ | Flat sorted array storing compact integer offsets. |
-| **Burrows-Wheeler Transformation** | Reference Database String ($n$) | $O(k)$ | Run-Length Encoded block matching via L2F steps. |
+| Architecture Scheme                | Preprocessing Allocation Target | Search Time Complexity  | Memory Management Footnote                                          |
+| ---------------------------------- | ------------------------------- | ----------------------- | ------------------------------------------------------------------- |
+| **Aho-Corasick Automaton**         | Multiple Short Patterns ($m$)   | $O(n + \text{matches})$ | [[Multiway Trie\|Multiway Trie]] tracking with failure link nodes.  |
+| **Suffix Arrays**                  | Reference Database String ($n$) | $O(k \cdot \log n)$     | Flat [[Array Lists\|Sorted Array]] storing compact integer offsets. |
+| **Burrows-Wheeler Transformation** | Reference Database String ($n$) | $O(k)$                  | Run-Length Encoded block matching via `L2F` steps.                  |
 
 ---
 

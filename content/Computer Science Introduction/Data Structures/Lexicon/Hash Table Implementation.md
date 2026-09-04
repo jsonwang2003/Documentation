@@ -24,7 +24,9 @@ To store a word inside a Hash Table lexicon, the architecture processes the elem
 1.  **String Hashing:** A non-commutative polynomial function evaluates the characters of the string (word) of length $k$ to generate an integer hash value. This step takes $O(k)$ time.
 2.  **Compression Indexing:** The system uses a modulo function to compress that wide integer down to fit within the physical array size: 
 
-$$\text{index} = \text{hashValue} \pmod{\text{array\_size}}$$
+$$
+\text{index} = \text{hashValue} \pmod{\text{array\_size}}
+$$
 
 ---
 
@@ -56,7 +58,7 @@ By upgrading our backing architecture from a standard Hash Table (which tracks u
 The Hash Table is a powerful contender for modern digital lexicons, but it introduces specific structural trade-offs:
 
 *   **Speed Superiority:** On average, it runs faster than [[Array Lists|Binary Search]]. A word with 7 letters takes roughly 7 mathematical operations to hash, regardless of whether the tracking dictionary contains 100 or 1,000,000 words. It decouples lookup speed from total word volume $n$.
-*   **Ordering Failure:** Unlike [[Array Implementation|Sorted Arrays]] or [[Binary Search Tree (BSTs)|BSTs]], Hash Tables are completely unordered. You cannot easily print the lexicon in alphabetical order or query the immediate "next" word in alphabetical sequence.
+*   **Ordering Failure:** Unlike [[Array Implementation#Structural Comparison Linked List vs. Sorted Array|Sorted Arrays]] or [[Binary Search Tree (BSTs)|Binary Search Tree]], **Hash Tables** are completely unordered. You cannot easily print the lexicon in alphabetical order or query the immediate "next" word in alphabetical sequence.
 *   **Memory Waste Requirements:** To prevent structural collisions and preserve $O(1)$ speeds, the table must maintain empty safety buffers, leaving roughly 30% of the allocated capacity empty.
 *   **Worst-Case Vulnerability:** In the worst-case scenario where many words collide into the same slot, performance can degrade to an $O(n)$ linear scan.
 

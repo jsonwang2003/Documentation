@@ -9,11 +9,10 @@ tags:
   - software-design
 ---
 > [!abstract] Abstract 
-> Mastering the division between Abstract Data Types (ADTs) and explicit Data Structures is a core milestone in software design. This boundary isolates logical operations from low-level memory mechanics, shielding system applications from breaking when underlying data frameworks are optimized.
+> Mastering the division between [[Abstract Data Types (ADT)]] and explicit **Data Structures** is a core milestone in software design. This boundary isolates logical operations from low-level memory mechanics, shielding system applications from breaking when underlying data frameworks are optimized.
 
 ---
-
-# Strategic Structural Comparison
+## Strategic Structural Comparison
 
 We distinguish between specification details and concrete physical layouts through a functional split:
 
@@ -45,10 +44,10 @@ A behavioral contract from the user's perspective:
 
 To see this architectural interaction in practice, observe how a single List ADT interface behaves under different backing implementations:
 
-| Target Operational Environment | Selected Implementation Backbone | Resulting Big-O Performance Shift |
-|---|---|---|
-| **High Frequency Index Reading** | [[Array Lists\|Array List]] | **Random Access:** $O(1)$ via simple index offsets.<br>**Front Insertion:** $O(n)$ due to sequential cell shifting. |
-| **High Frequency Edge Modifications** | [[Computer Science Introduction/Data Structures/Introductory Data Structures/Linked List\|Doubly Linked List]] | **Random Access:** $O(n)$ due to pointer-chasing traversals.<br>**Front Insertion:** $O(1)$ via simple pointer swaps. |
+| Target Operational Environment        | Selected Implementation Backbone                                                                                                     | Resulting Big-O Performance Shift                                                                                     |
+| ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------- |
+| **High Frequency Index Reading**      | [[Array Lists\|Array List]]                                                                                                          | **Random Access:** $O(1)$ via simple index offsets.<br>**Front Insertion:** $O(n)$ due to sequential cell shifting.   |
+| **High Frequency Edge Modifications** | [[Computer Science Introduction/Data Structures/Introductory Data Structures/Linked List#Structural Variations\|Doubly Linked List]] | **Random Access:** $O(n)$ due to pointer-chasing traversals.<br>**Front Insertion:** $O(1)$ via simple pointer swaps. |
 
 ---
 

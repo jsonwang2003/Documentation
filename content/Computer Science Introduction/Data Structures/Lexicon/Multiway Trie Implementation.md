@@ -26,14 +26,11 @@ In a Lexicon backed by a Multiway Trie, words are not stored as standalone prope
 *   **Edge Tracking:** To locate a word, the search engine walks down edge transitions labeled with successive characters of the input string.
 *   **Validation Flags:** A word is confirmed to exist in the lexicon *only* if the character traversal loop terminates on a node explicitly marked with a `word-node` boundary flag.
 
-```
-       (Root Node)
-          | 'c'
-        [Node]
-          | 'a'
-        [Node]
-          | 't'
-     (Word Node: "cat")
+```mermaid
+flowchart TD
+    Root["<b>Root Node</b>"] -->|'c'| N1["<b>Node</b>"]
+    N1 -->|'a'| N2["<b>Node</b>"]
+    N2 -->|'t'| N3["<b>Word Node: 'cat'</b>"]
 ```
 
 > [!important] Edges vs. Nodes Notation
@@ -48,15 +45,20 @@ Starts at the root node and sequentially follows the edge labeled with each cons
 
 - **Time Complexity:** $O(k)$ worst-case boundary.
 
-```
-[Search Logic Flow]
-1. Does edge for character exist?
-   NO  --> Stop: Word is missing.
-   YES --> Advance to child node.
-2. Exhausted all characters?
-   YES --> Is final node flagged as a word-node?
-           YES --> Return true (Word Found)
-           NO  --> Return false (Prefix Only)
+```mermaid
+flowchart TD
+    Start(["<b>Start Search</b>"]) --> CheckEdge{"Does edge for<br/>character exist?"}
+    
+    CheckEdge -- No --> Missing(["<b>Return False</b><br><i>(Word is missing)</i>"])
+    CheckEdge -- Yes --> Advance["Advance to child node"]
+    
+    Advance --> Exhausted{"Exhausted all<br/>characters?"}
+    
+    Exhausted -- No --> CheckEdge
+    Exhausted -- Yes --> CheckWordNode{"Is final node flagged<br/>as a word-node?"}
+    
+    CheckWordNode -- Yes --> Found(["<b>Return True</b><br><i>(Word Found)</i>"])
+    CheckWordNode -- No --> PrefixOnly(["<b>Return False</b><br><i>(Prefix Only)</i>"])
 ```
 
 ![[Pasted image 20260128114050.png]]
@@ -139,7 +141,7 @@ Follows the character path to the terminal node and unmarks the `word-node` flag
 
 The hierarchical prefix structure of the Trie enables operations that are difficult to implement using standard arrays or hash structures:
 
-*   **Alphabetical Iteration:** By performing a **Pre-Order Traversal** (visiting child branches in alphabetical order), the entire lexicon can be printed in sorted order.
+*   **Alphabetical Iteration:** By performing a **Pre-Order Traversal** (visiting child branches in alphabetical order), the entire [[Computer Science Introduction/Data Structures/Lexicon/index|Lexicon]] can be printed in sorted order.
 *   **Auto-complete Prefix Extraction:** By traversing down a chosen prefix path (e.g., "cat") and then executing a traversal across that isolated subtree, the engine instantly returns all stored words starting with that specific prefix (e.g., "cats", "catnip", "cathedral").
 
 ---
@@ -167,4 +169,4 @@ The hierarchical prefix structure of the Trie enables operations that are diffic
 
 - [[Hash Table Implementation|Hash Table Implementation]]
 - [[Binary Search Tree Implementation|Binary Search Tree Implementation]]
-- [[Multiway Trie|Multiway Trie]]
+- [[Multiway Trie]]

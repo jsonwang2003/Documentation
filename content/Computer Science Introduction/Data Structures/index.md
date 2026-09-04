@@ -19,10 +19,10 @@ tags:
 
 This module covers physical memory organization and core sequential arrangements:
 
-*   **Data Structures vs. ADTs:** Distinguishing physical storage mechanics from logical behavioural contracts.
+*   **[[Data Structures vs. Abstract Data Types|Data Structures vs. ADTs]]:** Distinguishing physical storage mechanics from logical behavioral contracts.
 *   **[[Summary of Data Structures#Array List|Array Lists]]:** Dynamic contiguous memory storage supporting $O(1)$ random indexing.
 *   **[[Summary of Data Structures#Linked List|Linked Lists]]:** Sequential node chains connected via explicit pointers.
-*   **Circular Arrays:** Memory-efficient ring buffers for fixed-size capacity queues.
+*   **[[Circular Arrays|Circular Array]]:** Memory-efficient ring buffers for fixed-size capacity queues.
 
 ---
 
@@ -30,9 +30,9 @@ This module covers physical memory organization and core sequential arrangements
 
 Logical interfaces that define operational contracts regardless of underlying backing storage:
 
-*   **Stack:** LIFO (Last-In, First-Out) push/pop pipeline.
-*   **Queue:** FIFO (First-In, First-Out) enqueue/dequeue pipeline.
-*   **Deque:** Double-ended queue allowing operations at both ends.
+*   **[[Computer Science Introduction/Data Structures/Introductory Data Structures/Stack|Stacks]]:** LIFO (Last-In, First-Out) push/pop pipeline.
+*   **[[Queues]]:** FIFO (First-In, First-Out) enqueue/dequeue pipeline.
+*   **[[Deques]]:** Double-ended queue allowing operations at both ends.
 *   **[[Priority Queue|Priority Queue]]:** Elements ordered and retrieved based on priority rankings.
 *   **[[Set|Set]]:** Collection tracking unique elements.
 *   **[[Hash Maps (Maps)|Hash Map]]:** Key-value associative container.
@@ -45,7 +45,7 @@ Logical interfaces that define operational contracts regardless of underlying ba
 Data organizations optimized for fast searching, sorting, and priority-based access:
 
 *   **[[Binary Tree|Binary Tree]]:** Rooted topology limiting child branching to at most 2 nodes per parent.
-*   **[[Tree Structures/Binary Search Tree|Binary Search Tree (BST)]]:** Sorted structure providing average $O(\log n)$ search efficiency.
+*   **[[Binary Search Tree (BSTs)|Binary Search Tree]]:** Sorted structure providing average $O(\log n)$ search efficiency.
 *   **[[Heap|Heap]]:** Complete binary tree mapped to flat arrays for $O(1)$ priority root access.
 *   **[[Frequent Pattern Tree (FP-Tree)|FP-Tree]]:** Dense prefix tree for mining frequent itemsets without candidate generation.
 

@@ -11,7 +11,7 @@ tags:
   - bioinformatics
 ---
 > [!abstract] Abstract 
-> A Suffix Array is a space-efficient data structure designed to map millions of short sequence reads against a massive, fixed reference database genome. By storing sorted integer indices of text suffixes instead of full string blocks, it provides a compact index footprint that enables fast $O(k \cdot \log n)$ substring searches using [[Array Implementation|binary search]].
+> A Suffix Array is a space-efficient data structure designed to map millions of short sequence reads against a massive, fixed reference database genome. By storing sorted integer indices of text suffixes instead of full string blocks, it provides a compact index footprint that enables fast $O(k \cdot \log n)$ substring searches using [[Computer Science Introduction/Algorithms/Divide and Conquer/Binary Search|Binary Search]].
 > 
 > - **Category:** Index-Backed Search Arrays
 > - **Storage Strategy:** Stores sorted 32-bit or 64-bit integer start positions.
@@ -49,19 +49,15 @@ Instead of duplicating text strings, a Suffix Array stores only the starting ind
 | **5** | 0 | `GCATCGC` |
 | **6** | 3 | `TCGC` |
 
-$$\text{The Suffix Array (SA)} = [2, 6, 1, 4, 5, 0, 3]$$
+$$
+\text{The Suffix Array (SA)} = [2, 6, 1, 4, 5, 0, 3]
+$$
 
 ---
 
 # Substring Search via Dual Binary Search
 
-To locate a read sequence $w$ of length $k$, the engine performs a [[Array Implementation|binary search]] over the Suffix Array. Because the text indices are sorted alphabetically, all suffixes starting with the same sequence prefix $w$ cluster into a single contiguous block.
-
-```
-Suffix Array Space
-[ Entry ] [ Entry ] [ Left Bound i ] ... [ Right Bound j ] [ Entry ]
-                    |__________ Match Clump __________|
-```
+To locate a read sequence $w$ of length $k$, the engine performs a [[Computer Science Introduction/Algorithms/Divide and Conquer/Binary Search|Binary Search]] over the Suffix Array. Because the text indices are sorted alphabetically, all suffixes starting with the same sequence prefix $w$ cluster into a single contiguous block.
 
 The algorithm runs two separate binary searches to isolate this match clump:
 
@@ -78,7 +74,9 @@ Every entry residing within the isolated range $\text{SA}[i \dots j]$ represents
 *   **Search Latency Profile:** Locating a single read sequence of length $k$ requires $O(k \cdot \log n)$ character comparisons.
 *   **Massive Alignment Scalability:** For a pool of $m$ query reads, aggregate execution bounds trace to:
 
-$$\text{Total Mapping Time} = O(m \cdot k \cdot \log n)$$
+$$
+\text{Total Mapping Time} = O(m \cdot k \cdot \log n)
+$$
 
 ---
 
@@ -90,12 +88,12 @@ Because each individual read lookup runs independently without modifying the und
 
 # Structural Feature Comparison
 
-| Technical Dimension | Aho-Corasick Automaton | Suffix Array Indexer |
-|---|---|---|
-| **Preprocessed Destination** | Dynamic Motif Groups (Short text chunks) | Main Reference Genome (Long database) |
-| **Data Structure Core** | [[Multiway Trie Implementation\|Multiway Trie]] + Link shortcuts | Sorted flat integer array offsets |
-| **Search Logic Flow** | Finite State Machine transitions | Dual-bounded range binary search |
-| **Optimal Environment** | Finding short patterns in single streams | Mapping massive query pools to large databases |
+| Technical Dimension          | Aho-Corasick Automaton                            | Suffix Array Indexer                           |
+| ---------------------------- | ------------------------------------------------- | ---------------------------------------------- |
+| **Preprocessed Destination** | Dynamic Motif Groups (Short text chunks)          | Main Reference Genome (Long database)          |
+| **Data Structure Core**      | [[Multiway Trie\|Multiway Trie]] + Link shortcuts | Sorted flat integer array offsets              |
+| **Search Logic Flow**        | Finite State Machine transitions                  | Dual-bounded range binary search               |
+| **Optimal Environment**      | Finding short patterns in single streams          | Mapping massive query pools to large databases |
 
 ---
 

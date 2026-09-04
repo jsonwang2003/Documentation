@@ -9,7 +9,7 @@ tags:
   - strings
 ---
 > [!abstract] Abstract 
-> A Ternary Search Tree (TST) is a hybrid data structure that combines the prefix-searching logic of a [[Multiway Trie|Multiway Trie]] with the space-efficient storage of a [[Tree Structures/Binary Search Tree|Binary Search Tree (BST)]]. Each node stores a single character and has exactly three potential children: **Left**, **Middle**, and **Right**.
+> A Ternary Search Tree (TST) is a hybrid data structure that combines the prefix-searching logic of a [[Multiway Trie|Multiway Trie]] with the space-efficient storage of a [[Binary Search Tree (BSTs)|Binary Search Tree]]. Each node stores a single character and has exactly three potential children: **Left**, **Middle**, and **Right**.
 > 
 > - **Category:** Hybrid Character Branching Tree
 > - **Branching Factor:** Exactly 3 pointers per node (`leftChild`, `middleChild`, `rightChild`).
@@ -90,8 +90,6 @@ Searching for the word `"cme"`:
 2. `'c' == 'c'`, move to middle child (`'a'`) and letter `'m'`.
 3. `'m' > 'a'`, but node (`'a'`) has no right child $\to$ **Failure!**
 
----
-
 ## `Insert(key)`
 Compare the current character with the node's label:
 
@@ -144,8 +142,6 @@ Inserting the word `"cabs"` into an existing tree:
 2. Match at (`'a'`) $\to$ move to middle (`'l'`), next letter `'b'`.
 3. `'b' < 'l'`, but `'l'` has no left child $\to$ create left child (`'b'`).
 4. Move to (`'b'`), create middle child (`'s'`), mark as word-node.
-
----
 
 ## `Remove(key)`
 Use search logic to locate the target node representing the last character of the key. Unmark its `isWordNode` status.
@@ -216,5 +212,5 @@ To find all words starting with a prefix:
 # Related Notes
 
 - [[Multiway Trie|Multiway Trie]]
-- [[Tree Structures/Binary Search Tree|Binary Search Tree]]
+- [[Binary Search Tree (BSTs)|Binary Search Tree]]
 - [[Computer Science Introduction/Data Structures/Lexicon/index|Lexicon ADT]]

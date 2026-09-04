@@ -17,19 +17,11 @@ tags:
 > - **Typical use cases:** Browser malicious URL tracking filters, database LSM-tree disk-read filters (e.g., Cassandra, RocksDB), cache filtering layers.
 
 ---
-
 # Core Structure
 
 The filter does not retain the actual cleartext elements or structural keys within memory. Instead, it maintains a compact, flat array of bits initialized to zero. Multiple independent hash functions map elements to specific bit positions.
 
-```
-Bit Array Structure (Size m)
-[ 0 ] [ 1 ] [ 0 ] [ 1 ] [ 1 ] [ 0 ] [ 0 ] [ 1 ]
-  ^     ^           ^     ^                 ^
-  |     |___________|_____|_________________|
-  |             Hash Function Hits (k functions)
-[ Input Element x ]
-```
+![[Pasted image 20260903200949.png]]
 
 > [!tip] Key Idea
 > By abandoning key storage entirely and representing additions strictly as scattered bits, memory requirements drop from megabytes down to kilobytes. If any bit in an element's probe sequence is 0, it is mathematically impossible for that element to have been inserted, ensuring **zero false negatives**.
@@ -86,14 +78,20 @@ Re-evaluates the $k$ hash coordinates for the target value. If any bit position 
 
 The probability of a false positive ($\epsilon$) is directly tied to the size of the bit array ($m$), the number of elements expected ($n$), and the total hash functions deployed ($k$):
 
-$$\epsilon \approx \left(1 - e^{-kn/m}\right)^k$$
+$$
+\epsilon \approx \left(1 - e^{-kn/m}\right)^k
+$$
 
 To minimize error rates when designing a practical filter envelope, configuration sizing uses these optimal equations:
 
-*   **Optimal Array Sizing:**
-    $$m = -\frac{n \ln(\epsilon)}{(\ln(2))^2}$$
-*   **Optimal Hash Count:**
-    $$k = \frac{m}{n} \ln(2)$$
+- **Optimal Array Sizing:**
+    $$
+    m = -\frac{n \ln(\epsilon)}{(\ln(2))^2}
+    $$
+- **Optimal Hash Count:**
+    $$
+    k = \frac{m}{n} \ln(2)
+    $$
 
 ---
 

@@ -25,12 +25,22 @@ A Binary Search Tree is a rooted [[Binary Tree|Binary Tree]] structure that enfo
 *   **Left Subtree Rule:** For any given internal node, all elements residing within its left subtree must hold values strictly smaller than the node's own key.
 *   **Right Subtree Rule:** All elements residing within its right subtree must hold values strictly larger than the node's own key.
 
-```
-                  [ 50 ]
-                 /      \
-             [ 30 ]    [ 70 ]
-            /    \      /    \
-         [ 20 ] [40]  [60]  [80]
+```mermaid
+graph TD
+    N50["<b>50</b>"]
+    N30["<b>30</b>"]
+    N70["<b>70</b>"]
+    N20["<b>20</b>"]
+    N40["<b>40</b>"]
+    N60["<b>60</b>"]
+    N80["<b>80</b>"]
+
+    N50 --> N30
+    N50 --> N70
+    N30 --> N20
+    N30 --> N40
+    N70 --> N60
+    N70 --> N80
 ```
 
 > [!important] Duplicate Constraints
@@ -232,13 +242,13 @@ The operational utility of a standard BST relies entirely on its physical geomet
 
 ### The Core Tree Balance Configurations
 
-| Feature Parameter | Perfectly Balanced Shape | Self-Balancing ([[AVL Tree\|AVL]] / Red-Black) | Degenerate (Skewed Chain) |
-|---|---|---|---|
-| **Structural Layout** | Full symmetrical triangle topology | Mostly full; bounded height variances | A straight linear line arrangement |
-| **Operational Logic** | Levels fill completely before jumping down | Height constraints are dynamically managed | Elements land on one side exclusively |
-| **Height Bound** | $h \approx \log_2 n$ | $h = O(\log n)$ | $h = n - 1$ |
-| **Search Time** | $O(\log n)$ | $O(\log n)$ guaranteed worst-case | $O(n)$ linear scan bottleneck |
-| **Production Context** | Complex/Costly to enforce perfectly | Industry standard default models | Triggered by sorting data streams |
+| Feature Parameter      | Perfectly Balanced Shape                   | Self-Balancing ([[AVL Tree\|AVL]] / [[Red-Black Tree\|Red-Black]]) | Degenerate (Skewed Chain)             |
+| ---------------------- | ------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------- |
+| **Structural Layout**  | Full symmetrical triangle topology         | Mostly full; bounded height variances                              | A straight linear line arrangement    |
+| **Operational Logic**  | Levels fill completely before jumping down | Height constraints are dynamically managed                         | Elements land on one side exclusively |
+| **Height Bound**       | $h \approx \log_2 n$                       | $h = O(\log n)$                                                    | $h = n - 1$                           |
+| **Search Time**        | $O(\log n)$                                | $O(\log n)$ guaranteed worst-case                                  | $O(n)$ linear scan bottleneck         |
+| **Production Context** | Complex/Costly to enforce perfectly        | Industry standard default models                                   | Triggered by sorting data streams     |
 
 > [!warning] The Sorted Insertion Trap
 > Introducing sorted array streams (such as `[1, 2, 3, 4, 5]`) directly into a naive BST causes the structure to grow exclusively in one direction. This turns your search tree into an expensive, linear linked list layout. Production systems avoid this issue by implementing self-balancing tree architectures like [[AVL Tree|AVL Trees]] to force geometric balance via structural rotations.
@@ -257,7 +267,9 @@ To prove average-case performance bounds, we establish two constraints:
 ### 2. Defining Expected Node Depth
 We define the depth of node $i$ ($d_i$) as the count of node blocks on the path tracking from the root to node $i$. The root sits at depth 1. The expected total depth across a given tree structure $j$ resolves to:
 
-$$E_j(d) = \frac{1}{n}\sum_{i=1}^{n}d_{ji} = \frac{1}{n}D_j(n)$$
+$$
+E_j(d) = \frac{1}{n}\sum_{i=1}^{n}d_{ji} = \frac{1}{n}D_j(n)
+$$
 
 where $D_j(n)$ represents the combined aggregate depth of tree configuration $j$.
 
@@ -268,37 +280,52 @@ Instead of evaluating all $n!$ layout shapes individually, we construct a struct
 
 The expected aggregate depth calculation given a subtree density split of $i$ items maps to:
 
-$$D(n \mid i) = D(i) + D(n - i - 1) + n$$
+$$
+D(n \mid i) = D(i) + D(n - i - 1) + n
+$$
 
 *(The $+n$ factor accounts for the structural constraint that appending a root node shifts every nested subtree node exactly one level deeper).*
 
 Since each element has an equal probability of being selected as the first item inserted (assuming the root position), the probability of choosing any subtree configuration $i$ tracks to $\frac{1}{n}$. This gives us the following recurrence relation:
 
-$$D(n) = \frac{2}{n}\sum_{i=0}^{n-1}D(i) + n$$
+$$
+D(n) = \frac{2}{n}\sum_{i=0}^{n-1}D(i) + n
+$$
 
 ### 4. Mathematical Solution Proof
 Multiplying the recurrence layout expression by $n$ yields:
 
-$$n D(n) = 2\sum_{i=0}^{n-1}D(i) + n^2 \quad \text{--- (Equation 1)}$$
+$$
+n D(n) = 2\sum_{i=0}^{n-1}D(i) + n^2
+$$
 
 Substituting the parameter size boundary to $(n-1)$ produces:
 
-$$(n-1) D(n-1) = 2\sum_{i=0}^{n-2}D(i) + (n-1)^2 \quad \text{--- (Equation 2)}$$
+$$
+(n-1) D(n-1) = 2\sum_{i=0}^{n-2}D(i) + (n-1)^2
+$$
 
 Subtracting Equation 2 from Equation 1 simplifies the summation chain down to a telescoping form:
 
-$$n D(n) - (n-1) D(n-1) = 2 D(n-1) + n^2 - (n-1)^2$$
-
-$$n D(n) = (n+1) D(n-1) + 2n - 1$$
+$$
+\begin{gather*}
+n D(n) - (n-1) D(n-1) = 2 D(n-1) + n^2 - (n-1)^2 \\
+n D(n) = (n+1) D(n-1) + 2n - 1
+\end{gather*}
+$$
 
 Solving this relation yields the exact closed-form depth solution for the structure:
 
-$$D(n) = 2(n+1)\sum_{i=1}^{n}\frac{1}{i} - 3n$$
+$$
+D(n) = 2(n+1)\sum_{i=1}^{n}\frac{1}{i} - 3n
+$$
 
 ### 5. Final Harmonic Approximation
 Applying the standard harmonic series expansion approximation ($\sum_{i=1}^{n}\frac{1}{i} \approx \ln n$), the expected average count of character comparisons for a lookup query matches:
 
-$$\frac{D(n)}{n} \approx 2\ln n \approx 1.386 \log_2 n$$
+$$
+\frac{D(n)}{n} \approx 2\ln n \approx 1.386 \log_2 n
+$$
 
 Because the multiplier $1.386$ is a fixed constant coefficient, this proves that the average-case runtime complexity for a standard binary search tree is strictly bounded at $O(\log n)$.
 

@@ -42,8 +42,8 @@ Since operational focus centers on an element's location relative to `head` and 
 ![[Pasted image 20260104003529.png]]
 
 ---
-
-# Insertion and Resizing
+# Operations
+## Insertion and Resizing
 
 When the backing array becomes fully saturated, it must be resized. Similar to a standard [[Array Lists|Array List]], the engine doubles array capacity and copies existing entries.
 
@@ -90,9 +90,7 @@ During a resize operation, the circular layout must be "unrolled" so the new arr
 	\end{algorithm}
 ```
 
----
-
-# Removal Operations
+## Removal Operations
 
 *   **Remove Front:** Erase the element at `head` and increment the `head` index (wrapping if necessary).
 *   **Remove Back:** Erase the element at `tail` and decrement the `tail` index (wrapping if necessary).
@@ -119,10 +117,7 @@ During a resize operation, the circular layout must be "unrolled" so the new arr
 
 > [!note] Memory Cleanup Considerations
 > Explicitly clearing unlinked array slots during removal is usually unnecessary because values are overwritten by future insertions. However, if the array stores raw pointers in non-garbage-collected environments, elements must be explicitly deallocated to prevent memory leaks.
-
----
-
-# Finding and Random Access
+## Finding and Random Access
 
 Unlike a [[Computer Science Introduction/Data Structures/Introductory Data Structures/Linked List|Linked List]], a Circular Array retains $O(1)$ Random Access capabilities. To access logical element $i$, calculate its physical index via modular arithmetic:
 

@@ -84,9 +84,13 @@ Queries the $k$ hashed matrix cell coordinates for the key and screens out infla
 To limit estimation error margins, the layout dimensions of the matrix grid are derived from a chosen error tolerance threshold ($\epsilon$) alongside a targeted confidence level ($1 - \delta$):
 
 *   **Matrix Width (Columns $m$):** Dictates the range bounds of the hashing calculations. More columns compress the numerical probability of a collision occurring inside any single row:
-    $$ m = \left\lceil \frac{e}{\epsilon} \right\rceil $$
+    $$
+     m = \left\lceil \frac{e}{\epsilon} \right\rceil 
+     $$
 *   **Matrix Depth (Rows $k$):** Dictates the number of independent hash functions. More rows reduce the probability that every row will sustain a significant collision overlap for a specific item:
-    $$ k = \left\lceil \ln\left(\frac{1}{\delta}\right) \right\rceil $$
+    $$
+     k = \left\lceil \ln\left(\frac{1}{\delta}\right) \right\rceil 
+     $$
 
 ---
 

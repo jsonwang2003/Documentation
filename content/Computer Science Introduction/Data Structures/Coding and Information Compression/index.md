@@ -10,9 +10,10 @@ tags:
   - data-compression
   - information-theory
 ---
-# Overview 
-This section covers data compression frameworks and source coding architectures. It details how to securely map cleartext messages to variable-bit configurations, evaluate theoretical efficiency bounds using [[Entropy and Information Theory|Information Theory]], and implement low-level, high-efficiency [[Bitwise Input-Output|Bitwise I/O Stream Layers]] within real operating systems.
+> [!abstract] 
+> This section covers data compression frameworks and source coding architectures. It details how to securely map cleartext messages to variable-bit configurations, evaluate theoretical efficiency bounds using [[Entropy and Information Theory|Information Theory]], and implement low-level, high-efficiency [[Bitwise Input-Output|Bitwise IO Stream Layers]] within real operating systems.
 
+---
 ## Foundational Concepts
 
 ### Structural Encoding and Decoding

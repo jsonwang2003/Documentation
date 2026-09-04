@@ -10,7 +10,7 @@ tags:
   - red-black
 ---
 > [!abstract] Abstract 
-> Derived from the 2-4 Tree, the Red-Black Tree is a self-balancing [[Tree Structures/Binary Search Tree|Binary Search Tree]] that achieves a worst-case $O(\log n)$ time complexity. Unlike the [[AVL Tree|AVL Tree]], which requires two passes (down and up) for updates, the Red-Black Tree is designed to maintain balance in a single pass through the tree.
+> Derived from the 2-4 Tree[^1], the Red-Black Tree is a self-balancing [[Binary Search Tree (BSTs)|Binary Search Tree]] that achieves a worst-case $O(\log n)$ time complexity. Unlike the [[AVL Tree|AVL Tree]], which requires two passes (down and up) for updates, the Red-Black Tree is designed to maintain balance in a single pass through the tree.
 > 
 > - **Category:** Color-Balanced Binary Search Tree
 > - **Core Mechanism:** Node coloring constraints paired with single-pass rotation logic.
@@ -41,7 +41,9 @@ We can prove that the height $h$ of a Red-Black Tree with $n$ internal nodes is 
 *   **Height Relation:** Since red nodes cannot be adjacent, at least half the nodes on any path (excluding the root) must be black. Thus, $bh(\text{root}) \ge h/2$.
 *   **Conclusion:** 
 
-$$ n \ge 2^{h/2} - 1 \implies h \le 2\log(n+1) $$
+$$
+n \ge 2^{h/2} - 1 \implies h \le 2\log(n+1) 
+$$
 
 The height is at most roughly twice the optimal BST height.
 
@@ -66,7 +68,7 @@ During your descent, if you encounter a black node with two red children:
 
 ### Case 3: Red-Red Violation (Straight Line)
 If the new red node and its red parent form a straight line (e.g., both are left children):
-1. Perform a Single [[AVL Tree|AVL Rotation]].
+1. Perform a Single [[AVL Tree#Rebalancing Structural AVL Rotations|AVL Rotation]].
 2. **Recolor:** Set the new "top" node of the rotation to **Black** and its children to **Red**.
 
 ![[Pasted image 20260121113342.png]]
@@ -108,6 +110,8 @@ If the nodes form a "kink" shape:
 
 # Related Notes
 
-- [[Tree Structures/Binary Search Tree|Binary Search Tree]]
+- [[Binary Search Tree (BSTs)|Binary Search Tree]]
 - [[AVL Tree|AVL Tree]]
 - [[Randomized Search Trees (Treap, RST)|Randomized Search Tree]]
+
+[^1]: In 1972, Redulf Bayer, a German computer scientist, invented a data structure called the **2-4 Tree** in which the length of any path from the root to a leaf was guaranteed to be equal, meaning that the tree was guaranteed to be perfectly balanced. Note that the **2-4 Tree** was not a [[Binary Search Tree (BSTs)|Binary Search Tree]]

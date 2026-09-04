@@ -14,7 +14,7 @@ tags:
 > 
 > - **Category:** Bounded Monitored ADT
 > - **Core Workflow:** Elements enter at the trailing end and exit at the leading end.
-> - **Common Structural Backbones:** [[Deques|Deques]], [[Computer Science Introduction/Data Structures/Introductory Data Structures/Linked List|Doubly-Linked Lists]], or [[Circular Arrays|Circular Arrays]].
+> - **Common Structural Backbones:** [[Deques|Deques]], [[Computer Science Introduction/Data Structures/Introductory Data Structures/Linked List#Structural Variations|Doubly-Linked Lists]], or [[Circular Arrays|Circular Arrays]].
 
 ---
 

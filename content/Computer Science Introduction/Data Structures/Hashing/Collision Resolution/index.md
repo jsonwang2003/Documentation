@@ -20,14 +20,14 @@ tags:
 ### Closed Addressing (External Storage)
 Keys are confined to their initial hashed index address. Colliding items are stored outside the primary table using separate data blocks:
 
-*   **Separate Chaining:** Slots in the array point to external linked data structures, typically dynamic singly linked lists.
+*   **[[Closed Addressing (Separate Chaining)|Separate Chaining]]:** Slots in the array point to external linked data structures, typically dynamic singly linked lists.
 
 ### Open Addressing (Internal Storage)
 All keys are stored directly within the primary backing array structure. When a target slot is occupied, the table is "open" to positioning the key in alternative array coordinates:
 
-*   **Linear Probing:** Sequentially checks the next consecutive array slot ($\text{index} + 1$) until a vacant spot is found.
-*   **Double Hashing:** Computes a custom stride size for each key using a secondary hash function to determine step distance.
-*   **Random Hashing:** Walks through a repeatable, pseudorandom probe path seeded by the key value itself.
+*   **[[Open Addressing (Linear Probing)|Linear Probing]]:** Sequentially checks the next consecutive array slot ($\text{index} + 1$) until a vacant spot is found.
+*   **[[Double Hashing]]:** Computes a custom stride size for each key using a secondary hash function to determine step distance.
+*   **[[Random Hashing]]:** Walks through a repeatable, pseudorandom probe path seeded by the key value itself.
 
 ---
 

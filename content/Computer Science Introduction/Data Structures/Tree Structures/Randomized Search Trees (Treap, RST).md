@@ -32,7 +32,7 @@ A Treap is a binary tree structure where each node explicitly encapsulates two s
 # Fundamental Operations
 
 ## `Find(element)`
-Since a Randomized Search Tree functions as a valid, standard [[Tree Structures/Binary Search Tree|Binary Search Tree]], lookups navigate down branches using key comparisons alone, bypassing priority scores entirely.
+Since a Randomized Search Tree functions as a valid, standard [[Binary Search Tree (BSTs)|Binary Search Tree]], lookups navigate down branches using key comparisons alone, bypassing priority scores entirely.
 
 - **Time Complexity:** Bounded by tree height: $O(h)$ operations.
 
@@ -78,7 +78,8 @@ Rotations are constant-time $O(1)$ pointer-swapping operations that modify the p
 |---|---|---|
 | **Right Rotation** | Promotes a left child into its parent's structural position. | Triggered when a left child node registers a higher priority score than its parent. |
 | **Left Rotation** | Promotes a right child into its parent's structural position. | Triggered when a right child node registers a higher priority score than its parent. |
-**RST Balance Rotations**
+
+## RST Balance Rotations
 ```pseudo
 	\begin{algorithm}
 	\caption{RST Right Rotation}
@@ -156,7 +157,7 @@ Because the assigned priority weights are randomly distributed, the nodes bubble
 
 # Related Notes
 
-- [[Tree Structures/Binary Search Tree|Binary Search Tree]]
+- [[Binary Search Tree (BSTs)|Binary Search Tree]]
 - [[AVL Tree|AVL Tree]]
 - [[Heap|Heap]]
 - [[Red-Black Tree|Red-Black Tree]]

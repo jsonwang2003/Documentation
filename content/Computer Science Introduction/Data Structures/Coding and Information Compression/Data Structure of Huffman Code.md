@@ -12,31 +12,34 @@ tags:
   - binary-trees
 ---
 
-# Abstract 
-A Huffman Tree is a specialized [[Binary Tree|Binary Tree Structure]] optimized to map alphanumeric symbols to highly efficient variable-length bit sequences. By ensuring no generated path forms the initial prefix of another, it allows clear text streams to be completely compressed and parsed without lookahead ambiguity.
-
-**Category:** Tree Structures / Priority Structures  
-**Stores:** Frequency-weighted alphabetic symbol mappings.  
-**Built on top of:** [[Binary Tree|Binary Tree Nodes]] and Min-Priority Heaps.  
-**Typical use cases:** Backbone processing inside DEFLATE engines, JPEG imaging frameworks, and custom serialization formats.
+> [!abstract]
+> A Huffman Tree is a specialized [[Binary Tree|Binary Tree Structure]] optimized to map alphanumeric symbols to highly efficient variable-length bit sequences. By ensuring no generated path forms the initial prefix of another, it allows clear text streams to be completely compressed and parsed without lookahead ambiguity.
+> 
+> - **Category:** Tree Structures / Priority Structures  
+> - **Stores:** Frequency-weighted alphabetic symbol mappings.  
+> - **Built on top of:** [[Binary Tree|Binary Tree Nodes]] and Min-Priority Heaps.  
+> - **Typical use cases:** Backbone processing inside DEFLATE engines, JPEG imaging frameworks, and custom serialization formats.
 
 ---
 
 ## Core Structure
 The data structure is formatted as a rooted, strict binary tree layout. External leaf nodes store individual alphabet symbols, while internal routing nodes track the combined cumulative frequencies of their underlying child branches.
 
-```
-         [Root: Weight 1.0]
-             /        \
-          0 /          \ 1
-    [Leaf 'A': 0.6]  [Node: Weight 0.4]
-                        /          \
-                     0 /            \ 1
-               [Leaf 'C': 0.25]   [Leaf 'G': 0.15]
-```
+```mermaid
+graph TD
+    Root["<b>Root</b><br>Weight: 1.0"]
+    LeafA["<b>Leaf 'A'</b><br>Weight: 0.6"]
+    Node1["<b>Node</b><br>Weight: 0.4"]
+    LeafC["<b>Leaf 'C'</b><br>Weight: 0.25"]
+    LeafG["<b>Leaf 'G'</b><br>Weight: 0.15"]
 
-### Key Idea
-By constructing the topology from the bottom up—repeatedly pairing the lowest-frequency components found across a dataset—we ensure rare symbols finish furthest from the root (receiving long bit representations), while frequent symbols sit close to the root (receiving short bit paths).
+    Root -->|0| LeafA
+    Root -->|1| Node1
+    Node1 -->|0| LeafC
+    Node1 -->|1| LeafG
+```
+> [!tip] Key Idea
+> By constructing the topology from the bottom up—repeatedly pairing the lowest-frequency components found across a dataset—we ensure rare symbols finish furthest from the root (receiving long bit representations), while frequent symbols sit close to the root (receiving short bit paths).
 
 ---
 
@@ -59,11 +62,13 @@ Because elements are assembled exclusively by combining smaller subtrees into co
 
 ## Data Structure Operations
 
-### BuildTree(Frequencies)
+### `BuildTree(Frequencies)`
 Consolidates an alphabet frequency map into a single rooted tree. It uses an underlying min-heap [[Priority Queue|Priority Queue]] to repeatedly extract and merge the two least-frequent subtrees.
 
 *   **Time Complexity:** $O(A \log A)$ where $A$ matches alphabet symbol counts.
-*   **Notes:** The $\log A$ factor is driven by heap maintenance operations during extraction loops.
+
+> [!note]
+> The $\log A$ factor is driven by heap maintenance operations during extraction loops.
 
 ```pseudo
 \begin{algorithm}
@@ -91,13 +96,13 @@ Consolidates an alphabet frequency map into a single rooted tree. It uses an und
 \end{algorithm}
 ```
 
-### EncodeSymbol(Root, Symbol)
+### `EncodeSymbol(Root, Symbol)`
 Traverses the tree to map a character to its unique binary path.
 
 *   **Time Complexity:** $O(d)$ where $d$ matches tree depth (bounded by max tree height).
 *   **Engineering Optimization:** Walking downwards requires heavy recursive search overhead. Instead, map leaf nodes to an array upfront, then walk *upwards* to the root using parent pointers. Push the bits onto a [[Computer Science Introduction/Data Structures/Introductory Data Structures/Stack|Stack]] and pop them to retrieve the correct root-to-leaf path.
 
-### DecodeStream(Root, BitStream)
+### `DecodeStream(Root, BitStream)`
 Parses a compressed binary stream back into cleartext using an active bit-by-bit reading engine.
 
 *   **Time Complexity:** $O(1)$ amortized per individual bit decoded.
@@ -108,9 +113,10 @@ Parses a compressed binary stream back into cleartext using an active bit-by-bit
 ## Common Pitfalls
 
 > [!WARNING] The Metadata Overhead Penalty
-> A classic pitfall is forgetting the tree storage cost inside your compressed file. If you transmit a compressed bitstream, you must attach the tree architecture layout within the file header so the receiver can decode it. For small text files, storing this tree topology can easily add more bytes than the compression saves, resulting in file size inflation.
+> A classic pitfall is forgetting the **tree storage cost** inside your compressed file. If you transmit a compressed bitstream, you must attach the tree architecture layout within the file header so the receiver can decode it. For small text files, storing this tree topology can easily add more bytes than the compression saves, resulting in file size inflation.
 
-*   **Branch Direction Swaps:** Mixing up left/right assignments during min-heap unpacking will modify the explicit bit strings, though total path length optimization remains perfectly preserved.
+**Branch Direction Swaps:** 
+Mixing up left/right assignments during min-heap unpacking will modify the explicit bit strings, though total path length optimization remains perfectly preserved.
 
 ---
 
@@ -134,4 +140,5 @@ Reach for Huffman Trees when working with datasets where symbol probabilities sh
 *   **[[Bitwise Input-Output]]** — The vital I/O bridge used to pack individual Huffman paths onto standard disks.
 *   **[[Binary Tree]]** — The underlying structural model for tree navigation.
 *   **[[Priority Queue|Priority Queue]]** — The min-heap engine that coordinates the bottom-up greedy consolidation loops.
-*   **[[Minimum Spanning Trees|Kruskal's Algorithm]]** — Shares structural connections by utilizing similar priority-driven queue optimization loops.
+*   **[[Minimum Spanning Trees]]** — Shares structural connections by utilizing similar priority-driven queue optimization loops.
+*   [[Huffman Code]] ― The encoding and decoding details of Huffman Code

@@ -11,15 +11,14 @@ tags:
   - information-theory
   - probability
 ---
-
-# Abstract
-Suppose you have an information channel emitting data messages across a known symbol alphabet. The goal of data compression is to strip away redundancy until the physical storage footprint aligns perfectly with the underlying information content. **Shannon Entropy** defines the absolute mathematical lower bound for this optimization.
-
-**Category:** Information Theory / Optimization Bounds  
-**Input:** A discrete probability distribution $P$ over an active alphabet set.  
-**Output:** A value tracking the minimum average bits required per processed symbol.  
-**Paradigm:** Analytical Lower Bounds / Limits Evaluation  
-**Typical use cases:** Validating upper-bound compression efficiency limits, analyzing cryptographic randomness, informational analysis.
+> [!abstract]
+> Suppose you have an information channel emitting data messages across a known symbol alphabet. The goal of data compression is to strip away redundancy until the physical storage footprint aligns perfectly with the underlying information content. **Shannon Entropy** defines the absolute mathematical lower bound for this optimization.
+> 
+> - **Category:** Information Theory / Optimization Bounds  
+> - **Input:** A discrete probability distribution $P$ over an active alphabet set.  
+> - **Output:** A value tracking the minimum average bits required per processed symbol.  
+> - **Paradigm:** Analytical Lower Bounds / Limits Evaluation  
+> - **Typical use cases:** Validating upper-bound compression efficiency limits, analyzing cryptographic randomness, informational analysis.
 
 ---
 
@@ -28,9 +27,13 @@ Suppose you have an information channel emitting data messages across a known sy
 *   **Solution Format:** A prefix code assignment matching every $x_i$ to a unique bitstring $C(x_i)$ within a [[Data Structure of Huffman Code|Huffman Tree Layout]].
 *   **Constraints:** The compiled bit configurations must maintain strict prefix-free properties to prevent parsing collision down the [[Bitwise Input-Output|Bit Stream Engine]].
 *   **Objective:** Minimize the expected average code length per character:
-$$L_{avg} = \sum_{i=1}^{n} P(x_i) \cdot |C(x_i)|$$
+$$
+L_{avg} = \sum_{i=1}^{n} P(x_i) \cdot |C(x_i)|
+$$
 *   **Goal:** Minimize $L_{avg}$ such that it approaches the absolute Shannon Entropy limit:
-$$H(X) = - \sum_{i=1}^{n} P(x_i) \log_2 P(x_i)$$
+$$
+H(X) = - \sum_{i=1}^{n} P(x_i) \log_2 P(x_i)
+$$
 
 ---
 
@@ -53,21 +56,35 @@ We must show that no valid binary prefix code can compress an information source
 
 ### The Tricky Part
 An arbitrary coding schema could use an infinite variety of bit layout choices. To evaluate all potential valid layouts, we must find a universal constraint on their bit lengths. This is provided by **Kraft's Inequality**, which states that any decodable binary prefix code must satisfy:
-$$\sum_{i=1}^{n} 2^{-|C(x_i)|} \leq 1$$
+$$
+\sum_{i=1}^{n} 2^{-|C(x_i)|} \leq 1
+$$
 
 ### Proof Sketch via Gibbs' Inequality
 Let $p_i = P(x_i)$ represent the true probability of symbol $i$, and let $l_i = |C(x_i)|$ be its assigned bit length. We define a normalized, dummy probability layout:
-$$q_i = \frac{2^{-l_i}}{\sum_{j=1}^n 2^{-l_j}}$$
+$$
+q_i = \frac{2^{-l_i}}{\sum_{j=1}^n 2^{-l_j}}
+$$
 
 Using **Gibbs' Inequality** (which proves that the relative entropy or Kullback-Leibler divergence between two distributions is always non-negative: $\sum p_i \log_2 \frac{p_i}{q_i} \geq 0$), we expand the relational configuration:
-$$\sum_{i=1}^n p_i \log_2 p_i - \sum_{i=1}^n p_i \log_2 q_i \geq 0$$
-$$\implies - \sum_{i=1}^n p_i \log_2 q_i \geq - \sum_{i=1}^n p_i \log_2 p_i = H(X)$$
+$$
+\begin{align*}
+&\sum_{i=1}^n p_i \log_2 p_i - \sum_{i=1}^n p_i \log_2 q_i \geq 0 \\
+\implies &- \sum_{i=1}^n p_i \log_2 q_i \geq - \sum_{i=1}^n p_i \log_2 p_i = H(X)
+\end{align*}
+$$
 
 Substituting our definition of $q_i$ into the expression:
-$$- \sum_{i=1}^n p_i \log_2 \left( \frac{2^{-l_i}}{\sum 2^{-l_j}} \right) = \sum_{i=1}^n p_i l_i + \log_2 \left( \sum_{j=1}^n 2^{-l_j} \right)$$
+$$
+\begin{align*}
+- \sum_{i=1}^n p_i \log_2 \left( \frac{2^{-l_i}}{\sum 2^{-l_j}} \right) = \sum_{i=1}^n p_i l_i + \log_2 \left( \sum_{j=1}^n 2^{-l_j} \right)
+\end{align*}
+$$
 
 Applying Kraft's inequality ($\sum 2^{-l_j} \leq 1$), the log term becomes $\leq 0$. Therefore:
-$$L_{avg} = \sum_{i=1}^n p_i l_i \geq H(X)$$
+$$
+L_{avg} = \sum_{i=1}^n p_i l_i \geq H(X)
+$$
 
 > [!TIP] The Entropy Match
 > This mathematical inequality minimizes perfectly when your assigned bit allocations match their inverse log probabilities exactly ($l_i = -\log_2 p_i$). This proves that $H(X)$ is the absolute lower bound for lossless compression.

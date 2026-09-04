@@ -12,7 +12,7 @@ tags:
   - bioinformatics
 ---
 > [!abstract] Abstract 
-> The Burrows-Wheeler Transform (BWT) rearranges a text string into a completely reversible, block-sorted format that optimizes data compression and full-text indexing. When combined with an FM-Index and the Last-to-First (L2F) mapping property, it achieves the absolute theoretical limit for pattern matching: finding all occurrences of a query string in time proportional to the length of the query itself, completely independent of database size.
+> The **Burrows-Wheeler Transform (BWT)** rearranges a text string into a completely reversible, block-sorted format that optimizes data compression and full-text indexing. When combined with an **FM-Index** and the **Last-to-First (L2F) mapping property**, it achieves the absolute theoretical limit for pattern matching: finding all occurrences of a query string in time proportional to the length of the query itself, completely independent of database size.
 > 
 > - **Category:** Block-Sorted Text Indexing
 > - **Key Property:** Reversible character clumping with Last-to-First pointer mapping.
@@ -25,16 +25,18 @@ tags:
 The transform rearranges character arrays to group matching context symbols together. This increases compression efficiency (used in utilities like `bzip2`) and constructs a high-performance genomic index.
 
 ### The Cyclic Matrix Generation
-Using the target database example string `BANANA$` (where `$` represents a unique lexicographically smallest terminating character sentinel):
+Using the target database example string `BANANA$` (where `$` represents a unique lexicographically smallest terminating character):
 
 1.  **Generate Rotations:** Construct all possible cyclic shifts of the source string text.
 2.  **Sort Rows:** Sort these shifts alphabetically, keeping the `$` symbol as the smallest starting character.
 3.  **Isolate the Terminal String:** Extract the final column vector from this sorted rotation matrix grid. That isolated sequence forms the BWT string:
 
-$$ \text{BWT}(\text{BANANA\$}) = \text{ANNB\$AA} $$
+$$ 
+\text{BWT}(\text{BANANA\$}) = \text{ANNB\$AA} 
+$$
 
 ### The Last-to-First (L2F) Mapping Invariant
-The utility of the BWT rests on the Last-to-First (L2F) Property: 
+The utility of the BWT rests on the Last-to-First (L2F) Property.
 
 > [!important] The L2F Core Invariant
 > The $i$-th occurrence of a specific character $x$ within the final column vector (the BWT) corresponds to the exact same physical character instance within the source string as the $i$-th occurrence of character $x$ inside the first column vector (the sorted alphabet list).
@@ -47,11 +49,11 @@ Because every row in the sorted matrix is a valid cyclic rotation, the character
 
 Instead of utilizing standard binary searches that narrow down ranges inside an index array, an FM-Index leverages the BWT to run a **Backward Search**. The matching process evaluates characters in reverse order, starting with the final character of a query string and working toward its front.
 
-```
-Query: [ 'A', 'N', 'A' ]  <--- Evaluated Right-to-Left (Step 3 to Step 1)
-Step 1: Locate range for 'A' in First Column
-Step 2: Filter matching 'N' components in Last Column boundary
-Step 3: Map indices backward via L2F step adjustments
+```mermaid
+flowchart TD
+    Query["<b>Query: ['A', 'N', 'A']</b><br><i>(Evaluated Right-to-Left)</i>"] --> Step1["<b>Step 1: First Evaluated Char ('A')</b><br>Locate range for 'A' in First Column"]
+    Step1 --> Step2["<b>Step 2: Next Char ('N')</b><br>Filter matching 'N' components in Last Column boundary"]
+    Step2 --> Step3["<b>Step 3: Next Char ('A')</b><br>Map indices backward via L2F step adjustments"]
 ```
 
 ```pseudo
@@ -93,11 +95,11 @@ BWT-based indexing serves as the industry standard for modern sequence alignment
 
 # Read Mapping Strategies Evaluation
 
-| Strategy Architecture | Preprocessing Cost | Active Search Complexity | Operational Footnotes |
-|---|---|---|---|
-| **[[Aho-Corasick Automaton\|Aho-Corasick Automaton]]** | $O(m)$ pattern costs | $O(n + \text{matches})$ | Preprocesses read queries; best for small motif pools. |
-| **[[Suffix Arrays\|Suffix Arrays]]** | $O(n)$ text costs | $O(k \cdot \log n)$ | Leverages array binary searches on sorted index ranges. |
-| **[[Burrows-Wheeler Transformation\|BWT / FM-Index Engine]]** | $O(n)$ text costs | $O(k)$ | Industry standard optimization targeting massive lookups. |
+| Strategy Architecture                                  | Preprocessing Cost   | Active Search Complexity | Operational Footnotes                                     |
+| ------------------------------------------------------ | -------------------- | ------------------------ | --------------------------------------------------------- |
+| **[[Aho-Corasick Automaton\|Aho-Corasick Automaton]]** | $O(m)$ pattern costs | $O(n + \text{matches})$  | Preprocesses read queries; best for small motif pools.    |
+| **[[Suffix Arrays\|Suffix Arrays]]**                   | $O(n)$ text costs    | $O(k \cdot \log n)$      | Leverages array binary searches on sorted index ranges.   |
+| **[[Burrows-Wheeler Transformation]]**                 | $O(n)$ text costs    | $O(k)$                   | Industry standard optimization targeting massive lookups. |
 
 ---
 
@@ -106,3 +108,4 @@ BWT-based indexing serves as the industry standard for modern sequence alignment
 - [[Suffix Arrays|Suffix Arrays]]
 - [[Aho-Corasick Automaton|Aho-Corasick Automaton]]
 - [[Multiway Trie Implementation|Multiway Trie Implementation]]
+- [[Multiway Trie]]

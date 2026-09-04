@@ -10,13 +10,12 @@ tags:
   - graph-optimization
   - network-design
 ---
-
-# Purpose
-The **Minimum Spanning Tree (MST)** problem focuses on isolating an optimized subset of edges that completely links every vertex across a connected, weighted undirected graph without introducing structural cycles, while minimizing the absolute sum of all chosen edge weights. This serves as the computational foundation for low-cost distribution networks (e.g., minimizing physical cable layouts across a system layout).
-
-**Category:** Graph Optimization / Network Management  
-**Solves:** Total cost minimization across distribution systems.  
-**Typical use cases:** Designing high-efficiency utility routing, clustering analysis, network backbone layout design.
+> [!abstract] 
+> The **Minimum Spanning Tree (MST)** problem focuses on isolating an optimized subset of edges that completely links every vertex across a connected, weighted undirected graph without introducing structural cycles, while minimizing the absolute sum of all chosen edge weights. This serves as the computational foundation for low-cost distribution networks (e.g., minimizing physical cable layouts across a system layout).
+> 
+> - **Category:** Graph Optimization / Network Management  
+> - **Solves:** Total cost minimization across distribution systems.  
+> - **Typical use cases:** Designing high-efficiency utility routing, clustering analysis, network backbone layout design.
 
 ---
 
@@ -44,7 +43,7 @@ While standard weight-blind traversal engines like [[Breadth First Search (BFS)|
 ## Algorithm Implementations
 
 ### Prim's Algorithm (Vertex-Centric Approach)
-Prim's grows a unified spanning structure node-by-node, starting from an arbitrary root vertex. This design mirrors Dijkstra’s Algorithm by maintaining a priority queue tracking the minimum cost to attach unvisited nodes to the growing tree.
+Prim's grows a unified spanning structure node-by-node, starting from an arbitrary root vertex. This design mirrors Dijkstra’s Algorithm by maintaining a priority queue tracking the minimum cost to attach unvisited nodes to the growing tree. Visit [[Prim's Algorithm]] for full detailed documentation.
 
 ```pseudo
 \begin{algorithm}
@@ -76,7 +75,7 @@ Prim's grows a unified spanning structure node-by-node, starting from an arbitra
 ```
 
 ### Kruskal's Algorithm (Edge-Centric Approach)
-Kruskal's shifts focus to the graph edges. It handles components as a decentralized collection of small trees, repeatedly pulling the global absolute lowest-cost edge available out of a queue and merging components if they pass validation checks via a disjoint-set manager.
+Kruskal's shifts focus to the graph edges. It handles components as a decentralized collection of small trees, repeatedly pulling the global absolute lowest-cost edge available out of a queue and merging components if they pass validation checks via a disjoint-set manager. Visit [[Kruskal's Algorithm]] for full detailed documentation.
 
 ```pseudo
 \begin{algorithm}

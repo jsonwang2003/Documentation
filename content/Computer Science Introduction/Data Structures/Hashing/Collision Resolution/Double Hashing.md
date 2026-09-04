@@ -8,7 +8,7 @@ tags:
   - collision-resolution
 ---
 > [!abstract] Abstract 
-> Double Hashing is an advanced Open Addressing strategy designed to eliminate Primary Clustering. By using a second hash function to determine the "skip" or offset, it ensures that keys which hash to the same initial index follow different probe sequences, leading to a more uniform distribution.
+> Double Hashing is an advanced [[Open Addressing (Linear Probing)|Open Addressing]] strategy designed to eliminate Primary Clustering. By using a second hash function to determine the "skip" or offset, it ensures that keys which hash to the same initial index follow different probe sequences, leading to a more uniform distribution.
 > 
 > - **Category:** Open Addressing Strategy
 > - **Stores:** Internal key allocations distributed within a bounded flat array.

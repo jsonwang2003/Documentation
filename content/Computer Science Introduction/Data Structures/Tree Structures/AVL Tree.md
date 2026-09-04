@@ -27,11 +27,15 @@ To prevent height degradation into a linear $O(n)$ chain, an AVL tree enforces t
 
 The mathematical representation of this tracking metric is the **Balance Factor (BF)**:
 
-$$ \text{BF}(u) = \text{Height}(\text{RightSubtree}(u)) - \text{Height}(\text{LeftSubtree}(u)) $$
+$$
+\text{BF}(u) = \text{Height}(\text{RightSubtree}(u)) - \text{Height}(\text{LeftSubtree}(u)) 
+$$
 
 A node state is considered structurally valid if and only if:
 
-$$ \text{BF}(u) \in \{-1, 0, 1\} $$
+$$
+\text{BF}(u) \in \{-1, 0, 1\} 
+$$
 
 | Valid AVL Tree | Invalid AVL Tree |
 |---|---|
@@ -47,11 +51,15 @@ We can prove that the maximum height $h$ of an AVL tree containing $n$ nodes is 
 
 To construct the most sparse AVL tree possible of height $h$, we provide one child with the minimum valid height $h-1$ and the opposing child with the minimum valid height $h-2$, plus the root node itself:
 
-$$ N_h = N_{h-1} + N_{h-2} + 1 $$
+$$
+N_h = N_{h-1} + N_{h-2} + 1 
+$$
 
 Using a 1-based height index framework where base cases resolve to $N_1 = 1$ and $N_2 = 2$, this recurrence relation matches the growth trajectory of the Fibonacci sequence. Because Fibonacci terms scale exponentially relative to the golden ratio ($\phi \approx 1.618$), we establish that:
 
-$$ N_h \approx \phi^h \implies h \approx \log_{\phi}(n) $$
+$$
+N_h \approx \phi^h \implies h \approx \log_{\phi}(n) 
+$$
 
 This mathematical relationship confirms that the height of an AVL tree is strictly bounded at $h \le 1.44 \log_2 n$, ensuring guaranteed $O(\log n)$ performance.
 
@@ -178,14 +186,17 @@ Every mutations pipeline couples traditional binary search tree logic with an in
 
 ## `Find(element)`
 Operates identically to a standard [[Binary Search Tree (BSTs)|BST]] lookup. The engine traverses down tree branches by comparing target values against active node keys.
-- **Time Complexity:** Guaranteed $O(\log n)$ since tree height is strictly controlled.
+
+**Time Complexity:** 
+Guaranteed $O(\log n)$ since tree height is strictly controlled.
 
 ## `Insert(element)`
 1.  **BST Phase:** Trace downward to find the target leaf slot and insert the element.
 2.  **Update Phase:** Walk back up toward the root starting from the new leaf node.
 3.  **Balance Phase:** Recalculate balance factors at each ancestor node. If any ancestor registers $\text{BF} = \pm 2$, execute the appropriate single or double rotation.
 
-- **Time Complexity:** $O(\log n)$ to search downward plus $O(\log n)$ for the upward rebalancing path.
+**Time Complexity:** 
+$O(\log n)$ to search downward plus $O(\log n)$ for the upward rebalancing path.
 
 ![[Pasted image 20260116111623.png]]
 
@@ -207,7 +218,8 @@ The engine immediately runs a left rotation centered at the root. Node $10$ assu
 2.  **Update Phase:** Start at the parent coordinate of the physically removed item and trace upward to the root.
 3.  **Balance Phase:** Check balance factors at every level. Unlike insertion (where a single rotation fix is guaranteed to restore balance across the entire tree), removal mutations can alter heights globally, occasionally requiring multiple independent rotations along the path to the root.
 
-- **Time Complexity:** $O(\log n)$ search cost plus an $O(\log n)$ multi-step balancing sweep.
+**Time Complexity:** 
+$O(\log n)$ search cost plus an $O(\log n)$ multi-step balancing sweep.
 
 ![[Pasted image 20260116111630.png]]
 
@@ -223,7 +235,7 @@ The engine immediately runs a left rotation centered at the root. Node $10$ assu
 | **Operational Passes** | 1 Pass (Downward trajectory only) | 2 Passes (Downward mutation + Upward repair) |
 
 > [!note] Architectural Design Trade-off
-> While AVL trees offer excellent lookup speeds due to their strict balance property, they require a two-pass update cycle (down to mutate, then back up to balance). In heavy write-dominated production libraries, developers often select **Red-Black Trees**, which compromise on strict height balancing to complete structural repairs in a single pass.
+> While AVL trees offer excellent lookup speeds due to their strict balance property, they require a two-pass update cycle (down to mutate, then back up to balance). In heavy write-dominated production libraries, developers often select [[Red-Black Tree]], which compromise on strict height balancing to complete structural repairs in a single pass.
 
 ---
 
