@@ -5,17 +5,27 @@
 ---
 ## The Identity
 
-$$\sum_{k = 0}^{n}\binom{n}{k} = \binom{n}{0} + \binom{n}{1} + \binom{n}{2} + \dots + \binom{n}{n} = 2^n$$
+$$
+\sum_{k = 0}^{n}\binom{n}{k} = \binom{n}{0} + \binom{n}{1} + \binom{n}{2} + \dots + \binom{n}{n} = 2^n
+$$
 
 ---
 ## 1. Algebraic Proof
 Using the **[[Binomial Theorem|Binomial Theorem]]**, we can expand $(x+y)^n$:
 
-$$(x+y)^n = \sum_{k=0}^{n}\binom{n}{k}x^{n-k}y^k$$
+$$
+(x+y)^n = \sum_{k=0}^{n}\binom{n}{k}x^{n-k}y^k
+$$
 
 By substituting $x = 1$ and $y = 1$:
 
-$$\begin{align*} (1+1)^n &= \sum_{k = 0}^{n} \binom{n}{k}(1)^{n-k}(1)^k \\ 2^n &= \sum_{k = 0}^n \binom{n}{k} \cdot 1 \cdot 1 \\ 2^n &= \binom{n}{0} + \binom{n}{1} + \dots + \binom{n}{n} \end{align*}$$
+$$
+\begin{align*} 
+(1+1)^n &= \sum_{k = 0}^{n} \binom{n}{k}(1)^{n-k}(1)^k \\ 
+2^n &= \sum_{k = 0}^n \binom{n}{k} \cdot 1 \cdot 1 \\ 
+2^n &= \binom{n}{0} + \binom{n}{1} + \dots + \binom{n}{n} 
+\end{align*}
+$$
 
 ---
 ## 2. Combinatorial Proof
@@ -39,7 +49,13 @@ This identity also counts the total number of subsets of a set $S$ where $|S| = 
 ---
 ## Example ($n = 4$)
 
-$$\begin{align*} 2^4 &= \binom{4}{0} + \binom{4}{1} + \binom{4}{2} + \binom{4}{3} + \binom{4}{4}\\ 16 &= 1 + 4 + 6 + 4 + 1\\ 16 &= 16 \end{align*}$$
+$$
+\begin{align*} 
+2^4 &= \binom{4}{0} + \binom{4}{1} + \binom{4}{2} + \binom{4}{3} + \binom{4}{4}\\ 
+16 &= 1 + 4 + 6 + 4 + 1\\ 
+16 &= 16 
+\end{align*}
+$$
 
 - **1** empty set $\emptyset$
 - **4** subsets of size 1

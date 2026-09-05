@@ -52,7 +52,9 @@ $f(n) \in \Omega(g(n))$ means $f(n)$ grows **at least as fast as** $g(n)$.
 
 When analyzing algorithms, we simplify functions by dropping constants and lower-order terms. The following standard functions are ordered from slowest to fastest growth:
 
-$$1 \ll \log n \ll n \ll n\log n \ll n^2 \ll n^3 \ll 2^n \ll n!$$
+$$
+1 \ll \log n \ll n \ll n\log n \ll n^2 \ll n^3 \ll 2^n \ll n!
+$$
 
 |**Term**|**Complexity**|**Verdict**|
 |---|---|---|

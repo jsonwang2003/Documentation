@@ -8,7 +8,7 @@ title: Random Variables
 ---
 ## Knowledge Map
 ### Foundations
-- **[[Random Variables]]**: The formal definition of $X: S \to \mathbb{R}$ and how to calculate the expectation $E[X]$ using outcomes or distribution values.
+- **[[Random Variables Definition]]**: The formal definition of $X: S \to \mathbb{R}$ and how to calculate the expectation $E[X]$ using outcomes or distribution values.
 - **[[Distributions]]**: The study of how probability mass is allocated across a sample space and the application of the **Law of Total Probability**.
 - **[[Uniform vs Non-Uniform Distributions]]**: Distinguishing between "fair" systems (equally likely) and "biased" or "weighted" systems.
 ### Specific Discrete Models

@@ -16,7 +16,26 @@
 ### Part 1: The Merge Helper (`RMerge`)
 We prove the helper function using **Regular Induction** because the total number of elements ($k+l$) decreases by exactly 1 in each recursive call.
 
-![[Pasted image 20251112194733.png]]
+```pseudo
+	\begin{algorithm}
+	\caption{RMerge}
+	\begin{algorithmic}
+		\Procedure{RMerge}{$[a_1, \dots, a_k], [b_1, \dots, b_l]$}
+			\If{$k==0$}
+				\Return $[b_1, b_l]$
+            \EndIf
+            \If{$l==0$}
+	            \Return $[a_1, a_k]$
+            \EndIf
+            \If{$a_1 < b_1$}
+	            \Return $a_1 \cdot$ RMerge($[a_2, \dots, a_k], [b_1, \dots, b_l]$)
+	        \Else
+		        \Return $b_1 \cdot$ RMerge($[a_1, \dots, a_k], [b_2, \dots, b_l]$)
+	        \EndIf
+        \EndProcedure
+	\end{algorithmic}
+	\end{algorithm}
+```
 
 - **Base Case**: If both lists are empty ($n=0$), it returns an empty list, which is sorted.
 - **Inductive Hypothesis**: Assume `RMerge` correctly merges any two sorted lists with combined size $n-1$.
@@ -25,7 +44,25 @@ We prove the helper function using **Regular Induction** because the total numbe
 ### Part 2: The Main Algorithm
 We prove `MergeSort` using **Strong Induction** because each subsequent call **halves the input size** ($\frac{n}{2} < n-1$).
 
-![[Pasted image 20251207173654.png]]
+```pseudo
+	\begin{algorithm}
+	\caption{Merge Sort}
+	\begin{algorithmic}
+	\Procedure{MergeSort}{$[a_1, a_2, \dots, a_n]$}
+		\If{$n==0$}
+			\Return $[]$
+        \EndIf
+        \If{$n==1$}
+	        \Return $[a_1]$
+        \EndIf
+        \State $m= \lfloor \frac{n}{2} \rfloor$
+        \State $L_1 = MergeSort([a_1, \dots, a_m])$
+        \State $L_2 = MergeSort([a_{m+1}, \dots, a_n])$
+        \Return $RMerge(L_1, L_2)$
+    \EndProcedure
+	\end{algorithmic}
+	\end{algorithm}
+```
 
 - **Base Case**:
     - $n=0$: Returns an empty list (trivially true).

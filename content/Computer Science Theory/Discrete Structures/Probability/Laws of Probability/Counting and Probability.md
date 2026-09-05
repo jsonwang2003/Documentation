@@ -10,8 +10,8 @@
 > If a sample space $S$ has a [[Uniform vs Non-Uniform Distributions#Uniform Distribution|Uniform Distribution]], then for any event $E \subseteq S$, the probability of $E$ is the ratio of the number of successful outcomes to the total number of possible outcomes:
 > 
 > $$
-p(E) = \frac{|E|}{|S|}
-$$
+> p(E) = \frac{|E|}{|S|}
+> $$
 
 This formula is valid only when every individual outcome in the sample space $S$ has the same probability, $p(a) = \frac{1}{|S|}$.
 

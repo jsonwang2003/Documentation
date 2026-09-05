@@ -3,7 +3,8 @@ title: Discrete Structure
 ---
 # Discrete Structures
 
-> [!INFO] The **mathematical foundation** of computer science → focuses on structures that are fundamentally discrete rather than continuous.
+> [!INFO] 
+> The **mathematical foundation** of computer science → focuses on structures that are fundamentally discrete rather than continuous.
 
 - Provides the logic and language for **formal verification**, **algorithm design**, and **cryptography**
 - Bridges the gap between **pure mathematics** and **computational logic**
@@ -45,4 +46,4 @@ title: Discrete Structure
 
 ---
 ## Resource Citation
-_Course notes – UC San Diego (CSE 21: Math/Algorithm & Systems Analysis)_
+_Course notes – UC San Diego (CSE 21: Math/Algorithm & Systems Analysis)_ Fall 2025

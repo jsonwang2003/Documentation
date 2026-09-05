@@ -16,10 +16,14 @@ For an encoding to be lossless, it must function as a one-to-one mapping. This r
 ### Minimum Bit Requirement
 If we have a set of data $|Data|$, and we want to encode it into binary strings of length $n$:
 1. The number of unique data items must be less than or equal to the total number of available binary strings:
-    $$|Data| \leq 2^n$$
+    $$
+    |Data| \leq 2^n
+    $$
     
 2. Solving for $n$ gives the theoretical lower bound:
-    $$\boxed{n \geq \lceil \log_2 |Data| \rceil}$$
+    $$
+    \boxed{n \geq \lceil \log_2 |Data| \rceil}
+    $$
     
 
 There will **always** exist an encoding of length $\lceil \log_2 |Data| \rceil$ bits for any finite data set.

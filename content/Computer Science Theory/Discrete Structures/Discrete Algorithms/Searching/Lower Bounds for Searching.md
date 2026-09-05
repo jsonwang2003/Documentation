@@ -23,10 +23,14 @@ Therefore, any valid decision tree for searching must have at least **$L = n+1$ 
 ## The Mathematical Proof
 We use the relationship between the number of leaves ($L$) and the height of a binary tree ($h$). The height $h$ represents the **worst-case number of comparisons**.
 1. Binary Tree Property: A binary tree of height $h$ can have at most $2^h$ leaves.
-    $$L \leq 2^h$$
+    $$
+    L \leq 2^h
+    $$
     
 2. Substitution: Since we need at least $n+1$ leaves:
-    $$n+1 \leq 2^h$$
+    $$
+    n+1 \leq 2^h
+    $$
     
 3. Solve for $h$:
     $$

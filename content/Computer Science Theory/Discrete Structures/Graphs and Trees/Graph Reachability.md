@@ -65,7 +65,28 @@ To find all vertices reachable from a starting vertex $s$, we partition the grap
 2. **Frontier (F)**: Vertices discovered but not yet processed.
 3. **Unreached (U)**: Vertices not yet seen.
 
-![[Pasted image 20251204114925.png]]
+```pseudo
+	\begin{algorithm}
+	\caption{GraphSearch}
+	\begin{algorithmic}
+	\Procedure{GraphSearch}{$G$: directed graph, $s$: starting vertex}
+		\State Initialize $X$ = empty, $F = \{ s \}$, $U$ = all vertex except the $s$
+		\While{$F$ is not empty}
+			\State Pick $w$ in $F$
+			\ForAll{outgoing neighbors $y$ of $w$ (in other words $(w, y) \in E$)}
+				\If{$y$ is not in $X$ or $F$}
+					\State move $y$ from $U$ to $F$
+                \EndIf
+            \EndFor
+            \State move $w$ from $F$ to $X$
+        \EndWhile
+        \Return $X$
+    \EndProcedure
+	\end{algorithmic}
+	\end{algorithm}
+```
+
+
 
 The data structure used for the **Frontier (F)** determines the search strategy:
 - **Stack**: [[Depth First Search (DFS)]]
@@ -125,7 +146,27 @@ An undirected graph $G$ (without isolated vertices) has an Eulerian trail **if a
 ### Fleury's Algorithm (Proof by Construction)
 Fleury’s Algorithm provides a way to construct an Eulerian trail by following a simple rule: **Do not cross a bridge unless you have no other choice.**
 
-![[Pasted image 20251204141308.png]]
+```pseudo
+	\begin{algorithm}
+	\caption{Fleury's Algorithm}
+	\begin{algorithmic}
+	\Procedure{Fleury's}{$G$: a connected undirected graph}
+		\If{$G$ has more than $2$ odd-degree vertices}
+			\State No Eulerian Trail Exist
+        \EndIf
+        \State Start at vertex $v$, an odd-degree vertex if possible
+        \While{there are edges in $G$ not visited}
+	        \If{more than one edge incident on $v$}
+		        \State Cross any edge incident on $v$ that is not a bridge
+		    \Else
+			    \State Cross the only edge available from $v$ and add edge to the output
+            \EndIf
+            \State Delete the edge just crossed from $G$, and delete $v$
+        \EndWhile
+    \EndProcedure
+	\end{algorithmic}
+	\end{algorithm}
+```
 #### Definitions
 - **Bridge**: An edge which, if removed, would cause the graph $G$ to become disconnected.
 - **Logic**: In an Eulerian trail, you must visit every edge on one side of a bridge before crossing it, because once you cross, there is no way to return to the previous component.
@@ -161,7 +202,23 @@ An ordered list of vertices where for every edge $(v, w)$, $v$ appears before $w
 - Only possible if the graph is a DAG.
 - **Algorithm**: Repeatedly remove a **source** (vertex with Indegree 0) and add it to the list.
 
-![[Pasted image 20251204145056.png]]
+```pseudo
+	\begin{algorithm}
+	\caption{Find Topological Ordering}
+	\begin{algorithmic}
+		\Procedure{FindTopologicalOrdering}{$G$: a directed connected graph}
+			\While{$G$ has at least one vertex}
+				\If{$G$ has some source}
+					\State Choose one source and output it
+					\State Delete the source and all its outgoing edges from $G$
+				\Else
+					\Return $G$ is not a $DAG$
+                \EndIf
+            \EndWhile
+    \EndProcedure
+	\end{algorithmic}
+	\end{algorithm}
+```
 ### Sources of a DAG
 - Vertices with **no incoming edges** are called *sources*
 	→ $A$ and $G$

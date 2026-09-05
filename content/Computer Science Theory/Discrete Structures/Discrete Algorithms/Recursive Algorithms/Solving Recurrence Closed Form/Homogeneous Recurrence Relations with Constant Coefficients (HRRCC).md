@@ -6,7 +6,9 @@
 ## When To Use
 A recurrence is an HRRCC if it matches the form:
 
-$$f(n) = c_1f(n-1) + c_2f(n-2) + \dots + c_k f(n-k)$$
+$$
+f(n) = c_1f(n-1) + c_2f(n-2) + \dots + c_k f(n-k)
+$$
 
 **Two Mandatory Conditions:**
 1. **Homogeneity**: Every term on the right-hand side is a function of a previous $f(k)$. There are no "extra" constants or $n$ terms (e.g., no $+7$ or $+n$).
@@ -51,7 +53,7 @@ Lets write this in $BS(n)$
 $$
 \begin{align*}
 BS(n) &= BS(n-1) + BS(n-1)\\
-&= 2BS(n-1)\\\\
+&= 2BS(n-1)\\ \\
 BS(0) &= 1
 \end{align*}
 $$
@@ -182,10 +184,14 @@ $$
 > 
 > We can find $A = \frac{\phi}{\sqrt{5}}$ and $B = \frac{1}{\phi\sqrt{5}}$
 > Use this, we can get the closed form of the algorithm to be
-> $$DT(n) = \frac{1}{\sqrt{5}}(\phi^{n+1}+(\frac{-1}{\phi})^{n+1})$$
+> $$
+> DT(n) = \frac{1}{\sqrt{5}}(\phi^{n+1}+(\frac{-1}{\phi})^{n+1})
+> $$
 > 
 > Notice that the second term $(\frac{-1}{\phi})^{n+1}$ grows smaller as $n$ increases, we can approximate $DT(n)$ as the *nearest integer* of $\frac{\phi^{n+1}}{\sqrt{5}}$ which we get
-> $$DT(n) = \lfloor \frac{\phi^{n+1}}{\sqrt{5}} \rceil$$
+> $$
+> DT(n) = \lfloor \frac{\phi^{n+1}}{\sqrt{5}} \rceil
+> $$
 > → $\lfloor x \rceil$ means the nearest integer of $x$
 
 ### N-Bit Binary Strings Without "11" Substring

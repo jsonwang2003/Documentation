@@ -24,6 +24,6 @@ If sets are **not disjoint**, then:
 $$
 [|A \cup B| = |A| + |B| - |A \cap B|]
 $$
-This is a basic form of the **[[Inclusion-Exclusion Principle]]**.
+This is a basic form of the **[[Inclusion Exclusion|Inclusion-Exclusion Principle]]**.
 
 ![[Pasted image 20251001145548.png]]

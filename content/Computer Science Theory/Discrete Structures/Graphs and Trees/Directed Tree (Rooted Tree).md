@@ -61,7 +61,7 @@ The efficiency of a BST depends entirely on its height. If the tree is balanced,
 ## Self-Balancing Trees
 To prevent the "line" scenario and ensure $O(\log n)$ performance, various self-balancing algorithms adjust the tree structure during insertion and deletion:
 - **[[AVL Tree]]**: Maintains height balance strictly.
-- **Red-Black Tree**: Uses color properties to ensure the path to the furthest leaf is no more than twice the path to the nearest.
+- **[[Red-Black Tree]]**: Uses color properties to ensure the path to the furthest leaf is no more than twice the path to the nearest.
 - **Splay Tree**: Moves frequently accessed nodes closer to the root.
 - **2-3 Tree**: A non-binary approach where nodes can have multiple keys and children.
 
@@ -69,6 +69,6 @@ To prevent the "line" scenario and ensure $O(\log n)$ performance, various self-
 ## Related Notes
 - **[[Graphs]]**: Rooted trees are a specialized subset of directed graphs.
 - **[[Graph Reachability]]**: Trees are a type of Directed Acyclic Graph (DAG) where every node is reachable from the root.
-- **[[Computer Science Theory/Discrete Structures/Discrete Algorithms/Searching/Binary Search]]**: BSTs are the dynamic data structure implementation of the binary search principle.
+- **[[Computer Science Theory/Discrete Structures/Discrete Algorithms/Searching/Binary Search|Binary Search]]**: BSTs are the dynamic data structure implementation of the binary search principle.
 - **[[Computer Science Theory/Discrete Structures/Discrete Algorithms/Recursive Algorithms/index|Recursive Algorithms]]**: Most tree operations, including height calculation and BST traversal, are defined and analyzed using recursion.
 - **[[Huffman Code]]**: Uses the rooted tree structure to create optimal prefix-free variable-length codes.

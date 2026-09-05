@@ -9,7 +9,22 @@ Unlike [[Fixed Length Character-By-Character Encoding For Strings (Fixed Length 
 - **Prefix-Free**: No codeword is a prefix of any other codeword (e.g., if 'A' is `01`, no other character can start with `01`). This makes the code **comma-free** or self-delimiting.
 - **Greedy Approach**: The algorithm builds the tree from the "bottom up" by repeatedly merging the two least frequent nodes.
 
-![[Pasted image 20251120193129.png]]
+```pseudo
+	\begin{algorithm}
+	\caption{Huffman Coding}
+	\begin{algorithmic}
+	\Procedure{Huffman}{$C$: symbols $a_i$ with frequencies $w_i$, $i=1, \dots, n$}
+		\State $F = $ Forst of $n$ rooted trees each consisting of the single vertex $a_i$ and assigned weighted $w_i$
+		\While{$F$ is not a tree}
+			\State Replace the rooted trees $T$ and $T'$ of least weights from $F$ with $w(T) \geq w(T')$ with a tree having a new root that has $T$ as its $left$ subtree and $T'$ as its $right$ subtree
+			\State Label the new edge to $T$ with $0$
+			\State Label the new edge to $T'$ with $1$
+			\State Assign $w(T) + w(T')$ as the weight of the new tree
+        \EndWhile
+    \EndProcedure
+	\end{algorithmic}
+	\end{algorithm}
+```
 
 ---
 ## Building a Huffman Tree: Step-by-Step
@@ -87,7 +102,9 @@ For a message containing the 24 characters above:
 ### 2. Huffman Analysis
 The size is calculated by $\sum (\text{frequency}_i \times \text{length}_i)$
 
-$$(6 \times 2) + (5 \times 2) + (4 \times 3) + (4 \times 3) + (2 \times 3) + (2 \times 4) + (1 \times 4) = \mathbf{64 \text{ bits}}$$
+$$
+(6 \times 2) + (5 \times 2) + (4 \times 3) + (4 \times 3) + (2 \times 3) + (2 \times 4) + (1 \times 4) = \mathbf{64 \text{ bits}}
+$$
 
 **Total Savings**: $\approx 11\%$ compression over fixed-length.
 

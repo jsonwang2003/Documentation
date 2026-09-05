@@ -12,7 +12,21 @@ The algorithm follows a simple iterative logic:
     - **No** → Move to the next item.
 4. **Terminate**: If you reach the end of the list without a match, report that the item is **not found**.
 
-![[Pasted image 20251106171845.png]]
+```pseudo
+	\begin{algorithm}
+	\caption{Linear Search}
+	\begin{algorithmic}
+	\Procedure{LinearSearch}{$x$: integer, $[a_1, a_2, \dots, a_n]$: integers}
+		\For{$i=1$}
+			\If{$x=a_i$}
+				\Return $i$
+            \EndIf
+        \EndFor
+        \Return "not found"
+    \EndProcedure
+	\end{algorithmic}
+	\end{algorithm}
+```
 
 ---
 ## Proof of Correctness

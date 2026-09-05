@@ -51,4 +51,4 @@ $$
 $$
 
 > [!NOTE]
-> This is a classic use of the [[CountingTechniques/QuotientRule]].
+> This is a classic use of the [[Quotient Rule]].

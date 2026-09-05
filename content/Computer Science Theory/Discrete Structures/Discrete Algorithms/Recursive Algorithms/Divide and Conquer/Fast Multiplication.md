@@ -10,14 +10,18 @@ The traditional method relies on computing partial products for each digit and t
 ## The Divide and Conquer Approach
 
 To multiply two $n$-digit numbers $x$ and $y$, we split them into their high-order ($L$) and low-order ($R$) halves:
-
-$$x = 10^{n/2}x_L + x_R$$
-
-$$y = 10^{n/2}y_L + y_R$$
+$$
+	\begin{align*}
+	x &= 10^{n/2}x_L + x_R\\
+	y &= 10^{n/2}y_L + y_R
+	\end{align*}
+$$
 
 The product $xy$ is expanded as:
 
-$$xy = 10^n(x_Ly_L) + 10^{n/2}(x_Ly_R + x_Ry_L) + x_Ry_R$$
+$$
+xy = 10^n(x_Ly_L) + 10^{n/2}(x_Ly_R + x_Ry_L) + x_Ry_R
+$$
 
 ### 1. Naive Divide and Conquer
 If we compute the four products ($x_Ly_L, x_Ly_R, x_Ry_L, x_Ry_R$) directly:
@@ -37,12 +41,16 @@ Instead of four multiplications, we perform **three**:
 3. $P_3 = (x_L + x_R) \cdot (y_L + y_R)$
 
 The middle term is then derived via subtraction:
-$$x_Ly_R + x_Ry_L = P_3 - P_1 - P_2$$
+$$
+x_Ly_R + x_Ry_L = P_3 - P_1 - P_2
+$$
 
 ### Recurrence Runtime
 Because we reduced the number of recursive calls from $4$ to $3$:
 
-$$T(n) = 3T(n/2) + O(n)$$
+$$
+T(n) = 3T(n/2) + O(n)
+$$
 
 **Using [[Master Theorem]]:**
 - $a = 3$

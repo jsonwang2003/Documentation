@@ -10,7 +10,22 @@ For a list $[a_1, a_2, \dots, a_n]$:
     - _Result:_ The largest element in that range is now at the final position.
 3. **Reduce Range**: Repeat the process, reducing the "end" of the list by one each time until no more swaps are needed.
 
-![[Pasted image 20251106162704.png]]
+```pseudo
+	\begin{algorithm}
+	\caption{Bubble Sort}
+	\begin{algorithmic}
+	\Procedure{BubbleSort}{$[a_1, a_2, \dots, a_n]$: integers with $n>2$}
+		\For{$i=1$ to $n-1$}
+			\For{$j=1$ to $n-i$}
+				\If{$a_j > a_{j+1}$}
+					\State swap $a_j$ and $a_{j+1}$
+                \EndIf
+            \EndFor
+        \EndFor
+    \EndProcedure
+	\end{algorithmic}
+	\end{algorithm}
+```
 
 ---
 ## Optimization: Early Exit
@@ -18,7 +33,27 @@ Standard Bubble Sort is "blind"—it continues iterating even if the list become
 - **Logic**: If a full pass is completed without a single swap occurring, the list is guaranteed to be sorted.
 - **Impact**: This improves the **Best Case** time complexity significantly.
 
-![[Pasted image 20251106160837.png]]
+```pseudo
+	\begin{algorithm}
+	\caption{Bubble Sort Early Exit}
+	\begin{algorithmic}
+	\Procedure{BubbleSortEE}{$[a_1, a_2, \dots, a_n]$: integers with $n \geq 2$}
+		\For{$i=1$ to $n-1$}
+			\State sorted = \True
+			\For{$j=1$ to $n-i$}
+				\If{$a_j > a_{j+1}$}
+					\State swap $a_j$ and $a_{j+1}$
+					\State sorted = \False
+                \EndIf
+            \EndFor
+            \If{sorted == \True}
+	            \Break
+            \EndIf
+        \EndFor
+    \EndProcedure
+	\end{algorithmic}
+	\end{algorithm}
+```
 
 ---
 ## Proof of Correctness (Sketch)

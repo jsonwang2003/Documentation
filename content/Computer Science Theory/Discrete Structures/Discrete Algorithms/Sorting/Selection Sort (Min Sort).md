@@ -9,7 +9,26 @@ For a list $[a_1, a_2, \dots, a_n]$:
 2. **Swap**: Exchange $x$ with the element at the beginning of the unsorted portion.
 3. **Repeat**: Move the boundary of the sorted portion one element to the right and repeat until the entire list is processed.
 
-![[Pasted image 20251027192326.png]]
+```pseudo
+	\begin{algorithm}
+	\caption{Minsort}
+	\begin{algorithmic}
+	\Procedure{Minsort}{$[a_1, a_2, \dots, a_n]$: integers with $n>2$}
+		\For{$i=1$ to $n-1$}
+			\State $m=1$
+			\For{$j=i+1$ to $n$}
+				\If{$a_j < a_m$}
+					\State $m=j$
+                \EndIf
+            \EndFor
+            \If{$i \neq m$}
+	            \State $a_i \leftrightarrow a_m$
+            \EndIf
+        \EndFor
+    \EndProcedure
+	\end{algorithmic}
+	\end{algorithm}
+```
 
 ---
 ## Efficiency Case Studies

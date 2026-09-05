@@ -8,20 +8,28 @@ We can prove the identity by expanding the binomial coefficients into their fact
 
 **LHS:**
 
-$$\frac{(n+1)!}{k!((n+1)-k)!}$$
+$$
+\frac{(n+1)!}{k!((n+1)-k)!}
+$$
 
 **RHS:**
 
-$$\binom{n}{k-1} + \binom{n}{k} = \frac{n!}{(k-1)!(n-k+1)!} + \frac{n!}{k!(n-k)!}$$
+$$
+\binom{n}{k-1} + \binom{n}{k} = \frac{n!}{(k-1)!(n-k+1)!} + \frac{n!}{k!(n-k)!}
+$$
 
 1. **Find Common Denominator**: The common denominator is $k!(n-k+1)!$.    
 2. **Multiply to match**:
     - Multiply the first term by $\frac{k}{k}$.
     - Multiply the second term by $\frac{n-k+1}{n-k+1}$.
-        $$\frac{n! \cdot k}{k!(n-k+1)!} + \frac{n! \cdot (n-k+1)}{k!(n-k+1)!}$$
+        $$
+        \frac{n! \cdot k}{k!(n-k+1)!} + \frac{n! \cdot (n-k+1)}{k!(n-k+1)!}
+        $$
         
 3. **Combine and Simplify**:
-    $$\frac{n!(k + n - k + 1)}{k!(n-k+1)!} = \frac{n!(n+1)}{k!(n-k+1)!} = \frac{(n+1)!}{k!(n+1-k)!}$$
+    $$
+    \frac{n!(k + n - k + 1)}{k!(n-k+1)!} = \frac{n!(n+1)}{k!(n-k+1)!} = \frac{(n+1)!}{k!(n+1-k)!}
+    $$
     
     **LHS = RHS**
 

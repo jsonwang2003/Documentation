@@ -11,7 +11,24 @@ For a list $[a_1, a_2, \dots, a_n]$:
 4. **Insert**: Once you find the correct spot (or reach the beginning), drop the key into the empty slot.
 5. **Repeat**: Continue until the unsorted side is empty.
 
-![[Pasted image 20251217192039.png]]
+```pseudo
+	\begin{algorithm}
+	\caption{Insertion Sort}
+	\begin{algorithmic}
+	\Procedure{InsertionSort}{$A[0 \dots n-1$: an array of $n$}
+		\For{$i=1$ to $n-1$}
+			\State $v = A[i]$
+			\State $j = i-1$
+			\While{$j \geq 0$ and $A[j] > v$}
+				\State $A[j+1] = A[j]$
+				\State $j = j-1$
+            \EndWhile
+            \State $A[j+1] = v$
+        \EndFor
+    \EndProcedure
+	\end{algorithmic}
+	\end{algorithm}
+```
 
 ---
 ## Proof of Correctness (Loop Invariant)
@@ -38,14 +55,14 @@ On a list of length $n$:
 ---
 ## Pros and Cons
 
-|**Strengths**|**Weaknesses**|
-|---|---|
-|**Adaptive**: Very fast for lists that are already "nearly sorted."|Inefficient ($O(n^2)$) for large, randomly ordered datasets.|
-|**Stable**: Does not change the relative order of equal elements.|Performs many "shifts" (writes), though fewer than Bubble Sort.|
-|**Online**: Can sort a list as it receives it (streaming data).||
+| **Strengths**                                                       | **Weaknesses**                                                  |
+| ------------------------------------------------------------------- | --------------------------------------------------------------- |
+| **Adaptive**: Very fast for lists that are already "nearly sorted." | Inefficient ($O(n^2)$) for large, randomly ordered datasets.    |
+| **Stable**: Does not change the relative order of equal elements.   | Performs many "shifts" (writes), though fewer than Bubble Sort. |
+| **Online**: Can sort a list as it receives it (streaming data).     |                                                                 |
 
 ---
 ## Related Notes
 - [[Bubble Sort]] – Another $O(n^2)$ sort, but usually less efficient than Insertion Sort.
 - [[Selection Sort (Min Sort)]] – $O(n^2)$ but performs fewer swaps (at most $n-1$).
-- [[Computer Science Theory/Discrete Structures/Discrete Algorithms/Recursive Algorithms/Divide and Conquer/Merge Sort]] – The $O(n \log n)$ alternative for larger datasets.
+- [[Computer Science Theory/Discrete Structures/Discrete Algorithms/Recursive Algorithms/Divide and Conquer/Merge Sort|Merge Sort]] – The $O(n \log n)$ alternative for larger datasets.

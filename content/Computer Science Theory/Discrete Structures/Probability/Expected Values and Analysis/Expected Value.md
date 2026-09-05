@@ -26,7 +26,8 @@ $$
 E(X) &= 1 \cdot P(X=1) + 2 \cdot P(X=2) + 3 \cdot P(X=3) + 4 \cdot P(X=4) + 5 \cdot P(X=5) + 6 \cdot P(X=6) \\ 
 &= 1 \cdot \left(\frac{1}{6}\right) + 2 \cdot \left(\frac{1}{6}\right) + 3 \cdot \left(\frac{1}{6}\right) + 4 \cdot \left(\frac{1}{6}\right) + 5 \cdot \left(\frac{1}{6}\right) + 6 \cdot \left(\frac{1}{6}\right) \\
 &= \boxed{3.5} 
-\end{align*}$$
+\end{align*}
+$$
 
 ### 2. Sum of Two Dice
 Let $X$ be the random variable representing the **sum of pips** after rolling two fair dice. The possible values for $X$ range from $2$ to $12$.
@@ -53,6 +54,6 @@ $$
 
 ---
 ## Related Notes
-- **[[Random Variables]]**: Expected value is only defined for numerical random variables.
+- **[[Random Variables Definition]]**: Expected value is only defined for numerical random variables.
 - **[[Conditional Expectation#Law of Total Expectation|Law of Total Expectation]]**: A method for calculating $E[X]$ by partitioning the sample space into cases.
 - **[[Case Analysis]]**: Useful for finding the expected value of complex, multi-stage experiments.

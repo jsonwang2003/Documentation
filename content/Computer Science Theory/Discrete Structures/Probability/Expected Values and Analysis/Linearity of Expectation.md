@@ -51,6 +51,6 @@ $$
 ---
 ## Related Notes
 - **[[Expected Value]]**: The fundamental definition of the weighted average.
-- **[[Random Variables]]**: The numerical functions upon which expectation is calculated.
+- **[[Random Variables Definition]]**: The numerical functions upon which expectation is calculated.
 - **[[Independent Events]]**: While not required for linearity, independence is required for the _variance_ of a sum to be additive.
 - **[[Binomial Distribution]]**: Where the $E[X] = np$ formula is standard.

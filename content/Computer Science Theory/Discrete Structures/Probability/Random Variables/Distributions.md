@@ -67,4 +67,4 @@ $$
 ## Related Notes
 - **[[Conditional Probabilities]]**: The Law of Total Probability is the denominator used in **[[Bayes' Theorem]]**.
 - **[[Case Analysis]]**: This is the practical application of the Law of Total Probability to simplify complex problems.
-- **[[Random Variables]]**: Distributions of events form the basis for Probability Mass Functions (PMFs).
+- **[[Random Variables Definition]]**: Distributions of events form the basis for Probability Mass Functions (PMFs).

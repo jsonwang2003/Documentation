@@ -7,7 +7,9 @@
 
 If a loop runs $O(T_2(n))$ times and the body of that loop takes $O(T_1(n))$ to execute, the total time is:
 
-$$O(T_1(n) \cdot T_2(n))$$
+$$
+O(T_1(n) \cdot T_2(n))
+$$
 
 ### The "Tightness" Trap
 While the product rule always provides a valid upper bound ($O$), it is not always a **tight bound** ($\Theta$). A pessimistic upper bound occurs when the "worst case" of the inner logic rarely happens across all iterations of the outer loop.
@@ -27,7 +29,9 @@ To check if two sorted lists are disjoint (no common elements), we use two point
 ## 2. Sum Rule for Processes
 If an algorithm performs two distinct tasks sequentially—first Process A then Process B—the total runtime is the sum of their individual runtimes:
 
-$$O(T_1(n) + T_2(n))$$
+$$
+O(T_1(n) + T_2(n))
+$$
 
 In asymptotic analysis, this simplifies to the maximum of the two: $O(\max(T_1(n), T_2(n)))$.
 
@@ -40,7 +44,9 @@ Consider the nested loop structure of Selection Sort (MinSort):
 ![[Pasted image 20251107171424.png]]
 
 1. Lower Bound ($\Omega$): By counting the number of comparisons:
-    $$(n-1) + (n-2) + \dots + 1 = \frac{n(n-1)}{2}$$
+    $$
+    (n-1) + (n-2) + \dots + 1 = \frac{n(n-1)}{2}
+    $$
     
     This is a polynomial of degree 2, so $T(n) \in \Omega(n^2)$.
 2. **Upper Bound ($O$):** By the **Product Rule**, the outer loop runs $n$ times and the inner loop runs at most $n$ times. Thus, $T(n) \in O(n^2)$.
@@ -49,7 +55,9 @@ Consider the nested loop structure of Selection Sort (MinSort):
 > 
 > Because $T(n) \in \Omega(n^2)$ AND $T(n) \in O(n^2)$, we can state definitively that:
 > 
-> $$T(n) = \Theta(n^2)$$
+> $$
+> T(n) = \Theta(n^2)
+> $$
 
 ---
 ## 4. Analysis Summary

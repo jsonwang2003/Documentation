@@ -11,7 +11,11 @@ tags:
 > Rearrangement or ordering of $n$ **distinct objects** so that each object appears **exactly once**
 
 $$
-P(n, r) = nPr = n(n - 1)(n - 2)\dots(n - r + 1) = \frac{n!}{(n - r)!}
+\begin{align*}
+P(n, r) &= nPr \\
+&= n(n - 1)(n - 2)\dots(n - r + 1) \\
+&= \frac{n!}{(n - r)!}
+\end{align*}
 $$
 
 > [!IMPORTANT]

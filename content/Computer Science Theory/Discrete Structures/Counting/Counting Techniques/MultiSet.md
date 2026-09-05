@@ -69,4 +69,6 @@ See [[Anagram Counting]] for worked examples.
 
 ---
 ## Related Topic
-- [[Set Theory]] - 
+- [[rPermutations]]
+- [[Quotient Rule]]
+- [[Anagram Counting]]

@@ -7,12 +7,16 @@
 De Morgan's Laws state that the complement of a group operation is equivalent to the operation on the individual complements, provided the operator is flipped ($\cup$ becomes $ \cap $, and $\cap$ becomes $\cup$).
 ### The Complement of the Union
 
-$$\overline{A \cup B} = \overline{A} \cap \overline{B}$$
+$$
+\overline{A \cup B} = \overline{A} \cap \overline{B}
+$$
 
 - **Meaning**: The set of elements that are **not** in $A$ or $B$ is exactly the set of elements that are **not** in $A$ **AND** **not** in $B$.
 ### The Complement of the Intersection
 
-$$\overline{A \cap B} = \overline{A} \cup \overline{B}$$
+$$
+\overline{A \cap B} = \overline{A} \cup \overline{B}
+$$
 
 - **Meaning**: The set of elements that are **not** in both $A$ and $B$ is the set of elements that are **not** in $A$ **OR** **not** in $B$.
 
@@ -24,16 +28,22 @@ If we have a universal set $S$ and properties $P_1, P_2, \dots, P_n$, let $A_i$ 
 
 We want to find the number of elements with none of the properties:
 
-$$N(P_1' P_2' \dots P_n') = |\overline{A_1} \cap \overline{A_2} \cap \dots \cap \overline{A_n}|$$
+$$
+N(P_1' P_2' \dots P_n') = |\overline{A_1} \cap \overline{A_2} \cap \dots \cap \overline{A_n}|
+$$
 
 By De Morgan's Law, this intersection of complements is equal to the complement of the union:
 
-$$|\overline{A_1} \cap \overline{A_2} \cap \dots \cap \overline{A_n}| = |\overline{A_1 \cup A_2 \cup \dots \cup A_n}|$$
+$$
+|\overline{A_1} \cap \overline{A_2} \cap \dots \cap \overline{A_n}| = |\overline{A_1 \cup A_2 \cup \dots \cup A_n}|
+$$
 
 ### The Final Formula
 Since the size of a complement is simply the total minus the set itself:
 
-$$|\overline{A_1 \cup A_2 \cup \dots \cup A_n}| = |S| - |A_1 \cup A_2 \cup \dots \cup A_n|$$
+$$
+|\overline{A_1 \cup A_2 \cup \dots \cup A_n}| = |S| - |A_1 \cup A_2 \cup \dots \cup A_n|
+$$
 
 > [!IMPORTANT]
 > This allows us to use the **[[Inclusion Exclusion|Inclusion-Exclusion Principle]]** to calculate $|A_1 \cup A_2 \cup \dots \cup A_n|$ and subtract it from the total.

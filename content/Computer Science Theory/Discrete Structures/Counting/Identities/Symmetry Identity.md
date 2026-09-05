@@ -6,9 +6,13 @@
 ## 1. Algebraic Proof
 By applying the factorial definition of a binomial coefficient, the symmetry becomes clear through the commutative property of multiplication.
 
-$$\text{LHS: } \binom{n}{k} = \frac{n!}{k!(n-k)!}$$
+$$
+\text{LHS: } \binom{n}{k} = \frac{n!}{k!(n-k)!}
+$$
 
-$$\text{RHS: } \binom{n}{n-k} = \frac{n!}{(n-k)!(n-(n-k))!} = \frac{n!}{(n-k)!k!}$$
+$$
+\text{RHS: } \binom{n}{n-k} = \frac{n!}{(n-k)!(n-(n-k))!} = \frac{n!}{(n-k)!k!}
+$$
 
 Since the denominators are identical, the two expressions are equal.
 
@@ -39,4 +43,4 @@ Using the row $1, 4, 6, 4, 1$:
 ---
 ## 4. Connection to De Morgan's Law
 
-The Symmetry Identity is the combinatorial cousin of **[[Demorgan's Law|De Morgan's Law]]**. While De Morgan's deals with the logic of complements ($\overline{A \cup B} = \overline{A} \cap \overline{B}$), the Symmetry Identity deals with the _counting_ of complements. Both rely on the fundamental relationship between a set and everything not in that set.
+The Symmetry Identity is the combinatorial cousin of **[[Demorgan's Law|De Morgan's Law]]**. While De Morgan's deals with the logic of complements ($\overline{A \cup B} = \overline{A} \cap \overline{B}$), the Symmetry Identity deals with the _counting_ of complements. Both rely on the fundamental relationship between a [[Set]] and everything not in that set.

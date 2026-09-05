@@ -33,14 +33,14 @@ For $T(n) = aT(n/b) + O(n^d)$, the complexity is determined by:
 |**$a > b^d$**|$O(n^{\log_b a})$|Work is dominated by the recursive calls (leaves).|
 
 ---
-## 🧮 Summary Comparison
+## Summary Comparison
 
-| **Technique**                                                                                                     | **Effort** | **Reliability** | **Best Use Case**                         |
-| ----------------------------------------------------------------------------------------------------------------- | ---------- | --------------- | ----------------------------------------- |
-| **Master Theorem**                                                                                                | 🟢 Low     | 🟡 High         | Standard $T(n/b)$ forms.                  |
-| **Unraveling**                                                                                                    | 🟡 Med     | 🟢 High         | Single-term recurrences (Hanoi/Sums).     |
-| **Guess & Check**                                                                                                 | 🟡 Med     | 🔴 Low*         | When the pattern is obvious (Power of 2). |
-| **HRRCC**                                                                                                         | 🔴 High    | 🟢 High         | Linear sequences (Fibonacci).             |
+| **Technique**      | **Effort** | **Reliability** | **Best Use Case**                         |
+| ------------------ | ---------- | --------------- | ----------------------------------------- |
+| **Master Theorem** | Low        | High            | Standard $T(n/b)$ forms.                  |
+| **Unraveling**     | Med        | High            | Single-term recurrences (Hanoi/Sums).     |
+| **Guess & Check**  | Med        | Low*            | When the pattern is obvious (Power of 2). |
+| **HRRCC**          | High       | High            | Linear sequences (Fibonacci).             |
 > [!NOTE]
 > Low reliability refers to the difficulty of making the initial guess, not the validity of the induction proof.
 
@@ -60,6 +60,7 @@ Let $P(n)$ be the number of unordered pairs of elements from a set of size $n$
 | 3   | 3      |
 | 4   | 6      |
 | 5   | 10     |
+
 We find the pattern to be matching that of the $2^{nd}$ diagonal column from [[Pascal's Identity|Pascal's Triangle]]
 
 > [!NOTE]
@@ -150,7 +151,9 @@ By the pattern, we can find the $T(n) = 2^n-1$, $T(1) = 1$
 > 2. Move the largest disk to the remaining empty pole
 > 3. Move the stack of the smallest $n-1$ disks to the pole with the largest disk
 > 
-> $$T(n) = T(n-1) + 1 + T(n-1) = \boxed{2T(n-1) + 1}$$
+> $$
+> T(n) = T(n-1) + 1 + T(n-1) = \boxed{2T(n-1) + 1}
+> $$
 
 #### Solution
 ##### Guess and Check

@@ -21,7 +21,23 @@ A Las Vegas algorithm uses randomness to avoid "bad" cases. It will never give y
 
 Quicksort is the quintessential Las Vegas algorithm. By picking a **random pivot**, we ensure that no specific input (like an already sorted list) can consistently trigger the $O(n^2)$ worst-case.
 
-![[Pasted image 20251204184913.png]]
+```pseudo
+\begin{algorithm}
+\caption{Quicksort}
+\begin{algorithmic}
+\Procedure{Quicksort}{$[a_1, a_2, \dots, a_n]$: a list of size $n$}
+	\If{$n=1$}
+		\Return $a_1$
+    \EndIf
+    \State Pick a random index $1 \leq i \leq n$
+    \State Partition the list into $SL, Sv, SR$
+    \State $L = Quicksort(SL)$
+	\State $R = Quicksort(SR)$
+	\Return $L \circ Sv \circ R$
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+```
 
 - **Logic**:
     1. Pick a random element as a **Pivot**.
@@ -30,14 +46,28 @@ Quicksort is the quintessential Las Vegas algorithm. By picking a **random pivot
 - **Runtime Complexity**:
     - **Best/Average Case**: $\Theta(n \log n)$ — Occurs when the pivot splits the list roughly in half.
     - **Worst Case**: $O(n^2)$ — Occurs if the pivot is always the extreme (min/max), but the probability of this happening with random pivots is nearly zero for large $n$.
-
----
 ### B. Monte Carlo Algorithms
 "Always fast, sometimes wrong."
 
 A Monte Carlo algorithm has a fixed execution time, but there is a small, calculable probability that the output is incorrect. We usually "boost" the correctness by running the algorithm multiple times.
 
-![[Pasted image 20251219123521.png]]
+```pseudo
+	\begin{algorithm}
+	\caption{Monte Carlo Algorithm}
+	\begin{algorithmic}
+	\Procedure{MonteCarloAlgorithm}{$x$: input, $n$: iterations}
+		\State Success = 0
+		\For{$i=1$ to $n$}
+			\State sample = GenerateRandomSample($x$)
+			\If{PropertyCheck(sample) == \True}
+				\State Success = Success + 1
+            \EndIf
+        \EndFor
+        \Return Success / $n$
+    \EndProcedure
+	\end{algorithmic}
+	\end{algorithm}
+```
 
 - **Logic**: It samples the search space. The more time you give it (more iterations), the higher the probability of success.
 - **Example**: **Primality Testing (Miller-Rabin)**. It can tell you if a number is prime very quickly, but there is a tiny chance it labels a composite number as prime.

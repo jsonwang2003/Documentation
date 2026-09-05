@@ -12,9 +12,13 @@
 
 
 Suppose we are playing a game where we can place 5 **different** knights into 3 **different** castles. How many ways can I use the knights to guard the castles?
-$$3^5$$
+$$
+3^5
+$$
 Suppose now the 5 knights are now **indistinguishable** into 3 **different** castles
-$$\binom{7}{2}$$
+$$
+\binom{7}{2}
+$$
 Configuration ⇆ fixed density binary strings
 `n` knights ⇆ `n` zeros
 `k` castles ⇆ `k-1` ones

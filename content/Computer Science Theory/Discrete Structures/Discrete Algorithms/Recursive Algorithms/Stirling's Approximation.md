@@ -6,7 +6,9 @@
 ## 1. Stirling's Approximation
 When analyzing algorithm complexity (especially in [[Asymptotic Notation]]), we often need a "smooth" function to represent $n!$. Stirling's formula provides a precise approximation:
 
-$$n! \approx \sqrt{2 \pi n} \left(\frac{n}{e}\right)^n$$
+$$
+n! \approx \sqrt{2 \pi n} \left(\frac{n}{e}\right)^n
+$$
 
 ### Accuracy Comparison
 
@@ -37,7 +39,8 @@ We can calculate $S(n)$ by partitioning the set of all permutations based on the
 By "unrolling" this recursive definition, we arrive at the factorial:
 
 $$
-\begin{align*} S(n) &= n \cdot S(n-1) \\
+\begin{align*} 
+S(n) &= n \cdot S(n-1) \\
 S(n) &= n \cdot (n-1) \cdot S(n-2) \\
 S(n) &= n \cdot (n-1) \cdot (n-2) \cdots 1 \cdot S(0) \\
 S(n) &= n! 

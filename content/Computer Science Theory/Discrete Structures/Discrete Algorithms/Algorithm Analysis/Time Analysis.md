@@ -48,7 +48,7 @@ Only the "fastest growing" term matters.
 - **Nested Steps**: If you do $O(g(n))$ work _inside_ a loop that runs $f(n)$ times, the total is $O(f(n) \cdot g(n))$.
 
 ---
-## 🔗 Related Notes
+## Related Notes
 - [[Asymptotic Notation]] — The formal definitions of $O$, $\Omega$, and $\Theta$.
 - [[Time Analysis For Recursion]] — Applying these rules to $T(n)$ relations.
 - [[Stirling's Approximation]] — How to handle the growth of $n!$.
