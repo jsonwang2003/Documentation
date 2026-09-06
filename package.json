@@ -42,9 +42,6 @@
     "@floating-ui/dom": "^1.7.6",
     "@myriaddreamin/rehype-typst": "^0.7.0",
     "@napi-rs/simple-git": "0.1.22",
-<<<<<<< HEAD
-    "@quartz-community/graph": "github:quartz-community/graph",
-=======
     "@quartz-community/alias-redirects": "^0.1.0",
     "@quartz-community/article-title": "^0.1.0",
     "@quartz-community/backlinks": "^0.1.0",
@@ -90,18 +87,13 @@
     "@quartz-community/tag-list": "^0.1.0",
     "@quartz-community/tag-page": "^0.1.0",
     "@quartz-community/unlisted-pages": "^0.1.0",
->>>>>>> f1fba3fc55cbf60a60a5d09c95a49c042cdab63a
     "ansi-truncate": "^1.4.0",
     "async-mutex": "^0.5.0",
     "chokidar": "^5.0.0",
     "esbuild-sass-plugin": "^3.7.0",
     "github-slugger": "^2.0.0",
-<<<<<<< HEAD
     "globby": "^16.2.0",
-=======
-    "globby": "^16.1.0",
     "hast-util-from-html": "^2.0.0",
->>>>>>> f1fba3fc55cbf60a60a5d09c95a49c042cdab63a
     "hast-util-to-jsx-runtime": "^2.3.6",
     "isomorphic-git": "^1.38.5",
     "lightningcss": "^1.32.0",
@@ -126,6 +118,15 @@
     "ws": "^8.21.0",
     "yaml": "^2.9.0",
     "yargs": "^18.0.0"
+  },
+  "overrides": {
+    "@quartz-community/graph": {
+      "@quartz-community/types": "$@quartz-community/types",
+      "@quartz-community/utils": "$@quartz-community/utils"
+    },
+    "@quartz-community/utils": {
+      "@quartz-community/types": "$@quartz-community/types"
+    }
   },
   "devDependencies": {
     "@quartz-community/types": "^0.3.0",
