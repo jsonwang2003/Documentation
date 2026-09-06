@@ -11,6 +11,7 @@ private/
 replit.nix
 .quartz/
 quartz/cli/tui/dist/
+<<<<<<< HEAD
 
 .vercel
 .env*
@@ -22,3 +23,6 @@ content/leetcode
 content/_textbooks
 content/temlater_scripts
 content/private
+=======
+.turbo/
+>>>>>>> f1fba3fc55cbf60a60a5d09c95a49c042cdab63a
