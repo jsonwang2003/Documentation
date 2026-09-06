@@ -41,7 +41,7 @@
     "@clack/prompts": "^1.6.0",
     "@floating-ui/dom": "^1.7.6",
     "@myriaddreamin/rehype-typst": "^0.7.0",
-    "@napi-rs/simple-git": "0.1.22",
+    "@napi-rs/simple-git": "1.1.0",
     "@quartz-community/alias-redirects": "^0.1.0",
     "@quartz-community/article-title": "^0.1.0",
     "@quartz-community/backlinks": "^0.1.0",
@@ -140,6 +140,6 @@
     "esbuild": "^0.28.1",
     "prettier": "^3.8.5",
     "tsx": "^4.22.4",
-    "typescript": "^6.0.3"
+    "typescript": "^7.0.2"
   }
 }
