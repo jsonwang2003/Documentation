@@ -22,7 +22,7 @@ tags:
 
 ---
 
-## 1. 1-Bit Adder Building Blocks
+## 1-Bit Adder Building Blocks
 
 ### Half Adder
 A **Half Adder** adds two 1-bit inputs ($A, B$) and produces a Sum ($S$) and Carry-out ($C_{out}$). It cannot accept an incoming carry from a less significant bit position.
@@ -39,10 +39,12 @@ A **Half Adder** adds two 1-bit inputs ($A, B$) and produces a Sum ($S$) and Car
 | $1$ | $0$ | $0$ | $1$ |
 | $1$ | $1$ | $1$ | $0$ |
 
-$$\begin{aligned}
+$$
+\begin{aligned}
 S &= A \oplus B \\
 C_{out} &= AB
-\end{aligned}$$
+\end{aligned}
+$$
 
 ### Full Adder
 A **Full Adder** adds three 1-bit inputs: two operands ($A, B$) and an incoming Carry-in ($C_{in}$).
@@ -63,14 +65,16 @@ A **Full Adder** adds three 1-bit inputs: two operands ($A, B$) and an incoming 
 | $1$ | $1$ | $0$ | $1$ | $0$ |
 | $1$ | $1$ | $1$ | $1$ | $1$ |
 
-$$\begin{aligned}
+$$
+\begin{aligned}
 S &= A \oplus B \oplus C_{in} \\
 C_{out} &= AB + AC_{in} + BC_{in} = AB + C_{in}(A \oplus B)
-\end{aligned}$$
+\end{aligned}
+$$
 
 ---
 
-## 2. Multi-Bit Adders & Propagation Delay
+## Multi-Bit Adders & Propagation Delay
 
 ![[Pasted image 20260821141422.png]]
 *Multi-Bit Adder Symbol*
@@ -88,7 +92,9 @@ A **Ripple-Carry Adder** chains $N$ 1-bit Full Adders in series, passing $C_{out
 > [!warning] Propagation Delay Bottleneck
 > The worst-case propagation delay occurs when a carry generated at the least significant bit ($bit_0$) ripples through every stage to the most significant bit ($bit_{N-1}$). For an $N$-bit adder with Full Adder delay $t_{FA}$:
 >
-> $$t_{ripple} = N \cdot t_{FA}$$
+> $$
+> t_{ripple} = N \cdot t_{FA}
+> $$
 
 ### Carry-Lookahead Adder (CLA)
 
@@ -101,13 +107,21 @@ A **Carry-Lookahead Adder** speeds up addition by calculating carry signals in p
 
 For any bit stage $i$:
 * **Generate ($G_i$):** A carry is generated internally regardless of $C_i$.
-  $$G_i = A_i B_i$$
+  
+$$
+G_i = A_i B_i
+$$
 * **Propagate ($P_i$):** An incoming carry $C_i$ will propagate to $C_{i+1}$.
-  $$P_i = A_i \oplus B_i$$
+  
+$$
+P_i = A_i \oplus B_i
+$$
 
 The next carry $C_{i+1}$ is computed as:
 
-$$C_{i+1} = G_i + P_i C_i$$
+$$
+C_{i+1} = G_i + P_i C_i
+$$
 
 ![[Pasted image 20260821142524.png]]
 *Unrolled Carry Lookahead Logic*
@@ -116,52 +130,62 @@ $$C_{i+1} = G_i + P_i C_i$$
 
 Expanding the recursive carry relation eliminates intermediate carry dependencies:
 
-$$\begin{aligned}
+$$
+\begin{aligned}
 C_1 &= G_0 + C_0 P_0 \\
 C_2 &= G_1 + G_0 P_1 + C_0 P_0 P_1 \\
 C_3 &= G_2 + G_1 P_2 + G_0 P_1 P_2 + C_0 P_0 P_1 P_2 \\
 C_4 &= G_3 + G_2 P_3 + G_1 P_2 P_3 + G_0 P_1 P_2 P_3 + C_0 P_0 P_1 P_2 P_3
-\end{aligned}$$
+\end{aligned}
+$$
 
 #### Block Propagate and Generate ($k$-bit Blocks)
 
 To construct wider adders hierarchically without massive fan-in gates, individual stages are grouped into $k$-bit blocks (e.g., 4-bit blocks):
 
-$$\begin{aligned}
+$$
+\begin{aligned}
 G_{3:0} &= G_3 + P_3(G_2 + P_2(G_1 + P_1 G_0)) \\
 P_{3:0} &= P_3 P_2 P_1 P_0 \\
 C_i &= G_{i:j} + P_{i:j} C_{in}
-\end{aligned}$$
+\end{aligned}
+$$
 
 ---
 
-## 3. Two's Complement Arithmetic & Subtraction
+## Two's Complement Arithmetic & Subtraction
 
 In fixed-width binary systems, two's complement notation converts subtraction into an addition operation:
 
-$$A - B = A + (-B) = A + \overline{B} + 1$$
+$$
+A - B = A + (-B) = A + \overline{B} + 1
+$$
 
 ### Two's Complement Negation Procedure ($N^*$)
 To negate a binary number $N$:
 1. Take the bitwise complement ($\overline{N}$).
 2. Add $1$.
 
-$$\text{Negation Formula: } N^* = -N = \overline{N} + 1$$
+$$
+\text{Negation Formula: } N^* = -N = \overline{N} + 1
+$$
 
 * **Example (+7 to -7 in 4 bits):** $7_{10} = 0111_2 \implies \overline{0111} + 1 = 1000_2 + 1 = 1001_2 \, (-7_{10})$
 * **Example (-7 to +7 in 4 bits):** $-7_{10} = 1001_2 \implies \overline{1001} + 1 = 0110_2 + 1 = 0111_2 \, (+7_{10})$
 
 #### Worked Subtraction Example ($4 - 7$)
 
-$$\begin{aligned}
+$$
+\begin{aligned}
 y &= 4 - 7 = 4 + (-7) \\
 &= 0100_2 + 1001_2 \\
 &= 1101_2 \quad (-3_{10})
-\end{aligned}$$
+\end{aligned}
+$$
 
 ---
 
-## 4. Arithmetic Overflow Detection
+## Arithmetic Overflow Detection
 
 Overflow occurs when an arithmetic operation produces a result that exceeds the representable range of the fixed $N$-bit container.
 
@@ -169,7 +193,9 @@ Overflow occurs when an arithmetic operation produces a result that exceeds the 
 
 Overflow occurs **if and only if** two numbers with the **same sign** are added, but produce a result with a **different sign**. Adding a positive and a negative number can never result in overflow.
 
-$$\text{Overflow Logic Equation: } V = a_{N-1}' b_{N-1}' s_{N-1} + a_{N-1} b_{N-1} s_{N-1}'$$
+$$
+\text{Overflow Logic Equation: } V = a_{N-1}' b_{N-1}' s_{N-1} + a_{N-1} b_{N-1} s_{N-1}'
+$$
 
 ![[Pasted image 20260821144433.png]]
 *Overflow Circuit based on Sign-Bit Comparison*
@@ -178,7 +204,9 @@ $$\text{Overflow Logic Equation: } V = a_{N-1}' b_{N-1}' s_{N-1} + a_{N-1} b_{N-
 
 A simpler hardware implementation detects overflow by taking the **XOR** of the carry into the sign bit ($C_{N-1}$) and the carry out of the sign bit ($C_N$):
 
-$$V = C_{N-1} \oplus C_N = C_{N-1} C_N' + C_{N-1}' C_N$$
+$$
+V = C_{N-1} \oplus C_N = C_{N-1} C_N' + C_{N-1}' C_N
+$$
 
 ![[Pasted image 20260821144826.png]]
 *Simplified Overflow Detection Circuit using $C_{in} \oplus C_{out}$ at MSB*
@@ -192,7 +220,7 @@ $$V = C_{N-1} \oplus C_N = C_{N-1} C_N' + C_{N-1}' C_N$$
 
 ---
 
-## 5. Configurable Adder-Subtractor Circuit
+## Configurable Adder-Subtractor Circuit
 
 By combining bitwise **XOR gates** with a multi-bit adder, a single circuit can perform both addition and subtraction governed by a select control signal ($Sel$ / $Sub$).
 
@@ -222,4 +250,4 @@ By combining bitwise **XOR gates** with a multi-bit adder, a single circuit can 
 - [[Comparator]]
 - [[Multiplier & Divider]]
 - [[Computer Systems/Digital Systems/ALU/Arithmetic Logic Unit|Arithmetic Logic Unit Integration]]
-- [[Computer Systems/Digital Systems/ALU/index|Arithmetic Logic Units Hub]]
+- [[Computer Systems/Digital Systems/ALU/index|Arithmetic Logic Units]]

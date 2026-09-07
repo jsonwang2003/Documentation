@@ -54,17 +54,20 @@ The **Sum of Products (SOP)** form expresses a function as a logical OR (sum) of
 
 Using the reference truth table where $F = 1$ at indices $\{1, 3, 5, 6, 7\}$:
 
-$$\begin{aligned}
+$$
+\begin{aligned}
 F(A, B, C) &= \Sigma m(1, 3, 5, 6, 7) \\
 &= m_1 + m_3 + m_5 + m_6 + m_7 \\
 &= A'B'C + A'BC + AB'C + ABC' + ABC
-\end{aligned}$$
+\end{aligned}
+$$
 
 ### Algebraic Simplification to Minimal SOP
 
 Canonical expressions are usually non-minimal. Applying Boolean algebra theorems:
 
-$$\begin{aligned}
+$$
+\begin{aligned}
 F(A, B, C) &= A'B'C + A'BC + AB'C + ABC + ABC' \\
 &= (A'B' + A'B + AB' + AB)C + ABC' && \quad \text{(Distributivity on $C$)} \\
 &= \left((A' + A)(B' + B)\right)C + ABC' && \quad \text{(Factoring terms)} \\
@@ -72,7 +75,8 @@ F(A, B, C) &= A'B'C + A'BC + AB'C + ABC + ABC' \\
 &= C + ABC' && \quad \text{(Identity)} \\
 &= C + AB && \quad \text{(Redundancy: } X + X'Y = X + Y\text{)} \\
 F(A, B, C) &= \mathbf{AB + C}
-\end{aligned}$$
+\end{aligned}
+$$
 
 ---
 
@@ -88,22 +92,26 @@ The **Product of Sums (POS)** form expresses a function as a logical AND (produc
 
 Using the reference truth table where $F = 0$ at indices $\{0, 2, 4\}$:
 
-$$\begin{aligned}
+$$
+\begin{aligned}
 F(A, B, C) &= \Pi M(0, 2, 4) \\
 &= M_0 \cdot M_2 \cdot M_4 \\
 &= (A + B + C)(A + B' + C)(A' + B + C)
-\end{aligned}$$
+\end{aligned}
+$$
 
 ### Algebraic Simplification to Minimal POS
 
 Applying Idempotency ($X = X \cdot X$) to duplicate $(A + B + C)$:
 
-$$\begin{aligned}
+$$
+\begin{aligned}
 F(A, B, C) &= \left[(A + B + C)(A + B' + C)\right] \cdot \left[(A + B + C)(A' + B + C)\right] \\
 &= \left[(A + C) + BB'\right] \cdot \left[(B + C) + AA'\right] && \quad \text{(Distributivity)} \\
 &= \left[(A + C) + 0\right] \cdot \left[(B + C) + 0\right] && \quad \text{(Complementarity)} \\
 F(A, B, C) &= \mathbf{(A + C)(B + C)}
-\end{aligned}$$
+\end{aligned}
+$$
 
 > [!note] Equivalence Check
 > Expanding the minimal POS form yields: $(A + C)(B + C) = AB + AC + BC + C = AB + C(A + B + 1) = AB + C$, proving equivalence to the minimal SOP form.
@@ -145,6 +153,6 @@ Canonical expansions are rarely optimal for hardware implementation because they
 ## Related Notes
 
 - [[Computer Systems/Digital Systems/Number Representation & Basic Logic Gates/Number Systems and Boolean Algebra|Number Systems and Boolean Algebra]]
-- [[Computer Systems/Digital Systems/Combinational Logic Design|Combinational Logic Design]]
-- [[Computer Systems/Digital Systems/SOP, POS, K-Maps & Logic Simplification|SOP, POS, K-Maps & Logic Simplification]]
-- [[Computer Systems/Digital Systems/index|Digital Systems Index]]
+- [[Logic Functions|Combinational Logic Design]]
+- [[Logic Simplification with K-maps|SOP, POS, K-Maps & Logic Simplification]]
+- [[Computer Systems/Digital Systems/index|Digital Systems]]

@@ -20,7 +20,7 @@ tags:
 
 ---
 
-## 1. SR Latch (Set/Reset Latch)
+## SR Latch (Set/Reset Latch)
 
 An **SR Latch** is the simplest asynchronous bistable circuit built from two cross-coupled NOR or NAND gates.
 
@@ -82,14 +82,16 @@ Breaking the feedback loop ($Q(t) \to Q(t+\Delta)$) yields the next-state truth 
 
 #### Characteristic Equation
 
-$$Q(t+\Delta) = S + R'Q(t) \quad \text{subject to constraint: } S \cdot R = 0$$
+$$
+Q(t+\Delta) = S + R'Q(t) \quad \text{subject to constraint: } S \cdot R = 0
+$$
 
 ![[Pasted image 20260824174635.png]]
 *SR Latch State Transition Diagram*
 
 ---
 
-## 2. Level-Sensitive Gated SR Latch & Clocking
+## Level-Sensitive Gated SR Latch & Clocking
 
 Adding a control/enable signal ($C$ or $CLK$) prevents inputs from changing state uncontrollably.
 
@@ -111,13 +113,19 @@ Sequential logic circuits use periodic clock signals to synchronize data transfe
 
 * **Clock Period ($T$):** Total duration of one complete clock cycle (e.g., $T = 20\text{ ns}$).
 * **Clock Frequency ($f$):** Number of cycles per second:
-  $$f = \frac{1}{T} = \frac{1}{20\text{ ns}} = 50\text{ MHz}$$
+  
+$$
+f = \frac{1}{T} = \frac{1}{20\text{ ns}} = 50\text{ MHz}
+$$
 * **Duty Cycle:** The ratio of time the clock is HIGH during one period:
-  $$\text{Duty Cycle} = \frac{T_{HIGH}}{T_{TOTAL}} \times 100\% \quad (50\% \text{ typical})$$
+  
+$$
+\text{Duty Cycle} = \frac{T_{HIGH}}{T_{TOTAL}} \times 100\% \quad (50\% \text{ typical})
+$$
 
 ---
 
-## 3. Level-Sensitive D Latch
+## Level-Sensitive D Latch
 
 The **D Latch (Data Latch)** eliminates the $S=1, R=1$ invalid state by placing an inverter between the $S$ and $R$ inputs.
 
@@ -136,11 +144,13 @@ The **D Latch (Data Latch)** eliminates the $S=1, R=1$ invalid state by placing 
 
 Constructing a standard gated D latch from CMOS gates requires **22 transistors ($22T$)**:
 
-$$\begin{aligned}
+$$
+\begin{aligned}
 \text{Total Transistors} &= (2 \times \text{AND}) + (1 \times \text{NOT}) + (1 \times \text{Cross-Coupled NOR Latch}) \\
 &= (2 \times 6T) + (1 \times 2T) + (2 \times 4T) \\
 &= 12T + 2T + 8T = \mathbf{22T}
-\end{aligned}$$
+\end{aligned}
+$$
 
 ![[Pasted image 20260824233933.png]]
 *Transistor-Level Diagram of Static CMOS D Latch*
@@ -155,7 +165,7 @@ $$\begin{aligned}
 
 ---
 
-## 4. D Flip-Flop (Master-Slave Edge-Triggered Storage)
+## D Flip-Flop (Master-Slave Edge-Triggered Storage)
 
 Level-sensitive latches remain transparent as long as $CLK = 1$, allowing data to propagate through multiple cascaded latches within a single clock cycle (**race condition**). A **D Flip-Flop** solves this by sampling input $D$ strictly on a **clock transition (edge)**.
 
@@ -177,7 +187,9 @@ A Master-Slave D Flip-Flop connects two D latches in series driven by inverted c
    * **Slave Latch ($C_s = 1$):** Becomes transparent, passing captured node $Q_m$ directly to final output $Q$.
 
 #### Characteristic Equation
-$$Q(t+1) = D(t) \quad \text{sampled at the active clock edge}$$
+$$
+Q(t+1) = D(t) \quad \text{sampled at the active clock edge}
+$$
 
 ### Rising Edge vs. Falling Edge Comparison
 
@@ -190,7 +202,7 @@ $$Q(t+1) = D(t) \quad \text{sampled at the active clock edge}$$
 
 ---
 
-## 5. Enhanced D Flip-Flop Features
+## Enhanced D Flip-Flop Features
 
 ### Enabled D Flip-Flop (Load Enable $EN$ / $LD$)
 
@@ -202,7 +214,9 @@ Instead of gating the clock line (which introduces clock skew), an **Enabled D F
 * **When $EN = 1$:** Multiplexer selects new input $D$. $Q$ updates on active clock edge.
 * **When $EN = 0$:** Multiplexer selects current $Q$. $Q$ retains state across cycles.
 
-$$D_{\text{new}} = EN' \cdot Q + EN \cdot D_{\text{in}}$$
+$$
+D_{\text{new}} = EN' \cdot Q + EN \cdot D_{\text{in}}
+$$
 
 ### Reset and Preset Controls
 Flip-flops include controls to force the initial state to $0$ (Reset $R$) or $1$ (Set/Preset $S$).
@@ -220,32 +234,40 @@ Flip-flops include controls to force the initial state to $0$ (Reset $R$) or $1$
 ![[Pasted image 20260825001735.png]]
 
 #### Both reset and preset
-- $D_{\text{new}} = \bar{R} \cdot D_{\text{old}} + S \qquad \text{(set-dominant)} S=1, R \text{ doesn't matter}$
-- $D_{\text{new}} = \bar{R} \cdot D_{\text{old}} + \bar{R}S \qquad \text{(reset-dominant)} R=1, \bar{R} = 0 \text{ dominate}$
+$$
+\begin{align*}
+D_{\text{new}} &= \bar{R} \cdot D_{\text{old}} + S \qquad \text{(set-dominant)}&& S=1, R \text{ doesn't matter}\\
+D_{\text{new}} &= \bar{R} \cdot D_{\text{old}} + \bar{R}S \qquad \text{(reset-dominant)}&& R=1, \bar{R} = 0 \text{ dominate}
+\end{align*}
+$$
 
 ![[Pasted image 20260825002115.png]]
 
 #### Synchronous Control
 Updates occur **only on the active clock edge**. The control signal is gated into the data input $D_{new}$:
 
-$$\begin{aligned}
+$$
+\begin{aligned}
 \text{Synchronous Reset Only: } D_{\text{new}} &= R' \cdot D_{\text{old}} \\
 \text{Synchronous Preset Only: } D_{\text{new}} &= D_{\text{old}} + S
-\end{aligned}$$
+\end{aligned}
+$$
 
 #### Asynchronous Control
 Overrides the clock line and updates state **immediately** via direct clear/preset lines in the internal latches.
 
 #### Priority Dominance Equations
 
-$$\begin{aligned}
+$$
+\begin{aligned}
 \text{Set-Dominant Logic: } D_{\text{new}} &= R' \cdot D_{\text{old}} + S \quad &&(\text{If } S=1 \implies D_{\text{new}}=1) \\
 \text{Reset-Dominant Logic: } D_{\text{new}} &= R' \cdot (D_{\text{old}} + S) \quad &&(\text{If } R=1 \implies D_{\text{new}}=0)
-\end{aligned}$$
+\end{aligned}
+$$
 
 ---
 
-## 6. Evolution of Bit Storage Elements
+## Evolution of Bit Storage Elements
 
 | Memory Element | Key Feature | Primary Disadvantage |
 |---|---|---|
@@ -256,7 +278,7 @@ $$\begin{aligned}
 
 ---
 
-## 7. Latch vs. Flip-Flop Waveform Comparison
+## Latch vs. Flip-Flop Waveform Comparison
 
 The timing diagram below illustrates the fundamental operational difference between a **Level-Sensitive D Latch** and a **Positive Edge-Triggered D Flip-Flop**:
 
@@ -273,4 +295,4 @@ The timing diagram below illustrates the fundamental operational difference betw
 - [[Computer Systems/Digital Systems/ALU/Mux & Demux|Mux & Demux]]
 - [[Computer Systems/Digital Systems/ALU/Arithmetic Logic Unit|Arithmetic Logic Unit Integration]]
 - [[Computer Systems/Digital Systems/Logic Design/index|Logic Design & K-Maps]]
-- [[Computer Systems/Digital Systems/index|Digital Systems Index]]
+- [[Computer Systems/Digital Systems/index|Digital Systems]]

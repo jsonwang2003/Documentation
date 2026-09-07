@@ -17,21 +17,22 @@ tags:
 
 ---
 
-## 1. Cache Mapping Strategies
+## Cache Mapping Strategies
 
 Cache mapping dictates how main memory blocks are placed into cache lines.
 
-```
-Main Memory Address: [ Tag Bits | Index Bits | Block Offset ]
-```
+![[Pasted image 20260726131005.png]]
 
 * **Direct-Mapped Cache:** Each memory block maps to exactly one specific cache line determined by `Index = Block Address % Number of Lines`. Fast tag comparison, but susceptible to conflict misses.
 * **Fully Associative Cache:** A memory block can be placed in any cache line. Eliminates conflict misses, but requires complex parallel tag comparators.
 * **$N$-Way Set-Associative Cache:** Memory blocks map to a specific set containing $N$ lines. Balances hardware comparator complexity with conflict miss reduction.
 
+> [!info]
+> For more information on how cache is managed by the operating system, visit [[File Buffer Cache]]
+
 ---
 
-## 2. Replacement & Write Policies
+## Replacement & Write Policies
 
 When a cache miss occurs in a full set, a **Replacement Policy** selects the victim line:
 * **Least Recently Used (LRU):** Evicts the block idle for the longest duration.
@@ -49,7 +50,7 @@ When a cache miss occurs in a full set, a **Replacement Policy** selects the vic
 
 ---
 
-## 3. Cache Performance & AMAT Analysis
+## Cache Performance & AMAT Analysis
 
 System performance depends on total cache size, block size (spatial locality), associativity, and hit rates.
 
@@ -57,7 +58,9 @@ System performance depends on total cache size, block size (spatial locality), a
 
 For a two-level cache hierarchy ($L_1, L_2$) backed by Main Memory:
 
-$$t_{av} = \underbrace{h_1 t_{L_1}}_{\text{Hit in } L_1} + \underbrace{(h_2 - h_1) t_{L_2}}_{\text{Hit in } L_2} + \underbrace{(1 - h_2 - h_1) t_{\text{main}}}_{\text{Penalty to Main Memory}}$$
+$$
+t_{av} = \underbrace{h_1 t_{L_1}}_{\text{Hit in } L_1} + \underbrace{(h_2 - h_1) t_{L_2}}_{\text{Hit in } L_2} + \underbrace{(1 - h_2 - h_1) t_{\text{main}}}_{\text{Penalty to Main Memory}}
+$$
 
 Where:
 * $h_1$ = Local hit rate in $L_1$ cache ($\%$).
@@ -70,4 +73,4 @@ Where:
 
 - [[Computer Systems/Digital Systems/Memory/Memory Hierarchy|Memory Hierarchy]]
 - [[Computer Systems/Digital Systems/Memory/Memory Types|Memory Types]]
-- [[Computer Systems/Digital Systems/Memory/index|Memory Index]]
+- [[Computer Systems/Digital Systems/Memory/index|Memory]]

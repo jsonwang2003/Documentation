@@ -16,7 +16,7 @@ tags:
 
 ---
 
-## 1. System Abstraction Roadmap
+## System Abstraction Roadmap
 
 ```mermaid
 flowchart TD
@@ -34,7 +34,7 @@ flowchart TD
 
 ---
 
-## 2. Directory Structure & Submodule Index
+## Directory Structure & Submodule Index
 
 | Module / Directory | Focus & Hardware Scope | Key Topics & Sub-Files |
 |---|---|---|
@@ -48,7 +48,7 @@ flowchart TD
 
 ---
 
-## 3. Submodule Roadmaps
+## Submodule Roadmaps
 
 ### 1. [[Computer Systems/Digital Systems/Number Representation & Basic Logic Gates/index|Number Representation & Basic Logic Gates]]
 * [[Computer Systems/Digital Systems/Number Representation & Basic Logic Gates/Number Systems and Boolean Algebra|Number Systems and Boolean Algebra]] — Positional notation, Two's complement representation, and Boolean theorems.
@@ -90,4 +90,5 @@ flowchart TD
 
 ## Related Parent Directories
 
-- [[Computer Systems/index|Computer Systems Main Index]]
+- [[Computer Systems/index|Computer Systems]]
+- [[Computer Systems/System Programming/index|System Programming]]

@@ -3,6 +3,7 @@
 
 Control takes **program** as input, it interprets each instruction and tell the **Datapath** to operate on data via **ALU, memory** and **registers**
 
+---
 ## CPU Components ― Single Cycle Execution
 ![[Pasted image 20260831231335.png]]
 
@@ -36,6 +37,7 @@ Control takes **program** as input, it interprets each instruction and tell the 
 #### Step 4: Write result to register
 ![[Pasted image 20260831233723.png]]
 
+---
 ## I-Type: Store Instruction
 
 ![[Pasted image 20260831234352.png]]
@@ -55,6 +57,7 @@ Control takes **program** as input, it interprets each instruction and tell the 
 #### Step 4 (store): Write the value to memory
 ![[Pasted image 20260901145348.png]]
 
+---
 ## I-Type: Conditional Branch
 ![[Pasted image 20260901145442.png]]
 
@@ -72,9 +75,16 @@ Control takes **program** as input, it interprets each instruction and tell the 
 #### Step 3 (beq): Compare registers, calculate branch target, and choose new PC
 ![[Pasted image 20260901151519.png]]
 
+---
 ## J-Type: Unconditional Branch
 ![[Pasted image 20260901150118.png]]
 
 - `BRANCH TARGET ADDRESS`: Actual Address (in words) which we multiply by 4 (<< 2) to get 28-bit address, then concatenate to upper 4 bits of PC+4 to get the 32 bit address of instruction to which we branch unconditionally
 
 ![[Pasted image 20260901152457.png]]
+
+---
+# Related Notes
+- [[Computer Systems/Digital Systems/Memory/index|Memory]]
+- [[High Level State Machines]]
+- [[Computer Systems/Digital Systems/ALU/index|ALU]]

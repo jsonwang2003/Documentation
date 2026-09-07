@@ -19,7 +19,7 @@ tags:
 
 ---
 
-## 1. Circuit Specifications: Combinational vs. Sequential
+## Circuit Specifications: Combinational vs. Sequential
 
 Digital circuits are broadly classified into **Combinational Networks** (memoryless) and **Sequential Networks** (state-dependent).
 
@@ -37,7 +37,7 @@ Digital circuits are broadly classified into **Combinational Networks** (memoryl
 
 ---
 
-## 2. 2-Bit Counter Synthesis Example
+## 2-Bit Counter Synthesis Example
 
 A **2-bit counter** cycles through binary states $S_0(00) \to S_1(01) \to S_2(10) \to S_3(11) \to S_0(00)$ on consecutive clock pulses.
 
@@ -57,10 +57,12 @@ A **2-bit counter** cycles through binary states $S_0(00) \to S_1(01) \to S_2(10
 
 Using D Flip-Flops, the excitation inputs $D_1(t)$ and $D_0(t)$ must match the target next-state outputs $Q_1(t+1)$ and $Q_0(t+1)$:
 
-$$\begin{aligned}
+$$
+\begin{aligned}
 D_0(t) &= \overline{Q_0(t)} \\
 D_1(t) &= Q_0(t)\overline{Q_1(t)} + \overline{Q_0(t)}Q_1(t) = Q_0(t) \oplus Q_1(t)
-\end{aligned}$$
+\end{aligned}
+$$
 
 ![[Pasted image 20260825180104.png]]
 *Circuit Implementation of 2-Bit Counter using D Flip-Flops*
@@ -70,7 +72,7 @@ D_1(t) &= Q_0(t)\overline{Q_1(t)} + \overline{Q_0(t)}Q_1(t) = Q_0(t) \oplus Q_1(
 
 ---
 
-## 3. Finite State Machine (FSM) Foundations
+## Finite State Machine (FSM) Foundations
 
 An FSM is a formal mathematical model of computation consisting of:
 1. A finite set of **States** ($S$).
@@ -87,7 +89,7 @@ An FSM is a formal mathematical model of computation consisting of:
 
 ---
 
-## 4. Mealy vs. Moore Machines
+## Mealy vs. Moore Machines
 ### Comparison Matrix
 
 | Property                   | Mealy Machine                                                                                    | Moore Machine                                                        |
@@ -102,7 +104,7 @@ An FSM is a formal mathematical model of computation consisting of:
 
 ---
 
-## 5. Systematic 5-Step FSM Design Procedure
+## Systematic 5-Step FSM Design Procedure
 
 Synthesizing a functional FSM from a behavioral specification follows a structured 5-step pipeline:
 
@@ -128,4 +130,4 @@ flowchart TD
 - [[Computer Systems/Digital Systems/ALU/Mux & Demux|Mux & Demux]]
 - [[Computer Systems/Digital Systems/ALU/Arithmetic Logic Unit|Arithmetic Logic Unit Integration]]
 - [[Computer Systems/Digital Systems/Logic Design/index|Logic Design & K-Maps]]
-- [[Computer Systems/Digital Systems/index|Digital Systems Index]]
+- [[Computer Systems/Digital Systems/index|Digital Systems]]

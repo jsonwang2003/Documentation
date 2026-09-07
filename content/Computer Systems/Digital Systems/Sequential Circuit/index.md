@@ -17,7 +17,7 @@ tags:
 
 ---
 
-## 1. Fundamentals of Sequential Circuits & Memory
+## Fundamentals of Sequential Circuits & Memory
 
 Sequential circuits form the core of digital processing units by maintaining state and controlling operations over time.
 
@@ -30,7 +30,7 @@ Sequential circuits form the core of digital processing units by maintaining sta
 
 ---
 
-## 2. Memory Hierarchy & RAM Technology Primitives
+## Memory Hierarchy & RAM Technology Primitives
 
 System memory is structured in a **Hierarchy** that trades off access latency for density, capacity, and cost per bit.
 
@@ -69,5 +69,5 @@ System memory is structured in a **Hierarchy** that trades off access latency fo
 - [[Computer Systems/Digital Systems/ALU/index|Arithmetic Logic Units (ALUs)]]
 - [[Computer Systems/Digital Systems/Logic Design/index|Logic Design & K-Maps]]
 - [[Computer Systems/Digital Systems/Number Representation & Basic Logic Gates/index|Number Representation & Basic Logic Gates]]
-- [[Computer Systems/Digital Systems/index|Digital Systems Main Index]]
+- [[Computer Systems/Digital Systems/index|Digital Systems]]
 - [[Computer Systems/index|Computer Systems]]

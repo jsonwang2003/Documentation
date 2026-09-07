@@ -21,7 +21,7 @@ tags:
 
 ---
 
-## 1. Shift and Rotate Operations
+## Shift and Rotate Operations
 
 Shifting moves the binary bits of an $N$-bit vector left or right by a specified distance $k$.
 
@@ -66,7 +66,7 @@ Shifting moves the binary bits of an $N$-bit vector left or right by a specified
 
 ---
 
-## 2. General Shifter Hardware Architecture (Barrel Shifter)
+## General Shifter Hardware Architecture (Barrel Shifter)
 
 Naive single-bit iterative shifters require $k$ clock cycles to shift by $k$ bits. A **Barrel Shifter** executes arbitrary $k$-bit shifts in a **single combinational delay pass** using a crossbar matrix or a logarithmic cascade of multiplexers.
 
@@ -96,4 +96,4 @@ For an $N$-bit shifter supporting shifts from $0$ to $N-1$ positions, the design
 - [[Adders & Subtractors]]
 - [[Comparator]]
 - [[Computer Systems/Digital Systems/ALU/Arithmetic Logic Unit|Arithmetic Logic Unit Integration]]
-- [[Computer Systems/Digital Systems/ALU/index|Arithmetic Logic Units Hub]]
+- [[Computer Systems/Digital Systems/ALU/index|Arithmetic Logic Units]]

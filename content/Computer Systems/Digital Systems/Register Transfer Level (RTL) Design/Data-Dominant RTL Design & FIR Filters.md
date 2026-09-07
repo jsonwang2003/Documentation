@@ -17,7 +17,7 @@ tags:
 
 ---
 
-## 1. Architectural Classification: Control-Dominant vs. Data-Dominant
+## Architectural Classification: Control-Dominant vs. Data-Dominant
 
 RTL designs balance control complexity against datapath computation density depending on the target application:
 
@@ -30,29 +30,39 @@ RTL designs balance control complexity against datapath computation density depe
 
 ---
 
-## 2. Case Study: Finite Impulse Response (FIR) Filter
+## Case Study: Finite Impulse Response (FIR) Filter
 
 A **Finite Impulse Response (FIR) Filter** transforms an input digital stream $x(t)$ into a filtered output stream $y(t)$ by computing a configurable weighted sum of present and past input samples.
+```mermaid
+flowchart LR
+    X["x(t)"] --> C0["c₀"]
+    X --> D1["z⁻¹"]
 
-```
-                      ┌──────┐
-x(t) ───┬────────────►│ c_0  ├───────────┐
-        │             └──────┘           │
-      ┌─▼──┐          ┌──────┐         ┌─▼─┐
-      │z⁻¹ │───┬─────►│ c_1  ├────────►│ + │
-      └────┘   │      └──────┘         └─┬─┘
-             ┌─▼──┐   ┌──────┐           │     ┌───┐
-             │z⁻¹ │──►│ c_2  ├───────────┴────►│ + ├───► y(t)
-             └────┘   └──────┘                 └───┘
+    D1 --> C1["c₁"]
+    D1 --> D2["z⁻¹"]
+
+    D2 --> C2["c₂"]
+
+    C0 --> A1["+"]
+    C1 --> A1
+
+    A1 --> A2["+"]
+    C2 --> A2
+
+    A2 --> Y["y(t)"]
 ```
 
 ### Mathematical Definition
 For an $N$-tap FIR filter, the transfer function is expressed as:
 
-$$y(t) = \sum_{i=0}^{N-1} c_i \cdot x(t-i)$$
+$$
+y(t) = \sum_{i=0}^{N-1} c_i \cdot x(t-i)
+$$
 
 #### 3-Tap FIR Filter Equation
-$$y(t) = c_0 \cdot x(t) + c_1 \cdot x(t-1) + c_2 \cdot x(t-2)$$
+$$
+y(t) = c_0 \cdot x(t) + c_1 \cdot x(t-1) + c_2 \cdot x(t-2)
+$$
 
 * **Filter Taps ($N$):** The number of past input samples preserved in the delay chain.
 * **Filter Coefficients ($c_i$):** User-configurable constants that define the frequency response (e.g., low-pass, high-pass, or band-pass filtering).
@@ -64,7 +74,7 @@ $$y(t) = c_0 \cdot x(t) + c_1 \cdot x(t-1) + c_2 \cdot x(t-2)$$
 
 ---
 
-## 3. RTL Design Pipeline for a 3-Tap FIR Filter
+## RTL Design Pipeline for a 3-Tap FIR Filter
 
 ### Step 1: Capture Behavior (HLSM)
 Because the datapath processes samples continuously on every clock tick, the controller HLSM requires minimal control states.
@@ -89,7 +99,7 @@ The simple controller asserts load/clear lines to configure coefficients and man
 *Interfacing Datapath with Minimal Controller Block*
 
 ---
-## 4. Hardware (RTL Circuit) vs. Software Performance Analysis
+## Hardware (RTL Circuit) vs. Software Performance Analysis
 
 Evaluating a **100-tap FIR filter** demonstrates the profound performance advantage of hardware spatial parallelism over software temporal execution.
 
@@ -106,20 +116,24 @@ Evaluating a **100-tap FIR filter** demonstrates the profound performance advant
 #### 1. Hardware RTL Implementation (Parallel Spatial Processing)
 In hardware, all $100$ multiplications execute concurrently in parallel ($20$ gate delays). The resulting $100$ products are summed via a **balanced binary adder tree** of depth $\lceil \log_2(100) \rceil = 7$ adder stages.
 
-$$\begin{aligned}
+$$
+\begin{aligned}
 \text{Longest Critical Path} &= \text{Multiplier Delay} + \left( \lceil \log_2(N) \rceil \times \text{Adder Delay} \right) \\
 &= 20 + (7 \times 2) \\
 &= \mathbf{34 \text{ Gate Delays per Sample Output}}
-\end{aligned}$$
+\end{aligned}
+$$
 
 #### 2. Software Implementation (Sequential Loop Processing)
 A general-purpose processor must process the 100-tap filter sequentially inside a loop ($100$ multiplications + $100$ additions). Assuming $2$ instructions per operation:
 
-$$\begin{aligned}
+$$
+\begin{aligned}
 \text{Total Operations} &= (100 \text{ mults} \times 2 \text{ inst}) + (100 \text{ adds} \times 2 \text{ inst}) = 400 \text{ instructions} \\
 \text{Total Latency} &= 400 \text{ instructions} \times 10 \text{ gate delays/instruction} \\
 &= \mathbf{4000 \text{ Gate Delays per Sample Output}}
-\end{aligned}$$
+\end{aligned}
+$$
 
 ### Performance Summary Matrix
 
@@ -141,4 +155,4 @@ $$\begin{aligned}
 - [[High Level State Machines|High-Level State Machines]]
 - [[Computer Systems/Digital Systems/Sequential Circuit/Timing Constraints in Sequential Designs|Timing Constraints in Sequential Designs]]
 - [[Computer Systems/Digital Systems/ALU/Multiplier & Divider|Multiplier & Divider]]
-- [[Computer Systems/Digital Systems/Sequential Circuit/index|Sequential Circuits Index]]
+- [[Computer Systems/Digital Systems/Sequential Circuit/index|Sequential Circuits]]

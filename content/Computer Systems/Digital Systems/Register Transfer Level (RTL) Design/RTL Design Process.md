@@ -20,7 +20,7 @@ tags:
 
 ---
 
-## 1. The Official RTL Design Process
+## The Official RTL Design Process
 
 Converting a high-level system behavioral specification into digital hardware follows a structured 2-phase, 5-step synthesis methodology:
 
@@ -47,9 +47,10 @@ flowchart LR
 
 ---
 
-## 2. Walkthrough: Soda Dispenser RTL Synthesis
+## Walkthrough: Soda Dispenser RTL Synthesis
 
-![[High Level State Machines#Example Soda Dispenser Controller]]
+> [!info] 
+> For the problem statement of the Soda Dispenser Example, visit [[High Level State Machines#Example Soda Dispenser Controller|Example Soda Dispenser Controller]]
 ### Step 1: HLSM Behavior Capture
 The soda dispenser continuously checks for coin deposits (`c`), updates an accumulated total sum (`tot = tot + a`), compares `tot` against the soda cost (`s`), and asserts the dispense signal (`d = '1'`) when `tot >= s`.
 
@@ -93,7 +94,7 @@ The derived FSM maps directly to a classical excitation truth table for logic ga
 
 ---
 
-## 3. RTL Timing & Critical Path Delay
+## RTL Timing & Critical Path Delay
 
 In RTL design, system operating frequency ($f_{\max} = \frac{1}{T_c}$) is strictly constrained by the **longest register-to-register path** (Critical Path).
 
@@ -113,13 +114,17 @@ flowchart LR
 
 To prevent timing violations across hundreds or thousands of internal RTL paths, all register-to-register paths must satisfy:
 
-$$\text{Setup Time Constraint: } T_c \ge t_{pcq} + t_{pd} + t_{\text{setup}} + t_{\text{skew}}$$
+$$
+\begin{align*}
+&\text{Setup Time Constraint: }\qquad &T_c &\ge t_{pcq} + t_{pd} + t_{\text{setup}} + t_{\text{skew}}\\
+&\text{Hold Time Constraint: }\qquad &t_{ccq} + t_{cd} &> t_{\text{hold}} + t_{\text{skew}}
+\end{align*}
+$$
 
-$$\text{Hold Time Constraint: } t_{ccq} + t_{cd} > t_{\text{hold}} + t_{\text{skew}}$$
 
 ---
 
-## 4. Behavioral Synthesis: C Code to Gates
+## Behavioral Synthesis: C Code to Gates
 
 High-Level Synthesis (HLS) automated tools compile behavioral software algorithms directly into HLSM state machines.
 
@@ -139,9 +144,7 @@ int SAD(byte A[256], byte B[256]) {
 }
 ```
 
----
-
-### C Construct to HLSM State Translation Rules
+### Construct to HLSM State Translation Rules
 
 | Control Construct | C Code Pattern | Synthesized HLSM State Structure |
 |---|---|---|
@@ -152,7 +155,7 @@ int SAD(byte A[256], byte B[256]) {
 
 ---
 
-## 5. Dedicated Hardware Circuit vs. Microprocessor Execution
+## Dedicated Hardware Circuit vs. Microprocessor Execution
 
 Comparing the performance of the Sum of Absolute Differences (SAD) algorithm on a custom synthesized RTL circuit versus execution on a general-purpose microprocessor highlights the architectural efficiency of application-specific hardware.
 
@@ -161,11 +164,18 @@ Comparing the performance of the Sum of Absolute Differences (SAD) algorithm on 
 * **Custom Dedicated Circuit:**
   * Executes each loop iteration across 2 dedicated states ($S_2$ and $S_3$).
   * Requires $2$ clock cycles per array item:
-    $$\text{Total Cycles}_{\text{Circuit}} = 256 \times 2 = 512 \text{ clock cycles}$$
+    
+$$
+\text{Total Cycles}_{\text{Circuit}} = 256 \times 2 = 512 \text{ clock cycles}
+$$
+
 * **General-Purpose Microprocessor:**
   * For each iteration ($i = 1 \dots 256$), the processor must fetch memory values into local registers, compute the difference, calculate absolute value, update the sum accumulator, and increment the loop counter.
   * Requires approximately $6$ clock cycles per array item:
-    $$\text{Total Cycles}_{\text{Processor}} = 256 \times 6 = 1536 \text{ clock cycles}$$
+    
+$$
+\text{Total Cycles}_{\text{Processor}} = 256 \times 6 = 1536 \text{ clock cycles}
+$$
 
 | Architecture | Execution Strategy | Cycles / Iteration | Total Execution Cycles | Relative Performance |
 |---|---|:---:|:---:|:---:|
@@ -183,4 +193,4 @@ Comparing the performance of the Sum of Absolute Differences (SAD) algorithm on 
 - [[Computer Systems/Digital Systems/Sequential Circuit/Finite State Machines|Finite State Machines]]
 - [[Computer Systems/Digital Systems/ALU/Arithmetic Logic Unit|Arithmetic Logic Unit Integration]]
 - [[Computer Systems/Digital Systems/Sequential Circuit/Timing Constraints in Sequential Designs|Timing Constraints in Sequential Designs]]
-- [[Computer Systems/Digital Systems/Sequential Circuit/index|Sequential Circuits Index]]
+- [[Computer Systems/Digital Systems/Sequential Circuit/index|Sequential Circuits]]

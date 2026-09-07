@@ -18,7 +18,7 @@ tags:
 
 ---
 
-## 1. Motivation: Limits of Classical FSMs
+## Motivation: Limits of Classical FSMs
 
 In classical FSMs, every unique combination of multi-bit data requires a distinct control state. Representing even modest $8$-bit numbers ($256$ possible values) causes **state explosion**, making visual state diagrams and state tables unmanageable.
 
@@ -37,7 +37,7 @@ To implement this using a classical FSM, distinct states would be required for e
 
 ---
 
-## 2. Core Extensions of HLSMs
+## Core Extensions of HLSMs
 
 HLSMs bridge pure control logic (FSMs) and computational datapaths by introducing three fundamental extensions:
 
@@ -50,7 +50,7 @@ HLSMs bridge pure control logic (FSMs) and computational datapaths by introducin
 
 ---
 
-## 3. HLSM Syntax & Modeling Conventions
+## HLSM Syntax & Modeling Conventions
 
 To prevent ambiguity during hardware synthesis, HLSM specifications adhere to strict notation rules:
 
@@ -65,7 +65,7 @@ To prevent ambiguity during hardware synthesis, HLSM specifications adhere to st
 
 ---
 
-## 4. Architectural Comparison: FSM vs. HLSM
+## Architectural Comparison: FSM vs. HLSM
 
 Both FSMs and HLSMs are **synchronous sequential networks** where transitions occur strictly on active clock edges. However, their internal abstraction boundaries differ significantly:
 
@@ -84,4 +84,4 @@ Both FSMs and HLSMs are **synchronous sequential networks** where transitions oc
 - [[Computer Systems/Digital Systems/Sequential Circuit/Finite State Machines|Finite State Machines]]
 - [[Computer Systems/Digital Systems/Sequential Circuit/Registers and Counters|Registers and Counters]]
 - [[Computer Systems/Digital Systems/ALU/Arithmetic Logic Unit|Arithmetic Logic Unit Integration]]
-- [[Computer Systems/Digital Systems/Sequential Circuit/index|Sequential Circuits Index]]
+- [[Computer Systems/Digital Systems/Sequential Circuit/index|Sequential Circuits]]

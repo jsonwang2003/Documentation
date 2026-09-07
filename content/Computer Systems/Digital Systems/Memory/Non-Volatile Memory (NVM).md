@@ -21,17 +21,32 @@ tags:
 
 ---
 
-## 1. Traditional Non-Volatile Memory Evolution
+## Traditional Non-Volatile Memory Evolution
 
 Traditional Read-Only Memory (ROM) devices evolved from factory-programmed circuits into in-system programmable non-volatile storage.
 
 ### Floating-Gate Transistor Mechanics
 Traditional floating-gate transistors embed an electrically isolated gate inside an oxide layer. High programming voltages force electrons to tunnel into the floating gate, trapping them to shift the transistor's threshold voltage ($V_T$) to store logic `'0'`.
 
-```
-[ Control Gate ]  ──► Applied Programming Voltage
-[ Floating Gate ] ──► Trapped Electrons (Logic '0')
-[ Substrate ]     ──► Source/Drain Channel
+```mermaid
+flowchart LR
+    subgraph Layer["Device Layer"]
+        direction TB
+        CG["Control Gate"]
+        FG["Floating Gate"]
+        SUB["Substrate"]
+    end
+
+    subgraph Function["State / Operation"]
+        direction TB
+        V["Applied Programming Voltage"]
+        E["Trapped Electrons (Logic '0')"]
+        CH["Source/Drain Channel"]
+    end
+
+    CG -->|Drives| V
+    FG -->|Stores| E
+    SUB -->|Conducts| CH
 ```
 
 ---
@@ -50,21 +65,30 @@ Injects and erases electrons **electronically** at byte/word granularity without
 
 **Flash Memory:** Operates on principles similar to EEPROM, but optimizes erasure density by erasing **large blocks of words simultaneously**. Both EEPROM and Flash are **In-System Programmable (ISP)**.
 
-
-
 ---
 
-## 2. Emerging NVM Paradigm
+## Emerging NVM Paradigm
 
 Emerging NVM technologies blur the historical distinction between **Memory** (fast, expensive, volatile) and **Storage** (slow, cheap, non-volatile).
+```mermaid
+flowchart TD
+    subgraph Traditional["Traditional Memory Limitations"]
+        SRAM["<b>SRAM</b><br/>Fast Read/Write<br/>Low Density (6T Cell)<br/>Volatile"]
+        DRAM["<b>DRAM</b><br/>High Density (1T1C)<br/> Requires Power Refresh<br/> Volatile"]
+        Flash["<b>NAND Flash</b><br/>Non-Volatile (~10 Yrs)<br/> High Write Latency<br/> Limited Endurance"]
+    end
 
-```
-┌───────────────────────────────────────────────────────────────────────────┐
-│                       Emerging NVM Sweet Spot                            │
-│   Non-Volatile (~10 Yrs)  │  Fast Read/Write (~SRAM)  │  High Density (~DRAM) │
-└───────────────────────────────────────────────────────────────────────────┘
-```
+    subgraph SweetSpot["<b>Emerging NVM Sweet Spot</b><br/>(Storage-Class / Universal Memory)"]
+        direction TB
+        NV["<b>Non-Volatile</b><br/>10+ Year Retention"]
+        SP["<b>SRAM Speed</b><br/>Nanosecond Read/Write"]
+        DN["<b>DRAM Density</b><br/>1T1R / 3D Cross-Point"]
+    end
 
+    SRAM -->|Provides Speed| SP
+    DRAM -->|Provides Density| DN
+    Flash -->|Provides Retention| NV
+```
 ### Key Technical Features & Challenges
 
 * **Target Applications:** Excellent fit for **Big Data analytics** (in-memory databases) and **energy-efficient edge AI processing** by eliminating static leakage and refresh power.
@@ -75,7 +99,7 @@ Emerging NVM technologies blur the historical distinction between **Memory** (fa
 
 ---
 
-## 3. Emerging NVM Technology Breakdown
+## Emerging NVM Technology Breakdown
 
 ### 1. Ferroelectric RAM (1T-1C FeRAM)
 * **Mechanics:** Similar to DRAM (1 Transistor, 1 Capacitor), but replaces the dielectric with a **ferroelectric layer** (typically Lead Zirconate Titanate - PZT). Electric fields shift central atoms into up/down polarization states representing `'1'` or `'0'`.
@@ -85,8 +109,6 @@ Emerging NVM technologies blur the historical distinction between **Memory** (fa
 ![[Pasted image 20260831171258.png]]
 *1T-1C FeRAM Cell Structure*
 
----
-
 ### 2. Spin-Transfer Torque RAM (STT-RAM / MRAM)
 * **Mechanics:** Stores data using a **Magnetic Tunneling Junction (MTJ)** with a **Fixed Magnetic Layer** and a **Free Magnetic Layer**. Spin-polarized electron currents align free-layer magnetization parallel (P = `'1'`, low resistance) or anti-parallel (AP = `'0'`, high resistance) to the fixed layer.
 * **Advantages:** High endurance ($10^{6} \dots 10^{12}$ cycles); ultra-fast read latency ($\sim 10\text{ ns}$); high retention ($\ge 10\text{ years}$).
@@ -94,8 +116,6 @@ Emerging NVM technologies blur the historical distinction between **Memory** (fa
 
 ![[Pasted image 20260831171156.png]] ![[Pasted image 20260831212634.png]]
 *STT-RAM Magnetic Tunneling Junction (MTJ) Structure*
-
----
 
 ### 3. Phase Change Memory (PCM / PCRAM)
 * **Mechanics:** Thermally shifts a chalcogenide material between an **amorphous phase** (RESET, high resistance) and a **crystalline phase** (SET, low resistance) via electrical current pulses.
@@ -105,16 +125,12 @@ Emerging NVM technologies blur the historical distinction between **Memory** (fa
 ![[Pasted image 20260831172321.png]] ![[Pasted image 20260831172334.png]]
 *PCM Crystalline (SET) vs. Amorphous (RESET) States*
 
----
-
 ### 4. Ferroelectric Field-Effect Transistor (1T FeFET)
 * **Mechanics:** Integrates ferroelectric material directly into the gate stack of a single FET transistor. Reversible threshold voltage ($V_T$) shifts are driven by sub-$\vert{}5\text{V}\vert{}$ nanosecond field pulses.
 * **Advantages:** **Non-destructive read detection**; co-located directly with CMOS logic gates (requiring only $2\text{--}4$ additional mask layers).
 
 ![[Pasted image 20260831173710.png]]
 *1T FeFET Co-Located Logic Transistor Cell*
-
----
 
 ### 5. Resistive RAM (ReRAM)
 Stores data by forming (low resistance) or breaking (high resistance) conductive atomic filaments across a dielectric oxide layer using applied voltage pulses.
@@ -127,7 +143,7 @@ Stores data by forming (low resistance) or breaking (high resistance) conductive
 
 ---
 
-## 4. Quantitative Technology Comparison Matrix
+## Quantitative Technology Comparison Matrix
 
 ### Emerging NVM Technology Comparison
 
@@ -145,8 +161,6 @@ Stores data by forming (low resistance) or breaking (high resistance) conductive
 ![[Pasted image 20260831215150.png]]
 *NVM Quantitative Metric Comparison Chart*
 
----
-
 ### Full Memory Spectrum Feature Comparison
 
 | Feature | SRAM | eDRAM | STT-RAM | PCRAM | ReRAM |
@@ -159,14 +173,29 @@ Stores data by forming (low resistance) or breaking (high resistance) conductive
 
 ---
 
-## 5. System Architecture Replacement Mappings
+## System Architecture Replacement Mappings
 
 Emerging NVM technologies target specific replacements across the memory hierarchy:
 
-```
-[ L1/L2/L3 Caches (SRAM) ]  ◄── Replace with ──  STT-RAM (Eliminates Static Leakage Power)
-[ Main Memory (DRAM) ]      ◄── Replace with ──  PCRAM (High Density Non-Volatile RAM)
-[ Flash / Storage (NAND) ]  ◄── Replace with ──  ReRAM (3D Crossbar / High Throughput)
+```mermaid
+flowchart LR
+    subgraph Traditional["<b>Traditional Volatile / Flash Memory</b>"]
+        direction TB
+        T1["L1/L2/L3 Caches<br/>(SRAM)"]
+        T2["Main Memory<br/>(DRAM)"]
+        T3["Flash / Storage<br/>(NAND)"]
+    end
+
+    subgraph Emerging["<b>Emerging Non-Volatile Replacement</b>"]
+        direction TB
+        E1["STT-RAM<br/>(Eliminates Static Leakage Power)"]
+        E2["PCRAM<br/>(High Density Non-Volatile RAM)"]
+        E3["ReRAM<br/>(3D Crossbar / High Throughput)"]
+    end
+
+    T1 -->|Replace with| E1
+    T2 -->|Replace with| E2
+    T3 -->|Replace with| E3
 ```
 
 1. **STT-RAM $\to$ SRAM Cache Replacement:** Eliminates static leakage power in dense multi-core CPU caches.
@@ -180,4 +209,4 @@ Emerging NVM technologies target specific replacements across the memory hierarc
 - [[Computer Systems/Digital Systems/Memory/Memory Hierarchy|Memory Hierarchy]]
 - [[Computer Systems/Digital Systems/Memory/Cache Design|Cache Design]]
 - [[Computer Systems/Digital Systems/Memory/Memory Types|Memory Types]]
-- [[Computer Systems/Digital Systems/Memory/index|Memory Index]]
+- [[Computer Systems/Digital Systems/Memory/index|Memory]]

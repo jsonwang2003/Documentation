@@ -28,6 +28,6 @@ tags:
 
 ## Related Modules
 
-- [[Computer Systems/Digital Systems/index|Digital Systems Main Index]]
+- [[Computer Systems/Digital Systems/index|Digital Systems]]
 - [[Computer Systems/Computer System/Binary and Data Representation/index|Binary & Data Representation]]
 - [[Computer Systems/index|Computer Systems]]

@@ -21,7 +21,9 @@ tags:
 
 In positional number systems, each digit's position represents a specific power of the base (radix). A symbol in a given position indicates the quantity of that power:
 
-$$\text{Value} = \sum_{i} d_i \times b^i$$
+$$
+\text{Value} = \sum_{i} d_i \times b^i
+$$
 
 * **Base 10 (Decimal):** Uses symbols $\{0, 1, 2, 3, 4, 5, 6, 7, 8, 9\}$. Positions represent powers of 10.
 * **Base 2 (Binary):** Uses symbols $\{0, 1\}$. Positions represent powers of 2. This matches physical two-state digital hardware (high/low voltage levels).
@@ -57,9 +59,7 @@ Boolean algebra operates on a two-element set $B = \{0, 1\}$. Variables evaluate
 ![[Pasted image 20260806151414.png]]
 *NOT Gate (Inverter) Symbol*
 
----
-
-## Derived Logic Gates
+### Derived Logic Gates
 
 Derived gates combine primary operators to perform specialized logic functions:
 
@@ -131,7 +131,9 @@ Derived gates combine primary operators to perform specialized logic functions:
 
 The dual of a Boolean expression is obtained by swapping $\cdot$ with $+$, $0$ with $1$, and vice versa, while leaving all variables unchanged.
 
-$$\text{General Duality: } f(X_1, X_2, \dots, X_n, 0, 1, +, \cdot) \iff f(X_1, X_2, \dots, X_n, 1, 0, \cdot, +)$$
+$$
+\text{General Duality: } f(X_1, X_2, \dots, X_n, 0, 1, +, \cdot) \iff f(X_1, X_2, \dots, X_n, 1, 0, \cdot, +)
+$$
 
 > [!tip] Property of Duality
 > If an algebraic theorem or equality is proven true, its **dual form is guaranteed to be true** without requiring a separate proof. Note that Duality is distinct from De Morgan's Theorem (Duality does not negate variables).
@@ -155,25 +157,25 @@ Exhaustively verifies that both sides of a Boolean expression evaluate to identi
 
 *Result:* Columns $(X + Y)'$ and $X' \cdot Y'$ are identical for all inputs, proving the identity.
 
----
-
 ### 2. Algebraic Proof
 
 Applies axiomatic identities step-by-step to transform one side of an equation into the target expression.
 
 **Example:** Prove the Combining Theorem $X \cdot Y + X \cdot Y' = X$
 
-$$\begin{aligned}
+$$
+\begin{aligned}
 X \cdot Y + X \cdot Y' &= X \cdot (Y + Y') && \quad \text{(Distributivity)} \\
 &= X \cdot (1) && \quad \text{(Complementarity: } Y + Y' = 1\text{)} \\
 &= X && \quad \text{(Identity: } X \cdot 1 = X\text{)}
-\end{aligned}$$
+\end{aligned}
+$$
 
 ---
 
 ## Related Notes
 
-- [[Computer Systems/Digital Systems/Transistors & Gates|Transistors & Gates]]
-- [[Computer Systems/Digital Systems/Combinational Logic Design|Combinational Logic Design]]
-- [[Computer Systems/Digital Systems/SOP, POS, K-Maps & Logic Simplification|SOP, POS, K-Maps & Logic Simplification]]
-- [[Computer Systems/Digital Systems/index|Digital Systems Index]]
+- [[Transistors & Gates|Transistors & Gates]]
+- [[Logic Functions|Combinational Logic Design]]
+- [[Logic Simplification with K-maps|SOP, POS, K-Maps & Logic Simplification]]
+- [[Computer Systems/Digital Systems/index|Digital Systems]]

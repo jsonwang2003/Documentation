@@ -24,7 +24,13 @@ tags:
 
 Multiplying an $N$-bit multiplicand $A$ by an $M$-bit multiplier $B$ yields a product $P$ up to $(N + M)$ bits wide:
 
-$$P = A \times B = \left( \sum_{i=0}^{N-1} a_i 2^i \right) \times \left( \sum_{j=0}^{M-1} b_j 2^j \right) = \sum_{i=0}^{N-1} \sum_{j=0}^{M-1} (a_i \cdot b_j) 2^{i+j}$$
+$$
+\begin{align*}
+P &= A \times B \\
+&= \left( \sum_{i=0}^{N-1} a_i 2^i \right) \times \left( \sum_{j=0}^{M-1} b_j 2^j \right) \\
+&= \sum_{i=0}^{N-1} \sum_{j=0}^{M-1} (a_i \cdot b_j) 2^{i+j}
+\end{align*}
+$$
 
 ![[Pasted image 20260824130709.png]]
 *N-Bit x M-Bit Multiplier Block Symbol*
@@ -33,7 +39,9 @@ $$P = A \times B = \left( \sum_{i=0}^{N-1} a_i 2^i \right) \times \left( \sum_{j
 
 In binary, generating a partial product bit $p_{i,j}$ is equivalent to a logical **AND** operation:
 
-$$p_{i,j} = a_i \cdot b_j = \begin{cases} a_i & \text{if } b_j = 1 \\ 0 & \text{if } b_j = 0 \end{cases}$$
+$$
+p_{i,j} = a_i \cdot b_j = \begin{cases} a_i & \text{if } b_j = 1 \\ 0 & \text{if } b_j = 0 \end{cases}
+$$
 
 ![[Pasted image 20260821182126.png]]
 *Generalized Partial Product Generation for 4-Bit Multiplication*
@@ -62,7 +70,9 @@ An **Array Multiplier** computes all partial products in parallel using an array
 
 Division of unsigned positive binary numbers divides a **Dividend** by a **Divisor** to calculate a **Quotient** and a **Remainder**:
 
-$$\text{Dividend} = (\text{Divisor} \times \text{Quotient}) + \text{Remainder} \quad \text{where } 0 \le \text{Remainder} < \text{Divisor}$$
+$$
+\text{Dividend} = (\text{Divisor} \times \text{Quotient}) + \text{Remainder} \quad \text{where } 0 \le \text{Remainder} < \text{Divisor}
+$$
 
 ### Iterative Repeated Subtraction Algorithm
 
@@ -93,4 +103,4 @@ Executing binary division via repeated subtraction requires three core hardware 
 - [[Adders & Subtractors]]
 - [[Comparator|Comparators]]
 - [[Computer Systems/Digital Systems/ALU/Arithmetic Logic Unit|Arithmetic Logic Unit Integration]]
-- [[Computer Systems/Digital Systems/ALU/index|ALU Submodule Index]]
+- [[Computer Systems/Digital Systems/ALU/index|Arithmetic Logic Units]]

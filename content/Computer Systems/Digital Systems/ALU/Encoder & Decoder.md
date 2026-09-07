@@ -20,7 +20,7 @@ tags:
 
 ---
 
-## 1. Binary Encoders
+## Binary Encoders
 
 An **Encoder** performs the reverse operation of a decoder. It accepts $2^N$ input lines ($I_0, I_1, \dots, I_{2^N-1}$) and converts the active input index into an $N$-bit binary output code $(y_{n-1}, \dots, y_0)$.
 
@@ -34,16 +34,20 @@ A basic binary encoder assumes that **at most one input $I_i$ is HIGH ($1$)** at
 
 For an enabled encoder ($EN = 1$):
 
-$$(y_{n-1}, \dots, y_0) = \begin{cases} i & \text{if } I_i = 1 \text{ and } EN = 1 \\ 0 & \text{otherwise} \end{cases}$$
+$$
+(y_{n-1}, \dots, y_0) = \begin{cases} i & \text{if } I_i = 1 \text{ and } EN = 1 \\  0 & \text{otherwise} \end{cases}
+$$
 
-$$A = \begin{cases} 1 & \text{if } EN = 1 \text{ and } \exists \, i \text{ such that } I_i = 1 \\ 0 & \text{otherwise} \end{cases}$$
+$$
+A = \begin{cases} 1 & \text{if } EN = 1 \text{ and } \exists \, i \text{ such that } I_i = 1 \\ 0 & \text{otherwise} \end{cases}
+$$
 
 ![[Pasted image 20260819173726.png]]
 *Detailed Logic Schematics for a 4-to-2 Binary Encoder*
 
 ---
 
-## 2. Decoders ($N \to 2^N$)
+## Decoders ($N \to 2^N$)
 
 A **Decoder** decodes an $N$-bit binary input code (referred to as **Select inputs $S$**) to activate exactly one of $2^N$ output lines.
 
@@ -53,7 +57,9 @@ A **Decoder** decodes an $N$-bit binary input code (referred to as **Select inpu
 ### One-Hot Output Behavior
 When the enable signal is active ($EN = 1$ or $G = 1$), the decoder outputs operate in a **one-hot** configuration: exactly **one** output line is asserted HIGH ($1$), while all other $2^N - 1$ output lines remain LOW ($0$).
 
-$$\text{Output } y_i = \begin{cases} 1 & \text{if } EN = 1 \text{ and } (S_{n-1}, \dots, S_0)_2 = i \\ 0 & \text{otherwise} \end{cases}$$
+$$
+\text{Output } y_i = \begin{cases} 1 & \text{if } EN = 1 \text{ and } (S_{n-1}, \dots, S_0)_2 = i \\ 0 & \text{otherwise} \end{cases}
+$$
 
 > [!note] Enable Line ($G$ / $EN$) Gating
 > If $EN = 0$ (or $G = 0$), **all outputs are forced to $0$**, disabling the driven devices regardless of the select inputs.
@@ -63,26 +69,31 @@ $$\text{Output } y_i = \begin{cases} 1 & \text{if } EN = 1 \text{ and } (S_{n-1}
 
 ---
 
-## 3. Decoder Logic Equations & Architectures
+## Decoder Logic Equations & Architectures
 
 The enable signal $G$ acts as a product factor across all output minterm equations:
 
 ### 1:2 Decoder ($1$ Select, $2$ Outputs)
-$$\begin{aligned}
+$$
+\begin{aligned}
 Y_0 &= G \cdot S' \\
 Y_1 &= G \cdot S
-\end{aligned}$$
+\end{aligned}
+$$
 
 ### 2:4 Decoder ($2$ Selects, $4$ Outputs)
-$$\begin{aligned}
+$$
+\begin{aligned}
 Y_0 &= G \cdot S_1' \cdot S_0' \\
 Y_1 &= G \cdot S_1' \cdot S_0 \\
 Y_2 &= G \cdot S_1 \cdot S_0' \\
 Y_3 &= G \cdot S_1 \cdot S_0
-\end{aligned}$$
+\end{aligned}
+$$
 
 ### 3:8 Decoder ($3$ Selects, $8$ Outputs)
-$$\begin{aligned}
+$$
+\begin{aligned}
 Y_0 &= G \cdot S_2' \cdot S_1' \cdot S_0' \\
 Y_1 &= G \cdot S_2' \cdot S_1' \cdot S_0 \\
 Y_2 &= G \cdot S_2' \cdot S_1 \cdot S_0' \\
@@ -91,11 +102,12 @@ Y_4 &= G \cdot S_2 \cdot S_1' \cdot S_0' \\
 Y_5 &= G \cdot S_2 \cdot S_1' \cdot S_0 \\
 Y_6 &= G \cdot S_2 \cdot S_1 \cdot S_0' \\
 Y_7 &= G \cdot S_2 \cdot S_1 \cdot S_0
-\end{aligned}$$
+\end{aligned}
+$$
 
 ---
 
-## 4. Decoder Applications
+## Decoder Applications
 
 Decoders are fundamental building blocks in computer memory architectures and bus controllers:
 
@@ -113,4 +125,4 @@ Decoders are fundamental building blocks in computer memory architectures and bu
 - [[Adders & Subtractors|Adders]]
 - [[Comparator]]
 - [[Computer Systems/Digital Systems/ALU/Arithmetic Logic Unit|Arithmetic Logic Unit Integration]]
-- [[Computer Systems/Digital Systems/ALU/index|Arithmetic Logic Units Hub]]
+- [[Computer Systems/Digital Systems/ALU/index|Arithmetic Logic Units]]

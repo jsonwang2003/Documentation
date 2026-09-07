@@ -46,5 +46,5 @@ tags:
 
 - [[Computer Systems/Digital Systems/Logic Design/index|Logic Design & K-Maps]]
 - [[Computer Systems/Digital Systems/Number Representation & Basic Logic Gates/index|Number Representation & Basic Logic Gates]]
-- [[Computer Systems/Digital Systems/index|Digital Systems Main Index]]
+- [[Computer Systems/Digital Systems/index|Digital Systems]]
 - [[Computer Systems/index|Computer Systems]]

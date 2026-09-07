@@ -20,7 +20,7 @@ tags:
 
 ---
 
-## 1. Basic Multi-Bit Registers
+## Basic Multi-Bit Registers
 
 A **Register** is an array of $N$ flip-flops sharing a common clock signal that stores an $N$-bit binary word simultaneously.
 
@@ -36,7 +36,7 @@ Each bit of an incoming multi-bit bus ($D_3 \dots D_0$) is connected directly to
 
 ---
 
-## 2. Shift Registers
+## Shift Registers
 
 A **Shift Register** connects $N$ flip-flops in series such that the output of stage $i$ feeds the input of stage $i+1$ ($Q_i \to D_{i+1}$).
 
@@ -51,7 +51,8 @@ Because edge-triggered D Flip-Flops sample inputs strictly on clock transitions,
 
 Feeding the bit stream **`0110111`** (inserted right-to-left) into an initially zeroed 4-bit shift register ($Q_3 Q_2 Q_1 Q_0 = 0000_2$):
 
-$$\begin{aligned}
+$$
+\begin{aligned}
 \text{Initial State } (t_0): & \quad 0000_2 \\
 \text{Cycle 1 } (t_1): & \quad 1000_2 \quad (\text{1 shifted in}) \\
 \text{Cycle 2 } (t_2): & \quad 1100_2 \quad (\text{1 shifted in}) \\
@@ -60,11 +61,12 @@ $$\begin{aligned}
 \text{Cycle 5 } (t_5): & \quad 1011_2 \quad (\text{1 shifted in}) \\
 \text{Cycle 6 } (t_6): & \quad 1101_2 \quad (\text{1 shifted in}) \\
 \text{Cycle 7 } (t_7): & \quad 0110_2 \quad (\text{0 shifted in})
-\end{aligned}$$
+\end{aligned}
+$$
 
 ---
 
-## 3. Pattern Recognizers (Sequence Detectors)
+## Pattern Recognizers (Sequence Detectors)
 
 A **Pattern Recognizer** combines a shift register with combinational output decoding logic to detect when a specific sequence of binary bits has been received across consecutive clock cycles.
 
@@ -75,11 +77,13 @@ A **Pattern Recognizer** combines a shift register with combinational output dec
 
 The example circuit monitors four parallel tap points ($Q_3 Q_2 Q_1 Q_0$). When the captured bit pattern matches **`1001`** ($Q_3 = 1, Q_2 = 0, Q_1 = 0, Q_0 = 1$), the NAND decoding gate asserts an active-low flag:
 
-$$\text{OUT} = \overline{Q_3 \cdot \overline{Q_2} \cdot \overline{Q_1} \cdot Q_0} = \begin{cases} 0 & \text{if } Q_3 Q_2 Q_1 Q_0 = 1001_2 \text{ (Match)} \\ 1 & \text{otherwise} \end{cases}$$
+$$
+\text{OUT} = \overline{Q_3 \cdot \overline{Q_2} \cdot \overline{Q_1} \cdot Q_0} = \begin{cases} 0 & \text{if } Q_3 Q_2 Q_1 Q_0 = 1001_2 \text{ (Match)} \\ 1 & \text{otherwise} \end{cases}
+$$
 
 ---
 
-## 4. Universal Shift Registers
+## Universal Shift Registers
 
 A **Universal Shift Register** combines multiple register modes—holding data, shifting right, shifting left, and parallel loading—into a single integrated module governed by select lines ($s_1, s_0$) and a clear control.
 
@@ -101,7 +105,7 @@ A **Universal Shift Register** combines multiple register modes—holding data, 
 
 ---
 
-## 5. Counters
+## Counters
 
 A **Counter** is a specialized sequential state machine that cycles through a predefined sequence of binary states upon receiving clock pulses.
 
@@ -116,7 +120,8 @@ Counters repeat their fixed state pattern after completing $M$ clock cycles (whe
 
 Starting from initial pattern $1001_2$, the counter steps through eight unique states before recycling back to the initial state:
 
-$$\begin{aligned}
+$$
+\begin{aligned}
 \text{State 0 } (t_0): & \quad 1001_2 \\
 \text{State 1 } (t_1): & \quad 0100_2 \\
 \text{State 2 } (t_2): & \quad 1010_2 \\
@@ -126,7 +131,8 @@ $$\begin{aligned}
 \text{State 6 } (t_6): & \quad 0101_2 \\
 \text{State 7 } (t_7): & \quad 0010_2 \\
 \text{State 8 } (t_8): & \quad \mathbf{1001_2} \quad \text{(Sequence repeats)}
-\end{aligned}$$
+\end{aligned}
+$$
 
 ---
 
@@ -134,4 +140,4 @@ $$\begin{aligned}
 
 - [[Computer Systems/Digital Systems/ALU/Mux & Demux|Mux & Demux]]
 - [[Computer Systems/Digital Systems/Logic Design/Logic Functions|Logic Functions]]
-- [[Computer Systems/Digital Systems/index|Digital Systems Index]]
+- [[Computer Systems/Digital Systems/index|Digital Systems]]

@@ -29,7 +29,9 @@ To construct a circuit diagram from a Boolean expression:
 
 Given the Boolean expression:
 
-$$F = a \cdot \overline{b + \overline{c}}$$
+$$
+F = a \cdot \overline{b + \overline{c}}
+$$
 
 * **Output Gate:** An **AND** gate combining $a$ with the intermediate signal $\overline{b + \overline{c}}$.
 * **Intermediate Logic:** A **NOR** gate operating on input $b$ and the inverted input $\overline{c}$ (**NOT** gate on $c$).
@@ -61,12 +63,12 @@ A **Half Adder** adds two 1-bit binary inputs ($a, b$) and produces a 1-bit Sum 
 
 #### Half Adder Boolean Equations
 
-$$\begin{aligned}
+$$
+\begin{aligned}
 \text{Sum}(a, b) &= a'b + ab' = a \oplus b \\
 \text{Carry}(a, b) &= ab
-\end{aligned}$$
-
----
+\end{aligned}
+$$
 
 ### 2. Full Adder
 
@@ -90,10 +92,12 @@ A **Full Adder** adds three 1-bit binary inputs: two primary operands ($A, B$) a
 
 #### Full Adder Boolean Equations
 
-$$\begin{aligned}
+$$
+\begin{aligned}
 S &= A \oplus B \oplus C_{in} \\
 C_{out} &= AB + AC_{in} + BC_{in} = AB + C_{in}(A + B)
-\end{aligned}$$
+\end{aligned}
+$$
 
 ---
 
@@ -116,6 +120,8 @@ Understanding algebraic structure requires precise terminology for variables and
 
 - [[Computer Systems/Digital Systems/Number Representation & Basic Logic Gates/Number Systems and Boolean Algebra|Number Systems and Boolean Algebra]]
 - [[Computer Systems/Digital Systems/Number Representation & Basic Logic Gates/Transistors & Gates|Transistors & Gates]]
-- [[Computer Systems/Digital Systems/SOP, POS, K-Maps & Logic Simplification|SOP, POS, K-Maps & Logic Simplification]]
-- [[Computer Systems/Digital Systems/Mux, Demux, Decoders, Adders|Mux, Demux, Decoders, Adders]]
-- [[Computer Systems/Digital Systems/index|Digital Systems Index]]
+- [[Logic Simplification with K-maps|SOP, POS, K-Maps & Logic Simplification]]
+- [[Mux & Demux]]
+- [[Encoder & Decoder]]
+- [[Adders & Subtractors]]
+- [[Computer Systems/Digital Systems/index|Digital Systems]]

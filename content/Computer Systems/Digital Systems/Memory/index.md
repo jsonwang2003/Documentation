@@ -18,7 +18,7 @@ tags:
 
 ---
 
-## 1. Directory Structure & Summary Framework
+## Directory Structure & Summary Framework
 
 
 ```mermaid
@@ -33,7 +33,7 @@ flowchart TD
 
 ---
 
-## 2. Submodule Summaries
+## Submodule Summaries
 
 ### 1. [[Computer Systems/Digital Systems/Memory/Memory Hierarchy|Memory Hierarchy]]
 * **Core Focus:** Balancing system needs around **speed**, **low power consumption**, and **predictability**.
@@ -56,7 +56,7 @@ flowchart TD
 ## Related Directories
 
 - [[Computer Systems/Digital Systems/Register Transfer Level (RTL) Design/index|Register Transfer Level (RTL) Design]]
-- [[Computer Systems/Digital Systems/Sequential Circuit/index|Sequential Circuits Index]]
+- [[Computer Systems/Digital Systems/Sequential Circuit/index|Sequential Circuits]]
 - [[Computer Systems/Digital Systems/ALU/index|Arithmetic Logic Units (ALUs)]]
-- [[Computer Systems/Digital Systems/index|Digital Systems Main Index]]
-- [[Computer Systems/index|Computer Systems Hub]]
+- [[Computer Systems/Digital Systems/index|Digital Systems]]
+- [[Computer Systems/index|Computer Systems]]

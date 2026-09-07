@@ -19,7 +19,7 @@ tags:
 
 ---
 
-## 1. Physical Building Blocks: Transmission Gates & Tristate Buffers
+## Physical Building Blocks: Transmission Gates & Tristate Buffers
 
 ### Transmission Gate Switches
 Because standalone nMOS switches pass $1$s poorly and standalone pMOS switches pass $0$s poorly, **Transmission Gates (TGs)** combine nMOS and pMOS transistors in parallel to pass full-rail $0$s and $1$s efficiently:
@@ -47,7 +47,7 @@ Floating nodes allow multiple distinct drivers to connect to a single **Tristate
 
 ---
 
-## 2. Multiplexers (Mux)
+## Multiplexers (Mux)
 
 A **Multiplexer** selects one of $N$ data inputs and routes it to a single output using $n = \log_2 N$ select control lines.
 
@@ -79,20 +79,26 @@ $$
 
 For a $2^n:1$ Mux with $n$ select lines, the output is the sum of products of each minterm $m_k$ (formed by the select lines) and its corresponding data input $I_k$:
 
-$$Z = \sum_{k=0}^{2^n - 1} m_k I_k$$
+$$
+Z = \sum_{k=0}^{2^n - 1} m_k I_k
+$$
 
 ![[Pasted image 20260810235055.png]]
 *General Minterm-based Multiplexer Structure*
 
 #### 4:1 Multiplexer ($n = 2$, Selects $A, B$)
-$$Z = A'B' I_0 + A'B I_1 + AB' I_2 + AB I_3$$
+$$
+Z = A'B' I_0 + A'B I_1 + AB' I_2 + AB I_3
+$$
 
 #### 8:1 Multiplexer ($n = 3$, Selects $A, B, C$)
-$$Z = A'B'C' I_0 + A'B'C I_1 + A'BC' I_2 + A'BC I_3 + AB'C' I_4 + AB'C I_5 + ABC' I_6 + ABC I_7$$
+$$
+Z = A'B'C' I_0 + A'B'C I_1 + A'BC' I_2 + A'BC I_3 + AB'C' I_4 + AB'C I_5 + ABC' I_6 + ABC I_7
+$$
 
 ---
 
-## 3. Multiplexers as General-Purpose Logic Generators
+## Multiplexers as General-Purpose Logic Generators
 
 A $2^n:1$ Mux can implement **any $(n+1)$-variable Boolean function** by connecting $n$ variables to the select lines and driving the data inputs $I_k$ with $0$, $1$, or the remaining variable (and its complement).
 
@@ -121,7 +127,7 @@ Partition the 3-variable K-Map into sub-blocks corresponding to select states $A
 
 ---
 
-## 4. Demultiplexers (Demux)
+## Demultiplexers (Demux)
 
 A **Demultiplexer** performs the inverse operation of a multiplexer: it routes a single data input line $X$ to one of $2^n$ output lines $Y_i$, selected by $n$ control lines $(S_{n-1}, \dots, S_0)$.
 
@@ -130,7 +136,9 @@ A **Demultiplexer** performs the inverse operation of a multiplexer: it routes a
 
 ### Mathematical Function Definition
 
-$$Y_i = \begin{cases} X & \text{if } i = (S_{n-1}, \dots, S_0)_2 \text{ and } EN = 1 \\ 0 & \text{otherwise} \end{cases}$$
+$$
+Y_i = \begin{cases} X & \text{if } i = (S_{n-1}, \dots, S_0)_2 \text{ and } EN = 1 \\ 0 & \text{otherwise} \end{cases}
+$$
 
 > [!note] Enable Line Behavior
 > If the enable line $EN = 0$, **all outputs $Y_i$ remain forced to $0$**, regardless of input $X$ or select line values.
@@ -142,4 +150,4 @@ $$Y_i = \begin{cases} X & \text{if } i = (S_{n-1}, \dots, S_0)_2 \text{ and } EN
 - [[Adders & Subtractors]]
 - [[Comparator]]
 - [[Computer Systems/Digital Systems/ALU/Arithmetic Logic Unit|Arithmetic Logic Unit Integration]]
-- [[Computer Systems/Digital Systems/ALU/index|Arithmetic Logic Units Hub]]
+- [[Computer Systems/Digital Systems/ALU/index|Arithmetic Logic Units]]

@@ -45,8 +45,9 @@ Synthesizing a behavioral model into gate-level hardware follows a systematic 4-
 
 In complex RTL systems, the maximum system clock frequency ($f_{\max} = \frac{1}{T_c}$) is strictly constrained by the single longest register-to-register propagation path (**Critical Path**).
 
-```
-[ Launching Register ] ──► ( Combinational Logic Delay ) ──► [ Receiving Register ]
+```mermaid
+flowchart LR
+	n1[Launching Register] -- Combinational Logic Delay --> n2[Receiving Register]
 ```
 
 ### Potential Critical Path Locations
@@ -75,8 +76,8 @@ To prevent setup time violations ($T_c \ge t_{pcq} + t_{pd} + t_{\text{setup}} +
 
 ## Related Submodules & Directories
 
-- [[Computer Systems/Digital Systems/Sequential Circuit/index|Sequential Circuits Index]]
+- [[Computer Systems/Digital Systems/Sequential Circuit/index|Sequential Circuits]]
 - [[Computer Systems/Digital Systems/ALU/index|Arithmetic Logic Units (ALUs)]]
 - [[Computer Systems/Digital Systems/Logic Design/index|Logic Design & K-Maps]]
-- [[Computer Systems/Digital Systems/index|Digital Systems Main Index]]
-- [[Computer Systems/index|Computer Systems Hub]]
+- [[Computer Systems/Digital Systems/index|Digital Systems]]
+- [[Computer Systems/index|Computer Systems]]

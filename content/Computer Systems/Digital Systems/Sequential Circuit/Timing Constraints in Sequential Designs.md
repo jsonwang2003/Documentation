@@ -20,7 +20,7 @@ tags:
 
 ---
 
-## 1. Combinational Logic Timing Dynamics
+## Combinational Logic Timing Dynamics
 
 Signals flowing through combinational networks experience delays dictated by transistor capacitance and resistance ($RC$).
 
@@ -32,16 +32,23 @@ flowchart LR
 ```
 
 * **Contamination Delay ($t_{cd}$):** The **minimum time** from when an input changes until the output *starts* to change. It is determined by the **shortest delay path** (fewest gates) through the circuit:
-  $$t_{cd} \approx RC$$
+  
+$$
+t_{cd} \approx RC
+$$
+
 * **Propagation Delay ($t_{pd}$):** The **maximum time** from when an input changes until the output is **guaranteed to reach its final stable value** (stops changing). It is determined by the **critical path** (longest delay path) through the circuit:
-  $$t_{pd} \approx 4RC$$
+  
+$$
+t_{pd} \approx 4RC
+$$
 
 ![[Pasted image 20260825193656.png]]
 *Shortest Path (Red / $t_{cd}$) vs. Critical Path (Blue / $t_{pd}$) in Combinational Logic*
 
 ---
 
-## 2. Sequential Timing Parameters
+## Sequential Timing Parameters
 
 Flip-flops require inputs to remain stable around the active clock edge to reliably capture state without entering a metastable condition.
 
@@ -56,7 +63,10 @@ Flip-flops require inputs to remain stable around the active clock edge to relia
 * **Setup Time ($t_{\text{setup}}$):** Minimum duration **before** the active clock edge that data input $D$ must remain completely stable.
 * **Hold Time ($t_{\text{hold}}$):** Minimum duration **after** the active clock edge that data input $D$ must remain completely stable.
 * **Aperture Time ($t_a$):** Total window around the clock edge during which data $D$ must not change:
-  $$t_a = t_{\text{setup}} + t_{\text{hold}}$$
+  
+$$
+t_a = t_{\text{setup}} + t_{\text{hold}}
+$$
 
 ### Clock-to-Q Output Delays
 
@@ -65,7 +75,7 @@ Flip-flops require inputs to remain stable around the active clock edge to relia
 
 ---
 
-## 3. Ideal Clock Timing Constraints
+## Ideal Clock Timing Constraints
 
 In an ideal system where the clock edge arrives at all flip-flops simultaneously, the clock period $T_c$ and combinational paths must satisfy two critical constraints:
 
@@ -78,9 +88,13 @@ flowchart LR
 ### Setup Time Constraint (Max Delay Limit)
 The total delay along the longest path between two registers must be shorter than one clock cycle ($T_c$) minus the setup time required by the destination flip-flop.
 
-$$T_c \ge t_{pcq} + t_{pd} + t_{\text{setup}}$$
+$$
+T_c \ge t_{pcq} + t_{pd} + t_{\text{setup}}
+$$
 
-$$\text{Maximum Allowed Logic Delay: } t_{pd} \le T_c - (t_{pcq} + t_{\text{setup}})$$
+$$
+\text{Maximum Allowed Logic Delay: } t_{pd} \le T_c - (t_{pcq} + t_{\text{setup}})
+$$
 
 > [!important] Fixing Setup Violations
 > A setup violation means the data path is **too slow** (or clock frequency $f = \frac{1}{T_c}$ is too high). It can be resolved by:
@@ -90,9 +104,13 @@ $$\text{Maximum Allowed Logic Delay: } t_{pd} \le T_c - (t_{pcq} + t_{\text{setu
 ### Hold Time Constraint (Min Delay Limit)
 The fastest possible signal update from the launching register must not arrive at the destination register before its hold time window has elapsed.
 
-$$t_{\text{hold}} < t_{ccq} + t_{cd}$$
+$$
+t_{\text{hold}} < t_{ccq} + t_{cd}
+$$
 
-$$\text{Minimum Required Logic Delay: } t_{cd} > t_{\text{hold}} - t_{ccq}$$
+$$
+\text{Minimum Required Logic Delay: } t_{cd} > t_{\text{hold}} - t_{ccq}
+$$
 
 > [!warning] Fixing Hold Violations
 > A hold violation means the data path is **too fast**—the new value overwrites the old value before the destination register finishes sampling. **Lowering the clock frequency cannot fix a hold violation** because hold constraints are independent of $T_c$.
@@ -115,9 +133,12 @@ In real physical chips, wire interconnect lengths and buffer delays cause the ac
 ![[Pasted image 20260825201406.png]]
 *Setup Timing Analysis under Worst-Case Early Receiving Clock ($CLK_2$)*
 
-$$T_c \ge t_{pcq} + t_{pd} + t_{\text{setup}} + t_{\text{skew}}$$
-
-$$t_{pd} \le T_c - (t_{pcq} + t_{\text{setup}} + t_{\text{skew}})$$
+$$
+	\begin{gather*}
+	T_c \ge t_{pcq} + t_{pd} + t_{\text{setup}} + t_{\text{skew}}\\
+	t_{pd} \le T_c - (t_{pcq} + t_{\text{setup}} + t_{\text{skew}})
+	\end{gather*}
+$$
 
 ### Hold Time Constraint with Clock Skew
 
@@ -126,15 +147,17 @@ $$t_{pd} \le T_c - (t_{pcq} + t_{\text{setup}} + t_{\text{skew}})$$
 ![[Pasted image 20260825202306.png]]
 *Hold Timing Analysis under Worst-Case Late Receiving Clock ($CLK_2$)*
 
-$$t_{ccq} + t_{cd} > t_{\text{hold}} + t_{\text{skew}}$$
-
-$$t_{cd} > t_{\text{hold}} + t_{\text{skew}} - t_{ccq}$$
-
-$$t_{\text{hold}} < t_{cd} + t_{ccq} - t_{\text{skew}}$$
+$$
+	\begin{gather*}
+	t_{ccq} + t_{cd} > t_{\text{hold}} + t_{\text{skew}}\\
+	t_{cd} > t_{\text{hold}} + t_{\text{skew}} - t_{ccq}\\
+	t_{\text{hold}} < t_{cd} + t_{ccq} - t_{\text{skew}}
+	\end{gather*}
+$$
 
 ---
 
-## 5. Constraint Summary Reference
+## Constraint Summary Reference
 
 | Constraint | Ideal Clock Equation | Equation with Clock Skew ($t_{\text{skew}}$) | Primary Impact |
 |---|---|---|---|
@@ -148,4 +171,4 @@ $$t_{\text{hold}} < t_{cd} + t_{ccq} - t_{\text{skew}}$$
 - [[Latches & Flip-Flops]]
 - [[Registers and Counters|Registers & Counters]]
 - [[Finite State Machines]]
-- [[Computer Systems/Digital Systems/Sequential Circuit/index|Sequential Circuit Index]]
+- [[Computer Systems/Digital Systems/Sequential Circuit/index|Sequential Circuit]]

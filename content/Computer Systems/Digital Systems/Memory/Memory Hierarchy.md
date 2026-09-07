@@ -16,7 +16,7 @@ tags:
 
 ---
 
-## 1. System Requirements & The Architectural Trade-Off
+## System Requirements & The Architectural Trade-Off
 
 Modern processor architectures balance three competing memory demands:
 
@@ -53,7 +53,7 @@ flowchart TD
 
 ---
 
-## 2. Latency & Density Spectrum
+## Latency & Density Spectrum
 
 | Component             | Diagram                              | Hierarchy Level   | Primary Technology | Performance & Density Trade-Off                           |   Access Latency (Cycles)    |
 | --------------------- | ------------------------------------ | ----------------- | ------------------ | --------------------------------------------------------- | :--------------------------: |
@@ -64,7 +64,7 @@ flowchart TD
 
  ---
 
-## 3. Predictable Real-Time Memory: ARMv8 & TCM
+## Predictable Real-Time Memory: ARMv8 & TCM
 
 Standard cache systems introduce latency non-determinism due to unpredictable cache misses. Real-time system architectures incorporate **Tightly Coupled Memory (TCM)** to ensure predictable execution.
 
@@ -80,4 +80,4 @@ Standard cache systems introduce latency non-determinism due to unpredictable ca
 - [[Computer Systems/Digital Systems/Memory/Cache Design|Cache Design]]
 - [[Computer Systems/Digital Systems/Memory/Memory Types|Memory Types]]
 - [[Computer Systems/Digital Systems/Memory/Non-Volatile Memory (NVM)|Non-Volatile Memory (NVM)]]
-- [[Computer Systems/Digital Systems/Memory/index|Memory Index]]
+- [[Computer Systems/Digital Systems/Memory/index|Memory]]

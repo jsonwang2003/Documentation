@@ -18,7 +18,7 @@ tags:
 
 ---
 
-## 1. $m \times n$ Array Organization & Signal Interface
+## $m \times n$ Array Organization & Signal Interface
 
 ![[Pasted image 20260829144430.png]]
 
@@ -38,7 +38,7 @@ A memory module of dimensions **$m \times n$** stores $m$ addressable words of $
 
  ---
 
-## 2. Memory Composition Techniques
+## Memory Composition Techniques
 
 ### 1. Wider Words (Bit-Width Expansion)
 To widen word size ($n$) while maintaining word count ($m$):
@@ -49,9 +49,7 @@ To widen word size ($n$) while maintaining word count ($m$):
 ![[Pasted image 20260829144847.png]]
 *Word Widening ($1024 \times 8 \to 1024 \times 32$)*
 
----
-
-### 2. More Words (Address-Space Expansion)
+### More Words (Address-Space Expansion)
 To increase total addressable words ($m$) while maintaining word width ($n$):
 * Stack memory modules **vertically**.
 * Drive lower address bits ($A_0 \dots A_{k-1}$) to all chips in parallel.
@@ -62,7 +60,7 @@ To increase total addressable words ($m$) while maintaining word width ($n$):
 
 ---
 
-## 3. Physical Storage Cell Comparison (RAM Spectrum)
+## Physical Storage Cell Comparison (RAM Spectrum)
 
 | Property | Register File (FF) | Static RAM (SRAM) | Dynamic RAM (DRAM) |
 |---|:---:|:---:|:---:|
@@ -74,7 +72,7 @@ To increase total addressable words ($m$) while maintaining word width ($n$):
 
 ---
 
-## 4. RAM Internal Architecture & Cell Operations
+## RAM Internal Architecture & Cell Operations
 
 RAM arrays are laid out in a **square matrix grid** to balance row (word line) and column (bit line) capacitance.
 
@@ -123,4 +121,4 @@ Stores charge on a large capacitor via a single pass transistor. Because charge 
 - [[Computer Systems/Digital Systems/Memory/Memory Hierarchy|Memory Hierarchy]]
 - [[Computer Systems/Digital Systems/Memory/Cache Design|Cache Design]]
 - [[Computer Systems/Digital Systems/Memory/Non-Volatile Memory (NVM)|Non-Volatile Memory (NVM)]]
-- [[Computer Systems/Digital Systems/Memory/index|Memory Index]]
+- [[Computer Systems/Digital Systems/Memory/index|Memory]]

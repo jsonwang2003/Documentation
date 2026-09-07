@@ -17,16 +17,21 @@ tags:
 
 ---
 
-## 1. Equality Comparators ($A = B$)
+## Equality Comparators ($A = B$)
 
 An **Equality Comparator** evaluates to Logic $1$ if and only if every corresponding pair of bits in two $N$-bit inputs $A$ and $B$ are identical ($A_i = B_i$ for all $i \in \{0 \dots N-1\}$).
 
 ### Circuit Architecture
 
 1. **Bitwise Comparison (XNOR Gate):** For each bit position $i$, an XNOR gate outputs $1$ if $A_i$ and $B_i$ match.
-   $$x_i = A_i \text{ XNOR } B_i = A_i B_i + A_i' B_i' = \overline{A_i \oplus B_i}$$
+$$
+x_i = A_i \text{ XNOR } B_i = A_i B_i + A_i' B_i' = \overline{A_i \oplus B_i}
+$$
 2. **Global Equivalence (AND Tree):** The overall equality output $A_{eq}B$ is active only when all bitwise XNOR outputs are $1$.
-   $$A_{eq}B = x_{N-1} \cdot x_{N-2} \cdots x_1 \cdot x_0 = \prod_{i=0}^{N-1} \overline{A_i \oplus B_i}$$
+   
+$$
+A_{eq}B = x_{N-1} \cdot x_{N-2} \cdots x_1 \cdot x_0 = \prod_{i=0}^{N-1} \overline{A_i \oplus B_i}
+$$
 
 ![[Pasted image 20260821145930.png]]
 *N-Bit Equality Comparator using Bitwise XNOR Gates and an N-Input AND Gate*
@@ -39,14 +44,16 @@ Equality can also be evaluated using an **Adder-Subtractor** block:
 2. If $A = B$, then $D = 0$ (all difference bits $D_i = 0$).
 3. Feed all difference bits $D_i$ into an **$N$-input NOR gate**:
 
-$$A_{eq}B = \overline{D_{N-1} + D_{N-2} + \dots + D_0}$$
+$$
+A_{eq}B = \overline{D_{N-1} + D_{N-2} + \dots + D_0}
+$$
 
 > [!note] Mux/Gate Swap Comparison
 > Using an dedicated XNOR-AND tree requires fewer gate levels and has lower propagation delay compared to waiting for carry propagation through a full subtractor array.
 
 ---
 
-## 2. Less-Than Comparators ($A < B$)
+## Less-Than Comparators ($A < B$)
 
 A **Less-Than Comparator** determines whether $A$ is strictly less than $B$.
 
@@ -54,7 +61,9 @@ A **Less-Than Comparator** determines whether $A$ is strictly less than $B$.
 
 To evaluate $A < B$, the circuit performs two's complement subtraction:
 
-$$D = A - B = A + \overline{B} + 1$$
+$$
+D = A - B = A + \overline{B} + 1
+$$
 
 In two's complement representation:
 * If $A \ge B$, the result $D$ is non-negative, and the Most Significant Bit (MSB / sign bit) is $0$ ($D_{N-1} = 0$).
@@ -66,11 +75,13 @@ In two's complement representation:
 > [!important] Overflow-Corrected Signed Comparisons
 > For signed numbers where arithmetic overflow ($V$) can occur, the true less-than condition incorporates overflow correction:
 >
-> $$\text{Less Than } (A < B) = D_{N-1} \oplus V$$
+> $$
+> \text{Less Than } (A < B) = D_{N-1} \oplus V
+> $$
 
 ---
 
-## 3. Deriving All Relational Operators
+## Deriving All Relational Operators
 
 All six standard relational operators can be constructed using an **Equality block ($A_{eq}B$)** and a **Less-Than block ($A_{lt}B$)** by swapping input ports ($A \leftrightarrow B$) or inverting output signals.
 
@@ -92,4 +103,4 @@ All six standard relational operators can be constructed using an **Equality blo
 - [[Adders & Subtractors|Adders]]
 - [[Multiplier & Divider]]
 - [[Computer Systems/Digital Systems/ALU/Arithmetic Logic Unit|Arithmetic Logic Unit Integration]]
-- [[Computer Systems/Digital Systems/ALU/index|Arithmetic Logic Units Hub]]
+- [[Computer Systems/Digital Systems/ALU/index|Arithmetic Logic Units]]

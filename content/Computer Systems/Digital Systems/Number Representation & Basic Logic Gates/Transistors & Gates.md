@@ -25,14 +25,19 @@ Digital logic signals are physical voltage levels. Analyzing gate delays and dyn
 * **Voltage ($V$):** The difference in electrical potential between two points, measured in Volts. Represents digital logic states ($V_{DD}$ for Logic 1, Ground/GND for Logic 0).
 * **Current ($I$):** The flow rate of charged particles through a conductor, measured in Amperes.
 * **Resistance ($R$):** The tendency of a material or wire to impede current flow, measured in Ohms ($\Omega$).
-  
-  $$\text{Ohm's Law: } V = IR$$
+
+$$
+\text{Ohm's Law: } V = IR
+$$
 
 * **Capacitance ($C$):** The ratio of electric charge change to electric potential change, measured in Farads ($F$). Gate terminals and interconnect wires behave as parasitic capacitors.
 
-  $$I = C \cdot \frac{dQ}{dt}$$
-
-  $$\Delta V = I \cdot \frac{\Delta t}{C}$$
+$$
+\begin{align*}
+I &= C \cdot \frac{dQ}{dt}\\
+\Delta V &= I \cdot \frac{\Delta t}{C}
+\end{align*}
+$$
 
 > [!info] Physical Switching Behavior
 > Charging a capacitance $C$ to voltage $\Delta V$ requires finite time $\Delta t$. This charging/discharging current limits the maximum operating clock frequency of digital circuits.
@@ -108,8 +113,6 @@ A **Transmission Gate (TG)** combines an nMOS and a pMOS transistor in parallel 
 
 Any Boolean function can be constructed using only **NAND** gates or only **NOR** gates (Functional Universality).
 
----
-
 ### Universal Logic: NAND Implementations
 
 A basic 2-input NAND gate consists of **4 transistors**: 2 pMOS in parallel (PUN) and 2 nMOS in series (PDN).
@@ -137,8 +140,6 @@ Constructed using De Morgan's Law ($\overline{A \cdot B} = \overline{A} + \overl
 *NAND-based OR Gate Structure*
 
 * **Transistor Count:** **8 Transistors** ($2 \times 2 \text{ [Inverters]} + 4 \text{ [NAND]}$).
-
----
 
 ### Universal Logic: NOR Implementations
 
@@ -183,6 +184,6 @@ Constructed using De Morgan's Law ($\overline{A + B} = \overline{A} \cdot \overl
 ## Related Notes
 
 - [[Number Systems and Boolean Algebra|Number Systems and Boolean Algebra]]
-- [[Computer Systems/Digital Systems/Combinational Logic Design|Combinational Logic Design]]
-- [[Computer Systems/Digital Systems/SOP, POS, K-Maps & Logic Simplification|SOP, POS, K-Maps & Logic Simplification]]
-- [[Computer Systems/Digital Systems/index|Digital Systems Index]]
+- [[Logic Functions|Combinational Logic Design]]
+- [[Logic Simplification with K-maps|SOP, POS, K-Maps & Logic Simplification]]
+- [[Computer Systems/Digital Systems/index|Digital Systems]]

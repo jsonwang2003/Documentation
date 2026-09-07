@@ -1,5 +1,4 @@
 ---
-title: "SOP, POS, K-Maps & Logic Simplification"
 description: "The Uniting Theorem, Boolean cubes, Karnaugh Maps (3 and 4 variables), Don't Care (X) conditions, subcube dimensionality, Implicants, Prime Implicants, Essential Prime Implicants, and the systematic 2-level logic minimization algorithm."
 aliases:
   - SOP, POS, K-Maps & Logic Simplification
@@ -19,11 +18,13 @@ tags:
 
 ---
 
-## 1. Key to Simplification: The Uniting Theorem
+## Key to Simplification: The Uniting Theorem
 
 The algebraic cornerstone of all two-level logic minimization is the **Uniting Theorem**:
 
-$$A \cdot B' + A \cdot B = A(B' + B) = A \cdot (1) = A$$
+$$
+A \cdot B' + A \cdot B = A(B' + B) = A \cdot (1) = A
+$$
 
 ### The Uniting Principle
 If two product terms in the ON-set differ in **exactly one variable** (one appears in true form, the other in complemented form), that varying variable can be eliminated, leaving a single product term with **one fewer literal** to represent both elements.
@@ -33,7 +34,7 @@ If two product terms in the ON-set differ in **exactly one variable** (one appea
 
 ---
 
-## 2. Geometric Abstraction: Boolean Cubes
+## Geometric Abstraction: Boolean Cubes
 
 A **Boolean Cube** is a geometric representation of an $n$-variable Boolean space as an $n$-dimensional hypercube ($n$-cube):
 
@@ -52,14 +53,16 @@ A **Boolean Cube** is a geometric representation of an $n$-variable Boolean spac
 
 ---
 
-## 3. Karnaugh Maps (K-Maps) & Gray Code Adjacency
+## Karnaugh Maps (K-Maps) & Gray Code Adjacency
 
 A **Karnaugh Map (K-Map)** is a flattened 2D planar projection of a Boolean hypercube designed to make adjacencies visually obvious.
 
 ### Gray Code Indexing
 K-Map rows and columns are arranged using **Gray code** sequences (where adjacent cells differ by only **one bit**), rather than standard binary count order:
 
-$$\text{Gray Code Sequence: } 00 \to 01 \to 11 \to 10$$
+$$
+\text{Gray Code Sequence: } 00 \to 01 \to 11 \to 10
+$$
 
 > [!important] Boundary Wraparound
 > Adjacency in a K-Map wraps around the outer borders. The leftmost column is adjacent to the rightmost column, and the top row is adjacent to the bottom row. The four corners of a 4-variable map are also mutually adjacent.
@@ -72,7 +75,7 @@ $$\text{Gray Code Sequence: } 00 \to 01 \to 11 \to 10$$
 
 ---
 
-## 4. Incompletely Specified Functions & Don't Cares ($X$)
+## Incompletely Specified Functions & Don't Cares ($X$)
 
 In many digital circuits, certain input combinations either **cannot occur** or their outputs **do not affect system behavior**. These conditions are represented as **Don't Care ($X$)** values.
 
@@ -91,11 +94,13 @@ A Boolean function is fully specified by declaring any **2 out of 3** sets:
 * **OFF-set ($\Pi M$):** All input conditions yielding output $0$.
 * **Don't Care set ($DC$ / $d$):** All input conditions yielding output $X$.
 
-$$F(A, B, C, D) = \Sigma m(1, 3, 7, 11) + d(0, 2, 5)$$
+$$
+F(A, B, C, D) = \Sigma m(1, 3, 7, 11) + d(0, 2, 5)
+$$
 
 ---
 
-## 5. Subcubes, Dimensionality & Literal Reduction
+## Subcubes, Dimensionality & Literal Reduction
 
 Groupings of adjacent cells in a K-Map are called **subcubes**. Every subcube must contain a number of cells equal to a **power of 2** ($1, 2, 4, 8, 16 \dots$).
 
@@ -114,7 +119,7 @@ For an $n$-variable function, an $m$-dimensional subcube ($m \le n$) contains $2
 
 ---
 
-## 6. Fundamental Implicant Terminology
+## Fundamental Implicant Terminology
 
 | Term | Definition | Key Characteristics |
 |---|---|---|
@@ -127,6 +132,43 @@ For an $n$-variable function, an $m$-dimensional subcube ($m \le n$) contains $2
 
 ---
 
-## 7. Systematic Algorithm for Two-Level Logic Simplification
+## Systematic Algorithm for Two-Level Logic Simplification
 
 To find the minimum SOP expression from a K-Map:
+
+```mermaid
+flowchart TD
+    Start([Start K-Map Minimization]) --> Step1["1. Locate all 1s and Xs on the map"]
+    Step1 --> Step2["2. Form all PRIME IMPLICANTS (PIs)<br/><i>Expand 1s into largest subcubes of 1s/Xs in powers of 2</i>"]
+    Step2 --> Step3["3. Identify ESSENTIAL PRIME IMPLICANTS (EPIs)<br/><i>Find 1s covered by ONLY ONE Prime Implicant</i>"]
+    Step3 --> Step4["4. Add all EPIs to final SOP expression"]
+    Step4 --> Decision{"5. Are all 1s covered?"}
+
+    Decision -- Yes --> Done([Done: Output Minimal SOP])
+    Decision -- No --> Step6["6. Select MINIMAL set of remaining PIs<br/><i>Cover remaining 1s prioritizing maximum overlap</i>"]
+    Step6 --> Done
+```
+    
+
+### Algorithmic Execution Steps
+
+1. **Find All Prime Implicants (PIs):**
+   * For every $1$ on the map, construct all maximal groupings of adjacent $1$s and $X$s (considering edges, columns, rows, and 4-corner wraps).
+2. **Identify Essential Prime Implicants (EPIs):**
+   * Inspect each $1$ cell on the map. If a $1$ is covered by **exactly one** PI, that PI is **Essential**.
+   * Mark all EPIs and include them in the final equation.
+3. **Cover Remaining Uncovered $1$s:**
+   * Mark all $1$s already covered by the selected EPIs.
+   * If any $1$s remain uncovered, select the **smallest set of remaining PIs** that covers all remaining $1$s.
+
+---
+
+## Related Notes
+
+- [[Computer Systems/Digital Systems/Number Representation & Basic Logic Gates/Number Systems and Boolean Algebra|Number Systems and Boolean Algebra]]
+- [[Logic Functions|Combinational Logic Design]]
+- [[Canonical Representation]]
+- [[Mux & Demux]]
+- [[Encoder & Decoder]]
+- [[Adders & Subtractors]]
+- [[Computer Systems/Digital Systems/index|Digital Systems]]
