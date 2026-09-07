@@ -22,7 +22,7 @@ tags:
 
 ---
 
-# 1. What is a Critical Section?
+# What is a Critical Section?
 
 A **Critical Section** is a segment of code that accesses shared mutable resources (such as global variables, heap structures, or file handles) and must not be concurrently executed by more than one thread.
 
@@ -45,7 +45,7 @@ void withdraw(Account* account, int amount) {
 
 ---
 
-# 2. The Four Goals of Critical Section Design
+# The Four Goals of Critical Section Design
 
 Any valid solution for protecting a critical section must satisfy four fundamental requirements:
 
@@ -63,7 +63,7 @@ The execution overhead of entering, checking, and exiting the critical section m
 
 ---
 
-# 3. Categorizing Goals: Safety vs. Liveness
+# Categorizing Goals: Safety vs. Liveness
 
 When evaluating concurrent systems, the four requirements map into two formal formalisms:
 

@@ -112,4 +112,4 @@ graph LR
 - [[Hypervisor Architectures & Software Virtualization|Hypervisor Architectures & Software Virtualization]]
 - [[Process Abstraction & PCB|Process Abstraction & PCB]]
 - [[Virtual Memory & Address Translation Fundamentals|Virtual Memory & Address Translation Fundamentals]]
-- [[Computer Systems/Operating Systems/Virtual Machines/index|Virtual Machines Main Directory]]
+- [[Computer Systems/Operating Systems/Virtual Machines/index|Virtual Machines]]

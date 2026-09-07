@@ -135,4 +135,4 @@ When creating process address spaces, the kernel sets PTE protection bits based 
 - [[System Calls|System Calls]]
 - [[File Systems & Storage Technologies#Protection & Access Rights|File Protection]]
 - [[Page Table Entries & Memory Overhead|Page Table Entries & Memory Overhead]]
-- [[Computer Systems/Operating Systems/Kernel & Architecture/index|Kernel & Architecture Main Directory]]
+- [[Computer Systems/Operating Systems/Kernel & Architecture/index|Kernel & Architecture]]

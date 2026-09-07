@@ -118,4 +118,4 @@ Modern server CPUs combine multiple hardware virtualization primitives:
 - [[CPU, Event, and IO Virtualization|CPU, Event, and IO Virtualization]]
 - [[Multi-Level Page Tables|Multi-Level Page Tables]]
 - [[Translation Lookaside Buffer (TLB)|Translation Lookaside Buffer (TLB)]]
-- [[Computer Systems/Operating Systems/Virtual Machines/index|Virtual Machines Main Directory]]
+- [[Computer Systems/Operating Systems/Virtual Machines/index|Virtual Machines]]

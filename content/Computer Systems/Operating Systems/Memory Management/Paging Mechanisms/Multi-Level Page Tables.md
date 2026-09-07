@@ -54,12 +54,18 @@ Assume a **32-bit address space**, **$4\text{ KB}$ page size**, and **$4\text{-b
 ![[Pasted image 20260726001338.png]]
 
 1.  **Offset Bits:**
-    $$\text{Page Size} = 4\text{ KB} = 4096\text{ bytes} = 2^{12}\text{ bytes} \implies \mathbf{12\text{ bits}}$$
+    $$
+    \text{Page Size} = 4\text{ KB} = 4096\text{ bytes} = 2^{12}\text{ bytes} \implies \mathbf{12\text{ bits}}
+    $$
 2.  **Page Directory Sizing:**
     To ensure every page table fits cleanly inside a single $4\text{ KB}$ page frame:
-    $$\text{Entries per Page} = \frac{4\text{ KB}}{4\text{ bytes per entry}} = 1024\text{ entries} = 2^{10} \implies \mathbf{10\text{ bits}}$$
+    $$
+    \text{Entries per Page} = \frac{4\text{ KB}}{4\text{ bytes per entry}} = 1024\text{ entries} = 2^{10} \implies \mathbf{10\text{ bits}}
+    $$
 3.  **Secondary Page Table Sizing:**
-    $$\text{Remaining Bits} = 32 - 12\text{ (Offset)} - 10\text{ (Directory)} = \mathbf{10\text{ bits}}$$
+    $$
+    \text{Remaining Bits} = 32 - 12\text{ (Offset)} - 10\text{ (Directory)} = \mathbf{10\text{ bits}}
+    $$
 
 ![[Pasted image 20260726001355.png]]
 

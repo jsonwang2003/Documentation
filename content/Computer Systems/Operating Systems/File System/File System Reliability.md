@@ -63,7 +63,8 @@ flowchart TD
 
 ---
 
-## Approach 1: File System Checker (`fsck`)
+## Approaches to Solving Crash Consistency Problem
+### Approach 1: File System Checker (`fsck`)
 
 Early Unix systems used an offline utility called **`fsck` (File System Check)** that executes during system reboot following an unclean shutdown.
 
@@ -76,27 +77,25 @@ flowchart LR
     CheckLinks --> Repair
 ```
 
-### Common Repairs
+#### Common Repairs
 *   **Reclaim Leaked Blocks:** If a bitmap bit is set to $1$ but no inode points to that block, `fsck` clears the bitmap bit.
 *   **Fix Discrepant Link Counts:** Adjusts the inode reference count to match the actual count of directory entries pointing to it.
 *   **Recover Lost Files:** Unreferenced inodes with non-zero link counts are moved to a `/lost+found` directory.
 
-### Drawbacks
+#### Drawbacks
 *   **Extreme Recovery Latency:** `fsck` must perform a full traversal of all inodes and directory structures on disk ($O(\text{disk capacity})$). On multi-terabyte drives, this scan can take **hours**.
 *   **Potential Data Loss:** Cannot restore file contents; can only restore structural integrity, sometimes leaving files containing garbage data.
 
----
-
-## Approach 2: Ordered Writes
+### Approach 2: Ordered Writes
 
 **Ordered Writes** prevent severe structural corruption by enforcing strict dependency ordering on disk writes so that invalid pointer references are never created.
 
-### Core Ordering Rules
+#### Core Ordering Rules
 1. **Initialize target data/bitmap blocks before writing pointers to them** in inodes.
 2. **Nullify existing pointers to a block before reusing it.**
 3. **Set a new pointer to a resource before clearing the old pointer** (e.g., during atomic `rename`).
 
-### Safe Append Sequence
+#### Safe Append Sequence
 When appending a block to a file, data and bitmap blocks are flushed before the inode pointer is committed:
 
 ```mermaid
@@ -107,20 +106,16 @@ flowchart LR
 *   **Pros:** Eliminates severe filesystem corruption without requiring an offline scan on reboot.
 *   **Cons:** Synchronous write ordering introduces high latency overhead. Space leaks can still occur, requiring background cleaning routines.
 
----
-
-## Approach 3: Journaling (Write-Ahead Logging)
+### Approach 3: Journaling (Write-Ahead Logging)
 
 Modern file systems (e.g., Linux `ext4`, Windows `NTFS`, macOS `APFS`) utilize **Journaling (Write-Ahead Logging)** to achieve fast crash recovery and guaranteed consistency.
 
-### Core Concept
+#### Core Concept
 Before writing changes to their permanent home locations on disk, the file system writes a description of the intended updates into an append-only log file called the **Journal**.
 
 ![[Pasted image 20260802203801.png]]
 
----
-
-### Journal Transaction Structure
+#### Journal Transaction Structure
 
 The journal is managed as a circular buffer composed of transaction records:
 
@@ -130,9 +125,7 @@ The journal is managed as a circular buffer composed of transaction records:
 2. **Block Records / Payloads:** The actual modified blocks (data, inode, bitmap).
 3. **Transaction Commit Block (`Tx Commit`):** A single block written **only after** all prior payload blocks are flushed. A transaction is considered finalized and durable **only** when the commit block is fully written to disk.
 
----
-
-### Journaling Lifecycle & Checkpointing
+#### Journaling Lifecycle & Checkpointing
 
 ```mermaid
 sequenceDiagram

@@ -22,7 +22,7 @@ tags:
 
 ---
 
-# 1. Problem Formulation
+# Problem Formulation
 
 | Pipeline Stage | System Component     | Operational Role & State                                                                  |
 | -------------- | -------------------- | ----------------------------------------------------------------------------------------- |
@@ -37,7 +37,7 @@ tags:
 
 ---
 
-# 2. Why Naive & Basic Lock Solutions Fail
+# Why Naive & Basic Lock Solutions Fail
 
 ### Naive Unsynchronized Attempt (Broken)
 Updating `count++` and `count--` concurrently without locks introduces **race conditions** that corrupt the buffer index pointers and item counts.
@@ -60,9 +60,9 @@ if (count == 1) wakeup(consumer);
 
 ---
 
-# 3. Correct Solution 1: Using Semaphores (Hoare Semantics)
+# Correct Solution 1: Using Semaphores (Hoare Semantics)
 
-To solve the problem with semaphores, we enforce three distinct constraints using three semaphores:
+To solve the problem with [[Semaphores]], we enforce three distinct constraints using three semaphores:
 1.  **`empty_count` (Counting Semaphore, Init = $N$):** Tracks available empty slots.
 2.  **`full_count` (Counting Semaphore, Init = $0$):** Tracks available filled items.
 3.  **`mutex` (Binary Semaphore, Init = $1$):** Enforces mutual exclusion on buffer operations.
@@ -103,9 +103,9 @@ void consumer() {
 
 ---
 
-# 4. Correct Solution 2: Using Condition Variables (Mesa Semantics)
+# Correct Solution 2: Using Condition Variables (Mesa Semantics)
 
-When using Condition Variables, we pair a single **Mutex Lock** with two **Condition Variables**:
+When using [[Condition Variables]], we pair a single **Mutex Lock** with two **Condition Variables**:
 1.  **`not_full` (CV):** Signaled by consumers when buffer space becomes available.
 2.  **`not_empty` (CV):** Signaled by producers when buffer items become available.
 

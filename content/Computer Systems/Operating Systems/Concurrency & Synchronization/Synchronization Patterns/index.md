@@ -19,10 +19,10 @@ tags:
 
 # Classical Synchronization Problems
 
-| Pattern Link | Description | Primary Challenge | Solution Mechanisms |
-|---|---|---|---|
-| **[[Producer-Consumer Problem\|Producer-Consumer Problem]]** | Manages a fixed-capacity bounded buffer shared between data-generating producers and data-consuming consumers. | Preventing buffer overflow, underflow, and lost wakeups | Counting Semaphores OR Mutex Lock + Condition Variables |
-| **[[Reader-Writer Problem\|Reader-Writer Problem]]** | Manages concurrent read access while ensuring exclusive write access to shared datasets. | Allowing concurrent readers without data corruption or writer starvation | Binary Semaphores (`mutex`, `block_write`) + Reader Tracking |
+| Pattern Link                                                 | Description                                                                                                    | Primary Challenge                                                        | Solution Mechanisms                                                                    |
+| ------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ | -------------------------------------------------------------------------------------- |
+| **[[Producer-Consumer Problem\|Producer-Consumer Problem]]** | Manages a fixed-capacity bounded buffer shared between data-generating producers and data-consuming consumers. | Preventing buffer overflow, underflow, and lost wakeups                  | [[Semaphores\|Counting Semaphore]] OR [[Locks\|Mutex Locks]] + [[Condition Variables]] |
+| **[[Reader-Writer Problem\|Reader-Writer Problem]]**         | Manages concurrent read access while ensuring exclusive write access to shared datasets.                       | Allowing concurrent readers without data corruption or writer starvation | Binary [[Semaphores]] (`mutex`, `block_write`) + Reader Tracking                       |
 
 ---
 
@@ -44,6 +44,6 @@ TITLE --> RW_NODE
 
 # Related Modules
 
-- [[Computer Systems/Operating Systems/Concurrency & Synchronization/Synchronization Primitives/index|Synchronization Primitives Directory]]
+- [[Computer Systems/Operating Systems/Concurrency & Synchronization/Synchronization Primitives/index|Synchronization Primitives]]
 - [[Critical Sections & Mutual Exclusion|Critical Sections & Mutual Exclusion]]
-- [[Computer Systems/Operating Systems/Concurrency & Synchronization/index|Concurrency & Synchronization Main Index]]
+- [[Computer Systems/Operating Systems/Concurrency & Synchronization/index|Concurrency & Synchronization]]

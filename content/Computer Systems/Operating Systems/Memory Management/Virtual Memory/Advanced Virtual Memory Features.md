@@ -42,7 +42,7 @@ When a process executes `fork()` to create a child process, copying the entire a
 
 **Copy-on-Write (CoW)** optimizes process creation by sharing physical pages lazily:
 
-1.  **Lazy Page Sharing:** During [[Process Lifecycle & API|fork()]], parent and child page table entries are set to point to the same physical pages and marked as **Read-Only**.
+1.  **Lazy Page Sharing:** During [[Process Lifecycle & API#1. `int fork()`|fork()]], parent and child page table entries are set to point to the same physical pages and marked as **Read-Only**.
 2.  **Protection Fault:** If either process attempts to write to a shared page, the hardware detects a protection violation and traps to the OS kernel.
 3.  **Page Replication:** The kernel allocates a new physical frame, copies the 4 KB page contents, updates the faulting process's PTE to point to the new frame with **Read/Write** permissions, and restarts the write instruction.
 

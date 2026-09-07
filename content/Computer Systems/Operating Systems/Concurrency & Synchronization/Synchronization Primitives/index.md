@@ -19,17 +19,17 @@ tags:
 
 # Core Primitives
 
-| Primitive Link | Description | Primary Mechanism / API | Primary Use Case |
-|---|---|---|---|
-| **[[Locks\|Locks]]** | Enforces strict mutual exclusion across critical sections. Evolves from hardware spinlocks to guarded sleep locks. | `acquire()`, `release()`, `test_and_set()` | Mutual Exclusion (Single Thread in Critical Section) |
-| **[[Semaphores\|Semaphores]]** | Dijkstra's non-negative integer variable. Retains event history to manage resource pools and timing sequences. | `wait()` ($P$), `signal()` ($V$), Counter + Wait Queue | Mutual Exclusion ($N=1$) AND Event Sequencing ($N > 1$) |
-| **[[Condition Variables\|Condition Variables]]** | Memoryless synchronization queues allowing threads to sleep inside critical sections by atomically releasing locks. | `wait()`, `signal()`, `broadcast()` (Mesa Semantics) | Waiting for complex shared state conditions |
-| **[[Monitors\|Monitors]]** | Language-level constructs encapsulating shared data and routines with compiler-enforced implicit mutual exclusion and internal CVs. | Encapsulated Procedures + Implicit Locks + Internal CVs | Structured, language-supported thread synchronization |
+| Primitive Link                                   | Description                                                                                                                         | Primary Mechanism / API                                 | Primary Use Case                                        | Level      | Mutual Exclusion   | Event Coordination         | Lock Management              | Primary Limitation                                            |
+| ------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- | ---------- | ------------------ | -------------------------- | ---------------------------- | ------------------------------------------------------------- |
+| **[[Locks\|Locks]]**                             | Enforces strict mutual exclusion across critical sections. Evolves from hardware spinlocks to guarded sleep locks.                  | `acquire()`, `release()`, `test_and_set()`              | Mutual Exclusion (Single Thread in Critical Section)    | Low-Level  | **Yes**            | No                         | Manual (`acquire`/`release`) | Prone to missing `release()` calls                            |
+| **[[Semaphores\|Semaphores]]**                   | Dijkstra's non-negative integer variable. Retains event history to manage resource pools and timing sequences.                      | `wait()` ($P$), `signal()` ($V$), Counter + Wait Queue  | Mutual Exclusion ($N=1$) AND Event Sequencing ($N > 1$) | Mid-Level  | **Yes** (Binary)   | **Yes** (Counting)         | Manual (`wait`/`signal`)     | Unstructured; history counter can confuse state logic         |
+| **[[Condition Variables\|Condition Variables]]** | Memoryless synchronization queues allowing threads to sleep inside critical sections by atomically releasing locks.                 | `wait()`, `signal()`, `broadcast()` (Mesa Semantics)    | Waiting for complex shared state conditions             | Mid-Level  | No                 | **Yes**                    | Manual (Paired with Lock)    | Memoryless; must re-check conditions in `while` loop          |
+| **[[Monitors\|Monitors]]**                       | Language-level constructs encapsulating shared data and routines with compiler-enforced implicit mutual exclusion and internal CVs. | Encapsulated Procedures + Implicit Locks + Internal CVs | Structured, language-supported thread synchronization   | High-Level | **Yes** (Implicit) | **Yes** (Via internal CVs) | **Automatic** (Compiler)     | Requires language/runtime support (e.g., Java `synchronized`) |
 
 ---
 
 # Related Modules
 
-- [[Computer Systems/Operating Systems/Concurrency & Synchronization/Synchronization Patterns/index|Synchronization Patterns Directory]]
-- [[Computer Systems/Operating Systems/Concurrency & Synchronization/Deadlocks/index|Deadlocks Directory]]
-- [[Computer Systems/Operating Systems/Concurrency & Synchronization/index|Concurrency & Synchronization Main Index]]
+- [[Computer Systems/Operating Systems/Concurrency & Synchronization/Synchronization Patterns/index|Synchronization Patterns]]
+- [[Computer Systems/Operating Systems/Concurrency & Synchronization/Deadlocks/index|Deadlocks]]
+- [[Computer Systems/Operating Systems/Concurrency & Synchronization/index|Concurrency & Synchronization]]

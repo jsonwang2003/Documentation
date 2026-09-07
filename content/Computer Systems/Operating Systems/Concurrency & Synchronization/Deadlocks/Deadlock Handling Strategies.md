@@ -20,7 +20,7 @@ tags:
 
 ---
 
-# 1. Overview of Deadlock Handling Strategies
+## Overview of Deadlock Handling Strategies
 
 | Strategy | Operational Mechanism | Pros / Cons | Primary Production Use Case |
 |---|---|---|---|
@@ -31,7 +31,7 @@ tags:
 
 ---
 
-# 2. Strategy 1: Deadlock Prevention
+## Strategy 1: Deadlock Prevention
 
 Deadlock Prevention forces the system to violate at least one of the four Coffman conditions:
 
@@ -65,7 +65,7 @@ void worker_thread() {
 
 ---
 
-# 3. Strategy 2: Deadlock Avoidance & The Banker's Algorithm
+## Strategy 2: Deadlock Avoidance & The Banker's Algorithm
 
 Deadlock Avoidance permits resource requests only if allocating them leaves the system in a **Safe State**.
 
@@ -84,7 +84,7 @@ The **Banker's Algorithm** evaluates incoming resource requests against total av
 
 ---
 
-# 4. Strategy 3: Deadlock Detection and Recovery
+## Strategy 3: Deadlock Detection and Recovery
 
 Allow deadlocks to occur, periodically execute a cycle-detection algorithm on the Resource Allocation Graph (RAG), and recover when cycles are found.
 
@@ -100,9 +100,9 @@ Allow deadlocks to occur, periodically execute a cycle-detection algorithm on th
 
 ---
 
-# 5. Checkpoint Case Study: Readers-Writers Flaw
+# Checkpoint Case Study: Readers-Writers Flaw
 
-Recall the Readers-Writers semaphore solution:
+Recall the [[Reader-Writer Problem#2. Semaphore Implementation (First Readers-Writers Solution)|Readers-Writers]] Semaphore solution:
 
 ![[Pasted image 20260723150015.png]]
 

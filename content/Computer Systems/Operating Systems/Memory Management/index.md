@@ -5,6 +5,7 @@ aliases:
   - Memory Management Directory
   - Memory Management Index
   - VM Hub
+  - Memory Management
 tags:
   - index
   - operating-systems
@@ -37,4 +38,4 @@ tags:
 
 - [[Process Abstraction & PCB|Process Abstraction & PCB]]
 - [[Dual-Mode Operation & Memory Protection|Dual-Mode Operation & Memory Protection]]
-- [[Computer Systems/Operating Systems/index|Operating Systems Main Directory]]
+- [[Computer Systems/Operating Systems/index|Operating Systems]]

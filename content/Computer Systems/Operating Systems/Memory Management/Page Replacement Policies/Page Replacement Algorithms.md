@@ -53,7 +53,9 @@ Belady's Optimal Algorithm evicts the page that will not be accessed for the lon
 ### Belady's Anomaly
 Belady's Anomaly describes a counterintuitive scenario where increasing the number of physical page frames results in **more** page faults for certain replacement algorithms (such as FIFO):
 
-$$\text{More Frames} \nRightarrow \text{Fewer Page Faults}$$
+$$
+\text{More Frames} \nRightarrow \text{Fewer Page Faults}
+$$
 
 Algorithms immune to Belady's Anomaly are called **Stack Algorithms** (e.g., LRU, Optimal).
 

@@ -51,7 +51,20 @@ The CPU Scheduler is invoked whenever execution control returns to the kernel th
 3.  **Waiting $\to$ Ready:** An external hardware I/O interrupt completes, unblocking a thread.
 4.  **Termination:** A thread exits explicitly (`exit()`) or encounters an unhandled fault.
 
-![[Pasted image 20260715145033.png]]
+```mermaid
+flowchart TD
+    Create([ ]) -->|"create thread"| Ready
+
+    Ready(("Ready"))
+    Running(("Running"))
+    Waiting(("Waiting"))
+
+    Ready -->|"schedule thread"| Running
+    Running -->|"timer interrupt,<br>yield"| Ready
+    Running -->|"block for resource<br>(I/O, page fault, etc.)"| Waiting
+    Waiting -->|"resource free,<br>I/O completion interrupt"| Ready
+    Running -->|"thread exit"| Exit([ ])
+```
 
 ---
 
@@ -61,11 +74,15 @@ Schedulers are evaluated against quantitative mathematical performance metrics:
 
 ### 1. Turnaround Time ($T_{\text{turnaround}}$)
 The total time elapsed from job arrival to complete execution:
-$$T_{\text{turnaround}} = T_{\text{completion}} - T_{\text{arrival}}$$
+$$
+T_{\text{turnaround}} = T_{\text{completion}} - T_{\text{arrival}}
+$$
 
 ### 2. Response Time ($T_{\text{response}}$)
 The time elapsed from job arrival until it first begins executing on a CPU core:
-$$T_{\text{response}} = T_{\text{firstrun}} - T_{\text{arrival}}$$
+$$
+T_{\text{response}} = T_{\text{firstrun}} - T_{\text{arrival}}
+$$
 
 ### 3. Throughput
 The number of completed jobs executed per unit of time (e.g., jobs/sec).
@@ -75,7 +92,9 @@ The fraction of CPU execution time lost to non-productive management tasks (cont
 
 ### 5. CPU Utilization
 The fraction of total elapsed time the system spends performing useful application work:
-$$\text{CPU Utilization} = \frac{\text{Time Doing Useful Work}}{\text{Total Time}}$$
+$$
+\text{CPU Utilization} = \frac{\text{Time Doing Useful Work}}{\text{Total Time}}
+$$
 
 ---
 
@@ -112,11 +131,15 @@ Context switches do not perform useful application work. A typical scheduling qu
 
 ### Case 1: CPU-Bound Workload ($1\text{ ms}$ Quantum, $1\text{ }\mu\text{s}$ Overhead)
 Three CPU-bound jobs run for their entire allocated $1\text{ ms}$ quantum:
-$$\text{CPU Utilization} = \frac{3 \times 1\text{ ms}}{3 \times 1\text{ ms} + 3 \times 1\text{ }\mu\text{s}} = \frac{3000\text{ }\mu\text{s}}{3003\text{ }\mu\text{s}} \approx 99.9\%$$
+$$
+\text{CPU Utilization} = \frac{3 \times 1\text{ ms}}{3 \times 1\text{ ms} + 3 \times 1\text{ }\mu\text{s}} = \frac{3000\text{ }\mu\text{s}}{3003\text{ }\mu\text{s}} \approx 99.9\%
+$$
 
 ### Case 2: I/O-Bound Workload ($20\text{ }\mu\text{s}$ CPU Burst, $1\text{ }\mu\text{s}$ Overhead)
 Three I/O-bound jobs execute for only $20\text{ }\mu\text{s}$ before issuing an I/O request and yielding:
-$$\text{CPU Utilization} = \frac{3 \times 20\text{ }\mu\text{s}}{3 \times 20\text{ }\mu\text{s} + 3 \times 1\text{ }\mu\text{s}} = \frac{60\text{ }\mu\text{s}}{63\text{ }\mu\text{s}} \approx 95.2\%$$
+$$
+\text{CPU Utilization} = \frac{3 \times 20\text{ }\mu\text{s}}{3 \times 20\text{ }\mu\text{s} + 3 \times 1\text{ }\mu\text{s}} = \frac{60\text{ }\mu\text{s}}{63\text{ }\mu\text{s}} \approx 95.2\%
+$$
 
 ---
 

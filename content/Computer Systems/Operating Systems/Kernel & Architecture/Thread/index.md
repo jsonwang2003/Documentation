@@ -45,8 +45,8 @@ flowchart TD
 
 # Related Sections
 
-- [[Computer Systems/Operating Systems/Kernel & Architecture/Process/index|Process Management Directory]]
+- [[Computer Systems/Operating Systems/Kernel & Architecture/Process/index|Process Management]]
 - [[Dual-Mode Operation & Memory Protection|Dual-Mode Operation & Memory Protection]]
 - [[Interrupts and Exceptions|Interrupts and Exceptions]]
-- [[Operating Systems/Concurrency & Synchronization/Mutexes & Semaphores|Mutexes & Semaphores]]
-- [[Computer Systems/Operating Systems/index|Operating Systems Main Index]]
+- [[Semaphores]]
+- [[Computer Systems/Operating Systems/index|Operating Systems]]

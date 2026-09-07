@@ -22,11 +22,24 @@ tags:
 
 ---
 
-# 1. Thread Execution States & State Queues
+# Thread Execution States & State Queues
 
 Like processes, threads transition through three primary execution states: **Running**, **Ready**, and **Waiting (Blocked)**.
 
-![[Pasted image 20260715145033.png]]
+```mermaid
+flowchart TD
+    Create([ ]) -->|"create thread"| Ready
+
+    Ready(("Ready"))
+    Running(("Running"))
+    Waiting(("Waiting"))
+
+    Ready -->|"schedule thread"| Running
+    Running -->|"timer interrupt,<br>yield"| Ready
+    Running -->|"block for resource<br>(I/O, page fault, etc.)"| Waiting
+    Waiting -->|"resource free,<br>I/O completion interrupt"| Ready
+    Running -->|"thread exit"| Exit([ ])
+```
 
 ### Kernel State Queues
 To manage thousands of active threads efficiently, the OS kernel maintains doubly linked state queues:
@@ -40,7 +53,7 @@ When a thread changes state, the OS unlinks its TCB from its current queue and l
 
 ---
 
-# 2. Non-Preemptive Scheduling & `yield()`
+# Non-Preemptive Scheduling & `yield()`
 
 In a **Non-Preemptive** scheduling environment, a running thread executes continuously until it voluntarily yields control of the CPU by calling an explicit routine like `yield()`, `sleep()`, or exiting.
 
@@ -83,7 +96,7 @@ void yield() {
 
 ---
 
-# 3. The Context Switch Mechanism
+# The Context Switch Mechanism
 
 The low-level `context_switch(old_thread, new_thread)` routine saves and restores hardware registers. It is written in assembly language because standard high-level language compilers cannot manipulate raw hardware registers directly.
 
@@ -106,7 +119,7 @@ sequenceDiagram
 
 ---
 
-# 4. Preemptive Scheduling
+# Preemptive Scheduling
 
 Non-preemptive multithreading relies entirely on user cooperative yielding. If a thread enters a bugged infinite loop (`while(1);`), the entire CPU core locks up because no other thread gets scheduled.
 

@@ -67,4 +67,4 @@ flowchart TD
 - [[Demand Paging & Page Faults|Demand Paging & Page Faults]]
 - [[Page Table Entries & Memory Overhead|Page Table Entries & Memory Overhead]]
 - [[Process Address Space Allocation (Stack & Heap)]]
-- [[Computer Systems/Operating Systems/Memory Management/index|Memory Management Main Directory]]
+- [[Computer Systems/Operating Systems/Memory Management/index|Memory Management]]

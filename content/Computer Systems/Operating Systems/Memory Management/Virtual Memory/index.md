@@ -111,4 +111,4 @@ Because virtual addresses are decoupled from physical storage, operating systems
 - [[Translation Lookaside Buffer (TLB)]]
 - [[Demand Paging & Page Faults|Demand Paging & Page Faults]]
 - [[Dual-Mode Operation & Memory Protection|Dual-Mode Operation & Memory Protection]]
-- [[Computer Systems/Operating Systems/Memory Management/index|Memory Management Directory]]
+- [[Computer Systems/Operating Systems/Memory Management/index|Memory Management]]

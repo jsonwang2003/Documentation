@@ -44,7 +44,9 @@ When a running process issues a virtual address $VA$:
 ![[Pasted image 20260725212225.png]]
 
 1.  **Hardware Bounds Check:** The MMU verifies that the virtual address falls within the process limit:
-    $$0 \le VA < \text{Bound}$$
+    $$
+    0 \le VA < \text{Bound}
+    $$
     *If $VA \ge \text{Bound}$, the MMU hardware triggers an exception (Fault / Segmentation Violation).*
 2.  **Physical Address Calculation:** If the bounds check succeeds, the hardware translates the virtual address:
     $$\text{Physical Address} (PA) = VA + \text{Base}$$

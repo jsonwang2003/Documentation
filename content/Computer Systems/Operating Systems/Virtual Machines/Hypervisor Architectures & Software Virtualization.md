@@ -38,7 +38,7 @@ A **Type-2 Hypervisor** runs as a user-space application or kernel module on top
 
 ## The x86 Architecture Virtualization Challenge
 
-Classic **Trap-and-Emulate** virtualization relies on the **Popek-Goldberg virtualization requirements**: *All sensitive instructions (those that read or modify hardware configuration/privilege states) must be a subset of privileged instructions (those that trap when executed in user mode).*
+Classic **Trap-and-Emulate** virtualization relies on the **Popek-Goldberg virtualization requirements**: "All sensitive instructions (those that read or modify hardware configuration/privilege states) must be a subset of privileged instructions (those that trap when executed in user mode)."
 
 Early x86 architectures violated this requirement:
 
@@ -59,9 +59,6 @@ To overcome x86 hardware limitations prior to hardware-assisted virtualization (
 
 *   **Hypercalls:** Sensitive operations (e.g., modifying page tables, disabling interrupts) are replaced at compile time with explicit calls into the VMM (**Hypercalls**), analogous to system calls.
 *   **Trade-off:** Sacrifices guest OS transparency (requires modified guest kernel code), but provides high performance without hardware extension requirements.
-
----
-
 ### 2. Binary Translation
 **Binary Translation** dynamically rewrites guest OS machine code at runtime without modifying the underlying operating system binaries.
 
@@ -86,4 +83,4 @@ To overcome x86 hardware limitations prior to hardware-assisted virtualization (
 - [[CPU, Event, and IO Virtualization|CPU, Event, and IO Virtualization]]
 - [[Memory Virtualization & Extended Page Tables|Memory Virtualization & Extended Page Tables]]
 - [[Dual-Mode Operation & Memory Protection|Dual-Mode Operation & Memory Protection]]
-- [[Computer Systems/Operating Systems/Virtual Machines/index|Virtual Machines Main Directory]]
+- [[Computer Systems/Operating Systems/Virtual Machines/index|Virtual Machines]]

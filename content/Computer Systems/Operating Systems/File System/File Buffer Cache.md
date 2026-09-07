@@ -125,8 +125,6 @@ void read(int fd, void *buffer, size_t count) {
 }
 ```
 
----
-
 ### 2. Write Execution (`write`)
 
 When an application invokes `write(fd, buffer, count)`:

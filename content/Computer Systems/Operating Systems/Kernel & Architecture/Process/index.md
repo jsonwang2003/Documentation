@@ -61,4 +61,4 @@ flowchart TD
 - [[Dual-Mode Operation & Memory Protection|Dual-Mode Operation & Memory Protection]]
 - [[System Calls|System Calls]]
 - [[Interrupts and Exceptions|Interrupts and Exceptions]]
-- [[Computer Systems/Operating Systems/index|Operating Systems Main Index]]
+- [[Computer Systems/Operating Systems/index|Operating Systems]]

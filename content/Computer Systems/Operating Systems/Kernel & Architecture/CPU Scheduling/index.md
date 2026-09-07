@@ -47,5 +47,5 @@ void yield() {
 
 - [[Thread Context Switch & Scheduling|Thread Context Switch & Scheduling]]
 - [[Process Abstraction & PCB|Process Abstraction & PCB]]
-- [[Computer Systems/Operating Systems/Kernel & Architecture/index|Kernel & Architecture Main Directory]]
-- [[Computer Systems/Operating Systems/index|Operating Systems Main Directory]]
+- [[Computer Systems/Operating Systems/Kernel & Architecture/index|Kernel & Architecture]]
+- [[Computer Systems/Operating Systems/index|Operating Systems]]

@@ -66,19 +66,6 @@ When a process inside a guest VM issues a system call (e.g., `read()`):
 
 ![[Pasted image 20260803225742.png]]
 
-```mermaid
-sequenceDiagram
-    autonumber
-    participant App as Guest User App
-    participant GuestOS as Guest Kernel
-    participant VMM as VMM / Hypervisor
-
-    App->>GuestOS: 1. Issue System Call (e.g., read())
-    Note over App,GuestOS: Full Virtualization (Legacy):
-    GuestOS->>VMM: 2. Traps to VMM (Privilege Violation)
-    VMM->>GuestOS: 3. VMM reflects trap into Guest Kernel Vector Table
-    GuestOS-->>App: 4. Execute system call & return result
-```
 
 In modern hardware-assisted CPUs executing in **Non-Root Mode**, system calls generated within Ring 3 trap directly to the Guest OS in Ring 0 without triggering a heavy hypervisor exit (`VM-Exit`).
 
@@ -89,15 +76,6 @@ In modern hardware-assisted CPUs executing in **Non-Root Mode**, system calls ge
 Because the spectrum of physical expansion cards and peripheral devices is vast, hypervisors employ three distinct strategies to virtualize I/O devices:
 
 ![[Pasted image 20260803231635.png]]
-
-```mermaid
-graph TD
-    IO_Tech["I/O Virtualization Strategies"]
-
-    IO_Tech --> Emulated["<b>1. Emulated Devices</b><br/>VMM runs physical drivers and presents standard generic virtual devices to guest."]
-    IO_Tech --> ParaIO["<b>2. Paravirtualized I/O</b><br/>Optimized guest drivers communicate directly with VMM via shared memory buffers."]
-    IO_Tech --> SRIOV["<b>3. Hardware Pass-Through (SR-IOV)</b><br/>Physical device exports Virtual Functions directly mapped to guest VMs."]
-```
 
 ### 1. Emulated Virtual Devices
 *   The VMM exports standardized software-emulated hardware devices (e.g., an IDE disk controller or Intel e1000 NIC).
@@ -112,6 +90,15 @@ graph TD
 *   **Single Root I/O Virtualization (SR-IOV):** Physical PCIe hardware devices export multiple **Virtual Functions (VF)** that can be mapped directly into guest address spaces.
 *   **IOMMU:** Translates Guest Physical Addresses (GPA) directly to Host Physical Addresses (HPA) for Direct Memory Access (DMA) transfers, achieving near-native wire speeds.
 
+```mermaid
+graph TD
+    IO_Tech["I/O Virtualization Strategies"]
+
+    IO_Tech --> Emulated["<b>1. Emulated Devices</b><br/>VMM runs physical drivers and presents standard generic virtual devices to guest."]
+    IO_Tech --> ParaIO["<b>2. Paravirtualized I/O</b><br/>Optimized guest drivers communicate directly with VMM via shared memory buffers."]
+    IO_Tech --> SRIOV["<b>3. Hardware Pass-Through (SR-IOV)</b><br/>Physical device exports Virtual Functions directly mapped to guest VMs."]
+```
+
 ---
 
 ## Related Notes
@@ -119,4 +106,4 @@ graph TD
 - [[Hypervisor Architectures & Software Virtualization|Hypervisor Architectures & Software Virtualization]]
 - [[Memory Virtualization & Extended Page Tables|Memory Virtualization & Extended Page Tables]]
 - [[Classic Scheduling Algorithms|Classic Scheduling Algorithms]]
-- [[Computer Systems/Operating Systems/Virtual Machines/index|Virtual Machines Main Directory]]
+- [[Computer Systems/Operating Systems/Virtual Machines/index|Virtual Machines]]

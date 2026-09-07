@@ -105,7 +105,7 @@ A parent process calls `wait(&status)` to suspend its own execution until one of
 
 ---
 
-# 4. Special Process States: Zombies & Orphans
+# Special Process States: Zombies & Orphans
 ```mermaid
 flowchart TD
 	PROCESS_EXIT["Process Exits"]

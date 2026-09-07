@@ -30,16 +30,16 @@ tags:
 
 ### 2. Execution & Resource Subsystems
 
-#### 📁 [[Computer Systems/Operating Systems/Kernel & Architecture/Process/index|Process Management Subsystem]]
+#### [[Computer Systems/Operating Systems/Kernel & Architecture/Process/index|Process Management]]
 *   **[[Process Abstraction & PCB\|Process Abstraction & PCB]]:** Memory address space layouts (Text, Data, Heap, Stack), execution states, and Process Control Block (`task_struct`) structures.
 *   **[[Process Lifecycle & API\|Process Lifecycle & API]]:** Creation models (`fork()` + `exec()` vs. `CreateProcess`), process hierarchies, termination (`exit()`, `wait()`), and Zombie/Orphan handling.
 
-#### 📁 [[Computer Systems/Operating Systems/Kernel & Architecture/Thread/index|Thread Management Subsystem]]
+#### [[Computer Systems/Operating Systems/Kernel & Architecture/Thread/index|Thread Management]]
 *   **[[Thread Abstraction & TCB\|Thread Abstraction & TCB]]:** Decoupling address space containers from execution streams, multithreaded memory layouts, TCBs, and Concurrency vs. Parallelism.
 *   **[[Thread Context Switch & Scheduling\|Thread Context Switch & Scheduling]]:** State queues, voluntary `yield()` mechanics, low-level assembly context switches, and hardware timer preemption.
 *   **[[Kernel vs User Level Threads\|Kernel vs User Level Threads]]:** Evaluating 1:1 Kernel-Level Threads, M:1 User-Level Threads, and M:N Hybrid Multithreading Models.
 
-#### 📁 [[Computer Systems/Operating Systems/Kernel & Architecture/CPU Scheduling/index|CPU Scheduling Subsystem]]
+#### [[Computer Systems/Operating Systems/Kernel & Architecture/CPU Scheduling/index|CPU Scheduling]]
 *   **[[CPU Scheduling Fundamentals & Metrics\|CPU Scheduling Fundamentals & Metrics]]:** Policy vs. mechanism, dispatcher triggers, scheduling metrics ($T_{\text{turnaround}}$, $T_{\text{response}}$), workload profiles, CPU utilization calculations, and starvation.
 *   **[[Classic Scheduling Algorithms\|Classic Scheduling Algorithms]]:** FCFS, SJF, SRTCF, Round Robin, and Priority Scheduling algorithm evaluation.
 *   **[[Multilevel Feedback Queue & Real-World Schedulers\|Multilevel Feedback Queue & Real-World Schedulers]]:** Priority decay in MLFQ, I/O burst handling, and production schedulers (Linux CFS, macOS/Windows MLFQ).
@@ -48,27 +48,40 @@ tags:
 
 # System Architecture Map
 
-```
-+-----------------------------------------------------------------------+
-| USER SPACE                                                            |
-|  [Applications] ---> [C Library (glibc)]                              |
-|                          |                                            |
-|                    system calls (fork, exec, read, yield)             |
-+--------------------------|--------------------------------------------+
-| HARDWARE BOUNDARY        v                                            |
-|                  [Software Traps / Interrupts / Faults]               |
-+--------------------------|--------------------------------------------+
-| KERNEL SPACE             v                                            |
-|  +-----------------------------------------------------------------+  |
-|  | Event Handlers & Syscall Dispatcher                             |  |
-|  +-----------------------------------------------------------------+  |
-|  | Process Subsystem      | Thread Subsystem     | CPU Scheduler   |  |
-|  |  - PCBs (task_struct)  |  - TCBs & Stacks     |  - MLFQ / CFS   |  |
-|  |  - Address Spaces      |  - Ready/Wait Queues |  - Policy vs    |  |
-|  |  - IPC                 |  - Context Switch    |    Mechanism    |  |
-|  +-----------------------------------------------------------------+  |
-|  | Memory Management (MMU)         | Device Drivers & I/O Systems  |  |
-+-----------------------------------------------------------------------+
+```mermaid
+flowchart TD
+    subgraph UserSpace["<b>USER SPACE</b>"]
+        Apps["Applications"] --> Glibc["C Library (glibc)"]
+    end
+
+    subgraph HardwareBoundary["<b>HARDWARE BOUNDARY</b>"]
+        Traps["Software Traps / Interrupts / Faults"]
+    end
+
+    subgraph KernelSpace["<b>KERNEL SPACE</b>"]
+        Dispatcher["Event Handlers & Syscall Dispatcher"]
+
+        subgraph Subsystems["Core Kernel Subsystems"]
+            ProcSub["<b>Process Subsystem</b><br>- PCBs: task_struct<br>- Address Spaces<br>- IPC"]
+            ThreadSub["<b>Thread Subsystem</b><br>- TCBs & Stacks<br>- Ready/Wait Queues<br>- Context Switch"]
+            SchedSub["<b>CPU Scheduler</b><br>- MLFQ / CFS<br>- Policy vs Mechanism"]
+        end
+
+        subgraph HardwareAbstraction["Hardware & Memory Layer"]
+            MMU["Memory Management (MMU)"]
+            IO["Device Drivers & I/O Systems"]
+        end
+    end
+
+    Glibc -->|System Calls| Traps
+    Traps --> Dispatcher
+    Dispatcher --> ProcSub
+    Dispatcher --> ThreadSub
+    Dispatcher --> SchedSub
+
+    ProcSub --> MMU
+    ThreadSub --> MMU
+    SchedSub --> IO
 ```
 
 ---
@@ -77,5 +90,5 @@ tags:
 
 - [[Computer Systems/Operating Systems/Concurrency & Synchronization/index|Concurrency & Synchronization Module]]
 - [[Computer Systems/Operating Systems/Memory Management/index|Memory Management Module]]
-- [[Operating Systems/Storage & I/O Systems/index|Storage & I/O Systems Module]]
+- [[Computer Systems/Operating Systems/Storage & IO Systems/index|Storage & IO Systems]]
 - [[Computer Systems/Operating Systems/index|Operating Systems Main Directory]]

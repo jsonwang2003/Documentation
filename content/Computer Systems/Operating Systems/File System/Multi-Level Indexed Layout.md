@@ -44,9 +44,13 @@ To optimize access for common workloads—where most files are small but a few a
 ### Inode Location & Disk Calculation
 Inodes are compact ($\approx 256\text{ bytes}$ each), allowing a single $4\text{ KB}$ physical block to store multiple inodes. Given an inode number and the count of inodes that fit in a single block ($\text{InodesPerBlock}$):
 
-$$\text{Block Number} = \left\lfloor \frac{\text{Inode Number}}{\text{InodesPerBlock}} \right\rfloor$$
+$$
+\text{Block Number} = \left\lfloor \frac{\text{Inode Number}}{\text{InodesPerBlock}} \right\rfloor
+$$
 
-$$\text{Offset within Block} = \text{Inode Number} \pmod{\text{InodesPerBlock}}$$
+$$
+\text{Offset within Block} = \text{Inode Number} \pmod{\text{InodesPerBlock}}
+$$
 
 ---
 

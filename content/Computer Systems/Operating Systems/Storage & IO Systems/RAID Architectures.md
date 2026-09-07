@@ -58,19 +58,25 @@ RAID 4 stores data blocks striped across $N-1$ data drives while dedicating a si
 ### Bitwise Parity Mathematics
 Parity is calculated by evaluating the bitwise XOR ($\otimes$) across matching blocks on all data disks:
 
-$$P = A \otimes B \otimes C \otimes D$$
+$$
+P = A \otimes B \otimes C \otimes D
+$$
 
 By definition of XOR arithmetic, combining all data blocks and the parity block yields zero:
 
-$$(A \otimes B \otimes C \otimes D \otimes P) == 0$$
+$$
+(A \otimes B \otimes C \otimes D \otimes P) == 0
+$$
 
 ### Fault Recovery Walkthrough
 If Disk $C$ fails physically, its data is reconstructed by XORing the surviving data disks together with the parity disk:
 
-$$C = A \otimes B \otimes D \otimes P$$
+$$
+C = A \otimes B \otimes D \otimes P
+$$
 
 ```mermaid
-graph LR
+graph TD
     D0["Disk A (Alive)"] --> XOR["Bitwise XOR Engine"]
     D1["Disk B (Alive)"] --> XOR
     D3["Disk D (Alive)"] --> XOR

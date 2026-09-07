@@ -4,6 +4,7 @@ description: "Master index and vault directory for Operating Systems concepts, i
 aliases:
   - OS Index
   - Operating Systems Hub
+  - Operating Systems
 tags:
   - index
   - operating-systems
@@ -51,11 +52,3 @@ tags:
 - **[[Hard Disk Drive Mechanics & Scheduling|Hard Disk Drive Mechanics & Scheduling]]**
 - **[[Solid State Drives & NAND Flash|Solid State Drives & NAND Flash]]**
 - **[[RAID Architectures|RAID Architectures]]**
-
----
-
-## Academic Coursework
-
-- **[[Computer Systems/Operating Systems/coursework/index|CSE 120 Coursework Directory]]**
-  - **Homework:** HW2, HW3, HW4
-  - **Projects:** Project 1, Project 2, Project 3

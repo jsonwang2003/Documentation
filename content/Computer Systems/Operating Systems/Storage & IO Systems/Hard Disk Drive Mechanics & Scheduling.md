@@ -65,7 +65,9 @@ Hard Disk Drives read and write magnetic data using mechanical components operat
 
 Total disk latency to read or write a sector is governed by three distinct physical phases:
 
-$$\text{Disk Latency} = T_{\text{seek}} + T_{\text{rotation}} + T_{\text{transfer}}$$
+$$
+\text{Disk Latency} = T_{\text{seek}} + T_{\text{rotation}} + T_{\text{transfer}}
+$$
 
 ```mermaid
 flowchart LR
@@ -82,11 +84,28 @@ Assume a disk with $15,000\text{ RPM}$, an average seek time of $4\text{ ms}$, a
 
 *   **Seek Time:** $T_{\text{seek}} = 4\text{ ms}$
 *   **Average Rotational Latency:**
-    $$T_{\text{rotation}} = \frac{1}{2} \times \left( \frac{1\text{ min}}{15000\text{ rev}} \times \frac{60000\text{ ms}}{1\text{ min}} \right) = \frac{1}{2} \times 4\text{ ms} = 2\text{ ms}$$
+    $$
+    \begin{align*}
+	T_{\text{rotation}} &= \frac{1}{2} \times \left( \frac{1\text{ min}}{15000\text{ rev}} \times \frac{60000\text{ ms}}{1\text{ min}} \right) \\
+	&= \frac{1}{2} \times 4\text{ ms} \\
+	&= 2\text{ ms}
+	\end{align*}
+    $$
 *   **Transfer Time:**
-    $$T_{\text{transfer}} = \frac{1024\text{ Bytes}}{125 \times 10^6\text{ Bytes/sec}} = 8.192 \ \mu\text{s} \approx 0.008\text{ ms}$$
+    $$
+    \begin{align*}
+    T_{\text{transfer}} &= \frac{1024\text{ Bytes}}{125 \times 10^6\text{ Bytes/sec}} \\
+    &= 8.192 \ \mu\text{s} \\
+    &\approx 0.008\text{ ms}
+	\end{align*}
+	$$
 *   **Total Latency:**
-    $$\text{Total Latency} \approx 4\text{ ms} + 2\text{ ms} + 0.008\text{ ms} = \mathbf{6.008\text{ ms}}$$
+    $$
+    \begin{align*}
+    \text{Total Latency} &\approx 4\text{ ms} + 2\text{ ms} + 0.008\text{ ms} \\
+    &= \mathbf{6.008\text{ ms}}
+	\end{align*}
+	$$
 
 ---
 
@@ -95,7 +114,7 @@ Assume a disk with $15,000\text{ RPM}$, an average seek time of $4\text{ ms}$, a
 Historically, operating systems specified raw disk accesses via **CHS** geometry (Cylinder, Head, Sector). Modern drives encapsulate this complexity inside internal disk controllers, exposing a simple **Logical Block Interface**:
 
 ```mermaid
-graph LR
+graph TD
     OS["Operating System"] -->|"Read / Write Block N"| LBA["Logical Block Array [0...N]"]
     LBA -->|"Internal Mapping"| Controller["Disk Controller Hardware"]
     Controller -->|"Physical Controls"| Hardware["Platter / Track / Sector"]

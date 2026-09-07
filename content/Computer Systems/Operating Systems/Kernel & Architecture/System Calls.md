@@ -64,5 +64,5 @@ Because user processes and the OS kernel operate in separate memory address spac
 
 - [[Dual-Mode Operation & Memory Protection|Dual-Mode Operation & Memory Protection]]
 - [[Interrupts and Exceptions|Interrupts and Exceptions]]
-- [[Computer Systems/Operating Systems/Kernel & Architecture/Process/index|Process Subsystem]]
-- [[Computer Systems/Operating Systems/Kernel & Architecture/Thread/index|Thread Subsystem]]
+- [[Computer Systems/Operating Systems/Kernel & Architecture/Process/index|Processes]]
+- [[Computer Systems/Operating Systems/Kernel & Architecture/Thread/index|Threads]]

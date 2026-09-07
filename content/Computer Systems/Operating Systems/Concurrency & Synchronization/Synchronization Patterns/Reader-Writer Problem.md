@@ -22,7 +22,7 @@ tags:
 
 ---
 
-# 1. Operational Rules & Constraints
+# Operational Rules & Constraints
 
 ```mermaid
 flowchart TD
@@ -44,9 +44,9 @@ TITLE --> AW_NODE
 
 ---
 
-# 2. Semaphore Implementation (First Readers-Writers Solution)
+# Semaphore Implementation (First Readers-Writers Solution)
 
-This solution prioritizes readers (readers-preference): no reader is kept waiting unless a writer has already obtained permission to modify the object.
+This solution uses [[Semaphores]] which prioritizes readers (readers-preference): no reader is kept waiting unless a writer has already obtained permission to modify the object.
 
 ### Shared State Variables
 *   `int read_count = 0;`: Tracks the number of active reader threads.
@@ -91,7 +91,7 @@ void reader() {
 
 ---
 
-# 3. Code Execution Mechanics
+# Code Execution Mechanics
 
 1.  **First Reader Arrives (`read_count == 1`):** The first reader calls `wait(&block_write)`. If a writer is active, the first reader blocks on `block_write` (holding up all subsequent readers at `mutex`). If no writer is active, the first reader claims `block_write`.
 2.  **Subsequent Readers Arrive (`read_count > 1`):** Subsequent readers increment `read_count`, bypass `block_write`, and immediately begin reading concurrently.

@@ -21,7 +21,7 @@ tags:
 
 ---
 
-# 1. Why Separate Processes from Execution Streams?
+# Why Separate Processes from Execution Streams?
 
 Handling concurrent tasks using multiple processes requires allocating duplicate page tables, creating new Process Control Blocks (PCBs), and setting up explicit Inter-Process Communication (IPC) regions.
 
@@ -38,7 +38,7 @@ Cooperating tasks within an application naturally share resources:
 
 ---
 
-# 2. Multithreaded Address Space Layout
+# Multithreaded Address Space Layout
 
 In a traditional single-threaded process, the virtual address space contains one execution stack growing down toward the heap. In a **multithreaded process**, the single address space is modified to accommodate **multiple independent thread stacks**:
 
@@ -50,7 +50,7 @@ Each thread receives its own allocated stack region to track private procedure c
 
 ---
 
-# 3. PCB vs. Thread Control Block (TCB)
+# PCB vs. Thread Control Block (TCB)
 
 Because a single process can host multiple threads, process information is divided into **shared process-wide metadata** and **per-thread execution state**:
 ```mermaid
@@ -73,7 +73,7 @@ When a thread is paused, the CPU hardware registers are saved into its **Thread 
 
 ---
 
-# 4. Concurrency vs. Parallelism
+# Concurrency vs. Parallelism
 
 Multithreading provides benefits on both single-core and multi-core CPU architectures, but the execution mechanics differ fundamentally:
 

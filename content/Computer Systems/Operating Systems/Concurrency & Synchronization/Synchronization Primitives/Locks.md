@@ -23,7 +23,7 @@ tags:
 
 ---
 
-# 1. The Lock Abstraction
+# The Lock Abstraction
 
 A **Lock** is a memory object used to enforce mutual exclusion around critical sections.
 
@@ -47,7 +47,7 @@ void worker() {
 
 ---
 
-# 2. Low-Level Implementation Attempts (Spinlocks)
+# Low-Level Implementation Attempts (Spinlocks)
 
 ### Attempt 1: Naive Software Lock (Broken)
 A naive attempt to build a lock using a boolean flag in user memory:
@@ -70,8 +70,6 @@ void release(struct lock* lock) {
 > [!danger] Why Attempt 1 Fails
 > A context switch can occur **after** the `while` loop evaluates to `false` but **before** `lock->held = true` executes. Two threads can both observe `held == false` and simultaneously enter the critical section. **The lock implementation itself contains a race condition!**
 
----
-
 ### Attempt 2: Disabling Interrupts (Kernel-Only)
 Involuntary context switches on a single CPU core are triggered by hardware interrupts (e.g., timer ticks). We can attempt atomicity by disabling interrupts:
 
@@ -93,8 +91,6 @@ void release(struct lock* lock) {
 1.  **User-Space Inaccessible:** Disabling interrupts is a **privileged instruction**. Allowing user applications to disable interrupts would allow buggy or malicious code to seize the machine permanently.
 2.  **Fails on Multicore Systems:** Disabling interrupts only prevents context switches on the *local CPU core*. Threads running on other physical cores can still access shared memory simultaneously.
 3.  **Missing Events:** Disabling interrupts for extended periods can cause the OS to miss or delay crucial hardware I/O and timer events.
-
----
 
 ### Attempt 3: Hardware Spinlock (`test_and_set`)
 To build multicore-safe locks, modern CPUs provide dedicated **atomic instructions** executed directly at the hardware bus/cache level.
@@ -130,9 +126,7 @@ void release(struct lock* lock) {
 *   **Correctness:** Works on multicore CPUs and can be safely invoked in user space.
 *   **The Busy-Waiting Deficit:** If Thread $A$ holds the lock and Thread $B$ attempts to acquire it, Thread $B$ loops continuously in the `while` check (**busy-waiting**). This wastes CPU cycles that could be used by other productive threads.
 
----
-
-# 3. High-Level Implementation Attempts (Blocking Locks)
+## High-Level Implementation Attempts (Blocking Locks)
 
 When critical sections are long (e.g., File I/O, database updates), spinlocks waste massive amounts of CPU cycles. High-level locks move waiting threads to a sleep queue.
 
@@ -140,8 +134,6 @@ When critical sections are long (e.g., File I/O, database updates), spinlocks wa
 |---|---|---|---|
 | **Spinlock** | Busy-wait loop (`while(test_and_set)`) | Wastes 100% CPU on waiting core | Very short critical sections (e.g., OS scheduler state) |
 | **Blocking Lock** | Moves waiting TCB to queue & sleeps | Releases CPU to run other threads | Long critical sections (e.g., File I/O, Database writes) |
-
----
 
 ### Attempt 4: Blocking Lock with Interrupt Disabling (Flawed)
 To prevent busy-waiting, waiting threads are moved to a sleep queue `Q`:
@@ -176,8 +168,6 @@ void release(struct lock* lock) {
 > [!danger] Drawbacks of Attempt 4
 > 1. Fails on **multicore CPUs** because disabling interrupts on Core 0 does not prevent Core 1 from modifying `lock->held`.
 > 2. Cannot be called by **user-level applications**.
-
----
 
 ### Attempt 5: Multicore Guarded Blocking Lock (Correct)
 To combine multicore safety with thread sleeping, we introduce a short-duration atomic **`guard`** spinlock that protects access to the lock's internal data structures (`held` flag and wait queue `Q`):
@@ -226,7 +216,7 @@ void release(struct lock* lock) {
 
 ---
 
-# 4. Specialized Lock Variants
+# Specialized Lock Variants
 
 Operating systems optimize locking overhead by employing specialized lock designs tailored to specific workload access patterns:
 

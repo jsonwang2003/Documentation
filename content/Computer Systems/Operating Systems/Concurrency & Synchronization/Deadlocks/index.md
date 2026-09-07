@@ -35,4 +35,4 @@ tags:
 
 - [[Locks|Locks]]
 - [[Critical Sections & Mutual Exclusion|Critical Sections & Mutual Exclusion]]
-- [[Computer Systems/Operating Systems/Concurrency & Synchronization/index|Concurrency & Synchronization Main Index]]
+- [[Computer Systems/Operating Systems/Concurrency & Synchronization/index|Concurrency & Synchronization]]

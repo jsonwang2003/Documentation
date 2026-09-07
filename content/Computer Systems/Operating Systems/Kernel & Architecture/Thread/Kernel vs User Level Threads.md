@@ -22,7 +22,7 @@ tags:
 
 ---
 
-# 1. Kernel-Level Threads (1:1 Model)
+# Kernel-Level Threads (1:1 Model)
 
 In a **Kernel-Level Threading** system, the OS kernel is explicitly aware of all threads. The kernel manages thread creation, maintenance, state queues, and scheduling directly.
 
@@ -44,7 +44,7 @@ In a **Kernel-Level Threading** system, the OS kernel is explicitly aware of all
 
 ---
 
-# 2. User-Level Threads (M:1 Model)
+# User-Level Threads (M:1 Model)
 
 In a **User-Level Threading** system, threads are managed entirely in user space by a runtime library or language virtual machine (e.g., Early Java Green Threads). The OS kernel is completely unaware of user-level threads; it sees only a single-threaded process.
 
@@ -63,7 +63,7 @@ In a **User-Level Threading** system, threads are managed entirely in user space
 
 ---
 
-# 3. Hybrid Threading Models (M:N Model)
+# Hybrid Threading Models (M:N Model)
 
 To combine the speed of user-level threads with the multicore scaling of kernel threads, hybrid models multiplex $M$ user-level threads onto $N$ kernel-level threads (`Many-to-Many Model`, $M \ge N$).
 
@@ -74,7 +74,7 @@ To combine the speed of user-level threads with the multicore scaling of kernel 
 
 ---
 
-# 4. Summary Matrix of Thread Models
+# Summary Matrix of Thread Models
 
 | Evaluation Feature | User-Level Threads (M:1) | Kernel-Level Threads (1:1) | Hybrid Model (M:N) |
 |---|---|---|---|

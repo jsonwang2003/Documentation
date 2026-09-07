@@ -66,4 +66,4 @@ graph TD
 - [[Computer Systems/Operating Systems/Kernel & Architecture/index|Kernel & Architecture]]
 - [[Computer Systems/Operating Systems/Memory Management/index|Memory Management]]
 - [[Computer Systems/Operating Systems/Storage & IO Systems/index|Storage & IO Systems]]
-- [[Computer Systems/Operating Systems/index|Operating Systems Main Directory]]
+- [[Computer Systems/Operating Systems/index|Operating Systems]]

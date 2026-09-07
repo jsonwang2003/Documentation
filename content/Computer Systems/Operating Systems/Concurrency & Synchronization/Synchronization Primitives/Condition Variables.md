@@ -22,7 +22,7 @@ tags:
 > - **Dominant Standard:** **Mesa Semantics** (requires checking conditions inside a `while` loop).
 
 ---
-# 1. Why Condition Variables?
+# Why Condition Variables?
 
 When a thread enters a critical section protected by a lock but discovers that a required resource condition is not met (e.g., the input buffer is empty), it must wait.
 
@@ -30,7 +30,7 @@ When a thread enters a critical section protected by a lock but discovers that a
 *   **The CV Solution:** `wait(cv, lock)` **atomically** releases the lock and puts the calling thread to sleep in a single indivisible step.
 
 ---
-# 2. Condition Variable API & Operations
+# Condition Variable API & Operations
 
 A Condition Variable is always associated with an explicit **Mutex Lock**:
 
@@ -42,7 +42,7 @@ A Condition Variable is always associated with an explicit **Mutex Lock**:
 > Unlike semaphores, Condition Variables have no history counter. Calling `signal()` when no threads are currently waiting does nothing; the signal is permanently lost.
 
 ---
-# 3. Signaling Semantics: Mesa vs. Hoare
+# Signaling Semantics: Mesa vs. Hoare
 
 What happens immediately after Thread $A$ calls `signal(cv)` to wake Thread $B$?
 ### 1. Mesa Semantics (Production Standard)
@@ -70,7 +70,7 @@ release(&lock);
 
 ---
 
-# 4. Common Pitfalls when Using Condition Variables
+# Common Pitfalls when Using Condition Variables
 
 ### Pitfall 1: Checking CVs Without a Separate Flag
 CVs hold no state. You cannot test if a CV is "true". You must maintain a separate shared state variable (e.g., `count` or `flag`) guarded by the lock.

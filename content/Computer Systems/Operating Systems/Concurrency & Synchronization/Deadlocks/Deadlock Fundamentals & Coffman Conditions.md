@@ -21,7 +21,7 @@ tags:
 
 ---
 
-# 1. The Dining Philosophers Problem
+# The Dining Philosophers Problem
 
 Introduced by Edsger Dijkstra in 1971, the **Dining Philosophers Problem** illustrates how competing for limited, shared resources leads to deadlock.
 
@@ -36,7 +36,7 @@ Introduced by Edsger Dijkstra in 1971, the **Dining Philosophers Problem** illus
 
 ---
 
-# 2. Formal Deadlock Definition
+# Formal Deadlock Definition
 
 > **Deadlock Definition:** Deadlock exists among a set of threads if **every thread in the set is waiting for an event that can be caused only by another thread in that set.**
 
@@ -44,7 +44,7 @@ Deadlock causes permanent execution starvation, requiring external intervention 
 
 ---
 
-# 3. The Four Coffman Conditions
+# The Four Coffman Conditions
 
 Deadlock can arise **if and only if** the following four conditions hold simultaneously within the system:
 
@@ -58,7 +58,7 @@ Deadlock can arise **if and only if** the following four conditions hold simulta
 
 ---
 
-# 4. Resource Allocation Graphs (RAG)
+# Resource Allocation Graphs (RAG)
 
 Deadlocks can be represented visually using a directed graph called a **Resource Allocation Graph (RAG)**:
 
@@ -73,7 +73,7 @@ Deadlocks can be represented visually using a directed graph called a **Resource
 ![[Pasted image 20260722160613.png]] *(Thread B requests Resource S)*
 ![[Pasted image 20260722160714.png]] *(Thread 1 and Thread 2 request each other's locks)*
 
-### Cycle Analysis Rules
+## Cycle Analysis Rules
 | Resource Instances per Type | Graph Cycle Status | Deadlock Status |
 |---|---|---|
 | **Single-Unit Resources** (1 instance per type) | Cycle Detected | **DEADLOCK EXISTS** |

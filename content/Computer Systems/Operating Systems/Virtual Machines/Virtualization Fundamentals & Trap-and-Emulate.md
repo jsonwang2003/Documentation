@@ -138,4 +138,4 @@ When an idle guest OS issues a `HALT` instruction to sleep the CPU:
 - [[CPU, Event, and IO Virtualization|CPU, Event, and IO Virtualization]]
 - [[Memory Virtualization & Extended Page Tables|Memory Virtualization & Extended Page Tables]]
 - [[Dual-Mode Operation & Memory Protection|Dual-Mode Operation & Memory Protection]]
-- [[Computer Systems/Operating Systems/Virtual Machines/index|Virtual Machines Main Directory]]
+- [[Computer Systems/Operating Systems/Virtual Machines/index|Virtual Machines]]

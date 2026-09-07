@@ -110,6 +110,6 @@ flowchart TD
 
 ## Related Notes
 
-- [[Multi-Level Indexed Layout|Unix Inodes]]
+- [[Multi-Level Indexed Layout#Unix Inode Structure & Metadata|Unix Inodes]]
 - [[File System Layout|File System Layout]]
 - [[File Systems & Storage Technologies|File Systems & Storage Technologies]]

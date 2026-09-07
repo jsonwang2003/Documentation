@@ -21,7 +21,7 @@ tags:
 
 ---
 
-# 1. Process vs. Program
+# Process vs. Program
 
 *   **Program:** A passive entity residing on disk (an executable file containing machine code instructions, static data, and metadata).
 *   **Process:** An active entity residing in memory representing an ongoing execution instance of a program.
@@ -32,7 +32,7 @@ A single program can give rise to multiple distinct processes running simultaneo
 
 ---
 
-# 2. Components of a Process
+# Components of a Process
 
 A process encapsulates all hardware and software state required to execute a program:
 
@@ -52,7 +52,7 @@ A process encapsulates all hardware and software state required to execute a pro
 
 ---
 
-# 3. Process Execution States
+# Process Execution States
 
 At any point in time, a process resides in one of three core execution states:
 
@@ -71,7 +71,7 @@ At any point in time, a process resides in one of three core execution states:
 
 ---
 
-# 4. The Processing Illusion & The PCB
+# The Processing Illusion & The PCB
 
 The OS provides every process with the illusion that it owns a dedicated CPU. In reality, a single physical CPU core is shared among many processes using **Time-Sharing** driven by periodic hardware timer interrupts.
 

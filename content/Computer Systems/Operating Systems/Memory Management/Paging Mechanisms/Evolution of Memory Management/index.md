@@ -15,15 +15,12 @@ tags:
 
 ## Translation Paradigm Comparison
 
-| Paradigm | Allocation Unit | Hardware Registers | Primary Fragmentation Issue |
-|---|---|---|---|
-| **Base & Bound** | Single contiguous chunk per process | Base Register, Bound Register | External Fragmentation |
-| **Segmentation** | Variable-sized logical segments (Code, Data, Stack) | Segment Table (Base + Bound per segment) | External Fragmentation |
-| **Paging** | Fixed-size pages / frames (e.g., 4 KB) | Page Table Base Register (PTBR) | Internal Fragmentation (last page only) |
+| Paradigm             | Allocation Unit                                     | Hardware Registers                       | Primary Fragmentation Issue             |
+| -------------------- | --------------------------------------------------- | ---------------------------------------- | --------------------------------------- |
+| **[[Base & Bound]]** | Single contiguous chunk per process                 | Base Register, Bound Register            | External Fragmentation                  |
+| **[[Segmentation]]** | Variable-sized logical segments (Code, Data, Stack) | Segment Table (Base + Bound per segment) | External Fragmentation                  |
+| **[[Paging]]**       | Fixed-size pages / frames (e.g., 4 KB)              | Page Table Base Register (PTBR)          | Internal Fragmentation (last page only) |
 
 ---
-## Module Notes
-
-- [[Base & Bound|Base & Bound]]
-- [[Segmentation|Segmentation]]
-- [[Paging|Paging]]
+## Related Notes
+- [[Computer Systems/Operating Systems/Memory Management/Paging Mechanisms/index|Paging Management]]

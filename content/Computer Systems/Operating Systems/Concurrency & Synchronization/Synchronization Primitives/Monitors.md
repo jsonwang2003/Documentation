@@ -21,7 +21,7 @@ tags:
 
 ---
 
-# 1. What is a Monitor?
+# What is a Monitor?
 
 While locks and semaphores require developers to manually invoke `acquire()` / `release()` or `wait()` / `signal()`, **Monitors** delegate lock management to the compiler.
 
@@ -45,9 +45,9 @@ classDiagram
 
 ---
 
-# 2. Producer-Consumer Implementation with a Monitor
+# Producer-Consumer Implementation with a Monitor
 
-Because mutual exclusion is implicit, pseudocode inside a monitor focuses purely on state checking and signaling:
+Recall the [[Producer-Consumer Problem]], due to mutual exclusion being implicit, pseudocode inside a monitor focuses purely on state checking and signaling:
 
 ```java
 Monitor BoundedBufferMonitor {
@@ -89,18 +89,6 @@ Monitor BoundedBufferMonitor {
 ```
 
 ---
-
-# 3. Comprehensive Primitive Comparison Matrix
-
-| Primitive | Level | Mutual Exclusion | Event Coordination | Lock Management | Primary Limitation |
-|---|---|---|---|---|---|
-| **Locks (Mutexes)** | Low-Level | **Yes** | No | Manual (`acquire`/`release`) | Prone to missing `release()` calls |
-| **Semaphores** | Mid-Level | **Yes** (Binary) | **Yes** (Counting) | Manual (`wait`/`signal`) | Unstructured; history counter can confuse state logic |
-| **Condition Variables** | Mid-Level | No | **Yes** | Manual (Paired with Lock) | Memoryless; must re-check conditions in `while` loop |
-| **Monitors** | High-Level | **Yes** (Implicit) | **Yes** (Via internal CVs) | **Automatic** (Compiler) | Requires language/runtime support (e.g., Java `synchronized`) |
-
----
-
 # Related Notes
 
 - [[Locks|Locks]]
