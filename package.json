@@ -38,10 +38,10 @@
     "quartz": "./quartz/bootstrap-cli.mjs"
   },
   "dependencies": {
-    "@clack/prompts": "^1.6.0",
+    "@clack/prompts": "^1.8.0",
     "@floating-ui/dom": "^1.7.6",
     "@myriaddreamin/rehype-typst": "^0.7.0",
-    "@napi-rs/simple-git": "0.1.22",
+    "@napi-rs/simple-git": "1.1.0",
     "@quartz-community/alias-redirects": "^0.1.0",
     "@quartz-community/article-title": "^0.1.0",
     "@quartz-community/backlinks": "^0.1.0",
@@ -132,7 +132,7 @@
     "@quartz-community/types": "^0.3.0",
     "@quartz-community/utils": "^0.1.0",
     "@types/hast": "^3.0.4",
-    "@types/node": "^26.0.1",
+    "@types/node": "^26.5.0",
     "@types/pretty-time": "^1.1.5",
     "@types/source-map-support": "^0.5.10",
     "@types/ws": "^8.18.1",
@@ -140,6 +140,6 @@
     "esbuild": "^0.28.1",
     "prettier": "^3.8.5",
     "tsx": "^4.22.4",
-    "typescript": "^6.0.3"
+    "typescript": "^7.0.2"
   }
 }
