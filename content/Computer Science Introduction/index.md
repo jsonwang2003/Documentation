@@ -21,12 +21,12 @@ panel:
 ### 1. Algorithms
 Fundamental algorithmic design paradigms, asymptotic analysis, recursive problem-solving, graph traversal, shortest path algorithms, network flows, and linear programming optimization.
 - [[Computer Science Introduction/Algorithms/index|Algorithms Main Directory]]
-	  - [[Computer Science Introduction/Algorithms/Divide and Conquer/index|Divide and Conquer]]
-	  - [[Computer Science Introduction/Algorithms/Greedy Algorithms/index|Greedy Algorithms]]
-	  - [[Computer Science Introduction/Algorithms/Dynamic Programming/index|Dynamic Programming]]
-	  - [[Computer Science Introduction/Algorithms/Backtracking/index|Backtracking]]
-	  - [[Computer Science Introduction/Algorithms/Graph Algorithms/index|Graph Algorithms]]
-	  - [[Computer Science Introduction/Algorithms/Linear Programming/index|Linear Programming]]
+	  - [[Computer Science Introduction/Algorithms/III. Divide and Conquer/index|Divide and Conquer]]
+	  - [[Computer Science Introduction/Algorithms/II. Greedy Algorithms/index|Greedy Algorithms]]
+	  - [[Computer Science Introduction/Algorithms/V. Dynamic Programming/index|Dynamic Programming]]
+	  - [[Computer Science Introduction/Algorithms/IV. Backtracking/index|Backtracking]]
+	  - [[Computer Science Introduction/Algorithms/I. Graph Algorithms/index|Graph Algorithms]]
+	  - [[Computer Science Introduction/Algorithms/VI. Linear Programming/index|Linear Programming]]
 
 ### 2. Data Structures
 Abstract Data Types (ADTs), sequential structures, self-balancing search trees (AVL, Red-Black), heap priority queues, hashing architectures, string search automata, and information compression algorithms.
