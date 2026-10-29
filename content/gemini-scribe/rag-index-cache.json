@@ -1,7 +1,7 @@
 {
   "version": "1.0",
   "storeName": "fileSearchStores/obsidiancontent-6alnkxve8rz9",
-  "lastSync": 1793260378466,
+  "lastSync": 1793304820162,
   "files": {
     "Robotics/Robot Mapping Workshop.md": {
       "resourceName": "fileSearchStores/obsidiancontent-6alnkxve8rz9",
@@ -3543,13 +3543,9 @@
       "contentHash": "5438e14a18b3746090619e3a870644097b727222d0de7ba244b369354dd986df",
       "lastIndexed": 1793043358163
     },
-    "CSE 127 Midterm Study Guide.md": {
+    "Computer Science Theory/Computer Secuity/coursework/CSE 127 Midterm Study Guide.md": {
       "contentHash": "49b2948733c3cf1a17ff13f476b93f0f1457870e0a641f55e862ff853c1c7c0a",
-      "lastIndexed": 1793253211267
-    },
-    "Untitled.md": {
-      "contentHash": "a75126085404f927be0d95c5052caa08ac3589bdf209099d3a9987f85271b70d",
-      "lastIndexed": 1793260378466
+      "lastIndexed": 1793304802832
     }
   },
   "indexingInProgress": false,
