@@ -5,7 +5,7 @@ configuration:
   enableSPA: true
   enablePopovers: true
   analytics:
-    provider: plausible
+    provider: vercel
   locale: en-US
   baseUrl: json-notebook.vercel.app
   ignorePatterns:
