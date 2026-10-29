@@ -1,1 +1,1 @@
-![[Computer Science Introduction/Algorithms/Divide and Conquer/Binary Search|Binary Search]]
+![[2. Binary Search|2]]

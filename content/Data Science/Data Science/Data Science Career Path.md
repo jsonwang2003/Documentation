@@ -18,7 +18,7 @@
 - expertise in machine learning, artificial intelligence, big data technologies
 	- ensemble learning
 	- deep learning with neural networks
-	- unsupervised learning ([[Artificial Intelligence/machine-learning/Unsupervised Learning/Clustering Models/index|Clustering]] and anomaly detection)
+	- unsupervised learning ([[Artificial Intelligence/Machine Learning/Unsupervised Learning/Clustering Models/index|Clustering]] and anomaly detection)
 - Knowledge of cloud computing platforms
 	- AWS
 	- Azure

@@ -6,6 +6,12 @@ tags:
   - Combinatorics
   - Multichoose
   - Stars-And-Bars
+title: Multisets and Combinations with Repetition
+description: Counting unordered collections of elements where repetition is allowed using multichoose and stars-and-bars.
+aliases:
+  - Multiset
+  - Multichoose
+  - Combinations with Repetition
 ---
 > [!INFO]
 > A **multiset** is a collection of elements where **repetition is allowed**.  

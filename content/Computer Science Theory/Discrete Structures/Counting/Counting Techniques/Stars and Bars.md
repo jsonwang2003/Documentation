@@ -1,3 +1,11 @@
+---
+title: Stars and Bars Method
+description: Combinatorial technique for distributing indistinguishable objects into distinct categories or solving integer equations.
+aliases:
+  - Stars and Bars
+  - Ball and Urn
+  - Distributing Indistinguishable Objects
+---
 >[!INFO]
 >In general, if I want to put `n` **indistinguishable** objects in `k` different baskets, I could instead count the number of ways of ordering
 >	$k-1$ bars and $n$ stars

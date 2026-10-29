@@ -12,12 +12,12 @@ tags:
   - partition-sets
 ---
 > [!Abstract]
-> When tracking grouping properties across dynamic networks—such as monitoring unified components or tracking connections in real time—standard graph traversals like [[Depth First Search (DFS)|DFS]] or [[Breadth First Search (BFS)|BFS]] carry massive overhead costs if invoked repeatedly. The **Disjoint Set Abstract Data Type (ADT)** solves this constraint by maintaining isolated subsets under an optimization model that merges groups and checks path connectivity in near-constant execution time.
+> When tracking grouping properties across dynamic networks—such as monitoring unified components or tracking connections in real time—standard graph traversals like [[3. Depth First Search (DFS)|DFS]] or [[6. Breadth First Search (BFS)|BFS]] carry massive overhead costs if invoked repeatedly. The **Disjoint Set Abstract Data Type (ADT)** solves this constraint by maintaining isolated subsets under an optimization model that merges groups and checks path connectivity in near-constant execution time.
 > 
 > - **Category:** Tree-based ADT (Up-Tree Forest)  
 > - **Stores:** A mathematical partition of elements split into disjoint subsets, where each group is managed by a unique representative node.  
 > - **Built on top of:** Plain standard sequential arrays.  
-> - **Typical use cases:** Dynamic cycle tracking inside [[Kruskal's Algorithm]], image segmentation tracking, network component clustering.
+> - **Typical use cases:** Dynamic cycle tracking inside [[8. Kruskal's Algorithm]], image segmentation tracking, network component clustering.
 
 ---
 

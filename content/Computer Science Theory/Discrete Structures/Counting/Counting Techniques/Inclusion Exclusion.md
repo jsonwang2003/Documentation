@@ -5,6 +5,11 @@ tags:
   - Complement
   - DeMorgan
   - Power-Rule
+title: Inclusion-Exclusion Principle
+description: Method for computing the size of the union of multiple sets by accounting for overlaps and intersections.
+aliases:
+  - Principle of Inclusion-Exclusion
+  - PIE
 ---
 $$
 \begin{align*}

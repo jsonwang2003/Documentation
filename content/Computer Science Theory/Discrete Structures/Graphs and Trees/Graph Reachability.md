@@ -89,9 +89,9 @@ To find all vertices reachable from a starting vertex $s$, we partition the grap
 
 
 The data structure used for the **Frontier (F)** determines the search strategy:
-- **Stack**: [[Depth First Search (DFS)]]
-- **Queue**: [[Breadth First Search (BFS)]]
-- **Priority Queue**: [[Dijkstra's Algorithm]]
+- **Stack**: [[3. Depth First Search (DFS)]]
+- **Queue**: [[6. Breadth First Search (BFS)]]
+- **Priority Queue**: [[7. Dijkstra's Algorithm]]
 
 ---
 ## Connectedness
@@ -194,9 +194,9 @@ Suppose we have a graph where vertex 4 has an odd degree:
 ## Directed Acyclic Graphs (DAG)
 A directed graph with **no cycles** (acyclic). DAGs are essential for representing dependencies.
 
-### Test if Graph is Acyclic using [[Depth First Search (DFS)]]
+### Test if Graph is Acyclic using [[3. Depth First Search (DFS)]]
 1. Perform **DFS** on the graph
-2. Test each edge to see if it is a [[Edge Types#Back Edge|back edge]]
+2. Test each edge to see if it is a [[2. Edge Types#Back Edge|back edge]]
 ### Topological Ordering (Linearization)
 An ordered list of vertices where for every edge $(v, w)$, $v$ appears before $w$ in the list.
 - Only possible if the graph is a DAG.
@@ -234,7 +234,7 @@ An ordered list of vertices where for every edge $(v, w)$, $v$ appears before $w
 
 #### Every edge in a DAG goes from a **higher post number** to **lower post number**
 **Proof**:
-	Suppose $(u, v)$ is an edge in a DAG, then it **can't be a back edge**, therefore it can only be a [[Edge Types#Tree Edge (Forward Edge)|Forward Edge / Tree Edge]] or a [[Edge Types#Cross Edge|Cross Edge]]. Both of which have the property that $post(v) < post(u)$
+	Suppose $(u, v)$ is an edge in a DAG, then it **can't be a back edge**, therefore it can only be a [[2. Edge Types#Tree Edge (Forward Edge)|Forward Edge / Tree Edge]] or a [[2. Edge Types#Cross Edge|Cross Edge]]. Both of which have the property that $post(v) < post(u)$
 
 #### Linearization of a DAG
 Given that edges go in the direction of **decreasing post numbers**, if we order the vertices by decreasing post numbers, then we will have a linearization

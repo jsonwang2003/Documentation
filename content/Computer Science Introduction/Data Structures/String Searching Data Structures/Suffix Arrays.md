@@ -11,7 +11,7 @@ tags:
   - bioinformatics
 ---
 > [!abstract] Abstract 
-> A Suffix Array is a space-efficient data structure designed to map millions of short sequence reads against a massive, fixed reference database genome. By storing sorted integer indices of text suffixes instead of full string blocks, it provides a compact index footprint that enables fast $O(k \cdot \log n)$ substring searches using [[Computer Science Introduction/Algorithms/Divide and Conquer/Binary Search|Binary Search]].
+> A Suffix Array is a space-efficient data structure designed to map millions of short sequence reads against a massive, fixed reference database genome. By storing sorted integer indices of text suffixes instead of full string blocks, it provides a compact index footprint that enables fast $O(k \cdot \log n)$ substring searches using [[2. Binary Search|2]].
 > 
 > - **Category:** Index-Backed Search Arrays
 > - **Storage Strategy:** Stores sorted 32-bit or 64-bit integer start positions.
@@ -57,7 +57,7 @@ $$
 
 # Substring Search via Dual Binary Search
 
-To locate a read sequence $w$ of length $k$, the engine performs a [[Computer Science Introduction/Algorithms/Divide and Conquer/Binary Search|Binary Search]] over the Suffix Array. Because the text indices are sorted alphabetically, all suffixes starting with the same sequence prefix $w$ cluster into a single contiguous block.
+To locate a read sequence $w$ of length $k$, the engine performs a [[2. Binary Search|2]] over the Suffix Array. Because the text indices are sorted alphabetically, all suffixes starting with the same sequence prefix $w$ cluster into a single contiguous block.
 
 The algorithm runs two separate binary searches to isolate this match clump:
 

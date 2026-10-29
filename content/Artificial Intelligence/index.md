@@ -2,45 +2,45 @@
 title: Artificial Intelligence
 description: Foundations of artificial intelligence, intelligent agents, classical and deep machine learning architectures, reinforcement learning, and AI ethics and governance policies.
 tags:
-  - artificial-intelligence
-  - machine-learning
-  - deep-learning
-  - reinforcement-learning
-  - ai-ethics
+  - CS/index
+  - CS/artificial-intelligence
+aliases:
+  - Artificial Intelligence
+  - AI Index
 panel:
   icon: cpu
   accent: ocean
 ---
+
 > [!abstract] Overview
 > **Artificial Intelligence** explores the principles, architectures, and ethical frameworks required to build autonomous, learning systems. This module covers foundational agent design, classical supervised and unsupervised machine learning algorithms, deep neural network architectures (CNNs, Transformers, GANs), reinforcement learning strategies, and the societal governance policies governing transparent and fair AI deployment.
 
 ---
+## Foundational Concepts
 
-## Core Book Modules
-
-### 1. Artificial Intelligence Foundations
-Foundational paradigms of artificial intelligence, historical evolution, and agent-environment interaction models.
-- [[Artificial Intelligence/Artificial Intelligence Agents|Artificial Intelligence Agents]]
-- [[Artificial Intelligence/History of Artificial Intelligence|History of Artificial Intelligence]]
-- [[AI Overview]]
-
-### 2. Machine Learning
-Classical statistical learning, deep neural representations, and goal-directed decision systems.
-- [[Artificial Intelligence/machine-learning/index|Machine Learning Main Directory]]
-  - [[Artificial Intelligence/machine-learning/Supervised Learning/index|Supervised Learning & Classification]]
-  - [[Artificial Intelligence/machine-learning/Unsupervised Learning/index|Unsupervised Learning (Clustering, Dimensionality Reduction, Association Rules)]]
-  - [[Artificial Intelligence/machine-learning/Reinforcement Learning/index|Reinforcement Learning & Search Trees]]
-  - [[Artificial Intelligence/machine-learning/Deep Learning/index|Deep Learning Architectures (Supervised, Unsupervised, Reinforced, Self-Supervised)]]
-
-### 3. Ethical AI and Policy
-Frameworks for algorithmic fairness, accountability, data privacy, user autonomy, and policy development.
-- [[Artificial Intelligence/Ethical AI and Policy/index|Ethical AI & Policy Directory]]
-  - [[Artificial Intelligence/Ethical AI and Policy/Policy Development/index|Policy Development, Transparency & Governance]]
+**Foundational Paradigms & Interaction Models**
+The foundation of AI requires understanding its historical evolution and the fundamental agent-environment interaction models that govern how autonomous systems behave. 
 
 ---
+## Core Framework / Shared Architecture
 
-## Related Vault Books
+**The Learning & Governance Pipeline**
+Modern AI systems rely on a shared computational lifecycle that utilizes classical statistical learning, deep neural representations, and goal-directed decision systems. Every architecture must be balanced by frameworks for algorithmic fairness, accountability, data privacy, user autonomy, and policy development.
 
-- [[Computer Science Introduction/index|Computer Science Introduction]]
-- [[Computer Science Theory/index|Computer Science Theory]]
-- [[Computer Systems/index|Computer Systems]]
+---
+## Notes in This Section
+
+| Note                                                                                   | One-line description                                                                                       |
+| :------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------- |
+| [[AI Overview]]                                                                        | Comprehensive overview of AI, historical milestones, intelligent agents, ML paradigms, and ethical policy. |
+| [[Artificial Intelligence Agents]]                                                     | Foundational paradigms of agent-environment interaction models and autonomous systems.                     |
+| [[History of Artificial Intelligence]]                                                 | Historical evolution of artificial intelligence from early foundations to modern large-scale applications. |
+| [[Artificial Intelligence/Machine Learning/index\|Machine Learning Main Directory]]    | Classical statistical learning, deep neural representations, and goal-directed decision systems.           |
+| [[Artificial Intelligence/Ethical AI and Policy/index\|Ethical AI & Policy Directory]] | Frameworks for algorithmic fairness, accountability, data privacy, user autonomy, and policy development.  |
+
+---
+## Related Categories
+
+- [[Computer Science Introduction/index\|Computer Science Introduction]]
+- [[Computer Science Theory/index\|Computer Science Theory]]
+- [[Computer Systems/index\|Computer Systems]]

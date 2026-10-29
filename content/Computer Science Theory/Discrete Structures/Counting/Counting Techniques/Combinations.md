@@ -5,6 +5,12 @@ tags:
   - Permutations
   - Subset
   - Binomial
+title: Combinations
+description: Counting the number of ways to form subsets of distinct elements where order does not matter.
+aliases:
+  - Combination
+  - Binomial Coefficient
+  - n Choose k
 ---
 > [!INFO]
 > Suppose a set $S$ with $n$ **distinct** elements and you want to know how many ways to form a **subset** of $k$ different elements of $S$.
@@ -56,3 +62,4 @@ $$
 
 > [!NOTE]
 > Combinations are often contrasted with permutations. See [[rPermutations]] for ordered selections.
+

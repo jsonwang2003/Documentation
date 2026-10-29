@@ -33,7 +33,7 @@ The foundational mathematical theorem used to prove the global correctness of gr
 ---
 
 ## How It Works
-While standard weight-blind traversal engines like [[Breadth First Search (BFS)|BFS]] can discover generic spanning structures in $O(|V| + |E|)$ time, they are weight-blind. They accept the first paths they encounter, missing optimal weight choices. To handle weighted layouts safely, we deploy specialized greedy optimization routines.
+While standard weight-blind traversal engines like [[6. Breadth First Search (BFS)|BFS]] can discover generic spanning structures in $O(|V| + |E|)$ time, they are weight-blind. They accept the first paths they encounter, missing optimal weight choices. To handle weighted layouts safely, we deploy specialized greedy optimization routines.
 
 > [!TIP] Key Idea
 > Prim's grows a single unified tree entity out from a singular root node, while Kruskal's aggregates individual structural components across an open grid ecosystem using an underlying disjoint set lookup to bridge isolated forests.
@@ -43,7 +43,7 @@ While standard weight-blind traversal engines like [[Breadth First Search (BFS)|
 ## Algorithm Implementations
 
 ### Prim's Algorithm (Vertex-Centric Approach)
-Prim's grows a unified spanning structure node-by-node, starting from an arbitrary root vertex. This design mirrors Dijkstra’s Algorithm by maintaining a priority queue tracking the minimum cost to attach unvisited nodes to the growing tree. Visit [[Prim's Algorithm]] for full detailed documentation.
+Prim's grows a unified spanning structure node-by-node, starting from an arbitrary root vertex. This design mirrors Dijkstra’s Algorithm by maintaining a priority queue tracking the minimum cost to attach unvisited nodes to the growing tree. Visit [[9. Prim's Algorithm]] for full detailed documentation.
 
 ```pseudo
 \begin{algorithm}
@@ -75,7 +75,7 @@ Prim's grows a unified spanning structure node-by-node, starting from an arbitra
 ```
 
 ### Kruskal's Algorithm (Edge-Centric Approach)
-Kruskal's shifts focus to the graph edges. It handles components as a decentralized collection of small trees, repeatedly pulling the global absolute lowest-cost edge available out of a queue and merging components if they pass validation checks via a disjoint-set manager. Visit [[Kruskal's Algorithm]] for full detailed documentation.
+Kruskal's shifts focus to the graph edges. It handles components as a decentralized collection of small trees, repeatedly pulling the global absolute lowest-cost edge available out of a queue and merging components if they pass validation checks via a disjoint-set manager. Visit [[8. Kruskal's Algorithm]] for full detailed documentation.
 
 ```pseudo
 \begin{algorithm}

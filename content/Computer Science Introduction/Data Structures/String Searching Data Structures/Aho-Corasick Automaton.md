@@ -91,7 +91,7 @@ When short patterns reside entirely inside longer words (e.g., motif `"A"` neste
 
 ### Preprocessing Automaton Setup
 1. Assemble a standard [[Multiway Trie|Multiway Trie]] containing all targeted search patterns.
-2. Run a [[Breadth First Search (BFS)]] traversal loop across the tree nodes to map failure links row by row.
+2. Run a [[6. Breadth First Search (BFS)]] traversal loop across the tree nodes to map failure links row by row.
 3. Pre-calculate dictionary link pointers to capture overlapping and nested matches.
 
 ### The Linear Scanning Cycle

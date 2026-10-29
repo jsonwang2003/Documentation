@@ -1,0 +1,10 @@
+> [!abstract]
+> **Context-Free Grammars** is a more powerful method of describing languages. Such grammars can describe certain features that have a *recursive* structure, which makes them useful in a variety of applications.
+
+---
+## Origin
+Context-Free Grammars were first used in the study of human languages. One way of understanding the relationship of terms such as *noun*, *verb*, and *preposition* and their respective phrases leads to a natural recursion because noun phrases may appear inside verb phrases and vice versa. Context-free grammars help us organize and understand these relationships. 
+
+An important application of context-free grammars occurs in the specification and compilation of programming languages. A grammar for a programming lan guage often appears as a reference for people trying to learn the language syntax. Designers of compilers and interpreters for programming languages often start by obtaining a grammar for the language. Most compilers and interpreters contain a component called a ***parser*** that extracts the meaning of a program prior to generating the compiled code or performing the interpreted execution. A number of methodologies facilitate the construction of a parser once a context-free grammar is available. Some tools even automatically generate the parser from the grammar.
+
+The collection of languages associated with context-free grammars are called the ***context-free languages***. They include all the regular languages and many additional languages. In this chapter, we give a formal definition of context-free grammars and study the properties of context-free languages. We also introduce [[pushdown automata]], a class of machines recognizing the context-free languages. Pushdown automata are useful because they allow us to gain additional insight into the power of context-free grammars.

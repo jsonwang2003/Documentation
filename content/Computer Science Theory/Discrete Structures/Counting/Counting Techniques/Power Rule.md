@@ -1,3 +1,10 @@
+---
+title: Power Rule
+description: Counting the number of sequences or strings of length n over a finite alphabet using independent choices.
+aliases:
+  - Exponentiation Rule
+  - Product Rule for Sequences
+---
 ## Power Rule
 
 > [!INFO]

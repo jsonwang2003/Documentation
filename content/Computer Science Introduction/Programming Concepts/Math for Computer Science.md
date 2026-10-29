@@ -51,7 +51,7 @@ mindmap
 ## Linear Algebra
 
 > [!INFO]
-> Explores **vectors**, **matrices** and **transformations** used in *graphics*, [[Artificial Intelligence/machine-learning/index|Machine Learning]] and [[Data Science/index|Data Science]]
+> Explores **vectors**, **matrices** and **transformations** used in *graphics*, [[Artificial Intelligence/Machine Learning/index|Machine Learning]] and [[Data Science/index|Data Science]]
 - [[Vector and Vector Space]]
 - [[Matrices]]
 - [[Matrix Diagonalization]]

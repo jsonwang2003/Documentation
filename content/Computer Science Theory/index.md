@@ -35,7 +35,7 @@ Probabilistic methods, random variables, expectation analysis, statistical infer
 Formal language theory, grammar scopes, deterministic and non-deterministic finite state automata, regular expressions, non-regular language proofs, and fundamental computability models.
 - [[Computer Science Theory/Theory of Computability/index|Theory of Computability Main Directory]]
   - [[Computer Science Theory/Theory of Computability/Introduction/index|Theoretical Foundations & Proof Systems]]
-  - [[Computer Science Theory/Theory of Computability/Automata and Languages/index|Automata and Formal Languages]]
+  - [[Computer Science Theory/Theory of Computability/I. Automata and Languages/index|Automata and Formal Languages]]
 
 ---
 

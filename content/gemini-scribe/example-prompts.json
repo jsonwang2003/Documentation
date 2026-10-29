@@ -1,0 +1,18 @@
+[
+  {
+    "icon": "folder-tree",
+    "text": "Organize notes in the Operating Systems folder by memory management, file systems, and concurrency topics"
+  },
+  {
+    "icon": "file-plus",
+    "text": "Create a summary sheet comparing supervised learning algorithms with deep learning architectures"
+  },
+  {
+    "icon": "globe",
+    "text": "Research recent advances in transformer models and large language models to add to the knowledge base"
+  },
+  {
+    "icon": "book-open",
+    "text": "Find and explain all notes related to dynamic programming patterns and graph algorithms"
+  }
+]

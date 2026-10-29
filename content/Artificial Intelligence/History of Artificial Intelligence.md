@@ -1,4 +1,19 @@
+---
+title: "History of Artificial Intelligence"
+description: "Timeline of the historical evolution of artificial intelligence, foundational breakthroughs, AI winters, and modern governance."
+aliases:
+  - AI History
+tags:
+  - CS/artificial-intelligence
+  - ai-history
+---
+
+> [!abstract] Abstract
+> The historical evolution of artificial intelligence spanning from the 1956 Dartmouth Workshop to the modern era of Large Language Models (LLMs) and global governance frameworks.
+
+---
 ## Timeline of Artificial Intelligence
+
 ### Early Foundations (1956-1974)
 ```mermaid
 ---
@@ -17,7 +32,6 @@ timeline
     1969 : Stanford Cart
     1974 : Start of First AI Winter
 ```
-
 ### Neural Revival & Applications (1981 - 1997)
 ```mermaid
 ---
@@ -36,7 +50,6 @@ timeline
     1995 : A.L.I.C.E. Chatbot
     1997 : Deep Blue Defeats Kasparov
 ```
-
 ### Deep Learning & Autonomy (2001 - 2017)
 ```mermaid
 ---
@@ -56,7 +69,6 @@ timeline
     2016 : OpenAI Founded
     2017 : Transformer Model Paper Released
 ```
-
 ### LLMs & Scale (2018-2022)
 ```mermaid
 ---
@@ -93,6 +105,8 @@ timeline
     2025 : Paris AI Action Summit
          : Stargate LLC Formed ($500B Infrastructure)
 ```
+
+---
 ## Responsible Advancement of AI
 
 ### 1. Collaborative Governance
@@ -106,3 +120,8 @@ To thrive in an AI-driven economy, education and training programs must evolve t
 
 ### 4. Balanced Integration  
 By fostering a thoughtful approach that maximizes AI’s benefits while addressing its challenges, society can leverage this transformative technology to drive sustainable development, enhance human well-being, and tackle global issues.
+
+---
+## Related Notes
+- [[AI Overview]]
+- [[Artificial Intelligence/index|Artificial Intelligence]]
