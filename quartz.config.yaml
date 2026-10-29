@@ -177,7 +177,7 @@ plugins:
       defaultIcon: book-open
       defaultAccent: theme
       accents:
-        ocean: "var(--secondary)"
+        ocean: var(--secondary)
         warning: "#b45309"
       replaceExplorer: true
     layout:
@@ -323,6 +323,12 @@ plugins:
       indentSize: 1.2em
       commentDelimiter: //
       titlePrefix: "Algorithm "
+    order: 50
+  - source: "@quartz-community/folder-page"
+    enabled: true
+    options:
+      showFolderCount: true
+      showSubfolders: true
     order: 50
 layout:
   groups:
